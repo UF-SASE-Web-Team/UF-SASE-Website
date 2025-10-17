@@ -16,16 +16,16 @@ const ResourceCard: React.FC<ResourceCardProps> = ({ description, icon, link, sh
         href={link}
         target="_blank"
         rel="noopener noreferrer"
-        className={`relative flex flex-col rounded-3xl border-2 border-black bg-white p-12 ${shadowColor || ""} transition duration-300 hover:scale-105`}
+        className={`relative flex flex-col rounded-3xl border-2 border-foreground bg-background p-12 ${shadowColor || ""} transition duration-300 hover:scale-105`}
       >
         {/* Title & Icon Row */}
         <div className="flex w-full items-center justify-between">
-          <h3 className="text-lg font-semibold text-gray-800">{title}</h3>
+          <h3 className="text-lg font-semibold text-foreground">{title}</h3>
           {icon}
         </div>
 
         {/* Description */}
-        <p className="mt-4 text-left font-semibold text-gray-700">{description}</p>
+        <p className="mt-4 text-left font-semibold text-foreground">{description}</p>
       </a>
     </div>
   );

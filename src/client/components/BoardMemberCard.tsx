@@ -50,7 +50,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
 
         {isExpanded && (
           <div
-            className="scrollbar-thinner absolute inset-0 flex cursor-pointer flex-col overflow-y-auto bg-white bg-opacity-95 p-[1vw] pt-[0.5vw] transition-opacity duration-500 ease-in-out"
+            className="scrollbar-thinner absolute inset-0 flex cursor-pointer flex-col overflow-y-auto bg-background bg-opacity-95 p-[1vw] pt-[0.5vw] transition-opacity duration-500 ease-in-out"
             onClick={() => setExpanded(false)}
           >
             {/* expanded content */}
@@ -61,7 +61,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
               <h4 className="cursor-pointer text-sm font-semibold sm:text-base md:text-lg" onClick={() => setExpanded(false)}>
                 {member.name}
               </h4>
-              <p className="cursor-pointer text-xs text-gray-600 sm:text-sm md:text-base" onClick={() => setExpanded(false)}>
+              <p className="cursor-pointer text-xs text-black dark:text-saseGray sm:text-sm md:text-base" onClick={() => setExpanded(false)}>
                 {member.major}
               </p>
               <a
@@ -72,7 +72,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
                 {member.contact}
               </a>
               <p
-                className="mt-[1vw] cursor-pointer text-xs text-gray-800 sm:text-xs md:text-xs"
+                className="mt-[1vw] cursor-pointer text-xs text-black dark:text-saseGray sm:text-xs md:text-xs"
                 onClick={() => setExpanded(false)}
                 style={{ marginTop: "1vw" }}
               >
@@ -84,7 +84,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
       </div>
 
       {/* name turns invisible on click of learn more */}
-      <p className={`mt-[1.5vw] text-base sm:text-lg md:text-2xl ${isExpanded ? "invisible" : "text-black"}`}>{member.name}</p>
+      <p className={`mt-[1.5vw] text-base sm:text-lg md:text-2xl ${isExpanded ? "invisible" : "text-foreground"}`}>{member.name}</p>
     </div>
   );
 };

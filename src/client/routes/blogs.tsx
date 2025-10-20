@@ -172,7 +172,7 @@ function BlogsPage() {
           <BlogTags tags={availableTags} activeTag={activeTag} onTagClick={handleTagClick} onSearch={setSearchQuery} />
 
           {/* title */}
-          <div className="mx-auto mb-5 mt-10 max-w-6xl px-2 sm:px-0">
+          <div className="mx-auto mb-5 mt-10 max-w-6xl px-2 text-foreground sm:px-0">
             <h2 className={sectionTitle}>{activeTag ? `POSTS TAGGED: ${activeTag}` : "ALL POSTS"}</h2>
           </div>
 
@@ -193,7 +193,7 @@ function BlogsPage() {
                     />
                   ))
                 ) : (
-                  <p className="font-redhat">{noResultsMessage}</p>
+                  <p className="font-redhat text-black">{noResultsMessage}</p>
                 )}
               </div>
             </BlogContainer>

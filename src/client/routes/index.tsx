@@ -8,8 +8,60 @@ import MobileMemberCard from "@components/mobile/MobileMemberCard";
 import SponsorCard from "@components/sponsors/SponsorCard";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { seo } from "../utils/seo";
+
+type Slide = {
+  image: string;
+  mission: string;
+  text: string;
+  shadow: "green" | "blue";
+};
+
+function MobileMissionCarousel({ slides }: { slides: Array<Slide> }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [idx, setIdx] = useState(0);
+
+  const onScroll = () => {
+    const el = ref.current;
+    if (!el) return;
+    setIdx(Math.round(el.scrollLeft / el.clientWidth));
+  };
+
+  const go = (i: number) => ref.current?.scrollTo({ left: i * (ref.current?.clientWidth ?? 0), behavior: "smooth" });
+
+  return (
+    <div className="w-full">
+      <div
+        ref={ref}
+        onScroll={onScroll}
+        className="relative w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain scrollbar-none"
+        style={{ scrollBehavior: "smooth" }}
+      >
+        <div className="flex">
+          {slides.map((s) => (
+            <div key={s.mission} className="w-full shrink-0 snap-start px-6 py-4">
+              <div className="mx-auto max-w-sm">
+                <MissionCard image={s.image} mission={s.mission} text={s.text} shadow={s.shadow} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-4 flex justify-center gap-2">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            aria-label={`Go to slide ${i + 1}`}
+            onClick={() => go(i)}
+            className={`h-2 rounded-full transition-all ${i === idx ? "w-6 bg-foreground" : "w-2 bg-muted-foreground/40"}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export const Route = createFileRoute("/")({
   meta: () => [
@@ -102,27 +154,29 @@ export const Route = createFileRoute("/")({
 
         <div className="flex w-full flex-col items-center bg-saseGray p-12 dark:bg-black">
           <h1 className="pb-12 text-center font-oswald text-6xl font-medium">Our Mission</h1>
-          <div className="grid gap-12 pl-4 pr-4 sm:grid-cols-1 md:grid-cols-3">
-            <MissionCard
-              image={imageUrls["Briefcase.png"]}
-              mission="Professional Development"
-              text="To prepare Asian heritage students for success in the
-                transnational, global business world."
-              shadow="green"
-            />
-            <MissionCard
-              image={imageUrls["People.png"]}
-              mission="Diversity"
-              text="To promote diversity and tolerance on campuses and in the
-                workplace."
-              shadow="blue"
-            />
-            <MissionCard
-              image={imageUrls["Lightbulb.png"]}
-              mission="Community"
-              text="To provide opportunities for its members to make contributions
-                to their local communities."
-              shadow="green"
+          {/* Mobile swipeable carousel */}
+          <div className="w-full sm:hidden">
+            <MobileMissionCarousel
+              slides={[
+                {
+                  image: imageUrls["Briefcase.png"],
+                  mission: "Professional Development",
+                  text: "To prepare Asian heritage students for success in the transnational, global business world.",
+                  shadow: "green",
+                },
+                {
+                  image: imageUrls["People.png"],
+                  mission: "Diversity",
+                  text: "To promote diversity and tolerance on campuses and in the workplace.",
+                  shadow: "blue",
+                },
+                {
+                  image: imageUrls["Lightbulb.png"],
+                  mission: "Community",
+                  text: "To provide opportunities for its members to make contributions to their local communities.",
+                  shadow: "green",
+                },
+              ]}
             />
           </div>
         </div>

@@ -3,6 +3,10 @@ import InternsPic2 from "@assets/interns/SaseInterns2.png";
 import InternsPic3 from "@assets/interns/SaseInterns3.png";
 import InternsPic4 from "@assets/interns/SaseInterns4.png";
 import SETPic from "@assets/set/SaseSet.png";
+import SETPic2 from "@assets/set/SETPHOTO1.png";
+import SETPic3 from "@assets/set/SETPHOTO2.png";
+import SETPic4 from "@assets/set/SETPHOTO3.jpg";
+import SETPic5 from "@assets/set/SETPHOTO4.jpg";
 import SportsPic1 from "@assets/sports/SaseSports1.png";
 import SportsPic2 from "@assets/sports/SaseSports2.png";
 import SportsPic3 from "@assets/sports/SaseSports3.png";
@@ -19,7 +23,7 @@ const ProgramImages = [
   },
   {
     program: "SET",
-    images: [SETPic, SETPic, SETPic, SETPic],
+    images: [SETPic, SETPic2, SETPic3, SETPic4, SETPic5],
   },
   {
     program: "Web Dev",

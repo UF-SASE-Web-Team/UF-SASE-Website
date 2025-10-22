@@ -139,19 +139,21 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
       <div className="overflow-hidden" ref={emblaRef}>
         <div className="flex touch-pan-y touch-pinch-zoom">
           {slides.map((slide, index) => (
-            <div className="flex min-w-0 flex-[0_0_100%] items-center justify-center [transform:translate3d(0,0,0)] md:flex-[0_0_50%]" key={index}>
+            <div className="flex min-w-0 flex-[0_0_80%] items-center justify-center [transform:translate3d(0,0,0)] md:flex-[0_0_50%]" key={index}>
               <div className="embla__slide__image rounded-2xl bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen p-[4px]">
                 {checkisValue(slide) ? (
-                  <div className="embla__slide__image group relative w-full rounded-2xl hover:cursor-pointer">
-                    <img src={slide.img} alt={`${slide.value} + Image`} className="aspect-auto rounded-xl" />
-                    <div className="absolute inset-0 flex flex-col items-center justify-center rounded-xl bg-saseGray/60 hover:bg-saseGray/85">
-                      <img src={slide.icon} alt={`${slide.value} + Icon`} className="mb-2 transition-opacity duration-300 group-hover:opacity-0" />{" "}
-                      <p className="text-center font-redhat text-3xl font-semibold text-black transition-opacity duration-300 group-hover:opacity-0 md:text-2xl lg:text-3xl">
-                        {slide.value}
-                      </p>
-                      <p className="absolute bottom-[-20%] px-4 text-center font-redhat text-lg font-medium text-black opacity-0 transition-all duration-500 group-hover:bottom-1/2 group-hover:translate-y-1/2 group-hover:opacity-100 md:text-base lg:text-lg">
-                        {slide.text}
-                      </p>
+                  <div className="rounded-[20px] bg-[linear-gradient(140deg,#7DC242_0%,#00AEEF_100%)] p-[3px]">
+                    <div className="group relative h-[350px] w-full overflow-hidden rounded-[inherit] hover:cursor-pointer md:h-[450px]">
+                      <img src={slide.img} alt={`${slide.value} + Image`} className="h-full w-full object-cover" />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center rounded-[inherit] bg-saseGray/60 hover:bg-saseGray/85">
+                        <img src={slide.icon} alt={`${slide.value} + Icon`} className="mb-2 transition-opacity duration-300 group-hover:opacity-0" />
+                        <p className="text-center font-redhat text-3xl font-semibold text-black transition-opacity duration-300 group-hover:opacity-0 md:text-2xl lg:text-3xl">
+                          {slide.value}
+                        </p>
+                        <p className="absolute bottom-[-20%] px-4 text-center font-redhat text-lg font-medium text-black opacity-0 transition-all duration-500 group-hover:bottom-1/2 group-hover:translate-y-1/2 group-hover:opacity-100 md:text-base lg:text-lg">
+                          {slide.text}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 ) : (

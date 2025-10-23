@@ -247,9 +247,10 @@ export const Route = createFileRoute("/")({
 
         <div className="dark:black flex w-full flex-col items-center justify-center bg-white p-12 dark:bg-black">
           <h1 className="w-full pb-12 text-center font-oswald text-6xl font-medium">Sponsors</h1>
-          <div className="mb-20 flex w-10/12 flex-col items-start gap-14 lg:flex-row xl:gap-24">
-            <div className="flex w-full flex-col items-center rounded-2xl border-4 border-foreground bg-muted p-10 shadow-[12px_12px_0px_#7DC242]">
-              <p className="p-4 text-left font-redhat text-xl sm:text-2xl">
+
+          <div className="w-11/12 lg:w-10/12">
+            <div className="relative rounded-3xl border-4 border-border bg-muted p-6 shadow-[12px_12px_0px_#7DC242] md:p-10">
+              <p className="mb-8 p-0 text-left font-redhat text-xl sm:text-2xl">
                 Are you interested in becoming a partner with the UF Society of Asian Scientists and Engineers (SASE) Chapter?
                 <br />
                 <br />
@@ -260,9 +261,9 @@ export const Route = createFileRoute("/")({
                 </a>
                 .
               </p>
-            </div>
-            <div className="flex w-full flex-col items-center gap-12">
-              <div className="grid w-full grid-cols-1 gap-14 sm:grid-cols-2 xl:gap-24">
+
+              {/* Sponsors now inside the same box */}
+              <div className="grid w-full grid-cols-2 place-items-stretch gap-4 sm:gap-6 md:gap-8">
                 {SponsorInfo.map((sponsor) =>
                   sponsor.tier === "Diamond" ? (
                     <SponsorCard
@@ -272,11 +273,13 @@ export const Route = createFileRoute("/")({
                       type={sponsor.tier}
                       shadowcolor={sponsor.shadow_color}
                       link={sponsor.link}
+                      mobileVariant="compact"
                     />
                   ) : null,
                 )}
               </div>
-              <p className="m-0 mt-[-30px] w-full text-center font-redhat text-2xl italic text-foreground xl:text-3xl">Current Featured Sponsors</p>
+
+              <p className="text-1xl mt-6 w-full text-center font-redhat italic text-foreground xl:text-3xl">Current Featured Sponsors</p>
             </div>
           </div>
         </div>

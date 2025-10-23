@@ -9,7 +9,7 @@ const SponsorInfo = [
     link: "https://www.blueorigin.com/",
   },
   {
-    company: "Fm Global",
+    company: "FM Global",
     tier: "Diamond",
     image: imageUrls["FMGlobal.png"],
     shadow_color: "shadow-blue-500",

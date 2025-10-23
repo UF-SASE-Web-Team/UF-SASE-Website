@@ -41,9 +41,11 @@ interface SponsorCardProps {
   link: string;
   shadowcolor: string;
   type: SponsorType;
+  mobileVariant?: "default" | "compact";
 }
 
-const SponsorCard = ({ companyName, image, link, shadowcolor, type }: SponsorCardProps) => {
+const SponsorCard = ({ companyName, image, link, mobileVariant = "default", shadowcolor: _shadowcolor, type }: SponsorCardProps) => {
+  const compact = mobileVariant === "compact";
   return (
     <div className="flex h-full w-full flex-col" style={{ zIndex: 10 }}>
       <p
@@ -54,18 +56,30 @@ const SponsorCard = ({ companyName, image, link, shadowcolor, type }: SponsorCar
             "text-slate-400": type === "Silver",
             "text-amber-700": type === "Bronze",
           },
-          "pb-2 text-center font-redhat text-4xl font-semibold",
+          compact ? "text-lg sm:text-2xl" : "text-2xl",
+          "pb-1 text-center font-redhat font-semibold",
         )}
       >
         {type}
       </p>
 
       <div
-        className={`relative flex h-full flex-col items-center rounded-2xl border-4 border-foreground bg-muted p-1 ${shadowcolor} shadow-2xl duration-300 hover:scale-105`}
+        className={cn(
+          "relative flex h-full flex-col items-center overflow-visible rounded-2xl bg-muted duration-300 hover:scale-105",
+          compact ? "border-2 p-0.5" : "border-4 p-1",
+          "border-black",
+          // green offset box shadow
+          "before:absolute before:-z-10 before:content-['']",
+          "before:inset-0 before:rounded-2xl before:bg-[#7DC242]",
+          "before:translate-x-1.5 before:translate-y-1.5",
+        )}
       >
         <Link to={link} className="absolute inset-0 z-10" />
-        <img src={image} alt="Company Logo" className="h-5/6 w-full rounded-2xl" />
-        <p className="pb-4 pt-4 text-center font-redhat text-3xl font-semibold">{companyName}</p>
+        <div className={cn("overflow-hidden rounded-2xl", compact ? "h-[120px] w-[98%] sm:h-[170px] sm:w-[98%]" : "h-5/6 w-full")}>
+          <img src={image} alt="Company Logo" className={cn("h-full w-full rounded-2xl object-fill", compact ? "p-0" : "")} />
+        </div>
+        {/* company text smaller on mobile when compact */}
+        <p className={cn("pb-4 pt-4 text-center font-redhat font-semibold", compact ? "text-base sm:text-3xl" : "text-3xl")}>{companyName}</p>
 
         {type in typeStyles && (
           <img
@@ -74,6 +88,7 @@ const SponsorCard = ({ companyName, image, link, shadowcolor, type }: SponsorCar
             className={cn(
               "absolute left-0 top-0 -translate-x-1/2",
               typeStyles[type].size,
+              compact ? "h-10 sm:h-[40%]" : typeStyles[type].size,
               typeStyles[type].translateY,
               typeStyles[type].rotate ?? "",
             )}

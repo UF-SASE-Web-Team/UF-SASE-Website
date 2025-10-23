@@ -11,6 +11,9 @@ type UsePrevNextButtonsType = {
   onNextButtonClick: () => void;
 };
 
+const colorClass = (c: "blue" | "green" = "blue") =>
+  c === "green" ? "text-[#7DC242] drop-shadow-[0_0_10px_rgba(125,194,66,.5)]" : "text-[#0668B3] drop-shadow-[0_0_10px_rgba(6,104,179,.5)]";
+
 export const usePrevNextButtons = (
   emblaApi: EmblaCarouselType | undefined,
   onButtonClick?: (emblaApi: EmblaCarouselType) => void,
@@ -52,50 +55,47 @@ export const usePrevNextButtons = (
 
 type PropType = ComponentPropsWithRef<"button"> & {
   purpose: string;
+  color?: "blue" | "green";
 };
 
-export const PrevButton: React.FC<PropType> = (props) => {
-  const { children, ...restProps } = props;
+const colorRing = (c?: "blue" | "green") => (c === "green" ? "ring-[#7DC242] text-[#7DC242]" : "ring-[#0668B3] text-[#0668B3]");
 
-  return (
-    <button
-      className={cn(
-        { "text-white": props.purpose == "Values", "text-text-foreground": props.purpose != "Values" },
-        `embla__button embla__button--prev`,
-      )}
-      type="button"
-      {...restProps}
-    >
-      <svg className="h-[35%] w-[35%]" viewBox="0 0 532 532">
-        <path
-          fill="currentColor"
-          d="M355.66 11.354c13.793-13.805 36.208-13.805 50.001 0 13.785 13.804 13.785 36.238 0 50.034L201.22 266l204.442 204.61c13.785 13.805 13.785 36.239 0 50.044-13.793 13.796-36.208 13.796-50.002 0a5994246.277 5994246.277 0 0 0-229.332-229.454 35.065 35.065 0 0 1-10.326-25.126c0-9.2 3.393-18.26 10.326-25.2C172.192 194.973 332.731 34.31 355.66 11.354Z"
-        />
-      </svg>
-      {children}
-    </button>
-  );
-};
+export const PrevButton: React.FC<PropType> = ({ children, color = "green", ...rest }) => (
+  <button
+    type="button"
+    {...rest}
+    className={cn(
+      "embla__button embla__button--prev",
+      "grid h-12 w-12 place-items-center",
+      "rounded-md bg-white shadow-sm ring-2",
+      colorRing(color),
+      "transition-transform hover:scale-105 disabled:opacity-40 disabled:hover:scale-100",
+      "focus:outline-none focus:ring-4 focus:ring-opacity-40",
+    )}
+  >
+    <svg className={cn("h-12 w-12 scale-y-[1.25] transform md:h-14 md:w-14", colorClass(color))} viewBox="0 0 100 100" aria-hidden>
+      <polygon points="72,8 28,50 72,92" fill="currentColor" stroke="white" strokeWidth="6" strokeLinejoin="round" />{" "}
+    </svg>
+    {children}
+  </button>
+);
 
-export const NextButton: React.FC<PropType> = (props) => {
-  const { children, ...restProps } = props;
-
-  return (
-    <button
-      className={cn(
-        { "text-white": props.purpose == "Values", "text-text-foreground": props.purpose != "Values" },
-        `embla__button embla__button--next`,
-      )}
-      type="button"
-      {...restProps}
-    >
-      <svg className="h-[35%] w-[35%]" viewBox="0 0 532 532">
-        <path
-          fill="currentColor"
-          d="M176.34 520.646c-13.793 13.805-36.208 13.805-50.001 0-13.785-13.804-13.785-36.238 0-50.034L330.78 266 126.34 61.391c-13.785-13.805-13.785-36.239 0-50.044 13.793-13.796 36.208-13.796 50.002 0 22.928 22.947 206.395 206.507 229.332 229.454a35.065 35.065 0 0 1 10.326 25.126c0 9.2-3.393 18.26-10.326 25.2-45.865 45.901-206.404 206.564-229.332 229.52Z"
-        />
-      </svg>
-      {children}
-    </button>
-  );
-};
+export const NextButton: React.FC<PropType> = ({ children, color = "blue", ...rest }) => (
+  <button
+    type="button"
+    {...rest}
+    className={cn(
+      "embla__button embla__button--next",
+      "grid h-12 w-12 place-items-center",
+      "rounded-md bg-white shadow-sm ring-2",
+      colorRing(color),
+      "transition-transform hover:scale-105 disabled:opacity-40 disabled:hover:scale-100",
+      "focus:outline-none focus:ring-4 focus:ring-opacity-40",
+    )}
+  >
+    <svg className={cn("h-12 w-12 scale-y-[1.25] transform md:h-14 md:w-14", colorClass(color))} viewBox="0 0 100 100" aria-hidden>
+      <polygon points="28,8 72,50 28,92" fill="currentColor" stroke="white" strokeWidth="6" strokeLinejoin="round" />{" "}
+    </svg>
+    {children}
+  </button>
+);

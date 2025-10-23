@@ -10,6 +10,7 @@ import SET2024 from "@assets/set/SetProject.png";
 import AshleyBurke from "@assets/sports/AshleyBurkeTestimonial.jpg";
 import BryanPark from "@assets/sports/BryanParkTestimonial.jpeg";
 import CameronMcMullen from "@assets/sports/CameronMcMullenTestimonial.jpeg";
+import TanTran from "@assets/sports/TanTranTestimonial.jpg";
 
 const Testimonials = [
   {
@@ -126,11 +127,11 @@ const Testimonials = [
         image: BryanPark,
       },
       {
-        name: "Bryan Park",
+        name: "Tan Tran",
         position: "SASE Sports Member",
         quote:
-          "My very first experience with SASE Sports was a casual frisbee event my freshmen year. I didn't know anyone at the time nor had I ever played ultimate frisbee, but everyone I met was super friendly and made the experience fun and enjoyable. Since then, I've had the chance to captain multiple intramural teams across different sports, meeting and playing with so many awesome people. I also had the honor of serving as Sports Coordinator my sophomore year, where I led the SASE Sports program. Thanks to SASE Sports, I've made so many friends and countless memories and it has undoubtedly been a core part of my time at UF.",
-        image: BryanPark,
+          "I’ve found SASE sports as a great community and one that I’ve been apart of ever since I arrived at UF. I look forward to the casual sports every week and participating in intramurals for SASE has been some of the most fun I’ve had thus far! Although the casuals can get a little serious at times, there is never a lack of community and openness whenever trying out new things. I encourage everyone who just wants to play the sports they enjoy or are looking for new interests to come out and play!",
+        image: TanTran,
       },
     ],
   },

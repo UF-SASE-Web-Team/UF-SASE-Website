@@ -40,7 +40,7 @@ function MobileMissionCarousel({ slides }: { slides: Array<Slide> }) {
       >
         <div className="flex">
           {slides.map((s) => (
-            <div key={s.mission} className="w-full shrink-0 snap-start px-6 py-4">
+            <div key={s.mission} className="w-full shrink-0 snap-start px-6 py-6">
               <div className="mx-auto max-w-sm">
                 <MissionCard image={s.image} mission={s.mission} text={s.text} shadow={s.shadow} />
               </div>

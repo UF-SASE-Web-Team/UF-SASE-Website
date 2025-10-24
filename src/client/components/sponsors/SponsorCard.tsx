@@ -78,7 +78,7 @@ const SponsorCard = ({ companyName, image, link, mobileVariant = "default", shad
         <div className={cn("overflow-hidden rounded-2xl", compact ? "h-[120px] w-[98%] sm:h-[170px] sm:w-[98%]" : "h-5/6 w-full")}>
           <img src={image} alt="Company Logo" className={cn("h-full w-full rounded-2xl object-fill", compact ? "p-0" : "")} />
         </div>
-        {/* company text smaller on mobile when compact */}
+        {/* text smaller on mobile when compact */}
         <p className={cn("pb-4 pt-4 text-center font-redhat font-semibold", compact ? "text-base sm:text-3xl" : "text-3xl")}>{companyName}</p>
 
         {type in typeStyles && (

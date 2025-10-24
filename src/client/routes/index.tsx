@@ -77,6 +77,27 @@ export const Route = createFileRoute("/")({
     const isMobile = useIsMobile();
     const [expanded, setExpanded] = useState(false);
 
+    const missionSlides: Array<Slide> = [
+      {
+        image: imageUrls["Briefcase.png"],
+        mission: "Professional Development",
+        text: "To prepare Asian heritage students for success in the transnational, global business world.",
+        shadow: "green",
+      },
+      {
+        image: imageUrls["People.png"],
+        mission: "Diversity",
+        text: "To promote diversity and tolerance on campuses and in the workplace.",
+        shadow: "blue",
+      },
+      {
+        image: imageUrls["Lightbulb.png"],
+        mission: "Community",
+        text: "To provide opportunities for its members to make contributions to their local communities.",
+        shadow: "green",
+      },
+    ];
+
     return (
       <div className="flex flex-col items-center">
         <div className="flex w-full flex-col items-center">
@@ -154,30 +175,23 @@ export const Route = createFileRoute("/")({
 
         <div className="flex w-full flex-col items-center bg-saseGray p-12 dark:bg-black">
           <h1 className="pb-12 text-center font-oswald text-6xl font-medium">Our Mission</h1>
+
           {/* Mobile swipeable carousel */}
           <div className="w-full sm:hidden">
-            <MobileMissionCarousel
-              slides={[
-                {
-                  image: imageUrls["Briefcase.png"],
-                  mission: "Professional Development",
-                  text: "To prepare Asian heritage students for success in the transnational, global business world.",
-                  shadow: "green",
-                },
-                {
-                  image: imageUrls["People.png"],
-                  mission: "Diversity",
-                  text: "To promote diversity and tolerance on campuses and in the workplace.",
-                  shadow: "blue",
-                },
-                {
-                  image: imageUrls["Lightbulb.png"],
-                  mission: "Community",
-                  text: "To provide opportunities for its members to make contributions to their local communities.",
-                  shadow: "green",
-                },
-              ]}
-            />
+            <MobileMissionCarousel slides={missionSlides} />
+          </div>
+
+          {/* Desktop / tablet grid (sm and up) */}
+          <div className="hidden w-full sm:block">
+            <div className="mx-auto grid max-w-6xl grid-cols-1 items-stretch gap-8 px-6 sm:auto-rows-fr sm:grid-cols-2 lg:grid-cols-3">
+              {missionSlides.map((s) => (
+                <div key={s.mission} className="flex justify-center">
+                  <div className="mx-auto h-full w-full max-w-sm [&>div]:h-full">
+                    <MissionCard image={s.image} mission={s.mission} text={s.text} shadow={s.shadow} />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -245,12 +259,18 @@ export const Route = createFileRoute("/")({
           <Carousel prog="N/A" purpose="Values" />
         </div>
 
+<<<<<<< HEAD
         <div className="dark:black flex w-full flex-col items-center justify-center bg-white p-12 dark:bg-black">
+=======
+        {/* --- Sponsors --- */}
+        <div className="flex w-full flex-col items-center justify-center bg-saseGray p-10 dark:bg-greenBackground">
+>>>>>>> c521481 (fixed desktop issue from mobile change)
           <h1 className="w-full pb-12 text-center font-oswald text-6xl font-medium">Sponsors</h1>
 
-          <div className="w-11/12 lg:w-10/12">
-            <div className="relative rounded-3xl border-4 border-border bg-muted p-6 shadow-[12px_12px_0px_#7DC242] md:p-10">
-              <p className="mb-8 p-0 text-left font-redhat text-xl sm:text-2xl">
+          {/* ===== MOBILE layout ===== */}
+          <div className="w-11/12 sm:hidden">
+            <div className="relative rounded-2xl border-4 border-border bg-muted p-6 shadow-[12px_12px_0px_#7DC242]">
+              <p className="mb-8 text-left font-redhat text-xl">
                 Are you interested in becoming a partner with the UF Society of Asian Scientists and Engineers (SASE) Chapter?
                 <br />
                 <br />
@@ -262,24 +282,61 @@ export const Route = createFileRoute("/")({
                 .
               </p>
 
-              {/* Sponsors now inside the same box */}
-              <div className="grid w-full grid-cols-2 place-items-stretch gap-4 sm:gap-6 md:gap-8">
-                {SponsorInfo.map((sponsor) =>
-                  sponsor.tier === "Diamond" ? (
+              {/* Sponsors inside the box on mobile */}
+              <div className="grid w-full grid-cols-2 place-items-stretch gap-4">
+                {SponsorInfo.map((s) =>
+                  s.tier === "Diamond" ? (
                     <SponsorCard
-                      key={sponsor.company}
-                      image={sponsor.image}
-                      companyName={sponsor.company}
-                      type={sponsor.tier}
-                      shadowcolor={sponsor.shadow_color}
-                      link={sponsor.link}
+                      key={s.company}
+                      image={s.image}
+                      companyName={s.company}
+                      type={s.tier as "Diamond" | "Gold" | "Silver" | "Bronze"}
+                      shadowcolor={s.shadow_color}
+                      link={s.link}
                       mobileVariant="compact"
                     />
                   ) : null,
                 )}
               </div>
 
-              <p className="text-1xl mt-6 w-full text-center font-redhat italic text-foreground xl:text-3xl">Current Featured Sponsors</p>
+              <p className="mt-6 w-full text-center font-redhat text-xl italic text-foreground">Current Featured Sponsors</p>
+            </div>
+          </div>
+
+          {/* ===== DESKTOP layout ===== */}
+          <div className="hidden w-10/12 sm:block">
+            <div className="mb-20 flex w-full flex-col items-start gap-14 lg:flex-row xl:gap-24">
+              <div className="flex w-full flex-col items-center rounded-2xl border-4 border-border bg-muted p-10 shadow-[12px_12px_0px_#7DC242]">
+                <p className="p-4 text-left font-redhat text-xl sm:text-2xl">
+                  Are you interested in becoming a partner with the UF Society of Asian Scientists and Engineers (SASE) Chapter?
+                  <br />
+                  <br />
+                  To get access to our sponsorship packet, please contact our External Vice President at
+                  <a href="mailto:ufsase.evp@gmail.com" className="text-saseGreen underline">
+                    {" "}
+                    ufsase.evp@gmail.com
+                  </a>
+                  .
+                </p>
+              </div>
+
+              <div className="flex w-full flex-col items-center gap-12">
+                <div className="grid w-full grid-cols-1 gap-14 sm:grid-cols-2 xl:gap-24">
+                  {SponsorInfo.map((sponsor) =>
+                    sponsor.tier === "Diamond" ? (
+                      <SponsorCard
+                        key={sponsor.company}
+                        image={sponsor.image}
+                        companyName={sponsor.company}
+                        type={sponsor.tier as "Diamond" | "Gold" | "Silver" | "Bronze"}
+                        shadowcolor={sponsor.shadow_color}
+                        link={sponsor.link}
+                      />
+                    ) : null,
+                  )}
+                </div>
+                <p className="m-0 mt-[-30px] w-full text-center font-redhat text-2xl italic text-foreground xl:text-3xl">Current Featured Sponsors</p>
+              </div>
             </div>
           </div>
         </div>

@@ -63,37 +63,40 @@ const SponsorCard = ({ companyName, image, link, mobileVariant = "default", shad
         {type}
       </p>
 
-      <div
-        className={cn(
-          "relative flex h-full flex-col items-center overflow-visible rounded-2xl bg-muted duration-300 hover:scale-105",
-          compact ? "border-2 p-0.5" : "border-4 p-1",
-          "border-black",
-          // green offset box shadow
-          "before:absolute before:-z-10 before:content-['']",
-          "before:inset-0 before:rounded-2xl before:bg-[#7DC242]",
-          "before:translate-x-1.5 before:translate-y-1.5",
-        )}
-      >
-        <Link to={link} className="absolute inset-0 z-10" />
-        <div className={cn("overflow-hidden rounded-2xl", compact ? "h-[120px] w-[98%] sm:h-[170px] sm:w-[98%]" : "h-5/6 w-full")}>
-          <img src={image} alt="Company Logo" className={cn("h-full w-full rounded-2xl object-fill", compact ? "p-0" : "")} />
-        </div>
-        {/* text smaller on mobile when compact */}
-        <p className={cn("pb-4 pt-4 text-center font-redhat font-semibold", compact ? "text-base sm:text-3xl" : "text-3xl")}>{companyName}</p>
+      <div className={cn("relative origin-top-left rounded-2xl transition-transform duration-300 hover:scale-105", compact ? "p-0.5" : "p-1")}>
+        {/* green offset behind the card */}
+        <div aria-hidden className={cn("pointer-events-none absolute inset-0 -z-10 rounded-2xl", "translate-x-1.5 translate-y-1.5 bg-[#7DC242]")} />
 
-        {type in typeStyles && (
-          <img
-            src={typeStyles[type].src}
-            alt={`${type} Icon`}
-            className={cn(
-              "absolute left-0 top-0 -translate-x-1/2",
-              typeStyles[type].size,
-              compact ? "h-10 sm:h-[40%]" : typeStyles[type].size,
-              typeStyles[type].translateY,
-              typeStyles[type].rotate ?? "",
-            )}
-          />
-        )}
+        {/* the actual card box */}
+        <div
+          className={cn(
+            "relative flex h-full flex-col items-center rounded-2xl bg-muted",
+            compact ? "border-2" : "border-4",
+            "overflow-visible border-black",
+          )}
+        >
+          <Link to={link} className="absolute inset-0 z-10" />
+
+          <div className={cn("w-full overflow-hidden rounded-2xl", compact ? "h-[120px] w-[98%] sm:h-[170px] sm:w-[98%]" : "h-5/6")}>
+            <img src={image} alt="Company Logo" className={cn("h-full w-full rounded-2xl object-fill", compact ? "p-0" : "")} />
+          </div>
+
+          <p className={cn("pb-4 pt-4 text-center font-redhat font-semibold", compact ? "text-base sm:text-3xl" : "text-3xl")}>{companyName}</p>
+
+          {type in typeStyles && (
+            <img
+              src={typeStyles[type].src}
+              alt={`${type} Icon`}
+              className={cn(
+                "absolute left-0 top-0 -translate-x-1/2",
+                typeStyles[type].size,
+                compact ? "h-10 sm:h-[40%]" : typeStyles[type].size,
+                typeStyles[type].translateY,
+                typeStyles[type].rotate ?? "",
+              )}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

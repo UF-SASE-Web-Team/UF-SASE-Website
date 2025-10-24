@@ -186,7 +186,7 @@ export const Route = createFileRoute("/")({
             <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-10 px-6 sm:grid-cols-3">
               {missionSlides.map((s) => (
                 <div key={s.mission} className="flex justify-center">
-                  <div className="h-full min-h-[330px] w-full max-w-[560px] border shadow lg:min-h-[330px] [&>div>div:nth-child(2)>div:hover]:scale-100 [&>div>div:nth-child(2)]:h-full [&>div]:h-full [&>div]:transform-gpu [&>div]:transition-transform [&>div]:duration-300 hover:[&>div]:scale-105">
+                  <div className="h-full min-h-[330px] w-full max-w-[560px] lg:min-h-[330px] [&>div>div:nth-child(2)>div:hover]:scale-100 [&>div>div:nth-child(2)]:h-full [&>div]:h-full [&>div]:transform-gpu [&>div]:transition-transform [&>div]:duration-300 hover:[&>div]:scale-105">
                     <MissionCard image={s.image} mission={s.mission} text={s.text} shadow={s.shadow} />
                   </div>
                 </div>

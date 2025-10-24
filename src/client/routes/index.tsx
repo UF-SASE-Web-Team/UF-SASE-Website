@@ -173,8 +173,8 @@ export const Route = createFileRoute("/")({
           </div>
         </div>
 
-        <div className="flex w-full flex-col items-center bg-saseGray p-12 dark:bg-black">
-          <h1 className="pb-12 text-center font-oswald text-6xl font-medium">Our Mission</h1>
+        <div className="flex w-full flex-col items-center bg-saseGray p-12 dark:bg-greenBackground">
+          <h1 className="pb-5 text-center font-oswald text-6xl font-medium sm:pb-12">Our Mission</h1>
 
           {/* Mobile swipeable carousel */}
           <div className="w-full sm:hidden">
@@ -259,12 +259,8 @@ export const Route = createFileRoute("/")({
           <Carousel prog="N/A" purpose="Values" />
         </div>
 
-<<<<<<< HEAD
-        <div className="dark:black flex w-full flex-col items-center justify-center bg-white p-12 dark:bg-black">
-=======
         {/* --- Sponsors --- */}
         <div className="flex w-full flex-col items-center justify-center bg-saseGray p-10 dark:bg-greenBackground">
->>>>>>> c521481 (fixed desktop issue from mobile change)
           <h1 className="w-full pb-12 text-center font-oswald text-6xl font-medium">Sponsors</h1>
 
           {/* ===== MOBILE layout ===== */}

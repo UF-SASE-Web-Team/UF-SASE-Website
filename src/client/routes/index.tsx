@@ -186,7 +186,26 @@ export const Route = createFileRoute("/")({
             <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-10 px-6 sm:grid-cols-3">
               {missionSlides.map((s) => (
                 <div key={s.mission} className="flex justify-center">
-                  <div className="h-full min-h-[330px] w-full max-w-[560px] lg:min-h-[330px] [&>div>div:nth-child(2)>div:hover]:scale-100 [&>div>div:nth-child(2)]:h-full [&>div]:h-full [&>div]:transform-gpu [&>div]:transition-transform [&>div]:duration-300 hover:[&>div]:scale-105">
+                  <div
+                    className={[
+                      "relative h-full min-h-[330px] w-full max-w-[560px] lg:min-h-[330px]",
+                      "[&>div]:h-full",
+                      "[&>div>div:nth-child(2)]:h-full",
+                      "[&>div>div:nth-child(2)>div]:h-full",
+                      // hide the background copy on desktop
+                      "[&>div>div:first-child]:hidden",
+                      // scale whole card on hover
+                      "[&>div]:transition-transform",
+                      "[&>div]:duration-300",
+                      "[&>div]:transform-gpu",
+                      "hover:[&>div]:scale-105",
+                      s.shadow === "blue"
+                        ? "hover:[&>div>div:nth-child(2)]:shadow-[12px_12px_0_#0668B3]"
+                        : "hover:[&>div>div:nth-child(2)]:shadow-[12px_12px_0_#7DC242]",
+                      // prevent inner double-scale
+                      "[&>div>div:nth-child(2)>div:hover]:scale-100",
+                    ].join(" ")}
+                  >
                     <MissionCard image={s.image} mission={s.mission} text={s.text} shadow={s.shadow} />
                   </div>
                 </div>

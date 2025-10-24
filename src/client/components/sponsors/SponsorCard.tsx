@@ -12,27 +12,10 @@ interface SponsorStyle {
 type SponsorType = "Diamond" | "Gold" | "Silver" | "Bronze";
 
 const typeStyles: Record<SponsorType, SponsorStyle> = {
-  Diamond: {
-    src: imageUrls["Diamond.png"],
-    size: "h-[30%]",
-    translateY: "-translate-y-1/3",
-    rotate: "rotate-[-15deg]",
-  },
-  Gold: {
-    src: imageUrls["Gold.png"],
-    size: "h-[30%]",
-    translateY: "-translate-y-1/3",
-  },
-  Silver: {
-    src: imageUrls["Silver.png"],
-    size: "h-[30%]",
-    translateY: "-translate-y-1/3",
-  },
-  Bronze: {
-    src: imageUrls["Bronze.png"],
-    size: "h-[30%]",
-    translateY: "-translate-y-1/3",
-  },
+  Diamond: { src: imageUrls["Diamond.png"], size: "h-[30%]", translateY: "-translate-y-1/3", rotate: "rotate-[-15deg]" },
+  Gold: { src: imageUrls["Gold.png"], size: "h-[30%]", translateY: "-translate-y-1/3" },
+  Silver: { src: imageUrls["Silver.png"], size: "h-[30%]", translateY: "-translate-y-1/3" },
+  Bronze: { src: imageUrls["Bronze.png"], size: "h-[30%]", translateY: "-translate-y-1/3" },
 };
 
 interface SponsorCardProps {
@@ -42,12 +25,23 @@ interface SponsorCardProps {
   shadowcolor: string;
   type: SponsorType;
   mobileVariant?: "default" | "compact";
+  indexSizing?: boolean;
 }
 
-const SponsorCard = ({ companyName, image, link, mobileVariant = "default", shadowcolor: _shadowcolor, type }: SponsorCardProps) => {
+const SponsorCard = ({
+  companyName,
+  image,
+  indexSizing = false,
+  link,
+  mobileVariant = "default",
+  shadowcolor: _shadowcolor,
+  type,
+}: SponsorCardProps) => {
   const compact = mobileVariant === "compact";
+
   return (
     <div className="flex h-full w-full flex-col" style={{ zIndex: 10 }}>
+      {/* Tier Label */}
       <p
         className={cn(
           {
@@ -56,47 +50,59 @@ const SponsorCard = ({ companyName, image, link, mobileVariant = "default", shad
             "text-slate-400": type === "Silver",
             "text-amber-700": type === "Bronze",
           },
-          compact ? "text-lg sm:text-2xl" : "text-2xl",
+          compact ? "text-lg sm:text-2xl" : indexSizing ? "text-2xl sm:text-3xl" : "text-4xl",
           "pb-1 text-center font-redhat font-semibold",
         )}
       >
         {type}
       </p>
 
-      <div className={cn("relative origin-top-left rounded-2xl transition-transform duration-300 hover:scale-105", compact ? "p-0.5" : "p-1")}>
-        {/* green offset behind the card */}
-        <div aria-hidden className={cn("pointer-events-none absolute inset-0 -z-10 rounded-2xl", "translate-x-1.5 translate-y-1.5 bg-[#7DC242]")} />
+      {/* Main Card with solid opaque shadow */}
+      <div
+        className={cn(
+          "relative isolate flex h-full flex-col items-center rounded-2xl border-foreground bg-muted duration-300 hover:scale-105",
+          // solid green shadow
+          "shadow-[4px_4px_0_#7DC242]",
+          "sm:shadow-[5px_5px_0_#7DC242] md:shadow-[6px_6px_0_#7DC242]",
+          compact ? "border-2" : "border-4",
+        )}
+      >
+        <Link to={link} className="absolute inset-0 z-10" />
 
-        {/* the actual card box */}
+        {/* Logo area */}
         <div
           className={cn(
-            "relative flex h-full flex-col items-center rounded-2xl bg-muted",
-            compact ? "border-2" : "border-4",
-            "overflow-visible border-black",
+            "w-full overflow-hidden rounded-2xl",
+            compact ? "h-[120px] w-[98%] sm:h-[170px] sm:w-[98%]" : indexSizing ? "h-[220px] sm:h-[260px] md:h-[300px]" : "h-5/6",
           )}
         >
-          <Link to={link} className="absolute inset-0 z-10" />
-
-          <div className={cn("w-full overflow-hidden rounded-2xl", compact ? "h-[120px] w-[98%] sm:h-[170px] sm:w-[98%]" : "h-5/6")}>
-            <img src={image} alt="Company Logo" className={cn("h-full w-full rounded-2xl object-fill", compact ? "p-0" : "")} />
-          </div>
-
-          <p className={cn("pb-4 pt-4 text-center font-redhat font-semibold", compact ? "text-base sm:text-3xl" : "text-3xl")}>{companyName}</p>
-
-          {type in typeStyles && (
-            <img
-              src={typeStyles[type].src}
-              alt={`${type} Icon`}
-              className={cn(
-                "absolute left-0 top-0 -translate-x-1/2",
-                typeStyles[type].size,
-                compact ? "h-10 sm:h-[40%]" : typeStyles[type].size,
-                typeStyles[type].translateY,
-                typeStyles[type].rotate ?? "",
-              )}
-            />
-          )}
+          <img src={image} alt="Company Logo" className={cn("h-full w-full rounded-2xl", (compact || indexSizing) && "object-contain")} />
         </div>
+
+        {/* Company name */}
+        <p
+          className={cn(
+            "text-center font-redhat font-semibold",
+            compact ? "pb-3 pt-3 text-base sm:text-3xl" : indexSizing ? "pb-3 pt-3 text-2xl sm:text-3xl" : "pb-4 pt-4 text-3xl",
+          )}
+        >
+          {companyName}
+        </p>
+
+        {/* Tier icon */}
+        {type in typeStyles && (
+          <img
+            src={typeStyles[type].src}
+            alt={`${type} Icon`}
+            className={cn(
+              "absolute left-0 top-0 -translate-x-1/2",
+              typeStyles[type].size,
+              compact ? "h-10 sm:h-[40%]" : typeStyles[type].size,
+              typeStyles[type].translateY,
+              typeStyles[type].rotate ?? "",
+            )}
+          />
+        )}
       </div>
     </div>
   );

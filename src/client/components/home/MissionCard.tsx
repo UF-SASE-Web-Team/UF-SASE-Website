@@ -17,7 +17,7 @@ const MissionCard = ({ image, mission, shadow: _shadow, text }: { image: string;
         <div className="flex flex-col items-center p-6 duration-300 hover:scale-105">
           <p className="pb-4 text-center font-redhat text-2xl font-semibold">{mission}</p>
           <img src={image} alt="Icon" className="pb-4" />
-          <p className="text-1xl text-center font-redhat">{text}</p>
+          <p className="text-center font-redhat text-2xl">{text}</p>
         </div>
       </div>
     </div>

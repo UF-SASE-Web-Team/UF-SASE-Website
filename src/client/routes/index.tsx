@@ -41,7 +41,7 @@ function MobileMissionCarousel({ slides }: { slides: Array<Slide> }) {
         <div className="flex">
           {slides.map((s) => (
             <div key={s.mission} className="w-full shrink-0 snap-start px-6 py-6">
-              <div className="mx-auto max-w-sm">
+              <div className="mx-auto h-[400px] max-w-sm [&>div>div:nth-child(2)>div:hover]:scale-100 [&>div>div:nth-child(2)>div]:h-full [&>div>div:nth-child(2)]:h-full [&>div]:h-full">
                 <MissionCard image={s.image} mission={s.mission} text={s.text} shadow={s.shadow} />
               </div>
             </div>
@@ -183,10 +183,10 @@ export const Route = createFileRoute("/")({
 
           {/* Desktop / tablet grid (sm and up) */}
           <div className="hidden w-full sm:block">
-            <div className="mx-auto grid max-w-6xl grid-cols-1 items-stretch gap-8 px-6 sm:auto-rows-fr sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mx-auto grid max-w-7xl grid-cols-1 items-stretch gap-10 px-6 sm:grid-cols-3">
               {missionSlides.map((s) => (
                 <div key={s.mission} className="flex justify-center">
-                  <div className="mx-auto h-full w-full max-w-sm [&>div]:h-full">
+                  <div className="h-full min-h-[330px] w-full max-w-[560px] border shadow lg:min-h-[330px] [&>div>div:nth-child(2)>div:hover]:scale-100 [&>div>div:nth-child(2)]:h-full [&>div]:h-full [&>div]:transform-gpu [&>div]:transition-transform [&>div]:duration-300 hover:[&>div]:scale-105">
                     <MissionCard image={s.image} mission={s.mission} text={s.text} shadow={s.shadow} />
                   </div>
                 </div>

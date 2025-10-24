@@ -65,12 +65,11 @@ export const PrevButton: React.FC<PropType> = ({ children, color = "green", ...r
     type="button"
     {...rest}
     className={cn(
-      "embla__button embla__button--prev",
-      "grid h-12 w-12 place-items-center",
-      "rounded-md bg-white shadow-sm ring-2",
+      "static grid h-12 w-12 place-items-center",
       colorRing(color),
       "transition-transform hover:scale-105 disabled:opacity-40 disabled:hover:scale-100",
-      "focus:outline-none focus:ring-4 focus:ring-opacity-40",
+      "outline-none focus:outline-none focus:ring-0 focus-visible:ring-4 focus-visible:ring-opacity-40",
+      "[-webkit-tap-highlight-color:transparent]",
     )}
   >
     <svg className={cn("h-10 w-10 scale-y-[1.25] transform md:h-14 md:w-14", colorClass(color))} viewBox="0 0 100 100" aria-hidden>
@@ -85,12 +84,11 @@ export const NextButton: React.FC<PropType> = ({ children, color = "blue", ...re
     type="button"
     {...rest}
     className={cn(
-      "embla__button embla__button--next",
-      "grid h-12 w-12 place-items-center",
-      "rounded-md bg-white shadow-sm ring-2",
+      "static grid h-12 w-12 place-items-center",
       colorRing(color),
       "transition-transform hover:scale-105 disabled:opacity-40 disabled:hover:scale-100",
-      "focus:outline-none focus:ring-4 focus:ring-opacity-40",
+      "outline-none focus:outline-none focus:ring-0 focus-visible:ring-4 focus-visible:ring-opacity-40",
+      "[-webkit-tap-highlight-color:transparent]",
     )}
   >
     <svg className={cn("h-10 w-10 scale-y-[1.25] transform md:h-14 md:w-14", colorClass(color))} viewBox="0 0 100 100" aria-hidden>

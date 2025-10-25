@@ -10,7 +10,7 @@ export const faqData: Array<{ question: string; answer: string | React.ReactNode
   {
     question: "What projects does SET work on?",
     answer:
-      "SET members come together every year to choose what project to work on! However, last year SET created a trash-picking-up robot, and this year, SET is working on a robot rescue dog!",
+      "SET members come together every year to choose what project to work on! Two years ago SET created a trash-picking-up robot, and last year, SET made a robot rescue dog! This year, we are working on a an autonomous delivery robot!",
   },
   {
     question: "What does the time commitment look like?",

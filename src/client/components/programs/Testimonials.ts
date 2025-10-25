@@ -6,7 +6,9 @@ import ConnieHuang from "@assets/interns/ConnieHuangTestimonial.png";
 import KaylaChen from "@assets/interns/KaylaChenTestimonial.png";
 import MishaSonavadekar from "@assets/interns/MishaSonavadekarTestimonial.png";
 import SharleneKo from "@assets/interns/SharleneKoTestimonial.png";
-import SET2024 from "@assets/set/SetProject.png";
+import SET2023 from "@assets/set/SetProject0.jpg";
+import SET2024 from "@assets/set/SetProject1.png";
+import SET2025 from "@assets/set/SetProject2.png";
 import AshleyBurke from "@assets/sports/AshleyBurkeTestimonial.jpg";
 import BryanPark from "@assets/sports/BryanParkTestimonial.jpeg";
 import CameronMcMullen from "@assets/sports/CameronMcMullenTestimonial.jpeg";
@@ -75,7 +77,7 @@ const Testimonials = [
         position: "2023 Project",
         quote:
           "During SET's first semester, SET successfully developed a campus cleaner robot designed to autonomously identify and pick up trash 🤖. This innovative project not only helped keep our campus clean but also provided valuable experience in robotics, programming, and teamwork.",
-        image: SET2024,
+        image: SET2023,
       },
       {
         name: "SET Dumpy",
@@ -87,8 +89,9 @@ const Testimonials = [
       {
         name: "2025 Project Name",
         position: "2024-2025 Project",
-        quote: "Coming soon...",
-        image: SET2024,
+        quote:
+          "A roboting dog that can rescue people in dangerous situations 🐕‍🦺. This innovative project aims to assist in search and rescue missions while providing valuable experience in robotics, programming, and teamwork.",
+        image: SET2025,
       },
       {
         name: "2026 Project Name",

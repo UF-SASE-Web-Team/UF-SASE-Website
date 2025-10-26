@@ -220,7 +220,7 @@ export const Route = createFileRoute("/")({
               <div className="w-full bg-gradient-to-r from-transparent via-[#7DC242] to-[#42957B]" />
               <div className="w-full bg-gradient-to-r from-[#42957B] via-[#0668B3] to-transparent" />
             </div>
-            <div className="my-2 flex w-full flex-col items-center bg-saseGray p-12 dark:bg-black">
+            <div className="flex w-full flex-col items-center bg-white p-12 dark:bg-black">
               <MobileMemberCard
                 image={imageUrls["President.jpeg"]}
                 name="Vincent Lin"

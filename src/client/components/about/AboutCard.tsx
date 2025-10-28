@@ -5,15 +5,14 @@ const AboutCard = () => {
   return (
     <div className="relative w-4/5">
       {/* Shadow Card */}
-      <div className="absolute left-5 top-5 h-full w-full rounded-lg bg-saseGreen"></div>
+      <div className="absolute left-5 top-5 h-full w-full rounded-3xl bg-saseGreen"></div>
 
       {/* Main Text Card */}
-      <div className="relative rounded-lg border-2 border-border bg-muted p-6 text-lg shadow-xl">
+      <div className="relative rounded-3xl border-2 border-border bg-muted p-11 text-lg shadow-xl">
         <p className="mb-4 text-foreground">
-          The <span className="font-semibold">Society of Asian Scientists and Engineers (SASE) </span>
-          was established in 2010 as a student organization dedicated to the advancement of Asian heritage scientists and engineers. Above all, SASE
-          is a welcoming community of driven individuals that cultivates a unique balance between professional development and a supportive, fun
-          community.
+          The <span className="font-semibold">Society of Asian Scientists and Engineers (SASE) </span> at UF was established in 2010 as a student
+          organization dedicated to the advancement of Asian heritage scientists and engineers. Above all, SASE is a welcoming community of driven
+          individuals that cultivates a unique balance between professional development and a supportive, fun community.
         </p>
         <p className="mb-4 text-foreground">
           Through our <span className="font-semibold">general body meetings</span>, <span className="font-semibold">socials</span>,
@@ -35,8 +34,8 @@ const AboutCard = () => {
         <img
           src={imageUrls["SASELogoStar.png"]}
           alt="Logo"
-          style={{ width: "150px", height: "150px" }} // Reduced size
-          className="absolute -bottom-24 -right-16 object-contain"
+          style={{ width: "200px", height: "200px" }} // Reduced size
+          className="absolute -bottom-20 -right-16 object-contain"
         />
       </div>
     </div>

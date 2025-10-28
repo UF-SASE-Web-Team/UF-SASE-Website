@@ -12,7 +12,7 @@ const MissionCard = ({ logo, shadowColor, text, title }: CardProps) => {
     <div className="flex-none">
       <div
         className={cn(
-          `flex h-64 w-56 transform flex-col items-center justify-between rounded-2xl border-2 border-border bg-muted p-4 transition duration-300 hover:scale-105`,
+          `flex h-56 w-56 transform flex-col items-center rounded-2xl border-2 border-border bg-muted p-4 transition duration-300 hover:scale-105`,
           {
             "hover:shadow-[12px_12px_0px_#0668B3]": shadowColor === "blue",
             "hover:shadow-[12px_12px_0px_#7DC242]": shadowColor === "green",

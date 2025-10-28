@@ -1,5 +1,4 @@
 import { imageUrls } from "@assets/imageUrls";
-import StarBulletPoint from "@assets/programs/StarBulletPoint.png";
 import React, { useEffect, useRef } from "react";
 
 interface TimelineItem {

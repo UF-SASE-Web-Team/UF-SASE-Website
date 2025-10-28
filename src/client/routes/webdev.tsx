@@ -1,15 +1,12 @@
-import Carousel from "@/client/components/carousel/Carousel";
-import BackendLead from "@assets/webdev/BackendLead.jpeg";
-import FrontEndLead from "@assets/webdev/FrontendLead.png";
-import FullStackLead from "@assets/webdev/FullStackLead2.jpg";
-import UIUXLead from "@assets/webdev/UIUXLead.jpg";
-import WebmasterChair from "@assets/webdev/WebmasterChair.jpeg";
+import UIUXLead from "@assets/webdev/HelenZou.png";
+import WebmasterChair2 from "@assets/webdev/LynetteHemingway.png";
+import BackendLead from "@assets/webdev/RJTabelon.png";
+import FrontEndLead from "@assets/webdev/StephanieFong.png";
+import WebmasterChair from "@assets/webdev/ThuyLe.png";
 import MemberCard from "@components/home/MemberCard";
 import MobileMemberCard from "@components/mobile/MobileMemberCard";
 import FAQ from "@components/programs/FAQCard";
 import { faqData } from "@components/programs/faqWebdev";
-import GoalCard from "@components/programs/GoalCard";
-import InfoCard from "@components/programs/InfoCard";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
 import { imageUrls } from "../assets/imageUrls";
@@ -29,106 +26,122 @@ export const Route = createFileRoute("/webdev")({
 
     return (
       <div className="mt-12 flex min-h-screen flex-col items-center bg-background">
-        <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 sm:flex-row">
-          <header className="mr-8 mt-10 flex items-center px-5">
-            {/* Green Line and Text in Row */}
-            <div className="mr-5 h-40 w-1.5 bg-saseGreen"></div>
-            <h2 className="font-oswald text-7xl font-semibold leading-tight text-foreground">
-              WEB
-              <br />
-              TEAM
-            </h2>
-          </header>
-          <InfoCard
-            text={
-              <>
-                The SASE Web Team consists of <strong>UI/UX, Frontend</strong>, and <strong>Backend</strong> teams working together to create the UF
-                SASE website. Are you looking to expand your skill set and gain experience with <strong>agile practices</strong> commonly used in the
-                industry? Do you want to apply your technical experience for the good of all SASE? If so, this is a great opportunity! We're seeking
-                committed members to bring our ideas to life and publish an improved, self-hosted version of our website. We encourage people of all
-                skill levels to apply!
-              </>
-            }
-          />
+        <div className="-mt-10 flex w-full max-w-7xl flex-col sm:flex-row sm:items-center">
+          <div className="relative mx-auto w-[75%] sm:w-2/5">
+            <img src="src/client/assets/webdev/WebTeam.png" alt="Web Team" className="mx-auto h-auto w-full sm:mx-0" />
+          </div>
+          <div className="relative w-full sm:w-4/5">
+            <img src="src/client/assets/webdev/WebDevTerminal.png" alt="Terminal" className="h-auto w-full" />
+          </div>
         </div>
-
-        <div className="w-full max-w-7xl p-8">
-          <Carousel purpose="Images" prog="Web Dev" />
-
-          {/* Leadership */}
-          <header className="mb-6 flex max-w-7xl items-center px-5">
-            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="font-oswald text-4xl text-foreground">Leadership</h2>
+        <div className="w-full">
+          <div className="relative w-full">
+            <div className="relative flex h-[330px] flex-col items-center justify-center bg-[#1E1E1E] sm:h-[600px]">
+              <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-saseGreen via-[#7DC242] to-saseBlue"></div>
+              <div className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-saseGreen via-[#7DC242] to-saseBlue"></div>
+              <img src="src/client/assets/webdev/WebDevTeamCropped.png" alt="Web Team" className="relative z-10 w-[95%] rounded-3xl sm:w-3/5" />
+              <div className="mt-2 px-3 pt-3 sm:w-3/5 sm:px-0">
+                <p className="font-silkscreen text-[20px] leading-relaxed text-white sm:text-[30px]">
+                  &gt; &gt; APPLICATIONS: <span className="text-saseBlue">CLOSED</span> <br />
+                  <span className="font-redhat text-base leading-relaxed text-white sm:text-lg">
+                    <strong>Spring 2026</strong> applications can be found on UF SASE’s{" "}
+                    <a href="https://www.instagram.com/ufsase/" target="_blank" rel="noopener noreferrer" className="text-saseGreen underline">
+                      Instagram
+                    </a>{" "}
+                    and{" "}
+                    <a href="http://discord.gg/q3HBeC5" target="_blank" rel="noopener noreferrer" className="text-saseGreen underline">
+                      Discord
+                    </a>
+                    !
+                  </span>
+                </p>
+              </div>
+            </div>
+          </div>
+          <header className="mt-4 flex w-full justify-center sm:mt-8">
+            <h2 className="bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen bg-clip-text text-center font-silkscreen text-[40px] text-transparent sm:mb-12 sm:text-[50px]">
+              Leadership
+            </h2>
           </header>
           {isMobile ? (
             <>
               <MobileMemberCard
                 image={WebmasterChair}
-                name="Ricky Zhang"
+                name="Thuy Le"
                 role="Webmaster"
                 textColor="blue"
                 quote="SASE deserves a better website"
                 imageSide="left"
               />
-              <div className="h-1 w-5/6 bg-gradient-to-r from-saseGreen to-saseBlue" />
+              <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseGreen to-saseBlue" />
               <MobileMemberCard
-                image={FullStackLead}
-                name="Arman Kumaraswamy"
-                role="Full-Stack"
+                image={WebmasterChair2}
+                name="Lynette Hemingway"
+                role="Webmaster"
                 textColor="green"
                 quote="[object Object]"
                 imageSide="right"
               />
-              <div className="h-1 w-5/6 bg-gradient-to-l from-saseBlue to-saseGreen" />
+              <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
               <MobileMemberCard
                 image={FrontEndLead}
-                name="Joseph Kim"
+                name="Stephanie Fong"
                 role="Frontend"
                 textColor="blue"
                 quote="still don't how to center a div"
                 imageSide="left"
               />
-              <div className="h-1 w-5/6 bg-gradient-to-l from-saseGreen to-saseBlue" />
+              <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
               <MobileMemberCard
                 image={BackendLead}
-                name="Sihala Senevirathne"
+                name="RJ Tabelon"
                 role="Backend"
                 textColor="green"
                 quote="Ricky, please pay me"
                 imageSide="right"
               />
-              <div className="h-1 w-5/6 bg-gradient-to-l from-saseBlue to-saseGreen" />
-              <MobileMemberCard image={UIUXLead} name="Catherine Wu" role="UI/UX" textColor="blue" quote="sigma Figma team" imageSide="left" />
+              <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
+              <MobileMemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="blue" quote="sigma Figma team" imageSide="left" />
             </>
           ) : (
-            <div className="mb-12 flex flex-col items-center justify-center gap-8">
-              <div className="flex flex-row gap-8">
-                <MemberCard image={FullStackLead} name="Arman Kumaraswamy" role="Full-Stack" textColor="blue" quote="[object Object]" />
-                <MemberCard image={WebmasterChair} name="Ricky Zhang" role="Webmaster" textColor="blue" quote="SASE deserves a better website" />
-              </div>
-              <div className="flex flex-row gap-8">
-                <MemberCard image={FrontEndLead} name="Joseph Kim" role="Frontend" textColor="green" quote="still don't how to center a div" />
-                <MemberCard image={BackendLead} name="Sihala Senevirathne" role="Backend" textColor="green" quote="Ricky, please pay me" />
-                <MemberCard image={UIUXLead} name="Catherine Wu" role="UI/UX" textColor="green" quote="sigma Figma team" />
-              </div>
+            <div className="mb-16 grid w-full grid-cols-1 gap-16 px-32 sm:grid-cols-2 lg:grid-cols-5">
+              <MemberCard image={FrontEndLead} name="Stephanie Fong" role="Frontend" textColor="blue" quote="still don't how to center a div" />
+              <MemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="green" quote="SASE deserves a better website" />
+              <MemberCard image={BackendLead} name="RJ Tabelon" role="Backend" textColor="blue" quote="Ricky, please pay me" />
+              <MemberCard image={WebmasterChair2} name="Lynette Hemingway" role="Webmaster" textColor="green" quote="[object Object]" />
+              <MemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="blue" quote="sigma Figma team" />
             </div>
           )}
-
-          {/* Goals & Outcomes */}
-          <header className="mb-12 flex max-w-7xl items-center px-5">
-            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="font-oswald text-4xl text-foreground">Goals & Outcomes</h2>
-          </header>
-          <div className="mb-24 flex flex-col flex-nowrap items-center justify-center gap-10 md:flex-row lg:gap-36">
-            <GoalCard text="Work with agile practices commonly found in the industry." color="blue" />
-            <GoalCard text="Develop technical skills related to UI/UX, frontend, or backend development." color="green" />
-            <GoalCard text="Gain hands-on experience with web development and contribute to SASE in a meaningful way." color="blue" />
+          <div className="bg-[#F5F5F5] pb-16 pt-4">
+            <div className="mx-auto w-full max-w-7xl">
+              <header className="mb-12 flex items-center px-5">
+                <div className="mr-3 h-12 w-1.5 bg-saseGreen"></div>
+                <h2 className="font-oswald text-[30px] text-foreground sm:text-[54px]">Goals & Outcomes</h2>
+              </header>
+              <div className="flex flex-col flex-nowrap items-center justify-center gap-10 md:flex-row lg:gap-36">
+                <div className="flex h-48 w-48 flex-col items-center justify-center rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:h-[19rem] sm:w-[19rem]">
+                  <p className="p-6 font-redhat text-[1rem] text-white sm:text-3xl">&gt; Work with agile practices commonly found in the industry.</p>
+                </div>
+                <div className="flex h-48 w-48 flex-col items-center justify-center rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:h-[19rem] sm:w-[19rem]">
+                  <p className="p-6 font-redhat text-[1rem] text-white sm:text-3xl">
+                    &gt; Develop technical skills related to UI/UX, front-end, or back-end development.
+                  </p>
+                </div>
+                <div className="flex h-48 w-48 flex-col items-center justify-center rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:h-[19rem] sm:w-[19rem]">
+                  <p className="p-6 font-redhat text-[1rem] text-white sm:text-3xl">
+                    &gt; Gain hands-on experience with web development and contribute to SASE in a meaningful way.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
-          <header className="flex max-w-7xl items-center px-5">
-            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="font-oswald text-4xl text-foreground">FAQs</h2>
-          </header>
-          <FAQ faqData={faqData} />
+          <div className="mx-auto w-full max-w-7xl pt-2">
+            <header className="flex items-center px-5">
+              <div className="mr-3 h-12 w-1.5 bg-saseGreen"></div>
+              <h2 className="font-oswald text-[40px] text-foreground sm:text-[50px]">FAQs</h2>
+            </header>
+            <FAQ faqData={faqData} />
+          </div>
         </div>
       </div>
     );

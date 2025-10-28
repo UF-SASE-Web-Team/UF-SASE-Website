@@ -64,7 +64,7 @@ export const Route = createFileRoute("/about")({
           <div className="ombre-divider"></div>
           <MissionSection />
           <div className="ombre-divider"></div>
-          <div className={cn("mb-12 mt-20 flex items-center")}>
+          <div className={cn("mb-12 mt-10 flex items-center")}>
             <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>
             <h2 className={cn("font-oswald text-5xl text-foreground")}>History</h2>
           </div>

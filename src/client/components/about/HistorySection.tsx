@@ -73,7 +73,7 @@ const HistorySection = () => {
       <div className="mt-4 text-center">
         <a
           href="2024-2025-SASE-Constitution.docx.pdf"
-          className="mt-6 inline-block transform rounded-full bg-[#0f6cb6] px-6 py-2 text-white transition duration-300 hover:scale-105"
+          className="mt-6 inline-block transform rounded-full border-2 border-black bg-[#0f6cb6] px-12 py-2 italic text-white underline transition duration-300 hover:scale-105"
           target="_blank"
           rel="noopener noreferrer"
         >

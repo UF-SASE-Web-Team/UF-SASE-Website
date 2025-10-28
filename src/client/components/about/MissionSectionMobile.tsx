@@ -3,9 +3,9 @@ import { cn } from "@/shared/utils";
 
 const MissionSectionMobile: React.FC = () => (
   <section className={cn("mx-auto mb-12 w-full max-w-7xl sm:px-0")}>
-    <div className={cn("mb-10 flex w-full max-w-7xl items-center sm:justify-start")}>
+    <div className={cn("mb-10 mt-10 flex w-full max-w-7xl items-center sm:justify-start")}>
       <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>
-      <h2 className={cn("font-oswald text-3xl font-semibold text-foreground")}>Mission Statement</h2>
+      <h2 className={cn("font-oswald text-5xl text-foreground")}>Mission Statement</h2>
     </div>
 
     <p className={cn("mb-6 flex text-lg text-foreground")}>To create a welcoming community where members:</p>

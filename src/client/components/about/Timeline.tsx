@@ -1,3 +1,5 @@
+import { imageUrls } from "@assets/imageUrls";
+import StarBulletPoint from "@assets/programs/StarBulletPoint.png";
 import React, { useEffect, useRef } from "react";
 
 interface TimelineItem {
@@ -165,10 +167,23 @@ const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
         <div className="relative w-full px-32">
           {/* Main Timeline Line */}
 
+          {/* Background SASE Logos */}
+          <div className="z-15 absolute -left-2">
+            <img src={imageUrls["SASELogoStar.png"]} className="h-50 w-50 drop-shadow-md"></img>
+          </div>
+          <div className="z-15 absolute -right-2">
+            <img src={imageUrls["SASELogoStar.png"]} className="h-50 w-50 drop-shadow-md"></img>
+          </div>
+          <div className="z-15 absolute -bottom-2 right-[50%]">
+            <img src={imageUrls["SASELogoStar.png"]} className="h-50 w-50 drop-shadow-md"></img>
+          </div>
+
           {/* Timeline Items Container */}
           <div className="relative flex items-center space-x-44 pl-8">
             {items.map((item, index) => {
               const isTop = index % 2 === 0;
+              const showBottomSASELogo = index % 3 === 0;
+              const showTopStar = index % 3 !== 0;
 
               return (
                 <div key={index} className="relative flex flex-col items-center" style={{ width: `${100 / items.length}%` }}>
@@ -181,6 +196,22 @@ const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
                     <div className="text-xs text-muted-foreground">{item.date}</div>
                     <div className="mt-1 text-lg font-bold text-foreground">{item.title}</div>
                     <p className="mt-2 overflow-auto text-foreground">{item.description}</p>
+
+                    {/* Optional SASE Logos */}
+                    {showBottomSASELogo && (
+                      <div className="absolute -bottom-7 -right-7 z-20">
+                        <img src={imageUrls["SASELogoStar.png"]} className="h-20 w-20 drop-shadow-md"></img>
+                      </div>
+                    )}
+
+                    {/* Optional Stars */}
+                    {showTopStar && (
+                      <div className="absolute -left-5 -top-6 z-20">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#0668B3" viewBox="0 0 24 24" className="h-14 w-14 drop-shadow-md">
+                          <path d="M12 3l2.5 6.5L21 10l-5 4 1.5 7L12 17l-5.5 4L8 14 3 10l6.5-.5L12 3z" />
+                        </svg>
+                      </div>
+                    )}
                   </div>
 
                   {/* Connector Line */}

@@ -11,7 +11,7 @@ type ImageData = {
   key: string;
   url: string;
   size: number;
-  customId: any;
+  customId: unknown;
   uploadedAt: string;
 };
 

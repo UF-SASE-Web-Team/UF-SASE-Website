@@ -59,27 +59,20 @@ export const Route = createFileRoute("/webdev")({
             </div>
           </div>
           <header className="mt-4 flex w-full justify-center sm:mt-8">
-            <h2 className="bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen bg-clip-text text-center font-silkscreen text-[40px] text-transparent sm:mb-12 sm:text-[50px]">
+            <h2 className="bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen bg-clip-text text-center font-silkscreen text-[40px] text-transparent sm:mb-10 sm:text-[50px]">
               Leadership
             </h2>
           </header>
           {isMobile ? (
             <>
-              <MobileMemberCard
-                image={WebmasterChair}
-                name="Thuy Le"
-                role="Webmaster"
-                textColor="blue"
-                quote="SASE deserves a better website"
-                imageSide="left"
-              />
+              <MobileMemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="blue" quote="SWT is sweet" imageSide="left" />
               <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseGreen to-saseBlue" />
               <MobileMemberCard
                 image={WebmasterChair2}
                 name="Lynette Hemingway"
                 role="Webmaster"
                 textColor="green"
-                quote="[object Object]"
+                quote="...sandwiches"
                 imageSide="right"
               />
               <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
@@ -88,7 +81,7 @@ export const Route = createFileRoute("/webdev")({
                 name="Stephanie Fong"
                 role="Frontend"
                 textColor="blue"
-                quote="still don't how to center a div"
+                quote="food, family, friends, front-end"
                 imageSide="left"
               />
               <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
@@ -97,19 +90,19 @@ export const Route = createFileRoute("/webdev")({
                 name="RJ Tabelon"
                 role="Backend"
                 textColor="green"
-                quote="Ricky, please pay me"
+                quote="Lynette thinks we're doing quotes together"
                 imageSide="right"
               />
               <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
-              <MobileMemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="blue" quote="sigma Figma team" imageSide="left" />
+              <MobileMemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="blue" quote="herm" imageSide="left" />
             </>
           ) : (
-            <div className="mb-16 grid w-full grid-cols-1 gap-16 px-32 sm:grid-cols-2 lg:grid-cols-5">
-              <MemberCard image={FrontEndLead} name="Stephanie Fong" role="Frontend" textColor="blue" quote="still don't how to center a div" />
-              <MemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="green" quote="SASE deserves a better website" />
-              <MemberCard image={BackendLead} name="RJ Tabelon" role="Backend" textColor="blue" quote="Ricky, please pay me" />
-              <MemberCard image={WebmasterChair2} name="Lynette Hemingway" role="Webmaster" textColor="green" quote="[object Object]" />
-              <MemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="blue" quote="sigma Figma team" />
+            <div className="mx-auto mb-16 grid w-full grid-cols-1 gap-2 px-32 sm:grid-cols-2 lg:grid-cols-5">
+              <MemberCard image={FrontEndLead} name="Stephanie Fong" role="Frontend" textColor="blue" quote="food, family, friends, front-end" />
+              <MemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="green" quote="SWT is sweet" />
+              <MemberCard image={BackendLead} name="RJ Tabelon" role="Backend" textColor="blue" quote="Lynette thinks we're doing quotes together" />
+              <MemberCard image={WebmasterChair2} name="Lynette Hemingway" role="Webmaster" textColor="green" quote="...sandwiches" />
+              <MemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="blue" quote="herm" />
             </div>
           )}
           <div className="bg-[#F5F5F5] pb-16 pt-4">
@@ -119,15 +112,15 @@ export const Route = createFileRoute("/webdev")({
                 <h2 className="font-oswald text-[30px] text-foreground sm:text-[54px]">Goals & Outcomes</h2>
               </header>
               <div className="flex flex-col flex-nowrap items-center justify-center gap-10 md:flex-row lg:gap-36">
-                <div className="flex h-48 w-48 flex-col items-center justify-center rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:h-[19rem] sm:w-[19rem]">
+                <div className="ml-10 flex h-48 w-48 flex-col items-center justify-center self-start rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:ml-0 sm:h-[19rem] sm:w-[19rem]">
                   <p className="p-6 font-redhat text-[1rem] text-white sm:text-3xl">&gt; Work with agile practices commonly found in the industry.</p>
                 </div>
-                <div className="flex h-48 w-48 flex-col items-center justify-center rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:h-[19rem] sm:w-[19rem]">
+                <div className="mr-10 flex h-48 w-48 flex-col items-center justify-center self-end rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:mr-0 sm:h-[19rem] sm:w-[19rem]">
                   <p className="p-6 font-redhat text-[1rem] text-white sm:text-3xl">
                     &gt; Develop technical skills related to UI/UX, front-end, or back-end development.
                   </p>
                 </div>
-                <div className="flex h-48 w-48 flex-col items-center justify-center rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:h-[19rem] sm:w-[19rem]">
+                <div className="ml-10 flex h-48 w-48 flex-col items-center justify-center self-start rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:ml-0 sm:h-[19rem] sm:w-[19rem]">
                   <p className="p-6 font-redhat text-[1rem] text-white sm:text-3xl">
                     &gt; Gain hands-on experience with web development and contribute to SASE in a meaningful way.
                   </p>

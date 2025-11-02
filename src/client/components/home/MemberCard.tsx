@@ -2,10 +2,7 @@ import { cn } from "@/shared/utils";
 
 const MemberCard = ({ image, name, quote, role, textColor }: { image: string; name: string; role: string; textColor: string; quote: string }) => {
   return (
-    <div
-      className="relative flex h-[450px] w-[250px] flex-col justify-end rounded-2xl bg-cover bg-center pb-4"
-      style={{ backgroundImage: `url(${image})` }}
-    >
+    <div className="relative flex h-[450px] flex-col justify-end rounded-2xl bg-cover bg-center pb-4" style={{ backgroundImage: `url(${image})` }}>
       {/* Gradient Overlay */}
       <div className="absolute bottom-0 left-0 right-0 h-2/3 rounded-b-2xl bg-gradient-to-t from-black to-transparent" />
 

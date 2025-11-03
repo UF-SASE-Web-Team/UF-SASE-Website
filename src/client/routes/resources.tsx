@@ -1,13 +1,20 @@
-import ClassConnectorForms from "@/client/components/resources/ClassConnectorForms";
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
-import FreshmenFAQ from "@components/resources/FreshmenFAQ";
-// import ResourcesCard from "@components/ResourcesCard";
 import { createFileRoute } from "@tanstack/react-router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
+import {
+  FaAsterisk,
+  FaBriefcase,
+  FaCalendarAlt,
+  FaFileAlt,
+  FaGlobe,
+  FaQuestionCircle,
+  FaRegAddressCard,
+  FaSearch,
+  FaUsers,
+  FaUserTie,
+} from "react-icons/fa";
 import { IoMdLink } from "react-icons/io";
-import BoardOfficeHours from "../components/resources/BoardOfficeHours";
-import MarstonBooking from "../components/resources/MarstonBooking";
 import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";
 
@@ -65,16 +72,6 @@ import { seo } from "../utils/seo";
 
 // const mapToCards = (data: Array<ResourceCard>) => data.map((card, index) => <ResourcesCard key={index} {...card} />);
 
-const resourceTabs: Record<string, React.ReactNode> = {
-  "Board Office Hours": <BoardOfficeHours />,
-  "Marston Study Room Booking": <MarstonBooking />,
-  "Class Connector Forms": <ClassConnectorForms />,
-  "Freshman FAQs": <FreshmenFAQ />,
-  // "Study Materials": mapToCards(studyMaterials),
-  // Workshops: mapToCards(workshops),
-  // "Career Resources": mapToCards(careerResources),
-};
-
 export const Route = createFileRoute("/resources")({
   meta: () => [
     ...seo({
@@ -85,59 +82,163 @@ export const Route = createFileRoute("/resources")({
     }),
   ],
   component: () => {
-    useEffect(() => {
-      applyOmbreDivider();
-    }, []);
+    const Card = ({ href, icon, title }: { href: string; icon: React.ReactNode; title: string }) => (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group mx-auto w-44 transform transition duration-300 hover:scale-105 sm:w-52 lg:w-56"
+      >
+        <div className="flex flex-col items-center rounded-xl border-2 border-foreground bg-background p-4 shadow-[0_6px_0_rgba(203,203,212,1)]">
+          <div className="h-50 w-50 flex items-center justify-center rounded-lg border-2 border-background bg-background text-saseBlueLight">
+            {icon}
+          </div>
+          <div className="mt-3 text-center font-redhat text-sm font-semibold">{title}</div>
+        </div>
+      </a>
+    );
 
-    const [activeTab, setActiveTab] = useState<keyof typeof resourceTabs>("Board Office Hours");
-    const tabRefs = useRef<Array<HTMLButtonElement>>([]);
-    const categories = Object.keys(resourceTabs);
+    const sectionHeader = (label: string) => (
+      <div className="mb-6 flex items-center justify-center">
+        <div className="mx-auto flex w-full max-w-5xl items-center gap-4 px-4">
+          <div className="h-3 flex-1 rounded-r-md bg-gradient-to-r from-saseGreen to-transparent" />
+          <div className="mx-4 whitespace-nowrap rounded-md bg-background px-6 py-1 text-center text-sm font-semibold shadow-sm">{label}</div>
+          <div className="h-3 flex-1 rounded-l-md bg-gradient-to-l from-saseBlue to-transparent" />
+        </div>
+      </div>
+    );
+
+    const topResources = [
+      {
+        title: "Freshman FAQs",
+        icon: <img src="src\client\assets\resources\FAQ.png" width={75} height={75} />,
+        href: "https://docs.google.com/document/d/1gpMn9fMbpp3S3ELU5daBqwKOJXxTaPq5yvwpnjEgCJ0/edit?tab=t.0",
+      },
+      { title: "Linktree", icon: <img src="src\client\assets\resources\linktree.webp" width={75} height={75} />, href: "https://linktr.ee/ufsase" },
+      {
+        title: "SASE Resume Template",
+        icon: <img src="src\client\assets\resources\resume.png" width={75} height={75} />,
+        href: "https://docs.google.com/document/d/1aRuKSidAX1rXyCNmivHesHYHh0MbUcE2/edit",
+      },
+      {
+        title: "SASE's Gcal",
+        icon: <img src="src\client\assets\resources\Google-Calendar-Logo.png" width={75} height={75} />,
+        href: "https://calendar.google.com/calendar/u/0/r?cid=MzdhYzRkNTU0MDEzNmM3NTI0YjlhNjRkYWExMTc2Mjc1NGM1MmFmYTc3MGYzZjEyZTFhYzZlZGNhN2NiNTlhM0Bncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
+      },
+    ];
+
+    const saseResources = [
+      {
+        title: "Pi Booking Spreadsheet",
+        icon: <img src="src\client\assets\resources\high_capacity_small.webp" height={75} width={89} />,
+        href: "https://docs.google.com/spreadsheets/d/15N-sULElmb4B3t1UEnwiZQCUpnQ9iKcJrBbBF2URRaU/edit?gid=892345678#gid=892345678",
+      },
+      {
+        title: "Class Connector Form",
+        icon: <img src="src\client\assets\resources\connect.png" width={75} height={75} />,
+        href: "https://docs.google.com/forms/d/e/1FAIpQLSdrCUj2Ym6irv_5xaTQnkq8gO-bUN_1pY5J0Nk9lnajncJDaw/viewform",
+      },
+      {
+        title: "Class Connector Finder Sheet",
+        icon: <img src="src\client\assets\resources\find.png" width={75} height={75} />,
+        href: "https://docs.google.com/spreadsheets/d/1hXDAGoLMM4kcFoPU5XD9H1Mxge0BPbeNHrKQinkLioQ/edit?gid=1830176438#gid=1830176438",
+      },
+      {
+        title: "Board Office Hours",
+        icon: <img src="src\client\assets\resources\2023-11-03_Malachowsky-Opening-144-1679x1120.webp" height={75} />,
+        href: "https://docs.google.com/spreadsheets/d/1lUTyJcn1-eDALD-bjWQQRrQ_5_iJFNWKMill8ovUVFk/edit?gid=943523131#gid=943523131",
+      },
+    ];
+
+    const academicResources = [
+      {
+        title: "Research Resources",
+        icon: <img src="src\client\assets\resources\research.png" width={75} height={75} />,
+        href: "https://drive.google.com/drive/folders/1jE62-6HKTkypG7WzqLbBgvDrMtYFBAL2",
+      },
+      {
+        title: "Pre-med Resources",
+        icon: <img src="src\client\assets\resources\premed.png" width={75} height={75} />,
+        href: "https://drive.google.com/drive/folders/1nFlB8M0RVqi5e0s7QtOsnJ4gSEWwaJvA",
+      },
+      {
+        title: "Design Team List",
+        icon: <img src="src\client\assets\resources\design.png" width={75} height={75} />,
+        href: "https://docs.google.com/document/d/1gcITx3IKn6HnJ1bcA4TVTlh27wP6jSFf/edit?rtpof=true&sd=true#heading=h.o9rwupa35f1a",
+      },
+    ];
+
+    const professionalResources = [
+      {
+        title: "Internship Resources",
+        icon: <img src="src\client\assets\resources\intern.png" width={75} height={75} />,
+        href: "https://drive.google.com/drive/folders/1ODgUWyr_5Zl3oLwiXUSgbKVggyx8Qxjq",
+      },
+      {
+        title: "Interview Resources",
+        icon: <img src="src\client\assets\resources\interview.png" width={75} height={75} />,
+        href: "https://drive.google.com/drive/folders/1Ziv21RfRcjXxGj84_feg1Y3JUVRCdjnX",
+      },
+      {
+        title: "Networking Resources",
+        icon: <img src="src\client\assets\resources\network.png" width={75} height={75} />,
+        href: "https://drive.google.com/drive/folders/14FTXWDmX-X-FlNe5mEfM0C5D-xf9oN2d",
+      },
+      {
+        title: "Experiences Tracker",
+        icon: <img src="src\client\assets\resources\tracker.png" width={75} height={75} />,
+        href: "https://docs.google.com/document/d/1rxYm5SCaX--ANEcCqRQFCgHLKbwZPqwU/edit",
+      },
+    ];
 
     return (
       <div className="w-full">
-        {/* Title */}
         <div className="text-center">
           <h1 className="mt-4 pb-8 font-oswald text-5xl font-medium sm:text-6xl md:text-7xl">RESOURCES</h1>
         </div>
 
-        {/* Blue line under title */}
         <div className="ombre-divider"></div>
 
-        {/* Tab Bar */}
-        <div className="mt-6 border-b-2 border-gray-300 pb-6">
-          <div className="mx-auto max-w-5xl px-4">
-            <div className="mb-4 flex flex-wrap justify-center gap-4">
-              {categories.map((category, idx) => {
-                const isActive = category === activeTab;
-                return (
-                  <button
-                    key={category}
-                    ref={(el) => {
-                      if (el) tabRefs.current[idx] = el;
-                    }}
-                    onClick={() => setActiveTab(category as keyof typeof resourceTabs)}
-                    className={cn(
-                      "whitespace-nowrap rounded-full border px-5 py-2 font-redhat text-base font-semibold transition-colors duration-200",
-                      isActive
-                        ? "border-saseGray bg-saseBlueLight text-white shadow-sm"
-                        : "border-transparent bg-transparent text-foreground hover:text-saseBlueLight",
-                    )}
-                  >
-                    {category}
-                  </button>
-                );
-              })}
+        <div className="pt-8">
+          {sectionHeader("Top Resources")}
+          <div className="mx-auto mb-12 max-w-5xl px-4">
+            <div className="flex flex-wrap items-stretch justify-center gap-6">
+              {topResources.map((r) => (
+                <Card key={r.title} {...r} />
+              ))}
+            </div>
+          </div>
+
+          {sectionHeader("SASE Resources")}
+          <div className="mx-auto mb-12 max-w-5xl px-4">
+            <div className="flex flex-wrap items-stretch justify-center gap-6">
+              {saseResources.map((r) => (
+                <Card key={r.title} {...r} />
+              ))}
+            </div>
+          </div>
+
+          {sectionHeader("Academic Resources")}
+          <div className="mx-auto mb-12 max-w-5xl px-4">
+            <div className="flex flex-wrap items-stretch justify-center gap-6">
+              {academicResources.map((r) => (
+                <Card key={r.title} {...r} />
+              ))}
+            </div>
+          </div>
+
+          {sectionHeader("Professional Resources")}
+          <div className="mx-auto mb-12 max-w-5xl px-4">
+            <div className="flex flex-wrap items-stretch justify-center gap-6">
+              {professionalResources.map((r) => (
+                <Card key={r.title} {...r} />
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Resource Cards */}
-        <div className="py-8">{resourceTabs[activeTab]}</div>
-
-        {/* Green line */}
         <div className="ombre-divider"></div>
 
-        {/* Linktree Button */}
         <div className="flex justify-center py-8">
           <a href="#" target="_blank" rel="noopener noreferrer">
             <div

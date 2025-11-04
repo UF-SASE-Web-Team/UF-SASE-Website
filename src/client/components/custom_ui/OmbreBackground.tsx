@@ -1,5 +1,7 @@
 interface OmbreBackgroundProps {
   innerComponent: React.ReactNode;
+  opacity?: number;
+  width?: number;
 }
 
 export const OmbreBackground: React.FC<OmbreBackgroundProps> = ({ innerComponent }) => {

@@ -2,10 +2,7 @@ import { cn } from "@/shared/utils";
 
 interface OmbreBackgroundProps {
   innerComponent: React.ReactNode;
-<<<<<<< HEAD
-=======
   isOpaque?: boolean;
->>>>>>> 66d9528 (resize ombre background and adjust ombre divider margins)
 }
 
 export const OmbreBackground: React.FC<OmbreBackgroundProps> = ({ innerComponent, isOpaque = false }) => {

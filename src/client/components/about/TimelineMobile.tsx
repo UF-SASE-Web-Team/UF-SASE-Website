@@ -99,14 +99,14 @@ const TimelineMobile = () => {
     <div className="scrollbar-custom max-h-[42rem] overflow-y-auto px-6 py-10">
       <div className="flex flex-col items-center gap-20">
         {defaultItems.map((item, index) => {
-          const isLeft = index % 2 === 0;
+          const isTop = index % 2 === 0;
           const showTopLeftStar = index % 2 === 0;
           const showBottomRightStar = index % 3 === 0;
 
           return (
             <div
               key={index}
-              className={`relative w-full max-w-[300px] transition-transform duration-500 ease-in-out hover:scale-[1.03] ${isLeft ? "ml-auto mr-4" : "ml-4 mr-auto"}`}
+              className={`relative w-full max-w-[300px] transition-transform duration-500 ease-in-out hover:scale-[1.03] ${isTop ? "ml-auto mr-4" : "ml-4 mr-auto"}`}
             >
               {/* Glow background */}
               <div className="absolute inset-0 z-0 rounded-2xl bg-gradient-to-br from-saseBlue/20 to-saseGreen/10 opacity-70 blur-lg"></div>
@@ -135,9 +135,9 @@ const TimelineMobile = () => {
               </div>
 
               {/* Connector Line */}
-              <div className={`absolute -bottom-20 right-1/2 h-20 w-1 bg-saseBlue`}>
+              <div className={`absolute w-1 bg-saseBlue ${isTop ? "-bottom-20 right-1/2 h-20" : "-bottom-20 right-1/2 h-20"}`}>
                 {/* Connecting Dot */}
-                <div className={`absolute -left-1.5 bottom-1/2 h-4 w-4 rounded-full bg-saseBlue`} />
+                <div className={`absolute -bottom-1 -left-1.5 h-4 w-4 rounded-full bg-saseBlue`} />
               </div>
             </div>
           );

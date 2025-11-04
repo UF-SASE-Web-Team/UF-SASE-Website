@@ -30,12 +30,12 @@ const AboutCard = () => {
           }}
         ></div>
 
-        {/* Logo Image*/}
+        {/* Logo Image (Reduced Size) */}
         <img
           src={imageUrls["SASELogoStar.png"]}
           alt="Logo"
-          style={{ width: "200px", height: "200px" }}
-          className="absolute -bottom-20 -right-16 object-contain"
+          style={{ width: "125px", height: "125px" }} // Reduced size
+          className="absolute -bottom-10 -right-10 object-contain"
         />
       </div>
     </div>

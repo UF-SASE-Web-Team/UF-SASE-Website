@@ -1,6 +1,7 @@
 import TimelineMobile from "@/client/components/about/TimelineMobile";
 import { cn } from "@/shared/utils";
 import AboutCard from "@about/AboutCard";
+import AboutCardMobile from "@about/AboutCardMobile";
 import ContactForm from "@about/ContactForm";
 import HeaderSection from "@about/HeaderSection";
 import HistorySection from "@about/HistorySection";
@@ -14,6 +15,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";
+
+interface OmbreBackground {
+  opacity: number;
+  width: number;
+}
 
 export const Route = createFileRoute("/about")({
   meta: () => [
@@ -36,6 +42,7 @@ export const Route = createFileRoute("/about")({
           <div className="mb-14 flex justify-center">
             <AboutCard />
           </div>
+          <div className="mb-14 flex justify-center">{isMobile ? <AboutCardMobile /> : <AboutCard />}</div>
           <div className="max-w-8xl w-8xl mb-16 mt-[-10px] flex justify-center sm:mt-2">
 =======
           <div className="mb-14 flex justify-center">{isMobile ? <AboutCardMobile /> : <AboutCard />}</div>

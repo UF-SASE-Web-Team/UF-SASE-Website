@@ -16,11 +16,6 @@ import { useEffect } from "react";
 import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";
 
-interface OmbreBackground {
-  opacity: number;
-  width: number;
-}
-
 export const Route = createFileRoute("/about")({
   meta: () => [
     ...seo({
@@ -36,10 +31,10 @@ export const Route = createFileRoute("/about")({
     }, []);
     return (
       <div className="mt-5 flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background font-redhat">
-        <div className="w-full max-w-7xl px-4 py-8">
+        <div className="max-w-8xl w-full py-8">
           <HeaderSection />
           <div className="mb-14 flex justify-center">{isMobile ? <AboutCardMobile /> : <AboutCard />}</div>
-          <div className="max-w-8xl w-8xl mb-16 mt-[-10px] flex justify-center sm:mt-2">
+          <div className="max-w-8xl w-7xl mb-16 mt-[-10px] flex justify-center sm:mt-2">
             <div className="flex space-x-4 sm:space-x-6">
               <Link
                 to="/board"
@@ -55,7 +50,10 @@ export const Route = createFileRoute("/about")({
               </Link>
             </div>
           </div>
-          <div className="ombre-divider"></div>
+          <div className="relative grid h-1 w-full grid-cols-2">
+            <div className="w-full bg-gradient-to-r from-transparent via-[#7DC242] to-[#42957B]" />
+            <div className="w-full bg-gradient-to-r from-[#42957B] via-[#0668B3] to-transparent" />
+          </div>
           <OmbreBackground
             innerComponent={
               <>
@@ -64,11 +62,15 @@ export const Route = createFileRoute("/about")({
                 </section>
               </>
             }
+            isOpaque={true}
           />
-          <div className="ombre-divider"></div>
+          <div className="relative grid h-1 w-full grid-cols-2">
+            <div className="w-full bg-gradient-to-r from-transparent via-[#7DC242] to-[#42957B]" />
+            <div className="w-full bg-gradient-to-r from-[#42957B] via-[#0668B3] to-transparent" />
+          </div>
           <MissionSection />
           <div className="ombre-divider"></div>
-          <div className={cn("mb-12 mt-10 flex items-center")}>
+          <div className={cn("mx-auto mb-12 mt-20 flex max-w-7xl items-center px-4")}>
             <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>
             <h2 className={cn("font-oswald text-5xl text-foreground")}>History</h2>
           </div>
@@ -78,7 +80,7 @@ export const Route = createFileRoute("/about")({
             </div>
           </section>
           <section className={cn("mb-20")}>
-            <div className={cn("mb-8 flex items-center")}>
+            <div className={cn("mx-auto mb-8 flex max-w-7xl items-center px-4")}>
               <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>{" "}
               <h2 className={cn("font-oswald text-5xl text-foreground")}>Timeline of Accomplishments</h2>
             </div>
@@ -86,7 +88,7 @@ export const Route = createFileRoute("/about")({
           </section>
           <div className="ombre-divider"></div>
           <section id="contact" className={cn("mb-12")}>
-            <div className={cn("mb-12 mt-12 flex items-center")}>
+            <div className={cn("mx-auto mb-12 mt-12 flex max-w-7xl items-center px-4")}>
               <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>{" "}
               <h2 className={cn("font-oswald text-5xl text-foreground")}>Contact Us</h2>
             </div>

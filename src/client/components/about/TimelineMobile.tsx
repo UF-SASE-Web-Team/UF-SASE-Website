@@ -115,7 +115,7 @@ const TimelineMobile = () => {
               <div className="bg-muted-background relative z-10 flex h-[180px] w-[300px] transform flex-col rounded-2xl border-2 border-border p-4 shadow-[0px_10px_0px_#7DC242] duration-300 hover:shadow-[0px_10px_0px_#0668B3]">
                 {/* Optional Stars */}
                 {showTopLeftStar && (
-                  <div className="animate-pulse-slow absolute -left-5 -top-5 z-20">
+                  <div className="absolute -left-5 -top-5 z-20 animate-pulse">
                     <svg xmlns="@assets/programs/StarBulletPoint.png" fill="#0668B3" viewBox="0 0 24 24" className="h-12 w-12 drop-shadow-md">
                       <path d="M12 3l2.5 6.5L21 10l-5 4 1.5 7L12 17l-5.5 4L8 14 3 10l6.5-.5L12 3z" />
                     </svg>
@@ -135,9 +135,9 @@ const TimelineMobile = () => {
               </div>
 
               {/* Connector Line */}
-              <div className={`absolute w-1 bg-saseBlue ${isTop ? "-bottom-20 right-1/2 h-20" : "-bottom-20 right-1/2 h-20"}`}>
+              <div className={`absolute -bottom-20 right-1/2 h-20 w-1 bg-saseBlue`}>
                 {/* Connecting Dot */}
-                <div className={`absolute -bottom-1 -left-1.5 h-4 w-4 rounded-full bg-saseBlue`} />
+                <div className={`absolute -left-1.5 bottom-1/2 h-4 w-4 rounded-full bg-saseBlue`} />
               </div>
             </div>
           );

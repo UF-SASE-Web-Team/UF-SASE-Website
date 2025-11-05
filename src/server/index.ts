@@ -30,6 +30,33 @@ export default eventHandler(async (event) => {
 // Hono! https://hono.dev/
 // This is the entry point for our server which lives on the /api path
 const app = new Hono();
+
+const CAL_ID = "37ac4d5540136c7524b9a64daa11762754c52afa770f3f12e1ac6edca7cb59a3@group.calendar.google.com";
+const ICS_URL = `https://calendar.google.com/calendar/ical/${encodeURIComponent(CAL_ID)}/public/basic.ics`;
+
+app.get("/api/calendar/ics", async (c) => {
+  try {
+    const r = await fetch(ICS_URL, {
+      headers: { "User-Agent": "UF-SASE-Website/1.0 (+https://uf-sase.com)" },
+      cache: "no-store",
+    });
+
+    if (!r.ok) return c.text("Upstream error", { status: r.status });
+
+    const text = await r.text();
+
+    return new Response(text, {
+      status: 200,
+      headers: {
+        "Content-Type": "text/calendar; charset=utf-8",
+        "Cache-Control": "public, s-maxage=300, stale-while-revalidate=86400",
+      },
+    });
+  } catch {
+    return c.text("Proxy failed", { status: 500 });
+  }
+});
+
 app.routes.forEach((route) => {
   console.log(`Method: ${route.method}, Path: ${route.path}`);
 });

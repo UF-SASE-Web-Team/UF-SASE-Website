@@ -1,11 +1,24 @@
+import { cn } from "@/shared/utils";
+
 interface OmbreBackgroundProps {
   innerComponent: React.ReactNode;
+<<<<<<< HEAD
+=======
+  isOpaque?: boolean;
+>>>>>>> 66d9528 (resize ombre background and adjust ombre divider margins)
 }
 
-export const OmbreBackground: React.FC<OmbreBackgroundProps> = ({ innerComponent }) => {
+export const OmbreBackground: React.FC<OmbreBackgroundProps> = ({ innerComponent, isOpaque = false }) => {
   return (
     <>
-      <div className="relative h-full w-full rounded-2xl bg-gradient-to-r from-saseBlue to-saseGreen p-[4px]">{innerComponent}</div>
+      <div
+        className={cn(
+          { "w-[100vw] from-saseBlue/40 to-saseGreen/40": isOpaque, "w-full rounded-2xl from-saseBlue to-saseGreen": !isOpaque },
+          `relative h-full bg-gradient-to-r p-[4px]`,
+        )}
+      >
+        {innerComponent}
+      </div>
     </>
   );
 };

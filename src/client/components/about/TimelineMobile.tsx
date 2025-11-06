@@ -106,7 +106,7 @@ const TimelineMobile = () => {
           return (
             <div
               key={index}
-              className={`relative w-full max-w-[300px] transition-transform duration-500 ease-in-out hover:scale-[1.03] ${isTop ? "ml-auto mr-4" : "ml-4 mr-auto"}`}
+              className={`relative w-full max-w-[300px] transition-transform duration-500 ease-in-out hover:scale-[1.03] ${isTop ? "mr-8" : "ml-8"}`}
             >
               {/* Glow background */}
               <div className="absolute inset-0 z-0 rounded-2xl bg-gradient-to-br from-saseBlue/20 to-saseGreen/10 opacity-70 blur-lg"></div>

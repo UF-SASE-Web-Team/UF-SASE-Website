@@ -36,7 +36,7 @@ export const Route = createFileRoute("/webdev")({
         </div>
         <div className="w-full">
           <div className="relative w-full">
-            <div className="relative flex h-[330px] flex-col items-center justify-center bg-[#1E1E1E] sm:h-[600px]">
+            <div className="relative flex flex-col items-center justify-center bg-[#1E1E1E] py-10 sm:h-[600px] sm:py-20">
               <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-saseGreen via-[#7DC242] to-saseBlue"></div>
               <div className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-saseGreen via-[#7DC242] to-saseBlue"></div>
               <img src="src/client/assets/webdev/WebDevTeamCropped.png" alt="Web Team" className="relative z-10 w-[95%] rounded-3xl sm:w-3/5" />
@@ -97,12 +97,22 @@ export const Route = createFileRoute("/webdev")({
               <MobileMemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="blue" quote="herm" imageSide="left" />
             </>
           ) : (
-            <div className="mx-auto mb-16 grid w-full grid-cols-1 gap-2 px-32 sm:grid-cols-2 lg:grid-cols-5">
-              <MemberCard image={FrontEndLead} name="Stephanie Fong" role="Frontend" textColor="blue" quote="food, family, friends, front-end" />
-              <MemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="green" quote="SWT is sweet" />
-              <MemberCard image={BackendLead} name="RJ Tabelon" role="Backend" textColor="blue" quote="Lynette thinks we're doing quotes together" />
-              <MemberCard image={WebmasterChair2} name="Lynette Hemingway" role="Webmaster" textColor="green" quote="...sandwiches" />
-              <MemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="blue" quote="herm" />
+            <div className="mb-12 flex flex-col items-center justify-center gap-8">
+              <div className="flex flex-row gap-8">
+                <MemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="blue" quote="SWT is sweet" />
+                <MemberCard image={WebmasterChair2} name="Lynette Hemingway" role="Webmaster" textColor="blue" quote="...sandwiches" />
+              </div>
+              <div className="flex flex-row gap-8">
+                <MemberCard image={FrontEndLead} name="Stephanie Fong" role="Frontend" textColor="green" quote="food, family, friends, front-end" />
+                <MemberCard
+                  image={BackendLead}
+                  name="RJ Tabelon"
+                  role="Backend"
+                  textColor="green"
+                  quote="Lynette thinks we're doing quotes together"
+                />
+                <MemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="green" quote="herm" />
+              </div>
             </div>
           )}
           <div className="bg-[#F5F5F5] pb-16 pt-4">
@@ -111,17 +121,17 @@ export const Route = createFileRoute("/webdev")({
                 <div className="mr-3 h-12 w-1.5 bg-saseGreen"></div>
                 <h2 className="font-oswald text-[30px] text-foreground sm:text-[54px]">Goals & Outcomes</h2>
               </header>
-              <div className="flex flex-col flex-nowrap items-center justify-center gap-10 md:flex-row lg:gap-36">
-                <div className="ml-10 flex h-48 w-48 flex-col items-center justify-center self-start rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:ml-0 sm:h-[19rem] sm:w-[19rem]">
-                  <p className="p-6 font-redhat text-[1rem] text-white sm:text-3xl">&gt; Work with agile practices commonly found in the industry.</p>
+              <div className={`${isMobile ? "flex flex-col gap-10" : "flex flex-row gap-14 lg:gap-36"} w-full items-center justify-center px-8`}>
+                <div className="ml-2 flex h-48 w-48 flex-col items-center justify-center self-start rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:ml-0 sm:h-[19rem] sm:w-[19rem]">
+                  <p className="p-6 font-redhat text-[1rem] text-white sm:text-2xl">&gt; Work with agile practices commonly found in the industry.</p>
                 </div>
-                <div className="mr-10 flex h-48 w-48 flex-col items-center justify-center self-end rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:mr-0 sm:h-[19rem] sm:w-[19rem]">
-                  <p className="p-6 font-redhat text-[1rem] text-white sm:text-3xl">
+                <div className="mr-2 flex h-48 w-48 flex-col items-center justify-center self-end rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:mr-0 sm:h-[19rem] sm:w-[19rem]">
+                  <p className="p-6 font-redhat text-[1rem] text-white sm:text-2xl">
                     &gt; Develop technical skills related to UI/UX, front-end, or back-end development.
                   </p>
                 </div>
-                <div className="ml-10 flex h-48 w-48 flex-col items-center justify-center self-start rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:ml-0 sm:h-[19rem] sm:w-[19rem]">
-                  <p className="p-6 font-redhat text-[1rem] text-white sm:text-3xl">
+                <div className="ml-2 flex h-48 w-48 flex-col items-center justify-center self-start rounded-3xl border-2 border-white bg-[#1E1E1E] transition duration-300 hover:scale-105 hover:shadow-[18px_18px_0px_#7DC242] sm:ml-0 sm:h-[19rem] sm:w-[19rem]">
+                  <p className="p-6 font-redhat text-[1rem] text-white sm:text-2xl">
                     &gt; Gain hands-on experience with web development and contribute to SASE in a meaningful way.
                   </p>
                 </div>

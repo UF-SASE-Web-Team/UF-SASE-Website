@@ -10,7 +10,7 @@ const MissionSection: React.FC = () => {
   return isMobile ? (
     <MissionSectionMobile />
   ) : (
-    <section className={cn("mx-auto mb-32 w-full max-w-7xl px-4 sm:px-0")}>
+    <section className={cn("mx-auto mb-32 w-full max-w-7xl px-4")}>
       <div className={cn("mb-12 mt-12 flex w-full items-center")}>
         <div className={cn("mr-3 h-12 w-1.5 rounded-sm bg-saseGreen")}></div>
         <h2 className={cn("font-oswald text-5xl text-foreground")}>Mission Statement</h2>

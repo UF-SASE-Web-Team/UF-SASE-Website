@@ -8,7 +8,7 @@ const MissionSectionMobile: React.FC = () => (
       <h2 className={cn("font-oswald text-5xl text-foreground")}>Mission Statement</h2>
     </div>
 
-    <p className={cn("mb-6 flex text-lg text-foreground justify-center")}>To create a welcoming community where members:</p>
+    <p className={cn("mb-6 flex justify-center text-lg text-foreground")}>To create a welcoming community where members:</p>
 
     {/* Mobile-Specific Stacked Cards */}
     <div className={cn("flex flex-col items-center gap-6")}>

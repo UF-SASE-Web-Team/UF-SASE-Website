@@ -102,6 +102,7 @@ const TimelineMobile = () => {
           const isTop = index % 2 === 0;
           const showTopLeftStar = index % 2 === 0;
           const showBottomRightStar = index % 3 === 0;
+          const lastCard = index === defaultItems.length - 1;
 
           return (
             <div
@@ -135,10 +136,19 @@ const TimelineMobile = () => {
               </div>
 
               {/* Connector Line */}
+<<<<<<< HEAD
               <div className={`absolute w-1 bg-saseBlue ${isTop ? "-bottom-20 right-1/2 h-20" : "-bottom-20 right-1/2 h-20"}`}>
                 {/* Connecting Dot */}
                 <div className={`absolute -bottom-1 -left-1.5 h-4 w-4 rounded-full bg-saseBlue`} />
               </div>
+=======
+              {!lastCard && (
+                <div className={`absolute -bottom-20 right-1/2 h-20 w-1 bg-saseBlue`}>
+                  {/* Connecting Dot */}
+                  <div className={`absolute -left-1.5 bottom-1/2 h-4 w-4 rounded-full bg-saseBlue`} />
+                </div>
+              )}
+>>>>>>> d87dee7 (remove last card line connector)
             </div>
           );
         })}

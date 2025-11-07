@@ -38,16 +38,8 @@ export const Route = createFileRoute("/about")({
       <div className="mt-5 flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background font-redhat">
         <div className="max-w-8xl w-full py-8">
           <HeaderSection />
-<<<<<<< HEAD
-          <div className="mb-14 flex justify-center">
-            <AboutCard />
-          </div>
-          <div className="mb-14 flex justify-center">{isMobile ? <AboutCardMobile /> : <AboutCard />}</div>
-          <div className="max-w-8xl w-8xl mb-16 mt-[-10px] flex justify-center sm:mt-2">
-=======
           <div className="mb-14 flex justify-center">{isMobile ? <AboutCardMobile /> : <AboutCard />}</div>
           <div className="max-w-8xl w-7xl mb-16 mt-[-10px] flex justify-center sm:mt-2">
->>>>>>> 66d9528 (resize ombre background and adjust ombre divider margins)
             <div className="flex space-x-4 sm:space-x-6">
               <Link
                 to="/board"

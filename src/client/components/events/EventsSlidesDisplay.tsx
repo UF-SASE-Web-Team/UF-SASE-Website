@@ -138,7 +138,7 @@ const EventsSlides: React.FC = () => {
       )}
 
       {/* View Dropdown (Top right) */}
-      <div ref={dropdownRef} className="absolute right-5 top-5 z-10">
+      <div ref={dropdownRef} className="absolute right-5 top-5 z-10 hidden">
         <button
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}
           className="flex w-40 items-center justify-between rounded-xl border border-foreground bg-background px-2 py-2 font-redhat text-foreground"

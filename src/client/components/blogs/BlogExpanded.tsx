@@ -5,6 +5,7 @@ import type { BlogExpandedProps } from "@/shared/types/blogTypes";
 import { cn } from "@/shared/utils";
 import React, { useEffect } from "react";
 import { useBlogFunctions } from "../../hooks/useBlogsFunctions";
+import { useIsMobile } from "../../hooks/useIsMobile";
 import { Button } from "../ui/button";
 import BlogCarousel from "./BlogCarousel";
 
@@ -18,6 +19,7 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
   showBackButton = true,
 }) => {
   const { startEditingBlog } = useBlogFunctions();
+  const isMobile = useIsMobile();
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
@@ -87,8 +89,51 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
 
         <div className="relative">
           {/* shadow card */}
-          <div className="relative rounded-[50px] border-2 border-border bg-white p-4 shadow-lg transition sm:p-8">
-            <div className="pointer-events-none absolute left-5 top-5 -z-10 h-full w-full rounded-[50px] bg-gradient-to-b from-saseGreen to-saseBlue" />
+          <div className="relative p-4 sm:p-8">
+            <div className="pointer-events-none absolute left-5 top-5 -z-10 h-full w-full rounded-[50px] bg-gradient-to-b" />
+            {/* mobile layout */}
+            {isMobile ? (
+              <div className="flex flex-col items-center">
+
+                <h1 className={cn("font-oswald font-bold text-gray-800", "text-xl")}>{blog.title}</h1>
+
+                {/* author & date */}
+                <p className="mt-2 text-center font-serif text-sm text-gray-600">
+                  by {blog.author}, {new Date(blog.publishedDate).toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </p>
+
+                  {/* reading time */}
+                <span className="mt-2 block text-center text-sm font-medium text-[#0668B3]">
+                  {blog.read_time || "15 minute"} read
+                </span>
+
+                  {/* image */}
+                <figure className="mt-4 mb-2 aspect-video w-full overflow-hidden rounded-2xl border-2 border-[#7cc7ff] shadow-[6px_6px_0px_0px_rgba(96,165,250,0.6)]">
+                {blog.images.length > 0 ? (
+                  <BlogCarousel images={blog.images} />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center rounded-lg bg-gray-200 text-gray-500">
+                    No images available
+                  </div>
+                )}
+              </figure>
+
+              <div className={cn(
+                "mx-4 mb-8 mt-4 w-full overflow-y-auto rounded-2xl border-4 border-dashed px-8 py-6 bg-gray-100",
+                "max-h-[70vh] border-saseGreen/40 border-r-saseBlue/60",
+              )}>
+                {renderContent()}
+              </div>
+
+              
+              </div>
+            ) : (
+
+              <>
             {/* header */}
             <div className="px-4 py-2 text-center">
               <div className="relative flex items-center justify-center">
@@ -100,7 +145,7 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
                 )}
               </div>
               <div className={cn("mt-2 flex items-center justify-center font-redhat", "text-sm text-gray-600 sm:text-base")}>
-                <span className="mr-2">{blog.timeUpdated || "15 min read"}</span>
+                <span className="mr-2 text-[#0668B3] font-bold">{blog.read_time || "15 min"} read</span>
                 <span className="mx-2">by {blog.author}</span>
                 <span className="ml-2">
                   {new Date(blog.publishedDate).toLocaleDateString("en-US", {
@@ -131,6 +176,8 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
             >
               {renderContent()}
             </div>
+            </>
+            )}
 
             {/* SASE Logo Star */}
             <img

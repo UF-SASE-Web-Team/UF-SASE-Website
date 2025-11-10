@@ -1,6 +1,5 @@
 "use client";
 
-import { imageUrls } from "@/client/assets/imageUrls";
 import type { BlogExpandedProps } from "@/shared/types/blogTypes";
 import { cn } from "@/shared/utils";
 import React, { useEffect } from "react";
@@ -94,103 +93,85 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
             {/* mobile layout */}
             {isMobile ? (
               <div className="flex flex-col items-center">
-
                 <h1 className={cn("font-oswald font-bold text-gray-800", "text-xl")}>{blog.title}</h1>
 
                 {/* author & date */}
                 <p className="mt-2 text-center font-serif text-sm text-gray-600">
-                  by {blog.author}, {new Date(blog.publishedDate).toLocaleDateString("en-US", {
+                  by {blog.author},{" "}
+                  {new Date(blog.publishedDate).toLocaleDateString("en-US", {
                     month: "long",
                     day: "numeric",
                     year: "numeric",
                   })}
                 </p>
 
-                  {/* reading time */}
-                <span className="mt-2 block text-center text-sm font-medium text-[#0668B3]">
-                  {blog.read_time || "15 minute"} read
-                </span>
+                {/* reading time */}
+                <span className="mt-2 block text-center text-sm font-medium text-[#0668B3]">{blog.read_time || "15 minute"} read</span>
 
-                  {/* image */}
-                <figure className="mt-4 mb-2 aspect-video w-full overflow-hidden rounded-2xl border-2 border-[#7cc7ff] shadow-[6px_6px_0px_0px_rgba(96,165,250,0.6)]">
-                {blog.images.length > 0 ? (
-                  <BlogCarousel images={blog.images} />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center rounded-lg bg-gray-200 text-gray-500">
-                    No images available
-                  </div>
-                )}
-              </figure>
+                {/* image */}
+                <figure className="mb-2 mt-4 aspect-video w-full overflow-hidden rounded-2xl border-2 border-[#7cc7ff] shadow-[6px_6px_0px_0px_rgba(96,165,250,0.6)]">
+                  {blog.images.length > 0 ? (
+                    <BlogCarousel images={blog.images} />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center rounded-lg bg-gray-200 text-gray-500">No images available</div>
+                  )}
+                </figure>
 
-              <div className={cn(
-                "mx-4 mb-8 mt-4 w-full overflow-y-auto rounded-2xl border-4 border-dashed px-8 py-6 bg-gray-100",
-                "max-h-[70vh] border-saseGreen/40 border-r-saseBlue/60",
-              )}>
-                {renderContent()}
-              </div>
-
-              
+                <div
+                  className={cn(
+                    "mx-4 mb-8 mt-4 w-full overflow-y-auto rounded-2xl border-4 border-dashed bg-gray-100 px-8 py-6",
+                    "max-h-[70vh] border-saseGreen/40 border-r-saseBlue/60",
+                  )}
+                >
+                  {renderContent()}
+                </div>
               </div>
             ) : (
-
               <>
-            {/* header */}
-            <div className="px-4 py-2 text-center">
-              <div className="relative flex items-center justify-center">
-                <h1 className={cn("font-oswald font-bold text-gray-800", "text-xl sm:text-4xl")}>{blog.title}</h1>
-                {blog.displayEditButton && (
-                  <Button className="absolute right-0" onClick={handleEditButtonClicked}>
-                    {!isEditing ? "Edit" : "Close Editor"}
-                  </Button>
-                )}
-              </div>
-              <div className={cn("mt-2 flex items-center justify-center font-redhat", "text-sm text-gray-600 sm:text-base")}>
-                <span className="mr-2 text-[#0668B3] font-bold">{blog.read_time || "15 min"} read</span>
-                <span className="mx-2">by {blog.author}</span>
-                <span className="ml-2">
-                  {new Date(blog.publishedDate).toLocaleDateString("en-US", {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </span>
-              </div>
-            </div>
-            {/* carousel */}
-            <div className="mb-6 mt-4">
-              {blog.images.length > 0 ? (
-                <BlogCarousel images={blog.images} />
-              ) : (
-                <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-200 text-gray-500">No images available</div>
-              )}
-              <div className={cn("mt-2 font-redhat", "text-center text-sm text-gray-500 sm:text-base")}>
-                {blog.images.length > 0 ? "caption lorem ipsum yuh lots of words to say about this photo" : ""}
-              </div>
-            </div>
-            {/* content */}
-            <div
-              className={cn(
-                "mx-4 mb-8 overflow-y-auto rounded-2xl border-4 border-dashed px-8 py-6",
-                "max-h-[70vh] border-saseGreen/40 border-r-saseBlue/60",
-              )}
-            >
-              {renderContent()}
-            </div>
-            </>
+                {/* header */}
+                <div className="px-4 py-2 text-center">
+                  <div className="relative flex items-center justify-center">
+                    <h1 className={cn("font-oswald font-bold text-gray-800", "text-xl sm:text-4xl")}>{blog.title}</h1>
+                    {blog.displayEditButton && (
+                      <Button className="absolute right-0" onClick={handleEditButtonClicked}>
+                        {!isEditing ? "Edit" : "Close Editor"}
+                      </Button>
+                    )}
+                  </div>
+                  <div className={cn("mt-2 flex items-center justify-center font-redhat", "text-sm text-gray-600 sm:text-base")}>
+                    <span className="mr-2 font-bold text-[#0668B3]">{blog.read_time || "15 min"} read</span>
+                    <span className="mx-2">by {blog.author}</span>
+                    <span className="ml-2">
+                      {new Date(blog.publishedDate).toLocaleDateString("en-US", {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
+                    </span>
+                  </div>
+                </div>
+                {/* carousel */}
+                <div className="mb-6 mt-4">
+                  {blog.images.length > 0 ? (
+                    <BlogCarousel images={blog.images} />
+                  ) : (
+                    <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-200 text-gray-500">No images available</div>
+                  )}
+                  <div className={cn("mt-2 font-redhat", "text-center text-sm text-gray-500 sm:text-base")}>
+                    {blog.images.length > 0 ? "caption lorem ipsum yuh lots of words to say about this photo" : ""}
+                  </div>
+                </div>
+                {/* content */}
+                <div
+                  className={cn(
+                    "mx-4 mb-8 overflow-y-auto rounded-2xl border-4 border-dashed px-8 py-6",
+                    "max-h-[70vh] border-saseGreen/40 border-r-saseBlue/60",
+                  )}
+                >
+                  {renderContent()}
+                </div>
+              </>
             )}
-
-            {/* SASE Logo Star */}
-            <img
-              src={imageUrls["SASELogoStar.png"]}
-              alt="Logo"
-              className={cn(
-                /* mobile */
-                "absolute -bottom-10 -right-8 h-24 w-24",
-                /* desktop */
-                "sm:-bottom-12 sm:-right-12 sm:h-[140px] sm:w-[140px]",
-                "object-contain",
-              )}
-            />
           </div>
         </div>
         {/* nav buttons */}

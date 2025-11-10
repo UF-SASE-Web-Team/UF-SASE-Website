@@ -262,7 +262,7 @@ export default function UpcomingEventsBox({ days = 7, icsUrl, limit = 5, showDes
       {/* main card */}
       <div className="overflow-wrap relative rounded-2xl border-[3px] border-black bg-white">
         {/* header */}
-        <div className="bg-saseGreen text-center rounded-t-xl">
+        <div className="rounded-t-xl bg-saseGreen text-center">
           <h3 className="py-3 font-oswald text-xl tracking-wide text-black md:text-2xl">Upcoming This Week</h3>
           <div className="h-[3px] w-full bg-black/70" />
         </div>

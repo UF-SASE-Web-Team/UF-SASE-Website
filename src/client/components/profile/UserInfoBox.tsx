@@ -110,10 +110,10 @@ export default function UserInfoBox(props: UserInfoBoxProps) {
       placeholder: "Bio",
       validate: validateBio,
     },
-    { name: "resumePath", label: "Resume URL", type: "text", editable: true, placeholder: "https://..." },
+    { name: "resumePath", label: "Resume", type: "text", editable: true, placeholder: "Add resume link" },
     {
       name: "linkedin",
-      label: "LinkedIn Profile URL",
+      label: "LinkedIn URL",
       type: "text",
       editable: true,
       placeholder: "https://linkedin.com/in/yourname",

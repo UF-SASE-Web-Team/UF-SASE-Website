@@ -149,5 +149,5 @@ export default function UserInfoBox(props: UserInfoBoxProps) {
     }
   };
 
-  return <ConfigurableAccountBox title="User Information" initialData={initialData} fieldConfigs={fieldConfigs} onSave={handleSave} />;
+  return <ConfigurableAccountBox title="Profile Information" initialData={initialData} fieldConfigs={fieldConfigs} onSave={handleSave} />;
 }

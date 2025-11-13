@@ -3,6 +3,9 @@ import WebmasterChair2 from "@assets/webdev/LynetteHemingway.png";
 import BackendLead from "@assets/webdev/RJTabelon.png";
 import FrontEndLead from "@assets/webdev/StephanieFong.png";
 import WebmasterChair from "@assets/webdev/ThuyLe.png";
+import WebTeamGroupImage from "@assets/webdev/WebDevTeamCropped.png";
+import WebTeamDescription from "@assets/webdev/WebDevTerminal.png";
+import WebTeamTitle from "@assets/webdev/WebTeam.png";
 import MemberCard from "@components/home/MemberCard";
 import MobileMemberCard from "@components/mobile/MobileMemberCard";
 import FAQ from "@components/programs/FAQCard";
@@ -28,10 +31,10 @@ export const Route = createFileRoute("/webdev")({
       <div className="mt-12 flex min-h-screen flex-col items-center bg-background">
         <div className="-mt-10 flex w-full max-w-7xl flex-col sm:flex-row sm:items-center">
           <div className="relative mx-auto w-[75%] sm:w-2/5">
-            <img src="src/client/assets/webdev/WebTeam.png" alt="Web Team" className="mx-auto h-auto w-full sm:mx-0" />
+            <img src={WebTeamTitle} alt="Web Team" className="mx-auto h-auto w-full sm:mx-0" />
           </div>
           <div className="relative w-full sm:w-4/5">
-            <img src="src/client/assets/webdev/WebDevTerminal.png" alt="Terminal" className="h-auto w-full" />
+            <img src={WebTeamDescription} alt="Terminal" className="h-auto w-full" />
           </div>
         </div>
         <div className="w-full">
@@ -39,7 +42,7 @@ export const Route = createFileRoute("/webdev")({
             <div className="relative flex flex-col items-center justify-center bg-[#1E1E1E] py-10 sm:h-[600px] sm:py-20">
               <div className="absolute left-0 top-0 h-1 w-full bg-gradient-to-r from-saseGreen via-[#7DC242] to-saseBlue"></div>
               <div className="absolute bottom-0 left-0 h-1 w-full bg-gradient-to-r from-saseGreen via-[#7DC242] to-saseBlue"></div>
-              <img src="src/client/assets/webdev/WebDevTeamCropped.png" alt="Web Team" className="relative z-10 w-[95%] rounded-3xl sm:w-3/5" />
+              <img src={WebTeamGroupImage} alt="Web Team" className="relative z-10 w-[95%] rounded-3xl sm:w-3/5" />
               <div className="mt-2 px-3 pt-3 sm:w-3/5 sm:px-0">
                 <p className="font-silkscreen text-[20px] leading-relaxed text-white sm:text-[30px]">
                   &gt; &gt; APPLICATIONS: <span className="text-saseBlue">CLOSED</span> <br />

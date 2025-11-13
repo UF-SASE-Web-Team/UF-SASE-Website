@@ -1,7 +1,7 @@
+import JustinDoan from "@assets/board/JustinDoan.jpg";
+import LeannTang from "@assets/board/LeannTang.jpg";
+import ManavSanghvi from "@assets/board/ManavSanghvi.jpg";
 import { imageUrls } from "@assets/imageUrls";
-import JustinDoan from "@assets/board/JustinDoan.jpg"
-import LeannTang from "@assets/board/LeannTang.jpg"
-import ManavSanghvi from "@assets/board/ManavSanghvi.jpg"
 
 const MentorshipIcon = imageUrls["MentorshipIcon.png"];
 const MentorshipPhoto = imageUrls["MentorshipValues.jpeg"];

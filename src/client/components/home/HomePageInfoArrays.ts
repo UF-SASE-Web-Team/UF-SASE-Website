@@ -1,3 +1,6 @@
+import JustinDoan from "@assets/board/JustinDoan.jpg";
+import LeannTang from "@assets/board/LeannTang.jpg";
+import ManavSanghvi from "@assets/board/ManavSanghvi.jpg";
 import { imageUrls } from "@assets/imageUrls";
 
 const MentorshipIcon = imageUrls["MentorshipIcon.png"];
@@ -84,26 +87,26 @@ export const People: Array<{
   mobileAlignment: "left" | "right";
 }> = [
   {
-    fullName: "Vincent Lin",
-    position: "2024 - 2025 President",
-    image: imageUrls["President.jpeg"],
-    quote: "Love the SASE Community :)",
+    fullName: "Justin Doan",
+    position: "President",
+    image: JustinDoan,
+    quote: "Advance your career with SASE!",
     fontColor: "blue",
     mobileAlignment: "left",
   },
   {
-    fullName: "Bryan Park",
-    position: "2024 - 2025 Internal Vice President",
-    image: imageUrls["InternalVicePresident.jpeg"],
-    quote: "I love SASE <3",
+    fullName: "Leann Tang",
+    position: "Internal Vice President",
+    image: LeannTang,
+    quote: "💖⋆˙⟡ I love SASE!! ⋆˙⟡💖",
     fontColor: "green",
     mobileAlignment: "right",
   },
   {
-    fullName: "Kayleen Diaz",
-    position: "2024 - 2025 External Vice President",
-    image: imageUrls["ExternalVicePresident.jpeg"],
-    quote: "Grow professionally with SASE! :D",
+    fullName: "Manav Sanghvi",
+    position: "External Vice President",
+    image: ManavSanghvi,
+    quote: "The SASE community is incredible 😄",
     fontColor: "blue",
     mobileAlignment: "left",
   },

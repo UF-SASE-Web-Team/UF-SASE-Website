@@ -98,7 +98,7 @@ export const Route = createFileRoute("/sponsors")({
 
             <OmbreBackground
               innerComponent={
-                <div className="w-100 relative grid grid-cols-1 items-stretch justify-items-center gap-48 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-24 pl-48 pr-48 dark:from-gray-900 dark:to-black lg:grid-cols-2 xl:grid-cols-2">
+                <div className="w-100 relative grid grid-cols-1 items-stretch justify-items-center gap-48 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-24 pl-48 pr-48 dark:from-gray-900 dark:to-black xl:grid-cols-2">
                   {SponsorInfo.map((sponsor) => (
                     <SponsorCard
                       key={sponsor.company}

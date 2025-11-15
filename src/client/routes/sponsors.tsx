@@ -33,7 +33,7 @@ export const Route = createFileRoute("/sponsors")({
           {/* Chat Bubble */}
           <OmbreBackground
             innerComponent={
-              <div className="rounded-full bg-white p-6 pl-8 pr-8 font-redhat font-medium md:text-xl lg:text-2xl xl:text-3xl">
+              <div className="rounded-full bg-muted p-6 pl-8 pr-8 font-redhat font-medium md:text-xl lg:text-2xl xl:text-3xl">
                 <div className="relative z-10">
                   Become a <span className="font-bold">partner</span> of the{" "}
                   <span className="font-bold">UF Society of Asian Scientists and Engineers (SASE)</span> Chapter!
@@ -45,14 +45,14 @@ export const Route = createFileRoute("/sponsors")({
 
           {/* Message Tail */}
           <div className="relative bottom-10 left-20 h-20 w-20 rotate-45 rounded-br-lg bg-saseBlue">
-            <div className="absolute bottom-2 right-2 h-full w-full rounded-br-lg bg-white"></div>
+            <div className="absolute bottom-2 right-2 h-full w-full rounded-br-lg bg-muted"></div>
           </div>
         </div>
 
         <div className="relative left-20 max-w-5xl">
           <OmbreBackground
             innerComponent={
-              <div className="rounded-full bg-white p-6 px-12 font-redhat font-medium md:text-xl lg:text-2xl xl:text-3xl">
+              <div className="rounded-full bg-muted p-6 px-12 font-redhat font-medium md:text-xl lg:text-2xl xl:text-3xl">
                 <div className="relative z-10">
                   To view our sponsorship packet, or for any related questions, please contact our External Vice President, Manav Sanghvi, at{" "}
                   <a href={`mailto:ufsase.evp@gmail.com`} className="font-bold underline">
@@ -67,7 +67,7 @@ export const Route = createFileRoute("/sponsors")({
 
           {/* Message Tail */}
           <div className="relative bottom-10 right-24 ml-auto h-20 w-20 rotate-45 rounded-br-lg bg-saseGreen">
-            <div className="absolute bottom-2 right-2 h-full w-full rounded-br-lg bg-white"></div>
+            <div className="absolute bottom-2 right-2 h-full w-full rounded-br-lg bg-muted"></div>
           </div>
         </div>
 
@@ -76,7 +76,7 @@ export const Route = createFileRoute("/sponsors")({
             <div className="absolute -top-32 z-20">
               <OmbreBackground
                 innerComponent={
-                  <div className="rounded-full bg-white px-6 py-4 font-redhat font-medium md:text-xl lg:text-2xl xl:text-3xl">
+                  <div className="rounded-full bg-muted px-6 py-4 font-redhat font-medium md:text-xl lg:text-2xl xl:text-3xl">
                     <div className="relative z-10 font-bold">Check Out Our Super Sponsors!</div>
                   </div>
                 }
@@ -85,7 +85,7 @@ export const Route = createFileRoute("/sponsors")({
 
               {/* Message Tail */}
               <div className="relative bottom-6 left-16 h-12 w-12 rotate-45 rounded-br-lg bg-saseBlue">
-                <div className="absolute bottom-2 right-2 h-full w-full rounded-br-lg bg-white"></div>
+                <div className="absolute bottom-2 right-2 h-full w-full rounded-br-lg bg-muted"></div>
               </div>
             </div>
 

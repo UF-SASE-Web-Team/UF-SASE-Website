@@ -2,16 +2,6 @@ import type { InsertUser, UpdateUser } from "@schema/userSchema";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createUser, deleteUser, fetchUser, fetchUsers, updateUser } from "../api/users";
 
-// export const useProfile = () => {
-//   return useQuery<ALLProfile, Error>({
-//     queryKey: ["profile"],
-//     queryFn: async () => {
-//       const response = await apiFetch("/api/profile", { credentials: "include" }, ALLprofileSchema);
-//       return response.data;
-//     },
-//   });
-// };
-
 export const useUsers = (id: string) => {
   const queryClient = useQueryClient();
 

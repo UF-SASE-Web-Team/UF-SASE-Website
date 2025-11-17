@@ -35,33 +35,123 @@ export default function UserInfoBox(props: UserInfoBoxProps) {
     graduationSemester: info.graduationSemester ?? "",
   };
 
+  const validatePhone = (phone: string): string | null => {
+    if (!phone) return null;
+
+    const phoneRegex = /^\d{3}-\d{3}-\d{4}$/;
+    if (!phoneRegex.test(phone)) {
+      return "Phone number must be in format: 123-456-7890";
+    }
+
+    return null;
+  };
+
+  const validateDiscord = (discord: string): string | null => {
+    if (!discord) return null;
+    const discordRegex = /^@?[\w.-]{2,32}(#\d{4})?$/;
+    if (!discordRegex.test(discord)) {
+      return "Discord username must be valid";
+    }
+    return null;
+  };
+
+  const validateBio = (bio: string): string | null => {
+    if (!bio) return null;
+    if (bio.length > 500) {
+      return "Bio must be 500 characters or less";
+    }
+    return null;
+  };
+
+  const validateLinkedIn = (linkedin: string): string | null => {
+    if (!linkedin) return null;
+    const linkedinRegex = /^(https?:\/\/)?(www\.)?linkedin\.com\/(in|profile)\/[\w-]+\/?$/;
+    if (!linkedinRegex.test(linkedin)) {
+      return "LinkedIn must be a valid profile URL (e.g., https://linkedin.com/in/yourname)";
+    }
+    return null;
+  };
+
+  const semesterOptions = [
+    { value: "Spring 2024", label: "Spring 2024" },
+    { value: "Summer 2024", label: "Summer 2024" },
+    { value: "Fall 2024", label: "Fall 2024" },
+    { value: "Spring 2025", label: "Spring 2025" },
+    { value: "Summer 2025", label: "Summer 2025" },
+    { value: "Fall 2025", label: "Fall 2025" },
+    { value: "Spring 2026", label: "Spring 2026" },
+    { value: "Summer 2026", label: "Summer 2026" },
+    { value: "Fall 2026", label: "Fall 2026" },
+    { value: "Spring 2027", label: "Spring 2027" },
+    { value: "Summer 2027", label: "Summer 2027" },
+    { value: "Fall 2027", label: "Fall 2027" },
+    { value: "Spring 2028", label: "Spring 2028" },
+    { value: "Summer 2028", label: "Summer 2028" },
+    { value: "Fall 2028", label: "Fall 2028" },
+    { value: "Spring 2029", label: "Spring 2029" },
+  ];
+
   const fieldConfigs: Array<FieldConfig> = [
-    { name: "phone", label: "Phone", type: "text", editable: true },
-    { name: "discord", label: "Discord", type: "text", editable: true },
-    { name: "bio", label: "Bio", type: "text", editable: true, multiline: true },
-    { name: "resumePath", label: "Resume Path", type: "text", editable: true },
-    { name: "linkedin", label: "LinkedIn", type: "text", editable: true },
-    { name: "portfolio", label: "Portfolio", type: "text", editable: true },
-    { name: "majors", label: "Majors", type: "text", editable: true },
-    { name: "minors", label: "Minors", type: "text", editable: true },
-    { name: "graduationSemester", label: "Graduation Semester", type: "text", editable: true },
+    { name: "phone", label: "Phone Number", type: "text", editable: true, placeholder: "123-456-7890", validate: validatePhone },
+    {
+      name: "discord",
+      label: "Discord Username",
+      type: "text",
+      editable: true,
+      placeholder: "username",
+      validate: validateDiscord,
+    },
+    {
+      name: "bio",
+      label: "Bio",
+      type: "text",
+      editable: true,
+      multiline: true,
+      placeholder: "Bio",
+      validate: validateBio,
+    },
+    { name: "resumePath", label: "Resume", type: "text", editable: true, placeholder: "Add resume link" },
+    {
+      name: "linkedin",
+      label: "LinkedIn URL",
+      type: "text",
+      editable: true,
+      placeholder: "https://linkedin.com/in/yourname",
+      validate: validateLinkedIn,
+    },
+    { name: "portfolio", label: "Portfolio URL", type: "text", editable: true, placeholder: "https://yourportfolio.com" },
+    { name: "majors", label: "Major(s)", type: "text", editable: true, placeholder: "Computer Science, Biology" },
+    { name: "minors", label: "Minor(s)", type: "text", editable: true, placeholder: "Philosophy, Spanish" },
+    {
+      name: "graduationSemester",
+      label: "Graduation Semester",
+      type: "select",
+      editable: true,
+      placeholder: "Select semester",
+      options: semesterOptions,
+    },
   ];
 
   const handleSave = async (updates: Record<string, string>) => {
-    const payload: Partial<Omit<ProfessionalInfo, "userId">> = {};
-    for (const [key, val] of Object.entries(updates)) {
-      if (val.trim()) {
-        (payload as Partial<Omit<ProfessionalInfo, "userId">>)[key as keyof Omit<ProfessionalInfo, "userId">] = val;
-      }
-    }
-    try {
-      await props.onSave(payload);
-      setInfo((prev) => ({ ...prev, ...payload }));
+    // if no updates, just show success
+    if (Object.keys(updates).length === 0) {
       toast.success("Info saved successfully!");
-    } catch {
+      return;
+    }
+
+    try {
+      await props.onSave(updates);
+      setInfo((prev) => ({ ...prev, ...updates }));
+      toast.success("Info saved successfully!");
+    } catch (err) {
+      console.error("Save failed", err);
       toast.error("Failed to save info.");
     }
   };
 
-  return <ConfigurableAccountBox initialData={initialData} fieldConfigs={fieldConfigs} onSave={handleSave} />;
+  return (
+    <div className="group w-3/4 rounded-2xl bg-background px-10 py-6 shadow-xl">
+      <ConfigurableAccountBox title="Profile Information" initialData={initialData} fieldConfigs={fieldConfigs} onSave={handleSave} />
+    </div>
+  );
 }

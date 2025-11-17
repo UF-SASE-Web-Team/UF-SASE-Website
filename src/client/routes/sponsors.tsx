@@ -4,7 +4,6 @@ import { OmbreBackground } from "@components/custom_ui/OmbreBackground";
 import SponsorCard from "@components/sponsors/SponsorCard";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
-import { Divide } from "hamburger-react";
 import { useEffect } from "react";
 import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";

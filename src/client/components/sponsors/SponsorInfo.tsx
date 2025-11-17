@@ -1,5 +1,4 @@
 import { imageUrls } from "@assets/imageUrls";
-import { image } from "d3";
 
 const SponsorInfo = [
   {

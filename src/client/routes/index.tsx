@@ -212,7 +212,7 @@ export const Route = createFileRoute("/")({
                 </p>
 
                 {/* Sponsors inside the box on mobile */}
-                <div className="align-items grid w-full grid-cols-2 place-items-stretch justify-items-center gap-8">
+                <div className="grid w-full grid-cols-1 place-items-stretch gap-8">
                   {SponsorInfo.map((s) =>
                     s.tier === "Diamond" ? (
                       <SponsorCard

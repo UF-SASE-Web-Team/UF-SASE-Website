@@ -77,12 +77,7 @@ const SettingsBox: React.FC<SettingsBoxProps> = ({ darkMode, email, firstName, l
 
       {/* Account Section */}
       <div className="mb-8">
-                <ConfigurableAccountBox
-          fieldConfigs={fieldConfigs}
-          initialData={initialData}
-          onSave={handleSave}
-          showHeader={true}
-        />
+        <ConfigurableAccountBox fieldConfigs={fieldConfigs} initialData={initialData} onSave={handleSave} showHeader={true} />
       </div>
 
       {/* Preferences Section */}

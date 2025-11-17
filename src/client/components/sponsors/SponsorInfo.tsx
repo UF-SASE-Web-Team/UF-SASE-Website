@@ -1,4 +1,7 @@
 import { imageUrls } from "@assets/imageUrls";
+import ExxonMobilLogo from "@assets/other/ExxonMobilLogo.png";
+import ProctorGambleLogo from "@assets/other/P&GLogo.jpeg";
+import SandiaLogo from "@assets/other/SandiaLogo.jpg";
 
 const SponsorInfo = [
   {
@@ -9,46 +12,25 @@ const SponsorInfo = [
     link: "https://www.blueorigin.com/",
   },
   {
-    company: "FM Global",
-    tier: "Diamond",
-    image: imageUrls["FMGlobal.png"],
-    shadow_color: "shadow-blue-500",
-    link: "https://www.fmglobal.com/",
-  },
-  {
-    company: "Sargent & Lundy",
-    tier: "Gold",
-    image: imageUrls["S&L.png"],
-    shadow_color: "shadow-[#FFD700]",
-    link: "https://www.sargentlundy.com/",
-  },
-  {
-    company: "Axogen",
-    tier: "Gold",
-    image: imageUrls["Axogen.png"],
-    shadow_color: "shadow-[#FFD700]",
-    link: "https://www.axogeninc.com/",
-  },
-  {
-    company: "Johnson & Johnson",
+    company: "Sandia",
     tier: "Silver",
-    image: imageUrls["J&J.png"],
-    shadow_color: "shadow-gray-600",
-    link: "https://www.jnj.com/",
+    image: SandiaLogo,
+    shadow_color: "shadow-[#FFD700]",
+    link: "https://www.sandia.gov/",
   },
   {
-    company: "Arthrex",
+    company: "ExxonMobil",
     tier: "Bronze",
-    image: imageUrls["Arthrex.png"],
+    image: ExxonMobilLogo,
     shadow_color: "shadow-[#CD7F32]",
-    link: "https://www.arthrex.com/",
+    link: "https://corporate.exxonmobil.com/",
   },
   {
-    company: "Google",
+    company: "P&G",
     tier: "Bronze",
-    image: imageUrls["Google.png"],
+    image: ProctorGambleLogo,
     shadow_color: "shadow-[#CD7F32]",
-    link: "https://www.google.com/",
+    link: "https://us.pg.com/",
   },
 ];
 

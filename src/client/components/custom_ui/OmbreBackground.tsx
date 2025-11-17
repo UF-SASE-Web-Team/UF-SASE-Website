@@ -10,8 +10,11 @@ export const OmbreBackground: React.FC<OmbreBackgroundProps> = ({ innerComponent
     <>
       <div
         className={cn(
-          { "w-[100vw] from-saseBlue/40 to-saseGreen/40": isOpaque, "w-full rounded-2xl from-saseBlue to-saseGreen": !isOpaque },
-          `relative h-full bg-gradient-to-r p-[4px]`,
+          {
+            "w-[100vw] from-saseBlue/40 to-saseGreen/40 p-[4px]": isOpaque,
+            "w-full rounded-2xl from-saseBlue to-saseGreen p-[4px]": !isOpaque,
+          },
+          `relative h-full bg-gradient-to-r`,
         )}
       >
         {innerComponent}

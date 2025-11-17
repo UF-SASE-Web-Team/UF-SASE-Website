@@ -79,9 +79,9 @@ export const Route = createFileRoute("/sponsors")({
             <div className="absolute -top-28 z-20">
               {/* Chat Bubble */}
               <div className="rounded-full bg-gradient-to-b from-saseBlue to-saseGreen p-2">
-                <div className="rounded-full bg-muted p-6 font-redhat font-medium">
+                <div className="xs:p-4 rounded-full bg-muted p-6 font-redhat font-medium">
                   <div className="rounded-full bg-muted font-redhat font-medium">
-                    <div className="relative z-10 font-bold md:text-xl lg:text-xl xl:text-4xl">Check Out Our Super Sponsors!</div>
+                    <div className="relative z-10 font-bold sm:text-2xl md:text-3xl xl:text-4xl">Check Out Our Super Sponsors!</div>
                   </div>
                 </div>
               </div>
@@ -101,7 +101,7 @@ export const Route = createFileRoute("/sponsors")({
 
             <OmbreBackground
               innerComponent={
-                <div className="w-100 grid grid-cols-1 items-stretch justify-items-center gap-24 rounded-2xl border-saseGreen bg-gradient-to-b from-gray-100 to-white p-24 dark:from-gray-900 dark:to-black lg:grid-cols-2 xl:grid-cols-3">
+                <div className="w-100 grid grid-cols-1 items-stretch justify-items-center gap-24 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-24 dark:from-gray-900 dark:to-black lg:grid-cols-2 xl:grid-cols-3">
                   {SponsorInfo.map((sponsor) => (
                     <SponsorCard
                       key={sponsor.company}

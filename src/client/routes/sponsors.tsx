@@ -2,6 +2,7 @@ import SponsorInfo from "@/client/components/sponsors/SponsorInfo";
 import { imageUrls } from "@assets/imageUrls";
 import { OmbreBackground } from "@components/custom_ui/OmbreBackground";
 import SponsorCard from "@components/sponsors/SponsorCard";
+import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
 import { Divide } from "hamburger-react";
 import { useEffect } from "react";
@@ -20,6 +21,7 @@ export const Route = createFileRoute("/sponsors")({
     useEffect(() => {
       applyOmbreDivider();
     }, []);
+    const isMobile = useIsMobile();
     return (
       <div className="flex flex-col items-center">
         <h1 className="pb-2 pt-16 text-center font-oswald text-6xl font-normal sm:text-7xl">CURRENT SPONSORS</h1>
@@ -29,41 +31,43 @@ export const Route = createFileRoute("/sponsors")({
           <div className="w-full bg-gradient-to-r from-[#42957B] via-[#0668B3] to-transparent" />
         </div>
 
-        <div className="relative right-20 max-w-6xl">
+        <div
+          className={
+            isMobile ? "relative max-w-xs sm:max-w-xs md:max-w-lg lg:max-w-4xl" : "relative right-20 max-w-xs sm:max-w-xs md:max-w-lg lg:max-w-4xl"
+          }
+        >
           {/* Chat Bubble */}
-          <OmbreBackground
-            innerComponent={
-              <div className="rounded-full bg-muted p-6 pl-8 pr-8 font-redhat font-medium md:text-xl lg:text-2xl xl:text-3xl">
-                <div className="relative z-10">
-                  Become a <span className="font-bold">partner</span> of the{" "}
-                  <span className="font-bold">UF Society of Asian Scientists and Engineers (SASE)</span> Chapter!
-                </div>
+          <div className="rounded-full bg-gradient-to-b from-saseBlue to-saseGreen p-2">
+            <div className="rounded-full bg-muted p-6 pl-8 pr-8 font-redhat font-medium">
+              <div className="relative z-10 md:text-xl lg:text-2xl xl:text-3xl">
+                Become a <span className="font-bold">partner</span> of the{" "}
+                <span className="font-bold">UF Society of Asian Scientists and Engineers (SASE)</span> Chapter!
               </div>
-            }
-            isChatBubble={true}
-          />
+            </div>
+          </div>
 
           {/* Message Tail */}
-          <div className="relative bottom-10 left-20 h-20 w-20 rotate-45 rounded-br-lg bg-saseBlue">
+          <div className="relative bottom-10 left-20 h-20 w-20 rotate-45 rounded-br-lg bg-saseGreen">
             <div className="absolute bottom-2 right-2 h-full w-full rounded-br-lg bg-muted"></div>
           </div>
         </div>
 
-        <div className="relative left-20 max-w-5xl">
-          <OmbreBackground
-            innerComponent={
-              <div className="rounded-full bg-muted p-6 px-12 font-redhat font-medium md:text-xl lg:text-2xl xl:text-3xl">
-                <div className="relative z-10">
-                  To view our sponsorship packet, or for any related questions, please contact our External Vice President, Manav Sanghvi, at{" "}
-                  <a href={`mailto:ufsase.evp@gmail.com`} className="font-bold underline">
-                    ufsase.evp@gmail.com
-                  </a>
-                  .
-                </div>
+        <div
+          className={
+            isMobile ? "relative max-w-xs sm:max-w-xs md:max-w-lg lg:max-w-4xl" : "relative left-20 max-w-xs sm:max-w-xs md:max-w-lg lg:max-w-4xl"
+          }
+        >
+          <div className="rounded-full bg-gradient-to-b from-saseBlue to-saseGreen p-2">
+            <div className="rounded-full bg-muted p-6 px-12 font-redhat font-medium">
+              <div className="relative z-10 md:text-xl lg:text-2xl xl:text-3xl">
+                To view our sponsorship packet, or for any related questions, please contact our External Vice President, Manav Sanghvi, at{" "}
+                <a href={`mailto:ufsase.evp@gmail.com`} className="font-bold underline">
+                  ufsase.evp@gmail.com
+                </a>
+                .
               </div>
-            }
-            isChatBubble={true}
-          />
+            </div>
+          </div>
 
           {/* Message Tail */}
           <div className="relative bottom-10 right-24 ml-auto h-20 w-20 rotate-45 rounded-br-lg bg-saseGreen">
@@ -73,18 +77,18 @@ export const Route = createFileRoute("/sponsors")({
 
         <div className="my-36 flex w-full flex-col items-center justify-center sm:w-2/3">
           <div className="max-w-8xl relative">
-            <div className="absolute -top-32 z-20">
-              <OmbreBackground
-                innerComponent={
-                  <div className="rounded-full bg-muted px-6 py-4 font-redhat font-medium md:text-xl lg:text-2xl xl:text-3xl">
-                    <div className="relative z-10 font-bold">Check Out Our Super Sponsors!</div>
+            <div className="absolute -top-28 z-20">
+              {/* Chat Bubble */}
+              <div className="rounded-full bg-gradient-to-b from-saseBlue to-saseGreen p-2">
+                <div className="rounded-full bg-muted p-6 font-redhat font-medium">
+                  <div className="rounded-full bg-muted font-redhat font-medium">
+                    <div className="relative z-10 font-bold md:text-xl lg:text-xl xl:text-4xl">Check Out Our Super Sponsors!</div>
                   </div>
-                }
-                isChatBubble={true}
-              />
+                </div>
+              </div>
 
               {/* Message Tail */}
-              <div className="relative bottom-6 left-16 h-12 w-12 rotate-45 rounded-br-lg bg-saseBlue">
+              <div className="relative bottom-6 left-16 h-12 w-12 rotate-45 rounded-br-lg bg-saseGreen">
                 <div className="absolute bottom-2 right-2 h-full w-full rounded-br-lg bg-muted"></div>
               </div>
             </div>
@@ -92,13 +96,13 @@ export const Route = createFileRoute("/sponsors")({
             <img
               src={imageUrls["SASELogoStar.png"]}
               alt="Logo"
-              style={{ width: "350px", height: "350px" }}
-              className="absolute -left-48 -top-20 z-10 object-contain"
+              style={isMobile ? { width: "200px", height: "200px" } : { width: "300px", height: "300px" }}
+              className={isMobile ? "absolute -left-24 -top-20 z-10 object-contain" : "absolute -left-48 -top-20 z-10 object-contain"}
             />
 
             <OmbreBackground
               innerComponent={
-                <div className="w-100 relative grid grid-cols-1 items-stretch justify-items-center gap-48 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-24 pl-48 pr-48 dark:from-gray-900 dark:to-black xl:grid-cols-2">
+                <div className="w-100 grid grid-cols-1 items-stretch justify-items-center gap-24 border-t-8 border-saseGreen bg-gradient-to-b from-gray-100 to-white p-24 dark:from-gray-900 dark:to-black lg:grid-cols-2 xl:grid-cols-3">
                   {SponsorInfo.map((sponsor) => (
                     <SponsorCard
                       key={sponsor.company}

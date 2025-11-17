@@ -1,4 +1,7 @@
 import { imageUrls } from "@assets/imageUrls";
+import ExxonMobilLogo from "@assets/other/ExxonMobilLogo.png";
+import ProctorGambleLogo from "@assets/other/P&GLogo.jpeg";
+import SandiaLogo from "@assets/other/SandiaLogo.jpg";
 
 const SponsorInfo = [
   {
@@ -11,21 +14,21 @@ const SponsorInfo = [
   {
     company: "Sandia",
     tier: "Silver",
-    image: imageUrls["SandiaLogo.jpg"],
+    image: SandiaLogo,
     shadow_color: "shadow-[#FFD700]",
     link: "https://www.sandia.gov/",
   },
   {
     company: "ExxonMobil",
     tier: "Bronze",
-    image: imageUrls["ExxonMobilLogo.png"],
+    image: ExxonMobilLogo,
     shadow_color: "shadow-[#CD7F32]",
     link: "https://corporate.exxonmobil.com/",
   },
   {
     company: "P&G",
     tier: "Bronze",
-    image: imageUrls["P&GLogo.jpeg"],
+    image: ProctorGambleLogo,
     shadow_color: "shadow-[#CD7F32]",
     link: "https://us.pg.com/",
   },

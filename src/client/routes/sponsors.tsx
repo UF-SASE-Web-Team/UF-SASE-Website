@@ -74,7 +74,7 @@ export const Route = createFileRoute("/sponsors")({
           </div>
         </div>
 
-        <div className="my-36 flex w-full flex-col items-center justify-center sm:w-2/3">
+        <div className="mb-36 mt-28 flex w-full flex-col items-center justify-center sm:w-2/3">
           <div className="max-w-8xl relative">
             <div className="absolute -top-28 z-20">
               {/* Chat Bubble */}
@@ -95,8 +95,8 @@ export const Route = createFileRoute("/sponsors")({
             <img
               src={imageUrls["SASELogoStar.png"]}
               alt="Logo"
-              style={isMobile ? { width: "200px", height: "200px" } : { width: "300px", height: "300px" }}
-              className={isMobile ? "absolute -left-24 -top-20 z-10 object-contain" : "absolute -left-48 -top-20 z-10 object-contain"}
+              style={isMobile ? { width: "200px", height: "200px" } : { width: "250px", height: "250px" }}
+              className={isMobile ? "absolute -left-24 -top-12 z-10 object-contain" : "absolute -left-40 -top-16 z-10 object-contain"}
             />
 
             <OmbreBackground

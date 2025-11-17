@@ -198,7 +198,7 @@ export const Route = createFileRoute("/")({
           <h1 className="w-full pb-12 text-center font-oswald text-6xl font-medium">Sponsors</h1>
           <div className="w-11/12">
             {isMobile ? (
-              <div className="relative rounded-2xl border-4 border-border bg-muted px-12 py-8 shadow-[12px_12px_0px_#7DC242]">
+              <div className="relative flex flex-col items-center rounded-2xl border-4 border-border bg-muted px-12 py-8 shadow-[12px_12px_0px_#7DC242]">
                 <p className="mb-8 text-left font-redhat text-xl">
                   Are you interested in becoming a partner with the UF Society of Asian Scientists and Engineers (SASE) Chapter?
                   <br />
@@ -212,7 +212,7 @@ export const Route = createFileRoute("/")({
                 </p>
 
                 {/* Sponsors inside the box on mobile */}
-                <div className="grid w-full grid-cols-1 place-items-stretch gap-8">
+                <div className="grid max-h-96 grid-cols-1 place-items-stretch gap-8">
                   {SponsorInfo.map((s) =>
                     s.tier === "Diamond" ? (
                       <SponsorCard

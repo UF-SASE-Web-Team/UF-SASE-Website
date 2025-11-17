@@ -1,6 +1,5 @@
 // src/routes/profile/settings.tsx
 import { DarkModeContext } from "@/client/components/custom_ui/DarkModeProvider";
-import AccountBox from "@components/profile/AccountBox";
 import SettingsBox from "@components/profile/SettingsBox";
 import { useAuth } from "@hooks/AuthContext";
 import { useUsers } from "@hooks/useUsers";
@@ -18,23 +17,16 @@ export const Route = createFileRoute("/profile/settings")({
     if (!user) return <div>User data unavailable</div>;
 
     return (
-      <>
-        {/* Account Box */}
-        <AccountBox
-          username={user.username}
-          email={user.email}
-          firstName={user.firstName}
-          lastName={user.lastName}
-          timeAdded={user.timeAdded}
-          timeUpdated={user.timeUpdated}
-          points={user.points}
-          roles={user.roles}
-          adminView={false}
-        />
-
-        {/* Preferences Section */}
-        <SettingsBox darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      </>
+      <SettingsBox
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        username={user.username}
+        email={user.email}
+        firstName={user.firstName}
+        lastName={user.lastName}
+        points={user.points}
+        roles={user.roles}
+      />
     );
   },
 });

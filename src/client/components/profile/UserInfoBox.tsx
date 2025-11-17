@@ -149,5 +149,9 @@ export default function UserInfoBox(props: UserInfoBoxProps) {
     }
   };
 
-  return <ConfigurableAccountBox title="Profile Information" initialData={initialData} fieldConfigs={fieldConfigs} onSave={handleSave} />;
+  return (
+    <div className="group w-3/4 rounded-2xl bg-background px-10 py-6 shadow-xl">
+      <ConfigurableAccountBox title="Profile Information" initialData={initialData} fieldConfigs={fieldConfigs} onSave={handleSave} />
+    </div>
+  );
 }

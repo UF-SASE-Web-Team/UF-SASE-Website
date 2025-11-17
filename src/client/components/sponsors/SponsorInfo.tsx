@@ -1,4 +1,5 @@
 import { imageUrls } from "@assets/imageUrls";
+import { image } from "d3";
 
 const SponsorInfo = [
   {
@@ -11,21 +12,21 @@ const SponsorInfo = [
   {
     company: "Sandia",
     tier: "Silver",
-    image: "@assets/other/SandiaLogo.jpg",
+    image: imageUrls["SandiaLogo.jpg"],
     shadow_color: "shadow-[#FFD700]",
     link: "https://www.sandia.gov/",
   },
   {
     company: "ExxonMobil",
     tier: "Bronze",
-    image: "@assets/other/ExxonMobilLogo.png",
+    image: imageUrls["ExxonMobilLogo.png"],
     shadow_color: "shadow-[#CD7F32]",
     link: "https://corporate.exxonmobil.com/",
   },
   {
     company: "P&G",
     tier: "Bronze",
-    image: "@assets/other/P&GLogo.jpg",
+    image: imageUrls["P&GLogo.jpeg"],
     shadow_color: "shadow-[#CD7F32]",
     link: "https://us.pg.com/",
   },

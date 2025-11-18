@@ -1,9 +1,9 @@
 import BoardMemberCard from "@/client/components/board/BoardMemberCard";
 import PastBoardDropDown from "@/client/components/board/PastBoardDropDown";
-import BoardPic from "@assets/board/24-25Board.jpg";
 import { imageUrls } from "@assets/imageUrls";
 import pastBoardInfo from "@components/board/PastBoardInfo";
-import { createFileRoute } from "@tanstack/react-router";
+import Carousel from "@components/carousel/Carousel";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";
@@ -29,12 +29,11 @@ export const Route = createFileRoute("/past-board")({
         </div>
 
         <div className="mb-8 mt-10 flex justify-center font-[Poppins]">
-          <div className="w-full max-w-5xl overflow-hidden rounded-2xl border-[3px] border-border shadow-[10px_10px_0px_0px_rgb(110,167,211)]">
-            <img src={BoardPic} className="w-full" />
-          </div>
+          {/* <div className="w-full max-w-5xl overflow-hidden rounded-2xl border-[3px] border-border shadow-[10px_10px_0px_0px_rgb(110,167,211)]"> */}
+          <Carousel purpose="Images" prog="Past Board" />
+          {/* </div> */}
         </div>
         <div className="text-center">
-          <p className="mb-8 mt-8 text-lg italic text-foreground sm:text-xl md:text-2xl">2024-25</p>
           <hr className="w-7/8 mb-10 mt-16 border-t-2 border-blue-500" />
         </div>
         <PastBoardDropDown title="2024-25">
@@ -51,6 +50,14 @@ export const Route = createFileRoute("/past-board")({
             </div>
           ))}
         </PastBoardDropDown>
+        <div className="flex justify-center">
+          <Link
+            to="/board"
+            className="flex h-9 w-40 items-center justify-center whitespace-nowrap rounded-xl border border-black bg-gradient-to-r from-saseGreen to-white px-6 py-2 text-xs italic tracking-wide text-black shadow-[2px_2px_2px_rgba(0,0,0,0.10)] transition duration-300 hover:scale-105 sm:h-10 sm:w-60 sm:px-7 sm:text-[18px]"
+          >
+            CURRENT BOARD
+          </Link>
+        </div>
       </div>
     );
   },

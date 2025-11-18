@@ -1,6 +1,7 @@
 import { Values } from "@/client/components/home/HomePageInfoArrays";
 import { useIsMobile } from "@/client/hooks/useIsMobile";
 import { cn } from "@/shared/utils";
+import PastBoardImages from "@components/programs/PastBoardImages";
 import ProgramImages from "@components/programs/ProgramImages";
 import Testimonials from "@components/programs/Testimonials";
 import type { EmblaCarouselType, EmblaEventType, EmblaOptionsType } from "embla-carousel";
@@ -38,6 +39,11 @@ type MMGroup = {
   image: string;
 };
 
+type PastBoard = {
+  src: string;
+  year: string;
+};
+
 const checkisValue = (slide: unknown): slide is Value => {
   return typeof slide === "object" && slide !== null && "img" in slide && "icon" in slide && "value" in slide && "text" in slide;
 };
@@ -50,23 +56,31 @@ const checkIsMMGroup = (slide: unknown): slide is MMGroup => {
   return typeof slide === "object" && slide !== null && "name" in slide && "position" in slide && "image" in slide;
 };
 
+const checkIsPastBoard = (slide: unknown): slide is PastBoard => {
+  return typeof slide === "object" && slide !== null && "src" in slide;
+};
+
 const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
   const isMobile = useIsMobile();
 
   let slides;
   if (purpose == "Testimonials") {
     slides = Testimonials.find((t) => t.program === prog)?.testimonials ?? [];
-  } else if (purpose == "Images") {
-    slides = ProgramImages.find((i) => i.program === prog)?.images ?? [];
+  } else if (purpose === "Images") {
+    const pastBoard = PastBoardImages.find((i) => i.program === prog)?.images;
+    const program = ProgramImages.find((i) => i.program === prog)?.images;
+    slides = pastBoard ?? program ?? [];
   } else {
     slides = Values;
   }
+  const [currentYear, setCurrentYear] = useState<string>("");
 
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
   const [selected, setSelected] = useState(0);
   const [snaps, setSnaps] = useState<Array<number>>([]);
   const tweenFactor = useRef(0);
   const tweenNodes = useRef<Array<HTMLElement>>([]);
+  const isShortCarousel = slides.length < 3;
 
   const { nextBtnDisabled, onNextButtonClick, onPrevButtonClick, prevBtnDisabled } = usePrevNextButtons(emblaApi);
 
@@ -128,17 +142,29 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
     setSnaps(emblaApi.scrollSnapList());
     setSelected(emblaApi.selectedScrollSnap());
 
-    const onSelect = () => setSelected(emblaApi.selectedScrollSnap());
+    const updateYear = () => {
+      const index = emblaApi.selectedScrollSnap();
+      setSelected(index);
+      const slide = slides[index];
+      if (checkIsPastBoard(slide)) {
+        setCurrentYear(slide.year);
+      }
+    };
+
+    updateYear();
+
+    const onSelect = () => updateYear();
     const onReInit = () => {
       setSnaps(emblaApi.scrollSnapList());
       setSelected(emblaApi.selectedScrollSnap());
       setTweenNodes(emblaApi);
       setTweenFactor(emblaApi);
       tweenScale(emblaApi);
+      updateYear();
     };
 
     emblaApi.on("select", onSelect).on("reInit", onReInit).on("scroll", tweenScale).on("slideFocus", tweenScale);
-  }, [emblaApi, setTweenNodes, setTweenFactor, tweenScale]);
+  }, [emblaApi, slides, setTweenNodes, setTweenFactor, tweenScale]);
 
   return (
     <div className="relative">
@@ -163,8 +189,8 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
               <div
                 className={cn(
                   {
-                    "flex-[0_0_100%]": isMobile,
-                    "flex-[0_0_50%]": !isMobile,
+                    "flex-[0_0_100%]": isMobile || (checkIsPastBoard(slide) && isShortCarousel),
+                    "flex-[0_0_50%]": !isMobile && !(checkIsPastBoard(slide) && isShortCarousel),
                   },
                   `flex min-w-0 items-center justify-center [transform:translate3d(0,0,0)]`,
                 )}
@@ -236,6 +262,8 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
                             ) : null}
                           </div>
                         </>
+                      ) : typeof slide === "object" && "src" in slide ? (
+                        <img src={slide.src} alt={`Image`} className="aspect-auto rounded-xl" />
                       ) : (
                         // Carousel for Program Images
                         <img src={slide} alt={`Image`} className="aspect-auto rounded-xl" />
@@ -262,6 +290,11 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
         ) : null}
       </div>
 
+      {purpose === "Images" && currentYear && (
+        <div className="mt-4 flex justify-center">
+          <p className="mb-8 mt-8 text-lg italic text-foreground sm:text-xl md:text-2xl">{currentYear}</p>
+        </div>
+      )}
       {/* Arrows for mobile version */}
       {isMobile ? (
         <div className="mt-6 flex h-fit flex-row items-center justify-center gap-12">

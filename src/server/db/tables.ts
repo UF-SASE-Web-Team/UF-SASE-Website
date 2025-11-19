@@ -10,7 +10,7 @@ export const users = sqliteTable("user", {
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),
   username: text("username").notNull().unique(),
-  password: text("password").notNull(),
+  password: text("password"),
   email: text("email").notNull().unique(),
   firstName: text("first_name").notNull().default(""),
   lastName: text("last_name").notNull().default(""),
@@ -21,6 +21,22 @@ export const users = sqliteTable("user", {
     .notNull()
     .$onUpdateFn(() => Date.now()),
   points: integer("points").notNull().default(0),
+});
+
+// OAuth Accounts table
+export const oauthAccounts = sqliteTable("oauth_account", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  provider: text("provider").notNull(),
+  providerUserId: text("provider_user_id").notNull(),
+  email: text("email"),
+  timeAdded: integer("time_added")
+    .notNull()
+    .$defaultFn(() => Date.now()),
 });
 
 // Session table

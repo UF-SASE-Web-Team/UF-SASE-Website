@@ -29,9 +29,7 @@ export const Route = createFileRoute("/past-board")({
         </div>
 
         <div className="mb-8 mt-10 flex justify-center font-[Poppins]">
-          {/* <div className="w-full max-w-5xl overflow-hidden rounded-2xl border-[3px] border-border shadow-[10px_10px_0px_0px_rgb(110,167,211)]"> */}
           <Carousel purpose="Images" prog="Past Board" />
-          {/* </div> */}
         </div>
         <div className="text-center">
           <hr className="w-7/8 mb-10 mt-16 border-t-2 border-blue-500" />

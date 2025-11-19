@@ -21,6 +21,7 @@ const navItems = [
     path: "/about",
     children: [
       { name: "Board", path: "/board" },
+      { name: "Past Board", path: "/past-board" },
       { name: "Sponsors", path: "/sponsors" },
     ],
   },

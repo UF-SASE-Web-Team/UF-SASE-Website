@@ -42,7 +42,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
         <section
           className={cn(
             "relative z-10 flex flex-col items-start rounded-[50px] border-2 border-border bg-white p-12",
-            "w-full shadow-lg transition sm:flex-col h-[670px]",
+            "h-[600px] w-full shadow-lg transition sm:flex-col",
           )}
         >
           {/* image */}
@@ -54,7 +54,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
             )}
           </figure>
           {/* content */}
-          <div className="flex w-full flex-col items-stretch flex-1">
+          <div className="flex w-full flex-1 flex-col items-stretch">
             <div className="relative flex items-center justify-center">
               {/* title */}
               <h2 className={cn("place-content-start font-oswald font-bold text-gray-800", "text-2xl sm:text-4xl")}>{blog.title}</h2>
@@ -73,7 +73,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
             {blog.read_time && <span className="mt-2 rounded-full bg-gray-100 px-4 py-1 text-sm text-gray-600">{blog.read_time} read</span>}
 
             {/* content */}
-            <p className={cn("mt-4 font-redhat text-gray-700 line-clamp-4", "text-sm sm:text-lg")}>
+            <p className={cn("mt-4 line-clamp-4 font-redhat text-gray-700", "text-sm sm:text-lg")}>
               {blog.content ? blog.content.substring(0, 80) + "..." : "No content available"}
             </p>
 

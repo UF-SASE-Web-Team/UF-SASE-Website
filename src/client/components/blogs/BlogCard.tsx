@@ -42,7 +42,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
         <section
           className={cn(
             "relative z-10 flex flex-col items-start rounded-[50px] border-2 border-border bg-white p-12",
-            "h-[600px] w-full shadow-lg transition sm:flex-col",
+            "h-[450px] w-full shadow-lg transition sm:h-[600px] sm:flex-col",
           )}
         >
           {/* image */}

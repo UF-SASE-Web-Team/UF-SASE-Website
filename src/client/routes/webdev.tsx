@@ -1,3 +1,4 @@
+import { cn } from "@/shared/utils";
 import UIUXLead from "@assets/webdev/HelenZou.png";
 import WebmasterChair2 from "@assets/webdev/LynetteHemingway.png";
 import BackendLead from "@assets/webdev/RJTabelon.png";
@@ -12,6 +13,8 @@ import FAQ from "@components/programs/FAQCard";
 import { faqData } from "@components/programs/faqWebdev";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
+import StateManagedSelect from "node_modules/react-select/dist/declarations/src";
+import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
 import { seo } from "../utils/seo";
 
@@ -26,6 +29,11 @@ export const Route = createFileRoute("/webdev")({
 
   component: () => {
     const isMobile = useIsMobile();
+    const [buttonToggle, setToggle] = useState(true);
+
+    const toggleState = (state: boolean) => {
+      setToggle(state);
+    };
 
     return (
       <div className="mt-12 flex min-h-screen flex-col items-center bg-background">
@@ -60,6 +68,30 @@ export const Route = createFileRoute("/webdev")({
                 </p>
               </div>
             </div>
+          </div>
+          <div
+            className={cn(`mx-auto mt-10 flex max-w-sm rounded-full border-2 border-black bg-muted font-redhat text-3xl font-medium`, {
+              "max-w-xs": isMobile,
+            })}
+          >
+            <button
+              onClick={() => toggleState(true)}
+              className={cn(`flex-grow rounded-full py-4 transition duration-300 hover:brightness-90`, {
+                "bg-saseGreen": buttonToggle,
+                "bg-muted": !buttonToggle,
+              })}
+            >
+              Website
+            </button>
+            <button
+              onClick={() => toggleState(false)}
+              className={cn(`flex-grow rounded-full bg-muted py-4 transition duration-300 hover:brightness-90`, {
+                "bg-muted": buttonToggle,
+                "bg-saseGreen": !buttonToggle,
+              })}
+            >
+              Project
+            </button>
           </div>
           <header className="mt-4 flex w-full justify-center sm:mt-8">
             <h2 className="bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen bg-clip-text text-center font-silkscreen text-[40px] text-transparent sm:mb-10 sm:text-[50px]">

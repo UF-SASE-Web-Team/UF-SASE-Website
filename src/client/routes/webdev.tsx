@@ -29,10 +29,10 @@ export const Route = createFileRoute("/webdev")({
 
   component: () => {
     const isMobile = useIsMobile();
-    const [buttonToggle, setToggle] = useState(true);
+    const [buttonToggle, setToggle] = useState(1);
 
-    const toggleState = (state: boolean) => {
-      setToggle(state);
+    const toggleState = (position: number) => {
+      setToggle(position);
     };
 
     return (
@@ -70,27 +70,36 @@ export const Route = createFileRoute("/webdev")({
             </div>
           </div>
           <div
-            className={cn(`mx-auto mt-10 flex max-w-sm rounded-full border-2 border-black bg-muted font-redhat text-3xl font-medium`, {
+            className={cn(`mx-auto mt-10 flex max-w-2xl rounded-full border-2 border-black bg-muted font-redhat text-3xl font-medium`, {
               "max-w-xs": isMobile,
             })}
           >
             <button
-              onClick={() => toggleState(true)}
+              onClick={() => toggleState(1)}
               className={cn(`flex-grow rounded-full py-4 transition duration-300 hover:brightness-90`, {
-                "bg-saseGreen": buttonToggle,
-                "bg-muted": !buttonToggle,
+                "bg-saseGreen": buttonToggle === 1,
+                "bg-muted": buttonToggle !== 1,
               })}
             >
               Website
             </button>
             <button
-              onClick={() => toggleState(false)}
+              onClick={() => toggleState(2)}
               className={cn(`flex-grow rounded-full bg-muted py-4 transition duration-300 hover:brightness-90`, {
-                "bg-muted": buttonToggle,
-                "bg-saseGreen": !buttonToggle,
+                "bg-saseGreen": buttonToggle === 2,
+                "bg-muted": buttonToggle !== 2,
               })}
             >
               Project
+            </button>
+            <button
+              onClick={() => toggleState(3)}
+              className={cn(`flex-grow rounded-full py-4 transition duration-300 hover:brightness-90`, {
+                "bg-saseGreen": buttonToggle === 3,
+                "bg-muted": buttonToggle !== 3,
+              })}
+            >
+              Past Webmasters
             </button>
           </div>
           <header className="mt-4 flex w-full justify-center sm:mt-8">

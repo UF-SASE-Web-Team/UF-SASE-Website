@@ -224,7 +224,7 @@ export const linkedinProfile = sqliteTable("linkedin_profile", {
 
 export const company = sqliteTable("company", {
   id: text("id").primaryKey(),
-  userId: text("id")
+  userId: text("user_id")
     .notNull()
     .references(() => users.id),
   name: text("name").notNull(),

@@ -7,6 +7,7 @@ import contactRoutes from "@api/contact";
 import emailRoutes from "@api/email";
 import eventRoutes from "@api/events";
 import mentorMenteeRoutes from "@api/mentorMentee";
+import boardRoutes from "@api/pastBoard";
 import profileRoutes from "@api/profile";
 import roleRoutes from "@api/roles";
 import saseRoutes from "@api/saseInfo";
@@ -76,4 +77,5 @@ app
   .route("/api", eventRoutes)
   .route("/api", sheetsRoutes)
   .route("/api", roleRoutes)
-  .route("/api", mentorMenteeRoutes);
+  .route("/api", mentorMenteeRoutes)
+  .route("/api", boardRoutes);

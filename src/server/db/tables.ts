@@ -194,3 +194,26 @@ export const pendingVerifications = sqliteTable("pending_verifications", {
   expiresAt: integer("expires_at").notNull(),
   attempts: integer("attempts").notNull().default(0),
 });
+
+export const linkedinProfile = sqliteTable("linkedin_profile", {
+  user: text("user")
+    .primaryKey()
+    .references(() => users.id),
+  name: text("name").notNull(),
+  major: text("major"),
+  graduationYear: integer("graduation_year"),
+  email: text("email"),
+  linkedin: text("linkedin"),
+});
+
+export const company = sqliteTable("company", {
+  id: text("id").primaryKey(),
+  userId: text("id")
+    .notNull()
+    .references(() => users.id),
+  name: text("name").notNull(),
+  startDate: text("start_date"),
+  endDate: text("end_date"),
+  role: text("role"),
+  isCurrent: integer("is_current").default(0).notNull(),
+});

@@ -7,12 +7,14 @@ import WebmasterChair from "@assets/webdev/ThuyLe.png";
 import WebTeamGroupImage from "@assets/webdev/WebDevTeamCropped.png";
 import WebTeamDescription from "@assets/webdev/WebDevTerminal.png";
 import WebTeamTitle from "@assets/webdev/WebTeam.png";
+import RickyZhang from "@assets/webdev/WebmasterChair.jpeg";
 import MemberCard from "@components/home/MemberCard";
 import MobileMemberCard from "@components/mobile/MobileMemberCard";
 import FAQ from "@components/programs/FAQCard";
 import { faqData } from "@components/programs/faqWebdev";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
+import { Divide } from "hamburger-react";
 import StateManagedSelect from "node_modules/react-select/dist/declarations/src";
 import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
@@ -71,7 +73,7 @@ export const Route = createFileRoute("/webdev")({
           </div>
           <div
             className={cn(`mx-auto mt-10 flex max-w-2xl rounded-full border-2 border-black bg-muted font-redhat text-3xl font-medium`, {
-              "max-w-xs": isMobile,
+              "max-w-sm text-xl": isMobile,
             })}
           >
             <button
@@ -103,59 +105,144 @@ export const Route = createFileRoute("/webdev")({
             </button>
           </div>
           <header className="mt-4 flex w-full justify-center sm:mt-8">
-            <h2 className="bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen bg-clip-text text-center font-silkscreen text-[40px] text-transparent sm:mb-10 sm:text-[50px]">
+            <h2 className="bg-gradient-to-r from-saseGreen via-[#7DC242] to-saseBlue bg-clip-text text-center font-silkscreen text-[40px] text-transparent sm:mb-10 sm:text-[50px]">
               Leadership
             </h2>
           </header>
           {isMobile ? (
             <>
-              <MobileMemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="blue" quote="SWT is sweet" imageSide="left" />
-              <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseGreen to-saseBlue" />
-              <MobileMemberCard
-                image={WebmasterChair2}
-                name="Lynette Hemingway"
-                role="Webmaster"
-                textColor="green"
-                quote="...sandwiches"
-                imageSide="right"
-              />
-              <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
-              <MobileMemberCard
-                image={FrontEndLead}
-                name="Stephanie Fong"
-                role="Frontend"
-                textColor="blue"
-                quote="food, family, friends, front-end"
-                imageSide="left"
-              />
-              <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
-              <MobileMemberCard
-                image={BackendLead}
-                name="RJ Tabelon"
-                role="Backend"
-                textColor="green"
-                quote="Lynette thinks we're doing quotes together"
-                imageSide="right"
-              />
-              <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
-              <MobileMemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="blue" quote="herm" imageSide="left" />
+              {buttonToggle !== 3 ? (
+                <>
+                  {/* Current Webmasters */}
+                  <MobileMemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="blue" quote="SWT is sweet" imageSide="left" />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseBlue to-saseGreen" />
+                  <MobileMemberCard
+                    image={WebmasterChair2}
+                    name="Lynette Hemingway"
+                    role="Webmaster"
+                    textColor="green"
+                    quote="...sandwiches"
+                    imageSide="right"
+                  />
+                </>
+              ) : (
+                <>
+                  {/* Past Webmasters */}
+                  <MobileMemberCard image={RickyZhang} name="Ricky Zhang" role="2024-2025" textColor="blue" quote="i love sase" imageSide="left" />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseBlue to-saseGreen" />
+                  <MobileMemberCard
+                    image={RickyZhang}
+                    name="Gurleen Dhillon"
+                    role="2023-2024"
+                    textColor="green"
+                    quote="i love sase"
+                    imageSide="right"
+                  />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseGreen to-saseBlue" />
+                  <MobileMemberCard image={RickyZhang} name="Maren Heck" role="2022-2023" textColor="blue" quote="i love sase" imageSide="left" />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseBlue to-saseGreen" />
+                  <MobileMemberCard image={RickyZhang} name="Julia Le" role="2021-2022" textColor="green" quote="i love sase" imageSide="right" />
+                </>
+              )}
+
+              {/* Web Maintenance Team Leads */}
+              {buttonToggle === 1 && (
+                <>
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
+                  <MobileMemberCard
+                    image={FrontEndLead}
+                    name="Stephanie Fong"
+                    role="Frontend"
+                    textColor="blue"
+                    quote="food, family, friends, front-end"
+                    imageSide="left"
+                  />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
+                  <MobileMemberCard
+                    image={BackendLead}
+                    name="RJ Tabelon"
+                    role="Backend"
+                    textColor="green"
+                    quote="Lynette thinks we're doing quotes together"
+                    imageSide="right"
+                  />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
+                  <MobileMemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="blue" quote="herm" imageSide="left" />
+                </>
+              )}
+
+              {/* Semester Project Team Leads */}
+              {buttonToggle === 2 && (
+                <>
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
+                  <MobileMemberCard image={UIUXLead} name="Kenzo Fukuda" role="Frontend & UI/UX" textColor="blue" quote="test!" imageSide="left" />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
+                  <MobileMemberCard
+                    image={UIUXLead}
+                    name="Aadithi Arjun"
+                    role="Frontend & UI/UX"
+                    textColor="green"
+                    quote="test!!"
+                    imageSide="right"
+                  />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
+                  <MobileMemberCard image={UIUXLead} name="Vincent Lin" role="Backend" textColor="blue" quote="test!!!" imageSide="left" />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
+                  <MobileMemberCard image={UIUXLead} name="Jordan Kusuda" role="Backend" textColor="green" quote="test!!!!" imageSide="right" />
+                </>
+              )}
             </>
           ) : (
             <div className="mb-12 flex flex-col items-center justify-center gap-8">
               <div className="flex flex-row gap-8">
-                <MemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="blue" quote="SWT is sweet" />
-                <MemberCard image={WebmasterChair2} name="Lynette Hemingway" role="Webmaster" textColor="blue" quote="...sandwiches" />
+                {buttonToggle !== 3 ? (
+                  <>
+                    {/* Current Webmasters */}
+                    <MemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="blue" quote="SWT is sweet" />
+                    <MemberCard image={WebmasterChair2} name="Lynette Hemingway" role="Webmaster" textColor="blue" quote="...sandwiches" />
+                  </>
+                ) : (
+                  <>
+                    {/* Past Webmasters */}
+                    <MemberCard image={RickyZhang} name="Ricky Zhang" role="2024-2025" textColor="blue" quote="i love sase" />
+                    <MemberCard image={RickyZhang} name="Gurleen Dhillon" role="2023-2024" textColor="green" quote="i love sase" />
+                    <MemberCard image={RickyZhang} name="Maren Heck" role="2022-2023" textColor="blue" quote="i love sase" />
+                    <MemberCard image={RickyZhang} name="Julia Le" role="2021-2022" textColor="green" quote="i love sase" />
+                  </>
+                )}
               </div>
+
               <div className="flex flex-row gap-8">
-                <MemberCard image={FrontEndLead} name="Stephanie Fong" role="Frontend" textColor="green" quote="food, family, friends, front-end" />
-                <MemberCard
-                  image={BackendLead}
-                  name="RJ Tabelon"
-                  role="Backend"
-                  textColor="green"
-                  quote="Lynette thinks we're doing quotes together"
-                />
-                <MemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="green" quote="herm" />
+                {/* Web Maintenance Team Leads */}
+                {buttonToggle === 1 && (
+                  <>
+                    <MemberCard
+                      image={FrontEndLead}
+                      name="Stephanie Fong"
+                      role="Frontend"
+                      textColor="green"
+                      quote="food, family, friends, front-end"
+                    />
+                    <MemberCard
+                      image={BackendLead}
+                      name="RJ Tabelon"
+                      role="Backend"
+                      textColor="green"
+                      quote="Lynette thinks we're doing quotes together"
+                    />
+                    <MemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="green" quote="herm" />
+                  </>
+                )}
+
+                {/* Semester Project Team Leads */}
+                {buttonToggle === 2 && (
+                  <>
+                    <MemberCard image={UIUXLead} name="Kenzo Fukuda" role="Frontend & UI/UX" textColor="green" quote="test!" />
+                    <MemberCard image={UIUXLead} name="Aadithi Arjun" role="Frontend & UI/UX" textColor="green" quote="test!!" />
+                    <MemberCard image={UIUXLead} name="Vincent Lin" role="Backend" textColor="green" quote="test!!!" />
+                    <MemberCard image={UIUXLead} name="Jordan Kusuda" role="Backend" textColor="green" quote="test!!!!" />
+                  </>
+                )}
               </div>
             </div>
           )}

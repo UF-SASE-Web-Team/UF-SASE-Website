@@ -1,10 +1,11 @@
 import { db } from "@/server/db/db";
 import { VerificationTemplate } from "@/server/email/verification-template";
 import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
-import { pendingVerifications, professionalInfo, sessions, userRoleRelationship, users } from "@db/tables";
+import { oauthAccounts, pendingVerifications, professionalInfo, sessions, userRoleRelationship, users } from "@db/tables";
 import { SERVER_ENV } from "@server/env";
+import { generateCodeVerifier, generateState, Google } from "arctic";
 import bcrypt from "bcryptjs";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { generateIdFromEntropySize } from "lucia";
 import { Resend } from "resend";
@@ -14,8 +15,10 @@ const { compare, hash } = bcrypt;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*!@#$%^&*()\-_=+\\|[{}\];:'",<>./?])[A-Za-z\d!@#$%^&*()\-_=+\\|[{}\];:'",<>./?]{8,}$/;
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-const resend = new Resend(SERVER_ENV.RESEND_API_KEY);
 const authRoutes = new Hono();
+
+const resend = new Resend(SERVER_ENV.RESEND_API_KEY);
+const google = new Google(SERVER_ENV.GOOGLE_OAUTH_CLIENT_ID, SERVER_ENV.GOOGLE_OAUTH_CLIENT_SECRET, SERVER_ENV.GOOGLE_OAUTH_REDIRECT_URI);
 
 authRoutes.post("/auth/signup", async (c) => {
   const { email, password, username } = await c.req.json();
@@ -223,14 +226,15 @@ authRoutes.post("/auth/login", async (c) => {
     return createErrorResponse(c, "INVALID_CREDENTIALS", "Invalid username or password!", 401);
   }
 
+  if (!user[0].password) {
+    return createErrorResponse(c, "NO_PASSWORD", "This account uses a social login (e.g., Google)", 401);
+  }
   const validPassword = await compare(password, user[0].password);
-
   if (!validPassword) {
     return createErrorResponse(c, "INVALID_PASSWORD", "Incorrect password!", 401);
   } else {
     const session_id = generateIdFromEntropySize(16);
-    createSession(session_id, user[0].id);
-    // Set cookie here
+    await createSession(session_id, user[0].id);
     c.header("Set-Cookie", `sessionId=${session_id}; Path=/; HttpOnly; Secure; Max-Age=3600; SameSite=Strict`);
     return createSuccessResponse(c, { sessionId: session_id }, "Successfully logged in");
   }
@@ -308,5 +312,163 @@ async function createSession(sessionID: string, userID: string) {
     console.log(error);
   }
 }
+
+const oauthStates = new Map<string, { codeVerifier: string; expiresAt: number }>();
+
+// Clean up expired states every 10 minutes
+setInterval(
+  () => {
+    const now = Date.now();
+    for (const [state, data] of oauthStates.entries()) {
+      if (data.expiresAt < now) {
+        oauthStates.delete(state);
+      }
+    }
+  },
+  10 * 60 * 1000,
+);
+
+authRoutes.get("/auth/google", async (c) => {
+  try {
+    const state = generateState();
+    const codeVerifier = generateCodeVerifier();
+
+    oauthStates.set(state, {
+      codeVerifier,
+      expiresAt: Date.now() + 10 * 60 * 1000,
+    });
+
+    const url = await google.createAuthorizationURL(state, codeVerifier, ["profile", "email"]);
+
+    return c.redirect(url.toString());
+  } catch (error) {
+    console.error("Error initiating Google OAuth:", error);
+    return createErrorResponse(c, "OAUTH_INIT_ERROR", "Failed to initiate Google login", 500);
+  }
+});
+
+authRoutes.get("/auth/google/callback", async (c) => {
+  const url = new URL(c.req.url);
+  const code = url.searchParams.get("code");
+  const state = url.searchParams.get("state");
+
+  if (!code || !state) {
+    return createErrorResponse(c, "INVALID_CALLBACK", "Missing code or state parameter", 400);
+  }
+
+  const storedData = oauthStates.get(state);
+  if (!storedData) {
+    return createErrorResponse(c, "INVALID_STATE", "Invalid or expired state", 400);
+  }
+
+  oauthStates.delete(state);
+
+  if (storedData.expiresAt < Date.now()) {
+    return createErrorResponse(c, "EXPIRED_STATE", "State has expired", 400);
+  }
+
+  try {
+    const tokens = await google.validateAuthorizationCode(code, storedData.codeVerifier);
+    const accessToken = tokens.accessToken();
+
+    const googleUserResponse = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!googleUserResponse.ok) {
+      return createErrorResponse(c, "GOOGLE_API_ERROR", "Failed to fetch user info from Google", 500);
+    }
+
+    const googleUser = (await googleUserResponse.json()) as {
+      id: string;
+      email: string;
+      verified_email: boolean;
+      name: string;
+      given_name?: string;
+      family_name?: string;
+      picture?: string;
+    };
+
+    if (!googleUser.verified_email) {
+      return createErrorResponse(c, "UNVERIFIED_EMAIL", "Please verify your Google email first", 400);
+    }
+
+    const existingOAuthAccount = await db
+      .select()
+      .from(oauthAccounts)
+      .where(and(eq(oauthAccounts.provider, "google"), eq(oauthAccounts.providerUserId, googleUser.id)))
+      .get();
+
+    let user;
+
+    if (existingOAuthAccount) {
+      user = await db.select().from(users).where(eq(users.id, existingOAuthAccount.userId)).get();
+    } else {
+      const existingEmailUser = await db.select().from(users).where(eq(users.email, googleUser.email)).get();
+
+      if (existingEmailUser) {
+        await db.insert(oauthAccounts).values({
+          userId: existingEmailUser.id,
+          provider: "google",
+          providerUserId: googleUser.id,
+          email: googleUser.email,
+        });
+
+        await db
+          .update(users)
+          .set({
+            firstName: existingEmailUser.firstName || googleUser.given_name || "",
+            lastName: existingEmailUser.lastName || googleUser.family_name || "",
+          })
+          .where(eq(users.id, existingEmailUser.id));
+
+        user = existingEmailUser;
+      } else {
+        const userId = generateIdFromEntropySize(16);
+        // Generate a temporary username for OAuth users
+        const username = googleUser.email;
+        await db.insert(users).values({
+          id: userId,
+          username,
+          password: null,
+          email: googleUser.email,
+          firstName: googleUser.given_name || "",
+          lastName: googleUser.family_name || "",
+        });
+
+        await db.insert(oauthAccounts).values({
+          userId,
+          provider: "google",
+          providerUserId: googleUser.id,
+          email: googleUser.email,
+        });
+
+        await db.insert(professionalInfo).values({ userId });
+        await db.insert(userRoleRelationship).values({
+          userId,
+          role: "user",
+        });
+
+        user = await db.select().from(users).where(eq(users.id, userId)).get();
+      }
+    }
+
+    if (!user) {
+      return createErrorResponse(c, "USER_CREATION_ERROR", "Failed to create or find user", 500);
+    }
+
+    const sessionId = generateIdFromEntropySize(16);
+    await createSession(sessionId, user.id);
+
+    c.header("Set-Cookie", `sessionId=${sessionId}; Path=/; HttpOnly; Secure; Max-Age=3600; SameSite=Strict`);
+
+    return c.redirect("/");
+  } catch (error) {
+    console.error("Error in Google OAuth callback:", error);
+    return createErrorResponse(c, "OAUTH_CALLBACK_ERROR", "Failed to complete Google login", 500);
+  }
+});
 
 export default authRoutes;

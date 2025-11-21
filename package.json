@@ -38,6 +38,7 @@
     "@uploadthing/react": "^7.3.0",
     "@vinxi/react": "^0.2.5",
     "@vitejs/plugin-react": "^4.3.1",
+    "arctic": "^3.7.0",
     "bcryptjs": "^2.4.3",
     "caniuse-lite": "^1.0.30001713",
     "class-variance-authority": "^0.7.0",

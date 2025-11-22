@@ -1,6 +1,9 @@
 import { cn } from "@/shared/utils";
+import { useIsMobile } from "@/client/hooks/useIsMobile";
 
 const MissionCard = ({ image, mission, shadow: _shadow, text }: { image: string; mission: string; text: string; shadow: "blue" | "green" }) => {
+  const isMobile = useIsMobile();
+
   return (
     // local stacking context
     <div className="relative z-0 w-full">
@@ -15,9 +18,9 @@ const MissionCard = ({ image, mission, shadow: _shadow, text }: { image: string;
 
       <div className="relative z-10 rounded-2xl border-[4px] border-black bg-muted">
         <div className="flex flex-col items-center p-6 duration-300 hover:scale-105">
-          <p className="pb-4 text-center font-redhat text-2xl font-semibold">{mission}</p>
+          <p className="pb-4 text-center font-redhat text-3xl font-semibold">{mission}</p>
           <img src={image} alt="Icon" className="pb-4" />
-          <p className="text-center font-redhat text-2xl">{text}</p>
+          <p className={cn({"text-lg" : !isMobile, "text-sm" : isMobile},"text-center font-redhat")}>{text}</p>
         </div>
       </div>
     </div>

@@ -1,6 +1,5 @@
 import BlueStar from "@assets/other/BlueStar.png";
 import GreenStar from "@assets/other/GreenStar.png";
-import { OmbreBackground } from "@components/custom_ui/OmbreBackground";
 import React from "react";
 
 interface ProgramCardProps {
@@ -14,8 +13,7 @@ interface ProgramCardProps {
 const ProgramCard: React.FC<ProgramCardProps> = ({ image, link, name, number, text }) => {
   return (
     <div>
-      <OmbreBackground
-        innerComponent={
+      <div className="ombre-background">
           <div className="h-full w-full">
             <div className="absolute -left-3 -top-3 z-20 flex h-10 w-14 items-center justify-center rounded-2xl border-l-4 border-t-4 border-border border-saseBlue bg-saseGrayLight dark:bg-black">
               <p className="pb- inline-block bg-gradient-to-r from-saseBlue to-saseGreen bg-clip-text font-redhat text-xl font-bold text-saseGreen text-transparent">
@@ -48,8 +46,7 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ image, link, name, number, te
               </div>
             </div>
           </div>
-        }
-      />
+       </div>
     </div>
   );
 };

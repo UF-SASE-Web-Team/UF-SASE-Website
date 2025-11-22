@@ -1,6 +1,3 @@
-import JustinDoan from "@assets/board/JustinDoan.jpg";
-import LeannTang from "@assets/board/LeannTang.jpg";
-import ManavSanghvi from "@assets/board/ManavSanghvi.jpg";
 import { imageUrls } from "@assets/imageUrls";
 
 const MentorshipIcon = imageUrls["MentorshipIcon.png"];
@@ -49,65 +46,5 @@ export const Values: Array<{
     icon: SportsIcon,
     value: "Sports",
     text: "We have a year-round intramural sports program with 10+ different sports that members can participate in. No experience required!",
-  },
-];
-
-export const Missions: Array<{
-  image: string;
-  mission: string;
-  text: string;
-  shadow: "green" | "blue";
-}> = [
-  {
-    image: imageUrls["Briefcase.png"],
-    mission: "Professional Development",
-    text: "To prepare Asian heritage students for success in the transnational, global business world.",
-    shadow: "green",
-  },
-  {
-    image: imageUrls["People.png"],
-    mission: "Diversity",
-    text: "To promote diversity and tolerance on campuses and in the workplace.",
-    shadow: "blue",
-  },
-  {
-    image: imageUrls["Lightbulb.png"],
-    mission: "Community",
-    text: "To provide opportunities for its members to make contributions to their local communities.",
-    shadow: "green",
-  },
-];
-
-export const People: Array<{
-  fullName: string;
-  position: string;
-  image: string;
-  quote: string;
-  fontColor: "green" | "blue";
-  mobileAlignment: "left" | "right";
-}> = [
-  {
-    fullName: "Justin Doan",
-    position: "President",
-    image: JustinDoan,
-    quote: "Advance your career with SASE!",
-    fontColor: "blue",
-    mobileAlignment: "left",
-  },
-  {
-    fullName: "Leann Tang",
-    position: "Internal Vice President",
-    image: LeannTang,
-    quote: "💖⋆˙⟡ I love SASE!! ⋆˙⟡💖",
-    fontColor: "green",
-    mobileAlignment: "right",
-  },
-  {
-    fullName: "Manav Sanghvi",
-    position: "External Vice President",
-    image: ManavSanghvi,
-    quote: "The SASE community is incredible 😄",
-    fontColor: "blue",
-    mobileAlignment: "left",
   },
 ];

@@ -122,6 +122,7 @@
 .flex-center {
   @apply flex items-center justify-center;
 }
+
 .flex-between {
   @apply flex items-center justify-between;
 }
@@ -188,4 +189,24 @@
 
 .no-results {
   @apply px-4 py-2 text-gray-600;
+}
+
+.header-text {
+  @apply font-oswald text-7xl font-semibold;
+}
+
+.subheader-text {
+  @apply font-oswald text-5xl font-medium;
+}
+
+.ombre-background {
+  @apply relative bg-gradient-to-r from-saseBlue to-saseGreen
+}
+
+.ombre-background-transparent {
+  @apply relative bg-gradient-to-r from-saseBlue/40 to-saseGreen/40
+}
+
+.ombre-text {
+  @apply inline-block bg-gradient-to-r from-saseBlue to-saseGreen bg-clip-text text-transparent
 }

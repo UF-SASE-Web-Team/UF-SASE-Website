@@ -1,7 +1,7 @@
 import { imageUrls } from "@assets/imageUrls";
 import Carousel from "@components/carousel/Carousel";
 import FAQ from "@components/programs/FAQCard";
-import { faqData } from "@components/programs/faqInterns";
+import { InternsFAQ } from "../information/ProgramFAQs";
 import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
 import { createFileRoute } from "@tanstack/react-router";
@@ -64,7 +64,7 @@ export const Route = createFileRoute("/interns")({
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="text-4xl text-foreground">FAQs</h2>
           </header>
-          <FAQ faqData={faqData} />
+          <FAQ faqData={InternsFAQ} />
         </div>
       </div>
     );

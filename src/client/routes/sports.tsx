@@ -2,9 +2,9 @@ import FAQ from "@components/programs/FAQCard";
 import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
 import { createFileRoute } from "@tanstack/react-router";
-import { imageUrls } from "../assets/imageUrls";
-import Carousel from "../components/carousel/Carousel";
-import { faqData } from "../components/programs/faqSports";
+import { imageUrls } from "@assets/imageUrls";
+import Carousel from "@components/carousel/Carousel";
+import { SportsFAQ } from "@information/ProgramFAQs";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/sports")({
@@ -63,7 +63,7 @@ export const Route = createFileRoute("/sports")({
             <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
             <h2 className="font-oswald text-4xl text-foreground">FAQs</h2>
           </header>
-          <FAQ faqData={faqData} />
+          <FAQ faqData={SportsFAQ} />
         </div>
       </div>
     );

@@ -1,6 +1,5 @@
-import SponsorInfo from "@/client/components/sponsors/SponsorInfo";
+import SponsorInfo from "@/client/information/Sponsors";
 import { imageUrls } from "@assets/imageUrls";
-import { OmbreBackground } from "@components/custom_ui/OmbreBackground";
 import SponsorCard from "@components/sponsors/SponsorCard";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
@@ -99,8 +98,7 @@ export const Route = createFileRoute("/sponsors")({
               className={isMobile ? "absolute -left-24 -top-12 z-10 object-contain" : "absolute -left-40 -top-16 z-10 object-contain"}
             />
 
-            <OmbreBackground
-              innerComponent={
+            <div className="ombre-background">
                 <div className="w-100 grid grid-cols-1 items-stretch justify-items-center gap-24 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-24 dark:from-gray-900 dark:to-black lg:grid-cols-2 xl:grid-cols-3">
                   {SponsorInfo.map((sponsor) => (
                     <SponsorCard
@@ -113,8 +111,7 @@ export const Route = createFileRoute("/sponsors")({
                     />
                   ))}
                 </div>
-              }
-            />
+            </div>
           </div>
         </div>
       </div>

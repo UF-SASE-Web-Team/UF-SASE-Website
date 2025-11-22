@@ -1,9 +1,8 @@
-import { faqData as mentorFaqData } from "@/client/components/programs/MentorMentee/MMfaq";
+import { MMFAQ } from "@information/ProgramFAQs";
 import { imageUrls } from "@assets/imageUrls";
 import MMGraphic from "@assets/programs/MMgraphic.png";
 import StarBulletPoint from "@assets/programs/StarBulletPoint.png";
 import Carousel from "@components/carousel/Carousel";
-import { OmbreBackground } from "@components/custom_ui/OmbreBackground";
 import FAQ from "@components/programs/FAQCard";
 import InfoCard from "@components/programs/InfoCard";
 import { MMGoalCard } from "@components/programs/MentorMentee/MMGoalCard";
@@ -77,8 +76,7 @@ export const Route = createFileRoute("/mentor-mentee")({
 
         {/* Image & Bullet Points on Ombre Background */}
         <div className="w-full max-w-7xl">
-          <OmbreBackground
-            innerComponent={
+          <div className="ombre-background">
               <div
                 className={cn({ "flex flex-col": isMobile, "grid grid-cols-[1fr_2fr]": !isMobile }, `items-center justify-center gap-4 px-8 py-4`)}
               >
@@ -97,16 +95,14 @@ export const Route = createFileRoute("/mentor-mentee")({
                   ))}
                 </ul>
               </div>
-            }
-          />
+          </div>
         </div>
 
         {/* M&M Events Section */}
         <div className="ombre-divider max-w-7xl" />
         <div className="my-[-20px] flex w-full flex-col gap-8 bg-saseGrayLight px-[10%] py-8">
           <h1 className="w-full text-center font-oswald text-6xl font-medium text-black">M&M Events</h1>
-          <OmbreBackground
-            innerComponent={
+          <div className="ombre-background">
               <div className="rounded-2xl bg-saseGrayLight p-4">
                 <p className="text-center font-redhat text-xl">
                   Join us for some fun and lighthearted events designed to <strong>spark meaningful interactions between mentors and mentees!</strong>{" "}
@@ -120,8 +116,7 @@ export const Route = createFileRoute("/mentor-mentee")({
                   rights!
                 </p>
               </div>
-            }
-          />
+          </div>
           <Carousel purpose="Testimonials" prog="M&M" />
         </div>
         <div className="ombre-divider max-w-7xl" />
@@ -145,7 +140,7 @@ export const Route = createFileRoute("/mentor-mentee")({
               <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
               <h2 className="font-oswald text-4xl text-foreground">FAQs</h2>
             </header>
-            <FAQ faqData={mentorFaqData} />
+            <FAQ faqData={MMFAQ} />
           </div>
         </div>
       </div>

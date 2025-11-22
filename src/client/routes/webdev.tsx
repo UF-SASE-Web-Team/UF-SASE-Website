@@ -17,13 +17,13 @@ import WebTeamDescription from "@assets/webdev/WebDevTerminal.png";
 import RickyZhang from "@assets/webdev/WebmasterChair.jpg";
 import WebTeam from "@assets/webdev/WebTeam.png";
 import MemberCard from "@components/home/MemberCard";
-import MobileMemberCard from "@components/mobile/MobileMemberCard";
+import MobileMemberCard from "@/client/components/home/MobileMemberCard";
 import FAQ from "@components/programs/FAQCard";
-import { faqData } from "@components/programs/faqWebdev";
+import { SwtFAQ } from "@information/ProgramFAQs";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
 import { useContext, useState } from "react";
-import { imageUrls } from "../assets/imageUrls";
+import { imageUrls } from "@assets/imageUrls";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/webdev")({
@@ -297,7 +297,7 @@ export const Route = createFileRoute("/webdev")({
               <div className="mr-3 h-12 w-1.5 bg-saseGreen"></div>
               <h2 className="font-oswald text-[40px] text-foreground sm:text-[50px]">FAQs</h2>
             </header>
-            <FAQ faqData={faqData} />
+            <FAQ faqData={SwtFAQ} />
           </div>
         </div>
       </div>

@@ -1,7 +1,6 @@
 import { cn } from "@/shared/utils.js";
 import { imageUrls } from "@assets/imageUrls";
-import { OmbreBackground } from "@components/custom_ui/OmbreBackground.js";
-import { GeneralProgramsInfo } from "@components/programs/GeneralProgramsInfo.js";
+import { GeneralProgramsInfo } from "@/client/information/Programs.js";
 import ProgramCard from "@components/programs/ProgramCard";
 import { useIsMobile } from "@hooks/useIsMobile.js";
 import { createFileRoute } from "@tanstack/react-router";
@@ -32,9 +31,8 @@ export const Route = createFileRoute("/programs")({
           <h1 className="inline-block bg-gradient-to-r from-saseBlue to-saseGreen bg-clip-text pb-6 font-oswald text-7xl font-extrabold text-transparent">
             PROGRAMS
           </h1>
-          <OmbreBackground
-            innerComponent={
-              <div className="flex h-full flex-col rounded-2xl bg-saseGrayLight p-4 text-center dark:bg-black">
+          <div className="ombre-background">
+            <div className="flex h-full flex-col rounded-2xl bg-saseGrayLight p-4 text-center dark:bg-black">
                 <p className="text-center font-redhat text-lg font-semibold text-black dark:text-white">
                   <span className="font-bold text-saseBlue">SASE programs</span> allow members opportunities to work on{" "}
                   <span className="font-bold text-saseGreen">long-term technical projects</span> and promote{" "}
@@ -42,8 +40,8 @@ export const Route = createFileRoute("/programs")({
                   social groups.
                 </p>
               </div>
-            }
-          />
+          </div>
+      
           <div className="ombre-divider"></div>
         </div>
 

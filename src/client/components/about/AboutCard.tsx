@@ -1,20 +1,23 @@
 import { imageUrls } from "@assets/imageUrls";
-import React from "react";
+import { useIsMobile } from "@/client/hooks/useIsMobile";
 
 const AboutCard = () => {
+  const isMobile = useIsMobile();
+  
   return (
+        <div className="mb-14 flex justify-center font-redhat">
     <div className="relative w-4/5">
       {/* Shadow Card */}
       <div className="absolute left-5 top-5 h-full w-full rounded-3xl bg-saseGreen"></div>
 
       {/* Main Text Card */}
-      <div className="relative rounded-3xl border-2 border-border bg-muted p-11 text-lg shadow-xl">
-        <p className="mb-4 text-foreground">
+      <div className="relative rounded-3xl border-2 border-border bg-muted p-11 shadow-xl">
+        <p className={isMobile ? "mb-4 text-sm text-foreground" : "mb-4 text-lg text-foreground"}>
           The <span className="font-semibold">Society of Asian Scientists and Engineers (SASE) </span> at UF was established in 2010 as a student
           organization dedicated to the advancement of Asian heritage scientists and engineers. Above all, SASE is a welcoming community of driven
           individuals that cultivates a unique balance between professional development and a supportive, fun community.
         </p>
-        <p className="mb-4 text-foreground">
+        <p className={isMobile ? "mb-4 text-sm text-foreground" : "mb-4 text-lg text-foreground"}>
           Through our <span className="font-semibold">general body meetings</span>, <span className="font-semibold">socials</span>,
           <span className="font-semibold"> workshops</span>, and <span className="font-semibold">internal mentorship program</span>, we aim to build
           our members’ relationships, skills, and knowledge that will enable them to succeed. We also offer an
@@ -34,11 +37,12 @@ const AboutCard = () => {
         <img
           src={imageUrls["SASELogoStar.png"]}
           alt="Logo"
-          style={{ width: "200px", height: "200px" }}
-          className="absolute -bottom-20 -right-16 object-contain"
+          style={{ width: "125px", height: "125px" }}
+          className="absolute -bottom-12 -right-12 object-contain"
         />
       </div>
     </div>
+        </div>
   );
 };
 

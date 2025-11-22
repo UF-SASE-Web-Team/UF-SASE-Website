@@ -5,7 +5,8 @@ interface MobileMissionCarouselProps {
   slides: Array<{
     image: string;
     mission: string;
-    text: string;
+    homeText: string;
+    aboutText: string;
     shadow: "green" | "blue";
   }>;
 }
@@ -32,9 +33,9 @@ export const MobileMissionCarousel: React.FC<MobileMissionCarouselProps> = ({ sl
       >
         <div className="flex">
           {slides.map((s) => (
-            <div key={s.mission} className="w-full shrink-0 snap-start px-6 py-6">
-              <div className="mx-auto h-[400px] max-w-sm [&>div>div:nth-child(2)>div:hover]:scale-100 [&>div>div:nth-child(2)>div]:h-full [&>div>div:nth-child(2)]:h-full [&>div]:h-full">
-                <MissionCard image={s.image} mission={s.mission} text={s.text} shadow={s.shadow} />
+            <div key={s.mission} className="w-full shrink-0 snap-start">
+              <div className="h-[300px] w-[300px] [&>div>div:nth-child(2)>div:hover]:scale-100 [&>div>div:nth-child(2)>div]:h-full [&>div>div:nth-child(2)]:h-full [&>div]:h-full">
+                <MissionCard image={s.image} mission={s.mission} text={s.homeText} shadow={s.shadow} />
               </div>
             </div>
           ))}

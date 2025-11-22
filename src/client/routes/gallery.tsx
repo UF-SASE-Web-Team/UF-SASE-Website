@@ -2,78 +2,146 @@ import { imageUrls } from "@assets/imageUrls";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { IoMdLink } from "react-icons/io";
-import GalleryDropdown from "../components/gallery/GalleryDropdown";
 import GalleryYearbook from "../components/gallery/GalleryYearbook";
 import GalleryZipExtraction from "../components/gallery/GalleryZipExtraction";
 import { applyOmbreDivider } from "../utils/ombre-divider.js";
 import { seo } from "../utils/seo";
 
+const slideshowLinks: Record<string, string> = {
+  "Fall 2024": "https://docs.google.com/document/d/1gjG2aHkh-IYXLQ5vTfmd6uphP7AYYN0M4liorjPt77k/edit?tab=t.0",
+  "Spring 2024": "https://docs.google.com/document/d/1SohQfPM2D8fQhf4vkeWPfC9xTE3my4XTfVA-BNYYA9s/edit?tab=t.0",
+  "Fall 2023": "https://docs.google.com/document/d/18brpCElaHqD-rFcKd2eG4FGfjnBWXSthrI-aNdqoHYk/edit?tab=t.0",
+};
+
+// yearbooks shown in the left buttons
+const yearbooks = [
+  { id: "2023-2024", label: "2023 – 2024", colorClass: "bg-saseGreen text-black" },
+  { id: "2024-2025", label: "2024 – 2025", colorClass: "bg-saseBlue text-white" },
+] as const;
+
+type YearbookId = (typeof yearbooks)[number]["id"];
+
+// per-year preview links
+const yearbookLinks: Record<YearbookId, string> = {
+  "2023-2024": "#",
+  "2024-2025": "https://www.mixbook.com/photo-books/interests/blank-canvas-34402104?vk=dlMW6WL1SBIaedVXgd2n", // TODO: replace
+};
+
 export const Route = createFileRoute("/gallery")({
-  meta: () => [...seo({ title: "Gallery | UF SASE", description: "Pictures of all UF SASE events", image: imageUrls["SASELogo.png"] })],
+  meta: () => [
+    ...seo({
+      title: "Gallery | UF SASE",
+      description: "Pictures of all UF SASE events",
+      image: imageUrls["SASELogo.png"],
+    }),
+  ],
   component: () => {
     const [slideshow, setSlideshow] = useState<string>("Fall 2024");
-    const [slideshowLink, setSlideshowLink] = useState<string>("");
+    const [activeYearbook, setActiveYearbook] = useState<YearbookId>("2023-2024");
 
-    // Map of slideshow names to Google Drive links
-    const slideshowLinks = new Map<string, string>([
-      ["Fall 2024", "https://docs.google.com/document/d/1gjG2aHkh-IYXLQ5vTfmd6uphP7AYYN0M4liorjPt77k/edit?tab=t.0"],
-      ["Spring 2024", "https://docs.google.com/document/d/1SohQfPM2D8fQhf4vkeWPfC9xTE3my4XTfVA-BNYYA9s/edit?tab=t.0"],
-      ["Fall 2023", "https://docs.google.com/document/d/18brpCElaHqD-rFcKd2eG4FGfjnBWXSthrI-aNdqoHYk/edit?tab=t.0"],
-    ]);
-
-    // Update slideshowLink whenever slideshow changes
     useEffect(() => {
-      setSlideshowLink(slideshowLinks.get(slideshow) || "");
-      applyOmbreDivider(); // ✅ Apply ombre divider after rendering
-    }, [slideshow]);
+      applyOmbreDivider();
+    }, []);
+
+    const entries = Object.entries(slideshowLinks);
+    const previewHref = yearbookLinks[activeYearbook];
 
     return (
-      <div>
+      <div className="pb-20">
         {/* Title */}
-        <p className="flex justify-center pb-5 text-center font-oswald text-7xl">GALLERY</p>
+        <p className="mt-6 flex justify-center pb-5 text-center font-oswald text-7xl">GALLERY</p>
 
-        <div className="ombre-divider"></div>
+        <div className="ombre-divider" />
 
-        <div className="mx-[5%] px-10 py-10 lg:px-20">
-          <GalleryDropdown slideshow={slideshow} setSlideshow={setSlideshow} />
-        </div>
-
-        <div className="flex-1 justify-center text-center">
-          <p className="pb-5 pt-5 text-center font-oswald text-4xl">{slideshow}</p>
-
-          <div className="pb-20">
+        {/* Main gallery grid */}
+        <section className="mx-auto mt-16 max-w-6xl px-4 md:px-8">
+          <div className="rounded-3xl bg-white/80 px-4 py-6 shadow-[0_10px_0_0_rgb(203,203,212)] md:px-6 md:py-8">
             <GalleryZipExtraction slideshow={slideshow} />
           </div>
+        </section>
+        
 
-          <div className="ombre-divider"></div>
+        {/* Google Drive Links box */}
+        <section className="mx-auto mt-16 max-w-6xl px-4 md:px-8">
+          <div className="flex flex-col gap-6 rounded-3xl border-2 border-border bg-background/80 px-6 py-5 shadow-[0_8px_0_0_rgb(6,104,179)] md:flex-row md:items-stretch">
+            {/* Left vertical text: Google Drive Links */}
+            <div className="flex items-center justify-center border-b border-border/40 pb-4 md:w-40 md:border-b-0 md:border-r md:pb-0 md:pr-6">
+              <p className="text-center font-oswald text-2xl leading-tight">
+                <span className="block">Google</span>
+                <span className="block">Drive</span>
+                <span className="block">Links</span>
+              </p>
+            </div>
 
-          <div className="flex-center pb-10">
-            <a href={slideshowLink} target="__blank">
-              <div className="delay-50 ... flex h-10 items-center justify-center rounded-full border-2 border-border bg-saseBlue text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)] transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black">
-                <div className="pl-5 font-redhat">Click here to visit the Google Drives!</div>
-                <div className="pl-2 pr-5">
-                  <IoMdLink size={15} />
-                </div>
-              </div>
-            </a>
-          </div>
-
-          <div className="flex-center">
-            <div className="mb-20 w-10/12 rounded-lg bg-blue-300 px-3 pb-10 pt-5 shadow-[10px_10px_0px_0px_rgb(6,104,179)] transition duration-150 hover:scale-105">
-              <GalleryYearbook />
+            {/* Right: semesters grid */}
+            <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {entries.map(([label, link]) => (
+                <a
+                  key={label}
+                  href={link}
+                  target="__blank"
+                  rel="noreferrer"
+                  onClick={() => setSlideshow(label)}
+                  className="flex flex-col justify-between rounded-2xl border border-border/60 bg-white px-3 py-2 text-left shadow-[0_3px_0_0_rgb(203,203,212)] transition hover:-translate-y-0.5 hover:border-saseBlue hover:shadow-[0_6px_0_0_rgb(6,104,179)]"
+                >
+                  <span className="font-redhat text-sm">{label}</span>
+                  <span className="mt-2 inline-flex items-center gap-1 self-start rounded-full border border-border bg-saseBlue px-2 py-1 text-[11px] font-medium text-white">
+                    <IoMdLink size={12} />
+                    Slideshow / Drive
+                  </span>
+                </a>
+              ))}
             </div>
           </div>
+        </section>
 
-          <div className="ombre-divider"></div>
+        {/* Yearbook section */}
+        <section className="mx-auto mt-16 max-w-6xl px-4 md:px-8">
+          <h2 className="font-oswald text-4xl md:text-5xl">UF SASE YEARBOOK</h2>
 
-          <div className="flex justify-center pb-10 font-redhat">
-            <a href="https://www.mixbook.com/photo-books/interests/blank-canvas-34402104?vk=dlMW6WL1SBIaedVXgd2n" target="_blank">
-              <button className="delay-50 ... flex h-10 items-center justify-center rounded-full border-2 border-gray-700 bg-saseBlue pl-5 pr-5 text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)] transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black">
-                2023-2024 SASE Yearbook
-              </button>
-            </a>
+          <div className="mt-6 flex flex-col gap-6 rounded-3xl bg-blue-300 px-4 py-5 shadow-[10px_10px_0_0_rgb(6,104,179)] transition duration-150 hover:scale-[1.01] md:flex-row md:px-6 md:py-6">
+            {/* Left year buttons */}
+            <div className="flex flex-row gap-2 md:flex-col md:gap-3">
+              {yearbooks.map((yb) => {
+                const isActive = activeYearbook === yb.id;
+                return (
+                  <button
+                    key={yb.id}
+                    type="button"
+                    onClick={() => setActiveYearbook(yb.id)}
+                    className={[
+                      "rounded-md px-3 py-2 font-redhat text-xs transition md:text-sm",
+                      yb.colorClass,
+                      "border border-transparent",
+                      isActive ? "shadow-[inset_0_0_0_2px_rgba(0,0,0,0.4)]" : "hover:shadow-[0_0_0_1px_rgba(0,0,0,0.25)]",
+                    ].join(" ")}
+                  >
+                    {yb.label}
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Yearbook preview graphic / component */}
+            <div className="flex-1">
+              {/* If you later want GalleryYearbook to change per year,
+                  add a prop like year={activeYearbook}. */}
+              <GalleryYearbook />
+            </div>
+
+            {/* Preview button (changes link based on selected yearbook) */}
+            <div className="flex items-end justify-start md:justify-end">
+              <a href={previewHref} target="_blank" rel="noreferrer">
+                <button
+                  className="flex h-10 items-center justify-center rounded-full border-2 border-gray-700 bg-saseBlue px-6 font-redhat text-sm text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)] transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black"
+                  disabled={previewHref === "#"}
+                >
+                  Preview
+                </button>
+              </a>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
     );
   },

@@ -1,21 +1,26 @@
 import { cn } from "@/shared/utils";
+import AadithiArjun from "@assets/webdev/AadithiArjun.jpeg";
+import GurleenDhillon from "@assets/webdev/GurleenDhillon.jpeg";
 import UIUXLead from "@assets/webdev/HelenZou.png";
+import JordanKusuda from "@assets/webdev/JordanKusuda.jpeg";
+import JuliaLe from "@assets/webdev/JuliaLe.jpeg";
+import KenzoFukuda from "@assets/webdev/KenzoFukuda.jpeg";
 import WebmasterChair2 from "@assets/webdev/LynetteHemingway.png";
+import MarenHeck from "@assets/webdev/MarenHeck.jpeg";
 import BackendLead from "@assets/webdev/RJTabelon.png";
 import FrontEndLead from "@assets/webdev/StephanieFong.png";
 import WebmasterChair from "@assets/webdev/ThuyLe.png";
 import WebTeamGroupImage from "@assets/webdev/WebDevTeamCropped.png";
 import WebTeamDescription from "@assets/webdev/WebDevTerminal.png";
 import WebTeamTitle from "@assets/webdev/WebTeam.png";
-import RickyZhang from "@assets/webdev/WebmasterChair.jpeg";
+import VincentLin from "@assets/webdev/VincentLin.jpeg";
+import RickyZhang from "@assets/webdev/WebmasterChair.jpg";
 import MemberCard from "@components/home/MemberCard";
 import MobileMemberCard from "@components/mobile/MobileMemberCard";
 import FAQ from "@components/programs/FAQCard";
 import { faqData } from "@components/programs/faqWebdev";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
-import { Divide } from "hamburger-react";
-import StateManagedSelect from "node_modules/react-select/dist/declarations/src";
 import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
 import { seo } from "../utils/seo";
@@ -31,10 +36,10 @@ export const Route = createFileRoute("/webdev")({
 
   component: () => {
     const isMobile = useIsMobile();
-    const [buttonToggle, setToggle] = useState(1);
+    const [buttonIndex, setIndex] = useState(1);
 
-    const toggleState = (position: number) => {
-      setToggle(position);
+    const buttonState = (position: number) => {
+      setIndex(position);
     };
 
     return (
@@ -77,28 +82,28 @@ export const Route = createFileRoute("/webdev")({
             })}
           >
             <button
-              onClick={() => toggleState(1)}
+              onClick={() => setIndex(1)}
               className={cn(`flex-grow rounded-full py-4 transition duration-300 hover:brightness-90`, {
-                "bg-saseGreen": buttonToggle === 1,
-                "bg-muted": buttonToggle !== 1,
+                "bg-saseGreen": buttonIndex === 1,
+                "bg-muted": buttonIndex !== 1,
               })}
             >
               Website
             </button>
             <button
-              onClick={() => toggleState(2)}
+              onClick={() => setIndex(2)}
               className={cn(`flex-grow rounded-full bg-muted py-4 transition duration-300 hover:brightness-90`, {
-                "bg-saseGreen": buttonToggle === 2,
-                "bg-muted": buttonToggle !== 2,
+                "bg-saseGreen": buttonIndex === 2,
+                "bg-muted": buttonIndex !== 2,
               })}
             >
               Project
             </button>
             <button
-              onClick={() => toggleState(3)}
+              onClick={() => setIndex(3)}
               className={cn(`flex-grow rounded-full py-4 transition duration-300 hover:brightness-90`, {
-                "bg-saseGreen": buttonToggle === 3,
-                "bg-muted": buttonToggle !== 3,
+                "bg-saseGreen": buttonIndex === 3,
+                "bg-muted": buttonIndex !== 3,
               })}
             >
               Past Webmasters
@@ -111,7 +116,7 @@ export const Route = createFileRoute("/webdev")({
           </header>
           {isMobile ? (
             <>
-              {buttonToggle !== 3 ? (
+              {buttonIndex !== 3 ? (
                 <>
                   {/* Current Webmasters */}
                   <MobileMemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="blue" quote="SWT is sweet" imageSide="left" />
@@ -128,25 +133,18 @@ export const Route = createFileRoute("/webdev")({
               ) : (
                 <>
                   {/* Past Webmasters */}
-                  <MobileMemberCard image={RickyZhang} name="Ricky Zhang" role="2024-2025" textColor="blue" quote="i love sase" imageSide="left" />
+                  <MobileMemberCard image={RickyZhang} name="Ricky Zhang" role="2024-2025" textColor="blue" imageSide="left" />
                   <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseBlue to-saseGreen" />
-                  <MobileMemberCard
-                    image={RickyZhang}
-                    name="Gurleen Dhillon"
-                    role="2023-2024"
-                    textColor="green"
-                    quote="i love sase"
-                    imageSide="right"
-                  />
+                  <MobileMemberCard image={GurleenDhillon} name="Gurleen Dhillon" role="2023-2024" textColor="green" imageSide="right" />
                   <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseGreen to-saseBlue" />
-                  <MobileMemberCard image={RickyZhang} name="Maren Heck" role="2022-2023" textColor="blue" quote="i love sase" imageSide="left" />
+                  <MobileMemberCard image={MarenHeck} name="Maren Heck" role="2022-2023" textColor="blue" imageSide="left" />
                   <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseBlue to-saseGreen" />
-                  <MobileMemberCard image={RickyZhang} name="Julia Le" role="2021-2022" textColor="green" quote="i love sase" imageSide="right" />
+                  <MobileMemberCard image={JuliaLe} name="Julia Le" role="2021-2022" textColor="green" imageSide="right" />
                 </>
               )}
 
               {/* Web Maintenance Team Leads */}
-              {buttonToggle === 1 && (
+              {buttonIndex === 1 && (
                 <>
                   <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
                   <MobileMemberCard
@@ -172,13 +170,13 @@ export const Route = createFileRoute("/webdev")({
               )}
 
               {/* Semester Project Team Leads */}
-              {buttonToggle === 2 && (
+              {buttonIndex === 2 && (
                 <>
                   <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
-                  <MobileMemberCard image={UIUXLead} name="Kenzo Fukuda" role="Frontend & UI/UX" textColor="blue" quote="test!" imageSide="left" />
+                  <MobileMemberCard image={KenzoFukuda} name="Kenzo Fukuda" role="Frontend & UI/UX" textColor="blue" quote="test!" imageSide="left" />
                   <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
                   <MobileMemberCard
-                    image={UIUXLead}
+                    image={AadithiArjun}
                     name="Aadithi Arjun"
                     role="Frontend & UI/UX"
                     textColor="green"
@@ -186,16 +184,16 @@ export const Route = createFileRoute("/webdev")({
                     imageSide="right"
                   />
                   <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
-                  <MobileMemberCard image={UIUXLead} name="Vincent Lin" role="Backend" textColor="blue" quote="test!!!" imageSide="left" />
+                  <MobileMemberCard image={VincentLin} name="Vincent Lin" role="Backend" textColor="blue" quote="test!!!" imageSide="left" />
                   <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
-                  <MobileMemberCard image={UIUXLead} name="Jordan Kusuda" role="Backend" textColor="green" quote="test!!!!" imageSide="right" />
+                  <MobileMemberCard image={JordanKusuda} name="Jordan Kusuda" role="Backend" textColor="green" quote="test!!!!" imageSide="right" />
                 </>
               )}
             </>
           ) : (
             <div className="mb-12 flex flex-col items-center justify-center gap-8">
               <div className="flex flex-row gap-8">
-                {buttonToggle !== 3 ? (
+                {buttonIndex !== 3 ? (
                   <>
                     {/* Current Webmasters */}
                     <MemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="blue" quote="SWT is sweet" />
@@ -204,17 +202,17 @@ export const Route = createFileRoute("/webdev")({
                 ) : (
                   <>
                     {/* Past Webmasters */}
-                    <MemberCard image={RickyZhang} name="Ricky Zhang" role="2024-2025" textColor="blue" quote="i love sase" />
-                    <MemberCard image={RickyZhang} name="Gurleen Dhillon" role="2023-2024" textColor="green" quote="i love sase" />
-                    <MemberCard image={RickyZhang} name="Maren Heck" role="2022-2023" textColor="blue" quote="i love sase" />
-                    <MemberCard image={RickyZhang} name="Julia Le" role="2021-2022" textColor="green" quote="i love sase" />
+                    <MemberCard image={RickyZhang} name="Ricky Zhang" role="2024-2025" textColor="blue" />
+                    <MemberCard image={GurleenDhillon} name="Gurleen Dhillon" role="2023-2024" textColor="green" />
+                    <MemberCard image={MarenHeck} name="Maren Heck" role="2022-2023" textColor="blue" />
+                    <MemberCard image={JuliaLe} name="Julia Le" role="2021-2022" textColor="green" />
                   </>
                 )}
               </div>
 
               <div className="flex flex-row gap-8">
                 {/* Web Maintenance Team Leads */}
-                {buttonToggle === 1 && (
+                {buttonIndex === 1 && (
                   <>
                     <MemberCard
                       image={FrontEndLead}
@@ -235,12 +233,12 @@ export const Route = createFileRoute("/webdev")({
                 )}
 
                 {/* Semester Project Team Leads */}
-                {buttonToggle === 2 && (
+                {buttonIndex === 2 && (
                   <>
-                    <MemberCard image={UIUXLead} name="Kenzo Fukuda" role="Frontend & UI/UX" textColor="green" quote="test!" />
-                    <MemberCard image={UIUXLead} name="Aadithi Arjun" role="Frontend & UI/UX" textColor="green" quote="test!!" />
-                    <MemberCard image={UIUXLead} name="Vincent Lin" role="Backend" textColor="green" quote="test!!!" />
-                    <MemberCard image={UIUXLead} name="Jordan Kusuda" role="Backend" textColor="green" quote="test!!!!" />
+                    <MemberCard image={KenzoFukuda} name="Kenzo Fukuda" role="Frontend & UI/UX" textColor="green" quote="test!" />
+                    <MemberCard image={AadithiArjun} name="Aadithi Arjun" role="Frontend & UI/UX" textColor="green" quote="test!!" />
+                    <MemberCard image={VincentLin} name="Vincent Lin" role="Backend" textColor="green" quote="test!!!" />
+                    <MemberCard image={JordanKusuda} name="Jordan Kusuda" role="Backend" textColor="green" quote="test!!!!" />
                   </>
                 )}
               </div>

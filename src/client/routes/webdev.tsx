@@ -1,3 +1,4 @@
+import { DarkModeContext } from "@/client/components/custom_ui/DarkModeProvider";
 import { cn } from "@/shared/utils";
 import AadithiArjun from "@assets/webdev/AadithiArjun.jpeg";
 import GurleenDhillon from "@assets/webdev/GurleenDhillon.jpeg";
@@ -15,13 +16,14 @@ import WebTeamDescription from "@assets/webdev/WebDevTerminal.png";
 import WebTeamTitle from "@assets/webdev/WebTeam.png";
 import VincentLin from "@assets/webdev/VincentLin.jpeg";
 import RickyZhang from "@assets/webdev/WebmasterChair.jpg";
+import WebTeam from "@assets/webdev/WebTeam.png";
 import MemberCard from "@components/home/MemberCard";
 import MobileMemberCard from "@components/mobile/MobileMemberCard";
 import FAQ from "@components/programs/FAQCard";
 import { faqData } from "@components/programs/faqWebdev";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
 import { seo } from "../utils/seo";
 
@@ -37,6 +39,7 @@ export const Route = createFileRoute("/webdev")({
   component: () => {
     const isMobile = useIsMobile();
     const [buttonIndex, setIndex] = useState(1);
+    const { darkMode } = useContext(DarkModeContext);
 
     const buttonState = (position: number) => {
       setIndex(position);
@@ -46,7 +49,13 @@ export const Route = createFileRoute("/webdev")({
       <div className="mt-12 flex min-h-screen flex-col items-center bg-background">
         <div className="-mt-10 flex w-full max-w-7xl flex-col sm:flex-row sm:items-center">
           <div className="relative mx-auto w-[75%] sm:w-2/5">
-            <img src={WebTeamTitle} alt="Web Team" className="mx-auto h-auto w-full sm:mx-0" />
+            <img
+              src={WebTeam}
+              alt="Web Team"
+              className={cn(`mx-auto h-auto w-full sm:mx-0`, {
+                invert: !darkMode,
+              })}
+            />
           </div>
           <div className="relative w-full sm:w-4/5">
             <img src={WebTeamDescription} alt="Terminal" className="h-auto w-full" />
@@ -77,9 +86,12 @@ export const Route = createFileRoute("/webdev")({
             </div>
           </div>
           <div
-            className={cn(`mx-auto mt-10 flex max-w-2xl rounded-full border-2 border-black bg-muted font-redhat text-3xl font-medium`, {
-              "max-w-sm text-xl": isMobile,
-            })}
+            className={cn(
+              `mx-auto mt-10 flex max-w-2xl rounded-full border-2 border-black bg-muted font-redhat text-3xl font-medium dark:border-white`,
+              {
+                "max-w-sm text-xl": isMobile,
+              },
+            )}
           >
             <button
               onClick={() => setIndex(1)}
@@ -173,20 +185,34 @@ export const Route = createFileRoute("/webdev")({
               {buttonIndex === 2 && (
                 <>
                   <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
-                  <MobileMemberCard image={KenzoFukuda} name="Kenzo Fukuda" role="Frontend & UI/UX" textColor="blue" quote="test!" imageSide="left" />
+                  <MobileMemberCard
+                    image={KenzoFukuda}
+                    name="Kenzo Fukuda"
+                    role="Frontend & UI/UX"
+                    textColor="blue"
+                    quote="i love sase!"
+                    imageSide="left"
+                  />
                   <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
                   <MobileMemberCard
                     image={AadithiArjun}
                     name="Aadithi Arjun"
                     role="Frontend & UI/UX"
                     textColor="green"
-                    quote="test!!"
+                    quote="i love sase!"
                     imageSide="right"
                   />
                   <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
-                  <MobileMemberCard image={VincentLin} name="Vincent Lin" role="Backend" textColor="blue" quote="test!!!" imageSide="left" />
+                  <MobileMemberCard image={VincentLin} name="Vincent Lin" role="Backend" textColor="blue" quote="i love sase!" imageSide="left" />
                   <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
-                  <MobileMemberCard image={JordanKusuda} name="Jordan Kusuda" role="Backend" textColor="green" quote="test!!!!" imageSide="right" />
+                  <MobileMemberCard
+                    image={JordanKusuda}
+                    name="Jordan Kusuda"
+                    role="Backend"
+                    textColor="green"
+                    quote="i love sase!"
+                    imageSide="right"
+                  />
                 </>
               )}
             </>
@@ -235,16 +261,16 @@ export const Route = createFileRoute("/webdev")({
                 {/* Semester Project Team Leads */}
                 {buttonIndex === 2 && (
                   <>
-                    <MemberCard image={KenzoFukuda} name="Kenzo Fukuda" role="Frontend & UI/UX" textColor="green" quote="test!" />
-                    <MemberCard image={AadithiArjun} name="Aadithi Arjun" role="Frontend & UI/UX" textColor="green" quote="test!!" />
-                    <MemberCard image={VincentLin} name="Vincent Lin" role="Backend" textColor="green" quote="test!!!" />
-                    <MemberCard image={JordanKusuda} name="Jordan Kusuda" role="Backend" textColor="green" quote="test!!!!" />
+                    <MemberCard image={KenzoFukuda} name="Kenzo Fukuda" role="Frontend & UI/UX" textColor="green" quote="i love sase!" />
+                    <MemberCard image={AadithiArjun} name="Aadithi Arjun" role="Frontend & UI/UX" textColor="green" quote="i love sase!" />
+                    <MemberCard image={VincentLin} name="Vincent Lin" role="Backend" textColor="green" quote="i love sase!" />
+                    <MemberCard image={JordanKusuda} name="Jordan Kusuda" role="Backend" textColor="green" quote="i love sase!" />
                   </>
                 )}
               </div>
             </div>
           )}
-          <div className="bg-[#F5F5F5] pb-16 pt-4">
+          <div className="bg-[#F5F5F5] pb-16 pt-4 dark:bg-[#040716]">
             <div className="mx-auto w-full max-w-7xl">
               <header className="mb-12 flex items-center px-5">
                 <div className="mr-3 h-12 w-1.5 bg-saseGreen"></div>

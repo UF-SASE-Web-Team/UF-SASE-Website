@@ -94,7 +94,7 @@ export const Route = createFileRoute("/webdev")({
             )}
           >
             <button
-              onClick={() => setIndex(1)}
+              onClick={() => buttonState(1)}
               className={cn(`flex-grow rounded-full py-4 transition duration-300 hover:brightness-90`, {
                 "bg-saseGreen": buttonIndex === 1,
                 "bg-muted": buttonIndex !== 1,
@@ -103,7 +103,7 @@ export const Route = createFileRoute("/webdev")({
               Website
             </button>
             <button
-              onClick={() => setIndex(2)}
+              onClick={() => buttonState(2)}
               className={cn(`flex-grow rounded-full bg-muted py-4 transition duration-300 hover:brightness-90`, {
                 "bg-saseGreen": buttonIndex === 2,
                 "bg-muted": buttonIndex !== 2,
@@ -112,7 +112,7 @@ export const Route = createFileRoute("/webdev")({
               Project
             </button>
             <button
-              onClick={() => setIndex(3)}
+              onClick={() => buttonState(3)}
               className={cn(`flex-grow rounded-full py-4 transition duration-300 hover:brightness-90`, {
                 "bg-saseGreen": buttonIndex === 3,
                 "bg-muted": buttonIndex !== 3,

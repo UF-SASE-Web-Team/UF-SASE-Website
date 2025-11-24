@@ -2,7 +2,7 @@ import BoardMemberCard from "@/client/components/board/BoardMemberCard";
 import BoardPic from "@assets/board/25-26Board.jpg";
 import { imageUrls } from "@assets/imageUrls";
 import boardInfo from "@components/board/BoardInfo";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";
@@ -51,6 +51,14 @@ export const Route = createFileRoute("/board")({
             </div>
           </div>
         ))}
+        <div className="flex justify-center">
+          <Link
+            to="/past-board"
+            className="flex h-9 w-40 items-center justify-center whitespace-nowrap rounded-xl border border-black bg-gradient-to-r from-saseGreen to-white px-6 py-2 text-xs italic tracking-wide text-black shadow-[2px_2px_2px_rgba(0,0,0,0.10)] transition duration-300 hover:scale-105 sm:h-10 sm:w-60 sm:px-7 sm:text-[18px]"
+          >
+            PAST BOARD MEMBERS
+          </Link>
+        </div>
       </div>
     );
   },

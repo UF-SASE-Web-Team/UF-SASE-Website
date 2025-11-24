@@ -1,17 +1,28 @@
+import { DarkModeContext } from "@/client/components/custom_ui/DarkModeProvider";
+import { cn } from "@/shared/utils";
+import AadithiArjun from "@assets/webdev/AadithiArjun.jpeg";
+import GurleenDhillon from "@assets/webdev/GurleenDhillon.jpeg";
 import UIUXLead from "@assets/webdev/HelenZou.png";
+import JordanKusuda from "@assets/webdev/JordanKusuda.jpeg";
+import JuliaLe from "@assets/webdev/JuliaLe.jpeg";
+import KenzoFukuda from "@assets/webdev/KenzoFukuda.jpeg";
 import WebmasterChair2 from "@assets/webdev/LynetteHemingway.png";
+import MarenHeck from "@assets/webdev/MarenHeck.jpeg";
 import BackendLead from "@assets/webdev/RJTabelon.png";
 import FrontEndLead from "@assets/webdev/StephanieFong.png";
 import WebmasterChair from "@assets/webdev/ThuyLe.png";
+import VincentLin from "@assets/webdev/VincentLin.jpeg";
 import WebTeamGroupImage from "@assets/webdev/WebDevTeamCropped.png";
 import WebTeamDescription from "@assets/webdev/WebDevTerminal.png";
-import WebTeamTitle from "@assets/webdev/WebTeam.png";
+import RickyZhang from "@assets/webdev/WebmasterChair.jpg";
+import WebTeam from "@assets/webdev/WebTeam.png";
 import MemberCard from "@components/home/MemberCard";
 import MobileMemberCard from "@components/mobile/MobileMemberCard";
 import FAQ from "@components/programs/FAQCard";
 import { faqData } from "@components/programs/faqWebdev";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
+import { useContext, useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
 import { seo } from "../utils/seo";
 
@@ -26,12 +37,24 @@ export const Route = createFileRoute("/webdev")({
 
   component: () => {
     const isMobile = useIsMobile();
+    const [buttonIndex, setIndex] = useState(1);
+    const { darkMode } = useContext(DarkModeContext);
+
+    const buttonState = (position: number) => {
+      setIndex(position);
+    };
 
     return (
       <div className="mt-12 flex min-h-screen flex-col items-center bg-background">
         <div className="-mt-10 flex w-full max-w-7xl flex-col sm:flex-row sm:items-center">
           <div className="relative mx-auto w-[75%] sm:w-2/5">
-            <img src={WebTeamTitle} alt="Web Team" className="mx-auto h-auto w-full sm:mx-0" />
+            <img
+              src={WebTeam}
+              alt="Web Team"
+              className={cn(`mx-auto h-auto w-full sm:mx-0`, {
+                invert: !darkMode,
+              })}
+            />
           </div>
           <div className="relative w-full sm:w-4/5">
             <img src={WebTeamDescription} alt="Terminal" className="h-auto w-full" />
@@ -61,64 +84,192 @@ export const Route = createFileRoute("/webdev")({
               </div>
             </div>
           </div>
+          <div
+            className={cn(
+              `mx-auto mt-10 flex max-w-2xl rounded-full border-2 border-black bg-muted font-redhat text-3xl font-medium dark:border-white`,
+              {
+                "max-w-sm text-xl": isMobile,
+              },
+            )}
+          >
+            <button
+              onClick={() => buttonState(1)}
+              className={cn(`flex-grow rounded-full py-4 transition duration-300 hover:brightness-90`, {
+                "bg-saseGreen": buttonIndex === 1,
+                "bg-muted": buttonIndex !== 1,
+              })}
+            >
+              Website
+            </button>
+            <button
+              onClick={() => buttonState(2)}
+              className={cn(`flex-grow rounded-full bg-muted py-4 transition duration-300 hover:brightness-90`, {
+                "bg-saseGreen": buttonIndex === 2,
+                "bg-muted": buttonIndex !== 2,
+              })}
+            >
+              Project
+            </button>
+            <button
+              onClick={() => buttonState(3)}
+              className={cn(`flex-grow rounded-full py-4 transition duration-300 hover:brightness-90`, {
+                "bg-saseGreen": buttonIndex === 3,
+                "bg-muted": buttonIndex !== 3,
+              })}
+            >
+              Past Webmasters
+            </button>
+          </div>
           <header className="mt-4 flex w-full justify-center sm:mt-8">
-            <h2 className="bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen bg-clip-text text-center font-silkscreen text-[40px] text-transparent sm:mb-10 sm:text-[50px]">
+            <h2 className="bg-gradient-to-r from-saseGreen via-[#7DC242] to-saseBlue bg-clip-text text-center font-silkscreen text-[40px] text-transparent sm:mb-10 sm:text-[50px]">
               Leadership
             </h2>
           </header>
           {isMobile ? (
             <>
-              <MobileMemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="blue" quote="SWT is sweet" imageSide="left" />
-              <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseGreen to-saseBlue" />
-              <MobileMemberCard
-                image={WebmasterChair2}
-                name="Lynette Hemingway"
-                role="Webmaster"
-                textColor="green"
-                quote="...sandwiches"
-                imageSide="right"
-              />
-              <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
-              <MobileMemberCard
-                image={FrontEndLead}
-                name="Stephanie Fong"
-                role="Frontend"
-                textColor="blue"
-                quote="food, family, friends, front-end"
-                imageSide="left"
-              />
-              <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
-              <MobileMemberCard
-                image={BackendLead}
-                name="RJ Tabelon"
-                role="Backend"
-                textColor="green"
-                quote="Lynette thinks we're doing quotes together"
-                imageSide="right"
-              />
-              <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
-              <MobileMemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="blue" quote="herm" imageSide="left" />
+              {buttonIndex !== 3 ? (
+                <>
+                  {/* Current Webmasters */}
+                  <MobileMemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="blue" quote="SWT is sweet" imageSide="left" />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseBlue to-saseGreen" />
+                  <MobileMemberCard
+                    image={WebmasterChair2}
+                    name="Lynette Hemingway"
+                    role="Webmaster"
+                    textColor="green"
+                    quote="...sandwiches"
+                    imageSide="right"
+                  />
+                </>
+              ) : (
+                <>
+                  {/* Past Webmasters */}
+                  <MobileMemberCard image={RickyZhang} name="Ricky Zhang" role="2024-2025" textColor="blue" imageSide="left" />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseBlue to-saseGreen" />
+                  <MobileMemberCard image={GurleenDhillon} name="Gurleen Dhillon" role="2023-2024" textColor="green" imageSide="right" />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseGreen to-saseBlue" />
+                  <MobileMemberCard image={MarenHeck} name="Maren Heck" role="2022-2023" textColor="blue" imageSide="left" />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-r from-saseBlue to-saseGreen" />
+                  <MobileMemberCard image={JuliaLe} name="Julia Le" role="2021-2022" textColor="green" imageSide="right" />
+                </>
+              )}
+
+              {/* Web Maintenance Team Leads */}
+              {buttonIndex === 1 && (
+                <>
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
+                  <MobileMemberCard
+                    image={FrontEndLead}
+                    name="Stephanie Fong"
+                    role="Frontend"
+                    textColor="blue"
+                    quote="food, family, friends, front-end"
+                    imageSide="left"
+                  />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
+                  <MobileMemberCard
+                    image={BackendLead}
+                    name="RJ Tabelon"
+                    role="Backend"
+                    textColor="green"
+                    quote="Lynette thinks we're doing quotes together"
+                    imageSide="right"
+                  />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
+                  <MobileMemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="blue" quote="herm" imageSide="left" />
+                </>
+              )}
+
+              {/* Semester Project Team Leads */}
+              {buttonIndex === 2 && (
+                <>
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
+                  <MobileMemberCard
+                    image={KenzoFukuda}
+                    name="Kenzo Fukuda"
+                    role="Frontend & UI/UX"
+                    textColor="blue"
+                    quote="i love sase!"
+                    imageSide="left"
+                  />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
+                  <MobileMemberCard
+                    image={AadithiArjun}
+                    name="Aadithi Arjun"
+                    role="Frontend & UI/UX"
+                    textColor="green"
+                    quote="i love sase!"
+                    imageSide="right"
+                  />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseBlue to-saseGreen" />
+                  <MobileMemberCard image={VincentLin} name="Vincent Lin" role="Backend" textColor="blue" quote="i love sase!" imageSide="left" />
+                  <div className="mx-auto h-1 w-[95%] bg-gradient-to-l from-saseGreen to-saseBlue" />
+                  <MobileMemberCard
+                    image={JordanKusuda}
+                    name="Jordan Kusuda"
+                    role="Backend"
+                    textColor="green"
+                    quote="i love sase!"
+                    imageSide="right"
+                  />
+                </>
+              )}
             </>
           ) : (
             <div className="mb-12 flex flex-col items-center justify-center gap-8">
               <div className="flex flex-row gap-8">
-                <MemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="blue" quote="SWT is sweet" />
-                <MemberCard image={WebmasterChair2} name="Lynette Hemingway" role="Webmaster" textColor="blue" quote="...sandwiches" />
+                {buttonIndex !== 3 ? (
+                  <>
+                    {/* Current Webmasters */}
+                    <MemberCard image={WebmasterChair} name="Thuy Le" role="Webmaster" textColor="blue" quote="SWT is sweet" />
+                    <MemberCard image={WebmasterChair2} name="Lynette Hemingway" role="Webmaster" textColor="blue" quote="...sandwiches" />
+                  </>
+                ) : (
+                  <>
+                    {/* Past Webmasters */}
+                    <MemberCard image={RickyZhang} name="Ricky Zhang" role="2024-2025" textColor="blue" />
+                    <MemberCard image={GurleenDhillon} name="Gurleen Dhillon" role="2023-2024" textColor="green" />
+                    <MemberCard image={MarenHeck} name="Maren Heck" role="2022-2023" textColor="blue" />
+                    <MemberCard image={JuliaLe} name="Julia Le" role="2021-2022" textColor="green" />
+                  </>
+                )}
               </div>
+
               <div className="flex flex-row gap-8">
-                <MemberCard image={FrontEndLead} name="Stephanie Fong" role="Frontend" textColor="green" quote="food, family, friends, front-end" />
-                <MemberCard
-                  image={BackendLead}
-                  name="RJ Tabelon"
-                  role="Backend"
-                  textColor="green"
-                  quote="Lynette thinks we're doing quotes together"
-                />
-                <MemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="green" quote="herm" />
+                {/* Web Maintenance Team Leads */}
+                {buttonIndex === 1 && (
+                  <>
+                    <MemberCard
+                      image={FrontEndLead}
+                      name="Stephanie Fong"
+                      role="Frontend"
+                      textColor="green"
+                      quote="food, family, friends, front-end"
+                    />
+                    <MemberCard
+                      image={BackendLead}
+                      name="RJ Tabelon"
+                      role="Backend"
+                      textColor="green"
+                      quote="Lynette thinks we're doing quotes together"
+                    />
+                    <MemberCard image={UIUXLead} name="Helen Zou" role="UI/UX" textColor="green" quote="herm" />
+                  </>
+                )}
+
+                {/* Semester Project Team Leads */}
+                {buttonIndex === 2 && (
+                  <>
+                    <MemberCard image={KenzoFukuda} name="Kenzo Fukuda" role="Frontend & UI/UX" textColor="green" quote="i love sase!" />
+                    <MemberCard image={AadithiArjun} name="Aadithi Arjun" role="Frontend & UI/UX" textColor="green" quote="i love sase!" />
+                    <MemberCard image={VincentLin} name="Vincent Lin" role="Backend" textColor="green" quote="i love sase!" />
+                    <MemberCard image={JordanKusuda} name="Jordan Kusuda" role="Backend" textColor="green" quote="i love sase!" />
+                  </>
+                )}
               </div>
             </div>
           )}
-          <div className="bg-[#F5F5F5] pb-16 pt-4">
+          <div className="bg-[#F5F5F5] pb-16 pt-4 dark:bg-[#040716]">
             <div className="mx-auto w-full max-w-7xl">
               <header className="mb-12 flex items-center px-5">
                 <div className="mr-3 h-12 w-1.5 bg-saseGreen"></div>

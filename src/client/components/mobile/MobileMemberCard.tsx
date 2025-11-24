@@ -12,7 +12,7 @@ const MobileMemberCard = ({
   name: string;
   role: string;
   textColor: string;
-  quote: string;
+  quote?: string;
   imageSide: string;
 }) => {
   return (
@@ -26,8 +26,10 @@ const MobileMemberCard = ({
                 "text-saseBlue": textColor == "blue",
                 "text-saseGreen": textColor == "green",
                 "text-right": imageSide == "right",
+                "md:text-5xl": quote,
+                "sm:text-5xl": !quote,
               },
-              `pb-2 font-oswald text-2xl font-semibold sm:text-4xl md:text-5xl`,
+              `pb-2 font-oswald text-4xl font-semibold`,
             )}
           >
             {name}
@@ -38,14 +40,20 @@ const MobileMemberCard = ({
                 "text-saseBlue": textColor == "blue",
                 "text-saseGreen": textColor == "green",
                 "text-right": imageSide == "right",
+                "md:text-3xl": quote,
+                "sm:text-3xl": !quote,
               },
-              `font-oswald text-xl font-medium italic sm:text-3xl md:text-4xl`,
+              `font-oswald text-2xl font-medium italic`,
             )}
           >
             {role}
           </p>
         </div>
-        <p className={cn({ "text-right": imageSide == "right" }, `pt-[25%] font-redhat text-lg italic sm:text-2xl md:text-3xl`)}>"{quote}"</p>
+        {quote && (
+          <>
+            <p className={cn({ "text-right": imageSide == "right" }, `pt-[25%] font-redhat text-lg italic sm:text-2xl md:text-3xl`)}>"{quote}"</p>
+          </>
+        )}
       </div>
       {imageSide == "right" ? <img src={image} alt={name} className="aspect-square max-h-96 w-full rounded-2xl object-cover object-[5%]" /> : null}
     </div>

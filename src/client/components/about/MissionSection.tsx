@@ -1,5 +1,5 @@
 import { cn } from "@/shared/utils";
-import MissionCard from "@components/home/MissionCard";
+import MissionCard from "@/client/components/custom_ui/MissionCard";
 import { Missions } from "@/client/information/Missions";
 
 const MissionSection: React.FC = () => {

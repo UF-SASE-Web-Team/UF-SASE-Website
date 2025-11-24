@@ -291,15 +291,15 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
       </div>
 
       {purpose === "Images" && currentYear && (
-        <div className="mt-4 flex justify-center">
-          <p className="mb-8 mt-8 text-lg italic text-foreground sm:text-xl md:text-2xl">{currentYear}</p>
+        <div className="mt-2 flex justify-center">
+          <p className="text-lg italic text-foreground font-redhat">{currentYear}</p>
         </div>
       )}
       {/* Slider Icon & Arrows for mobile version */}
       {isMobile ? (
         <div className="mt-6 flex h-fit flex-row items-center justify-center gap-12">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} purpose={purpose} className="static" />
-          <div className="mt-6 flex justify-center gap-2">
+          <div className="flex items-center justify-center gap-2">
         {snaps.map((_, i) => (
           <button
             key={i}
@@ -310,7 +310,7 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
       </div>
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} purpose={purpose} className="static" />
         </div>
-      ) : <div className="mt-6 flex justify-center gap-2">
+      ) : <div className="mt-6 flex justify-center items-center gap-2">
         {snaps.map((_, i) => (
           <button
             key={i}

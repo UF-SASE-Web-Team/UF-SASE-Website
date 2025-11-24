@@ -22,7 +22,7 @@ const AboutCard = () => {
           <span className="font-semibold"> workshops</span>, and <span className="font-semibold">internal mentorship program</span>, we aim to build
           our members’ relationships, skills, and knowledge that will enable them to succeed. We also offer an
           <span className="font-semibold"> intramural program (SASE Sports)</span>, an <span className="font-semibold">engineering team (SET)</span>,
-          and a <span className="font-semibold">leadership development program (SASE Interns)</span>.
+          a <span className="font-semibold">web development team (SWT)</span>, and a <span className="font-semibold">leadership development program (SASE Interns)</span>.
         </p>
 
         {/* Gradient Line */}

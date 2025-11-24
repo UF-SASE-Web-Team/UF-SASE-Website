@@ -192,11 +192,11 @@
 }
 
 .header-text {
-  @apply font-oswald text-7xl font-semibold;
+  @apply font-oswald text-7xl font-semibold pb-10;
 }
 
 .subheader-text {
-  @apply font-oswald text-5xl font-medium;
+  @apply font-oswald text-5xl font-medium pb-10;
 }
 
 .ombre-background {

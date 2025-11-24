@@ -5,7 +5,7 @@ import { Input } from "@ui/input";
 import React from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import { Logo } from "./navigation/Logo";
+import { Logo } from "@navigation/Logo";
 
 interface AuthFormProps {
   onSubmit: (data: FormData) => void;

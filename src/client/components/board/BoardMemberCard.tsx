@@ -13,11 +13,12 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
 
   return (
     <div
-      className={`group relative flex w-full max-w-[110%] flex-col items-center p-4 text-center transition-transform duration-500 ease-in-out sm:max-w-[300px] md:max-w-[350px]`}
+      className={`group relative flex flex-col items-center text-center font-redhat transition-transform duration-500 ease-in-out ${isExpanded ? "scale-105 cursor-default" : "scale-100 cursor-pointer"} w-full max-w-[110%] sm:max-w-[300px] md:max-w-[350px]`}
+      onClick={() => !isExpanded && handleToggleExpand()}
     >
       {/* role */}
       <p
-        className={`mb-3 flex h-[2.5rem] items-center justify-center text-center text-lg font-medium italic leading-tight tracking-wide text-[#0668B3] sm:text-xl md:text-2xl`}
+        className={`my-2 flex h-10 w-48 items-center justify-center whitespace-nowrap text-center ${isExpanded ? "invisible" : "font-semibold italic text-blue-500"} text-lg`}
         style={{ paddingTop: isSingleLine ? "0.5rem" : "0" }}
       >
         {member.role}
@@ -27,15 +28,48 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
       <div
         className={`group relative aspect-square w-full max-w-[300px] transition-transform duration-500 ease-in-out sm:max-w-[300px] md:max-w-[400px]`}
       >
-        <div className="absolute inset-0 rounded-[18px] bg-gradient-to-br from-[#0668B3] to-[#7DC242] pt-[0.8rem]" />
-        <div className="[0.25vw] absolute inset-[4px] overflow-hidden rounded-[18px] bg-white shadow-[0.6vw_0.6vw_0_rgba(125,194,66,0.6)]">
-          <img src={member.image} alt={`${member.name}'s photo`} className="h-full w-full rounded-[18px] object-cover" />
-        </div>
+        <img src={member.image} alt={`${member.name}'s photo`} className="h-full w-full object-cover" />
 
-        {/*hover overlay*/}
-        <div className="absolute inset-[4px] flex items-start justify-center rounded-[18px] bg-white bg-opacity-60 pt-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          <span className="text-sm text-black underline sm:text-base md:text-[1rem]">Learn More...</span>
-        </div>
+        {/* learn more */}
+        {!isExpanded && (
+          <div className="absolute inset-0 flex items-start justify-center bg-white bg-opacity-60 p-[1vw] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <span className="font-semibold text-black underline text-lg">Learn More</span>
+          </div>
+        )}
+
+        {isExpanded && (
+          <div
+            className="scrollbar-thinner absolute inset-0 flex cursor-pointer flex-col overflow-y-auto bg-background bg-opacity-95 p-2 transition-opacity duration-500 ease-in-out"
+            onClick={() => setExpanded(false)}
+          >
+            {/* expanded content */}
+            <div className="mt-[1.5vw] cursor-pointer text-left" onClick={(e) => e.stopPropagation()}>
+              <h3 className="cursor-pointer text-lg font-bold" onClick={() => setExpanded(false)}>
+                {member.role}
+              </h3>
+              <h4 className="cursor-pointer text-md font-semibold" onClick={() => setExpanded(false)}>
+                {member.name}
+              </h4>
+              <p className="cursor-pointer text-sm text-black dark:text-saseGray" onClick={() => setExpanded(false)}>
+                {member.major}
+              </p>
+              <a
+                href={`mailto:${member.contact}`}
+                className="cursor-pointer text-sm text-blue-500 underline"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {member.contact}
+              </a>
+              <p
+                className="mt-[1vw] cursor-pointer text-xs text-black dark:text-saseGray"
+                onClick={() => setExpanded(false)}
+                style={{ marginTop: "1vw" }}
+              >
+                {member.description}
+              </p>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* name turns invisible on click of learn more */}

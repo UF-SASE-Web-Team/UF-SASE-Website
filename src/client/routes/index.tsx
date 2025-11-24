@@ -1,13 +1,13 @@
-import MemberCard from "@/client/components/home/MemberCard";
-import MissionCard from "@/client/components/home/MissionCard";
+import MemberCard from "@/client/components/custom_ui/MemberCard";
+import MissionCard from "@/client/components/custom_ui/MissionCard";
 import SponsorInfo from "@/client/information/Sponsors";
 import BoardPic from "@assets/home/Board.png";
 import { imageUrls } from "@assets/imageUrls";
 import Carousel from "@components/carousel/Carousel";
 import { Missions } from "@/client/information/Missions";
-import MobileMemberCard from "@/client/components/home/MobileMemberCard";
+import MobileMemberCard from "@/client/components/custom_ui/MobileMemberCard";
 import { MobileMissionCarousel } from "@/client/components/home/MobileMissionCarousel";
-import SponsorCard from "@components/sponsors/SponsorCard";
+import SponsorCard from "@/client/components/custom_ui/SponsorCard";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
@@ -35,18 +35,18 @@ export const Route = createFileRoute("/")({
         {/* Title & Image Section */}
         <div className="flex w-full flex-col items-center">
           <img src={BoardPic} alt="2023-2024 SASE Board" className="relative h-auto w-full" />
-          <div className="absolute w-full items-center p-8 pt-[35%] font-oswald text-3xl font-bold italic text-white sm:text-5xl lg:text-6xl xl:text-7xl">
-            <h1 className="flex w-full items-center pl-[5%] sm:pl-[10%]">
+          <div className="absolute w-full items-center px-[10%] font-oswald font-bold italic text-white text-3xl pt-[30%] sm:text-5xl lg:text-7xl xl:pt-[35%]">
+            <h1 className="flex w-full items-center">
               <span>S </span>
               <img src={imageUrls["WhiteLogo.png"]} alt="SASE Logo" className="inline-block h-[1.5em] align-middle" />
               <span>CIETY OF ASIAN</span>
             </h1>
-            <h1 className="w-full pr-[5%] text-right sm:pr-[10%]">SCIENTISTS & ENGINEERS</h1>
+            <h1 className="w-full text-right">SCIENTISTS & ENGINEERS</h1>
           </div>
         </div>
 
         {/* Video & Description Section */}
-        <div className="flex flex-col items-center bg-black pt-14 pb-10">
+        <div className="flex flex-col items-center bg-black py-10">
           <div className="rounded-2xl w-9/12 ombre-background p-1">
             <div className={cn({"text-start p-10" : !isMobile, "text-center p-4" : isMobile},"flex h-full flex-col rounded-2xl bg-gray-950" )}>
               <h1 className={cn({"text-3xl" : isMobile, "text-5xl" : !isMobile},"pb-10 font-medium text-white font-oswald" )}>University of Florida Chapter</h1>
@@ -54,7 +54,7 @@ export const Route = createFileRoute("/")({
                 {/* Video for sm-xl screens */}
                 <iframe
                   className="block aspect-video w-full pb-8 pl-2 pr-2 xl:hidden"
-                  src="https://www.youtube.com/embed/JV9HAUhVet8"
+                  src="https://www.youtube.com/embed/UymaxCaKkMU"
                   title="UF SASE Video"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -64,7 +64,7 @@ export const Route = createFileRoute("/")({
                 {/* Video for xl+ screen */}
                 <iframe
                   className="float-right hidden aspect-video w-1/2 pb-2 pl-8 xl:block"
-                  src="https://www.youtube.com/embed/JV9HAUhVet8"
+                  src="https://www.youtube.com/embed/UymaxCaKkMU"
                   title="UF SASE Video"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -109,7 +109,7 @@ export const Route = createFileRoute("/")({
 
         {/* Mission Section */}
         <div className="flex w-full flex-col items-center bg-saseGray px-12 py-10 dark:bg-greenBackground">
-          <h1 className="subheader-text pb-10">Our Mission</h1>
+          <h1 className="subheader-text">Our Mission</h1>
 
           {isMobile ? (
             <div className="w-full">
@@ -182,21 +182,21 @@ export const Route = createFileRoute("/")({
 
         {/* Values Section */}
         <div className="w-full flex flex-col items-center bg-black py-10 px-4">
-          <h1 className="subheader-text text-white pb-10">Our Values</h1>
+          <h1 className="subheader-text text-white">Our Values</h1>
           <Carousel prog="N/A" purpose="Values" />
         </div>
 
         {/* Sponsors Section */}
-        <div className="flex w-full flex-col items-center justify-center bg-saseGray p-14 dark:bg-greenBackground">
-          <h1 className="subheader-text pb-10">Sponsors</h1>
-          <div className="w-full flex justify-center items-center">
+        <div className="flex w-full flex-col items-center justify-center bg-saseGray pt-10 pb-14 dark:bg-greenBackground">
+          <h1 className="subheader-text">Sponsors</h1>
+          <div className="w-10/12 flex justify-center items-center">
             {isMobile ? (
               <div className="relative flex flex-col items-center rounded-2xl border-4 border-border bg-muted p-4 shadow-[12px_12px_0px_#7DC242]">
-                <p className="mb-8 text-center font-redhat text-lg">
+                <p className="mb-8 text-center font-redhat text-sm">
                   Are you interested in becoming a partner with the UF Society of Asian Scientists and Engineers (SASE) Chapter?
                   <br />
                   <br />
-                  To get access to our sponsorship packet, please contact our External Vice President at
+                  To get access to our sponsorship packet, please contact our External Vice President, Manav Sanghvi, at
                   <a href="mailto:ufsase.evp@gmail.com" className="text-saseGreen underline">
                     {" "}
                     ufsase.evp@gmail.com
@@ -205,7 +205,7 @@ export const Route = createFileRoute("/")({
                 </p>
 
                 {/* Sponsors inside the box on mobile */}
-                <div className="max-w-1/2 max-h-96 flex items-center justify-center">
+                <div className="max-w-60 w-1/2">
                   {SponsorInfo.map((s) =>
                     s.tier === "Diamond" ? (
                       <SponsorCard
@@ -222,16 +222,16 @@ export const Route = createFileRoute("/")({
                   )}
                 </div>
 
-                <p className="mt-6 w-full text-center font-redhat text-xl italic text-foreground">Current Featured Sponsor</p>
+                <p className="mt-6 w-full text-center font-redhat text-sm italic text-foreground">Current Featured Sponsor</p>
               </div>
             ) : (
-              <div className="flex w-10/12 flex-row items-start justify-center h-96">
+              <div className="flex flex-row items-start justify-center h-96">
                 <div className="flex w-full h-full flex-col items-center rounded-2xl border-4 border-border bg-muted p-10 shadow-[12px_12px_0px_#7DC242]">
                   <p className="p-4 text-left font-redhat text-lg">
                     Are you interested in becoming a partner with the UF Society of Asian Scientists and Engineers (SASE) Chapter?
                     <br />
                     <br />
-                    To get access to our sponsorship packet, please contact our External Vice President at
+                    To get access to our sponsorship packet, please contact our External Vice President, Manav Sanghvi at
                     <a href="mailto:ufsase.evp@gmail.com" className="text-saseGreen underline">
                       {" "}
                       ufsase.evp@gmail.com

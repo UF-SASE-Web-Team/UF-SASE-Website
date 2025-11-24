@@ -13,7 +13,7 @@ interface ProgramCardProps {
 const ProgramCard: React.FC<ProgramCardProps> = ({ image, link, name, number, text }) => {
   return (
     <div>
-      <div className="ombre-background">
+      <div className="ombre-background p-1 rounded-2xl">
           <div className="h-full w-full">
             <div className="absolute -left-3 -top-3 z-20 flex h-10 w-14 items-center justify-center rounded-2xl border-l-4 border-t-4 border-border border-saseBlue bg-saseGrayLight dark:bg-black">
               <p className="pb- inline-block bg-gradient-to-r from-saseBlue to-saseGreen bg-clip-text font-redhat text-xl font-bold text-saseGreen text-transparent">
@@ -36,8 +36,8 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ image, link, name, number, te
 
               {/* Text Content */}
               <div className="flex w-full flex-1 flex-col items-center justify-between gap-4">
-                <h1 className="w-full pb-2 text-center font-oswald text-5xl font-medium">{name}</h1>
-                <p className="font-redhat text-xl text-foreground">{text}</p>
+                <h1 className="w-full pb-2 text-center font-oswald text-3xl font-medium">{name}</h1>
+                <p className="font-redhat text-lg text-foreground">{text}</p>
                 <a href={link} target="_blank" rel="noopener noreferrer">
                   <button className="mt-4 w-40 rounded-full bg-saseBlueLight py-2 text-center font-redhat text-lg italic text-white transition duration-300 hover:scale-105 hover:bg-saseBlue focus:outline-none focus:ring-2 focus:ring-blue-500">
                     Learn More ...

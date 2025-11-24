@@ -1,4 +1,4 @@
-import MissionCard from "@/client/components/home/MissionCard";
+import MissionCard from "@/client/components/custom_ui/MissionCard";
 import React, { useRef, useState } from "react";
 
 interface MobileMissionCarouselProps {

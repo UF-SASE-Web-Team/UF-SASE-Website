@@ -27,12 +27,12 @@ export const Route = createFileRoute("/about")({
     const isMobile = useIsMobile();
 
     return (
-      <div className="mt-5 max-w-8xl w-full py-10 flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background">
-        <h1 className="header-text ombre-text pb-10">ABOUT</h1>
+      <div className="max-w-8xl w-full py-10 flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background">
+        <h1 className="header-text ombre-text">ABOUT</h1>
         
         {/* Summary & Buttons to Board/Sponsors */}
         <AboutCard/>
-        <div className="max-w-8xl w-7xl mt-2 mb-10 flex justify-center font-redhat">
+        <div className="max-w-8xl w-7xl mb-10 flex justify-center font-redhat">
           <div className="flex space-x-4 sm:space-x-6">
             <Link
               to="/board"

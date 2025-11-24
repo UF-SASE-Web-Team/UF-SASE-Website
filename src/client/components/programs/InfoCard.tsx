@@ -1,18 +1,22 @@
 import React from "react";
+import { useIsMobile } from "@/client/hooks/useIsMobile";
+import { cn } from "@/shared/utils";
 
 interface SimpleCardProps {
   text: React.ReactNode;
 }
 
 const InfoCard: React.FC<SimpleCardProps> = ({ text }) => {
+  const isMobile = useIsMobile();
+
   return (
-    <div className="relative mx-auto mb-14 w-full max-w-4xl p-5 font-redhat">
+    <div className="relative mx-auto w-full max-w-4xl font-redhat">
       {/* Gradient Border Background */}
-      <div className="rounded-[2rem] bg-gradient-to-br from-saseBlue to-saseGreen p-[8px] shadow-[12px_12px_12px_rgba(125,194,66,0.5)]">
-        <div className="flex flex-col items-center rounded-[calc(1.5rem-3px)] bg-muted p-12">
+      <div className="rounded-2xl ombre-background p-2">
+        <div className="flex flex-col items-center bg-muted p-4 rounded-2xl">
           {/* Text Content */}
           <div className="flex flex-col justify-between">
-            <p className="mb-4 text-xl text-foreground">{text}</p>
+            <p className={cn({"text-sm" : isMobile, "text-lg" : !isMobile})}>{text}</p>
           </div>
         </div>
       </div>

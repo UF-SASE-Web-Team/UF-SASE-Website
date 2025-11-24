@@ -269,7 +269,7 @@ export const Route = createFileRoute("/webdev")({
               </div>
             </div>
           )}
-          <div className="bg-[#F5F5F5] pb-16 pt-4 dark:bg-[#040716]">
+          <div className="bg-saseGrayLight pb-16 pt-4 dark:bg-[#040716]">
             <div className="mx-auto w-full max-w-7xl">
               <header className="mb-12 flex items-center px-5">
                 <div className="mr-3 h-12 w-1.5 bg-saseGreen"></div>

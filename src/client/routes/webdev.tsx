@@ -130,7 +130,7 @@ export const Route = createFileRoute("/webdev")({
                   {pastWebmastersInfo?.map((lead: { image: string; name: string; year: string; textColor: string; quote: string | undefined; mobileAlign: string;}, index) => (
                      <div key={index} className="flex flex-col gap-4">
                       <MobileMemberCard image={lead.image} name={lead.name} role={lead.year} textColor={lead.textColor} imageSide={lead.mobileAlign}/>
-                      <OmbreDivider/>
+                      {index < pastWebmastersInfo.length - 1 &&  <div className="mb-4"><OmbreDivider/></div>}
                     </div>
                   ))}
                 </>

@@ -32,7 +32,7 @@ export const Route = createFileRoute("/mentor-mentee")({
     const isMobile = useIsMobile();
 
     return (
-      <div className="flex min-h-screen flex-col items-center bg-background">
+      <div className="pb-10 flex min-h-screen flex-col items-center bg-background">
         <ClientOnly>
           <div className="flex w-full flex-1">
             <Suspense

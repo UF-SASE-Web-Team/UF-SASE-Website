@@ -47,7 +47,7 @@ export const Route = createFileRoute("/sports")({
           />
         </div>
         
-        <div className="w-full py-10 flex flex-col items-center">
+        <div className="w-full pb-10 flex flex-col items-center">
           <div className="max-w-7xl">
             <Carousel purpose="Images" prog="Sports" />
             <div className="mb-10" />

@@ -14,6 +14,7 @@ import { lazy, Suspense } from "react";
 import { seo } from "../utils/seo";
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
+import { MMGoals } from "@information/ProgramGoals";
 
 const MentorMenteeGraph = lazy(() => import("@/client/components/programs/MentorMentee/MMGraph"));
 
@@ -95,10 +96,10 @@ export const Route = createFileRoute("/mentor-mentee")({
 
         {/* M&M Events Section */}
         <OmbreDivider/>
-        <div className="flex w-full flex-col bg-saseGrayLight px-[10%] py-10 items-center justify-center">
+        <div className="flex w-full flex-col bg-saseGrayLight px-[10%] py-10 items-center justify-center dark:bg-black">
           <h1 className="subheader-text w-full text-center">M&M Events</h1>
           <div className="max-w-7xl ombre-background p-1 rounded-2xl mb-10">
-            <div className="rounded-2xl bg-saseGrayLight p-4">
+            <div className="rounded-2xl bg-saseGrayLight p-4 dark:bg-black">
               <p className={cn({"text-lg" : !isMobile, "text-sm" : isMobile}, "text-center font-redhat")}>
                 Join us for some fun and lighthearted events designed to <strong>spark meaningful interactions between mentors and mentees!</strong>{" "}
                 Participate in a variety of silly and competitive challenges that encourage teamwork, laughter, and connection.
@@ -121,9 +122,9 @@ export const Route = createFileRoute("/mentor-mentee")({
             <div className="w-full max-w-7xl">
               <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader"/>
               <div className={cn({"flex-col gap-10" : isMobile, "flex-row gap-16" : !isMobile},"px-8 flex flex-nowrap items-center justify-center")}>
-                <MMGoalCard text="> Build meaningful, genuine friendships with new people that go beyond academics!" cardColor="blue" mobileAlign="left"/>
-                <MMGoalCard text="> Bond, explore, and create unforgettable memories along the way!" cardColor="green" mobileAlign="right"/>
-                <MMGoalCard text="> Surround yourself with a reliable support system of mentors and peers!" cardColor="blue" mobileAlign="left"/>
+                {MMGoals.map((goal, index) => (
+                  <MMGoalCard text={goal.text} cardColor={goal.color} mobileAlign={goal.mobileAlign} key={index}/>
+                ))}  
               </div>
             </div>
           </div>

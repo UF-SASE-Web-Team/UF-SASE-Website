@@ -26,7 +26,7 @@ export const Route = createFileRoute("/programs")({
           <h1 className="header-text ombre-text pb-10">
             PROGRAMS
           </h1>
-          <div className="ombre-background p-1 rounded-2xl mb-10">
+          <div className="ombre-background p-1 rounded-2xl mx-4 mb-10">
             <div className="flex h-full flex-col rounded-2xl bg-saseGrayLight p-4 text-center dark:bg-black">
                 <p className="text-center font-redhat text-lg font-semibold text-black dark:text-white">
                   <span className="font-bold text-saseBlue">SASE programs</span> allow members opportunities to work on{" "}
@@ -36,7 +36,6 @@ export const Route = createFileRoute("/programs")({
                 </p>
               </div>
           </div>
-      
         <OmbreDivider/>
         </div>
 
@@ -47,7 +46,7 @@ export const Route = createFileRoute("/programs")({
               "grid-cols-1": isMobile,
               "grid-cols-2": !isMobile,
             },
-            "grid items-stretch gap-12 py-10 max-w-7xl",
+            "grid items-stretch gap-12 pt-10 px-4 max-w-7xl",
           )}
         >
           {GeneralProgramsInfo.map((program) => (

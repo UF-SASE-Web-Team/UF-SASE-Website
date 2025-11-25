@@ -154,7 +154,7 @@ export const Route = createFileRoute("/")({
         <OmbreDivider/>
         {isMobile ? (
           <>
-            <div className="flex w-full flex-col items-center bg-white p-10 gap-4 dark:bg-black">
+            <div className="flex w-full flex-col items-center bg-white px-4 gap-4 dark:bg-black">
               {PIEBoard.map((p, i) => (
                 <div key={i} className="flex flex-col gap-4">
                   <MobileMemberCard

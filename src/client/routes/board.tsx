@@ -2,9 +2,9 @@ import BoardMemberCard from "@/client/components/board/BoardMemberCard";
 import BoardPic from "@assets/board/25-26Board.jpg";
 import { imageUrls } from "@assets/imageUrls";
 import boardInfo from "@components/board/BoardInfo";
+import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
-import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 
 interface Member {
   role: string;
@@ -33,8 +33,8 @@ export const Route = createFileRoute("/board")({
         {/* title */}
         <div className="text-center">
           <h1 className="header-text ombre-text">BOARD</h1>
-          <p className="font-oswald text-3xl pb-10">Meet our 2025-2026 SASE Board Members!</p>
-          <OmbreDivider/>
+          <p className="pb-10 font-oswald text-3xl">Meet our 2025-2026 SASE Board Members!</p>
+          <OmbreDivider />
         </div>
 
         {/* group picture */}
@@ -58,7 +58,7 @@ export const Route = createFileRoute("/board")({
         {boardInfo.map((section, idx) => (
           <div key={idx} className="mb-10">
             {section.section === "Chair Board" && <hr className="w-7/8 my-10 border-t-2 border-green-500" />}
-            <h2 className="text-center subheader-text">{section.section}</h2>
+            <h2 className="subheader-text text-center">{section.section}</h2>
 
             {/* Centering the grid properly */}
             <div className="flex justify-center">
@@ -154,7 +154,7 @@ export const Route = createFileRoute("/board")({
         <div className="flex justify-center">
           <Link
             to="/past-board"
-            className="font-redhat flex h-10 items-center justify-center whitespace-nowrap rounded-2xl border border-black bg-gradient-to-r from-saseGreen to-white px-6 py-2 text-lg italic tracking-wide text-black shadow-[2px_2px_2px_rgba(0,0,0,0.10)] transition duration-300 hover:scale-105"
+            className="flex h-10 items-center justify-center whitespace-nowrap rounded-2xl border border-black bg-gradient-to-r from-saseGreen to-white px-6 py-2 font-redhat text-lg italic tracking-wide text-black shadow-[2px_2px_2px_rgba(0,0,0,0.10)] transition duration-300 hover:scale-105"
           >
             Past Board Members
           </Link>

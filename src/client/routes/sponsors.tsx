@@ -1,11 +1,11 @@
+import SponsorCard from "@/client/components/custom_ui/SponsorCard";
 import SponsorInfo from "@/client/information/Sponsors";
 import { imageUrls } from "@assets/imageUrls";
-import SponsorCard from "@/client/components/custom_ui/SponsorCard";
+import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
+import { ChatBubble } from "@components/sponsors/ChatBubble";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
-import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
-import { ChatBubble } from "@components/sponsors/ChatBubble";
 
 export const Route = createFileRoute("/sponsors")({
   meta: () => [
@@ -21,39 +21,32 @@ export const Route = createFileRoute("/sponsors")({
     return (
       <div className="flex flex-col items-center p-10">
         <h1 className="header-text ombre-text text-center">CURRENT SPONSORS</h1>
-        <OmbreDivider/>
-        <OmbreDivider/>
+        <OmbreDivider />
+        <OmbreDivider />
 
-        <div
-          className={
-            isMobile ? "pt-10 relative max-w-xs sm:max-w-2xl" : "pt-10 relative right-20 max-w-7xl"
-          }
-        >
+        <div className={isMobile ? "relative max-w-xs pt-10 sm:max-w-2xl" : "relative right-20 max-w-7xl pt-10"}>
           <ChatBubble tailSide="left">
             <>
-            Become a <span className="font-bold">partner</span> of the{" "}
-                  <span className="font-bold">UF Society of Asian Scientists and Engineers (SASE)</span> Chapter!</>
-          </ChatBubble>
-        </div>
-
-        <div
-          className={
-            isMobile ? "relative max-w-xs sm:max-w-2xl" : "relative left-20 max-w-5xl"
-          }
-        >
-          <ChatBubble tailSide="right">
-            <>
-            To view our sponsorship packet, or for any related questions, please contact our External Vice President at{" "}
-                <a href={`mailto:ufsase.evp@gmail.com`} className="font-bold underline">
-                  ufsase.evp@gmail.com
-                </a>
-                .
+              Become a <span className="font-bold">partner</span> of the{" "}
+              <span className="font-bold">UF Society of Asian Scientists and Engineers (SASE)</span> Chapter!
             </>
           </ChatBubble>
         </div>
 
-        <div className={`${isMobile ? "mt-40" : "mt-28"} flex flex-col items-center justify-center max-w-7xl relative`}>
-          <div className={`${isMobile ? "-left-4 -top-40" : "left-24 -top-28"} absolute z-10`}>
+        <div className={isMobile ? "relative max-w-xs sm:max-w-2xl" : "relative left-20 max-w-5xl"}>
+          <ChatBubble tailSide="right">
+            <>
+              To view our sponsorship packet, or for any related questions, please contact our External Vice President at{" "}
+              <a href={`mailto:ufsase.evp@gmail.com`} className="font-bold underline">
+                ufsase.evp@gmail.com
+              </a>
+              .
+            </>
+          </ChatBubble>
+        </div>
+
+        <div className={`${isMobile ? "mt-40" : "mt-28"} relative flex max-w-7xl flex-col items-center justify-center`}>
+          <div className={`${isMobile ? "-left-4 -top-40" : "-top-28 left-24"} absolute z-10`}>
             {/* Chat Bubble */}
             <ChatBubble tailSide="left">
               <div className="font-bold">Check Out Our Super Sponsors!</div>
@@ -63,11 +56,11 @@ export const Route = createFileRoute("/sponsors")({
           <img
             src={imageUrls["SASELogoStar.png"]}
             alt="Logo"
-            className={`absolute object-contain z-20 ${isMobile ? "-top-14 -right-10 w-[125px] h-[125px]" : "-top-20 -right-20 w-[200px] h-[200px]"}`}
+            className={`absolute z-20 object-contain ${isMobile ? "-right-10 -top-14 h-[125px] w-[125px]" : "-right-20 -top-20 h-[200px] w-[200px]"}`}
           />
 
-          <div className="ombre-background p-2 rounded-2xl">
-            <div className="w-full max-w-96 lg:max-w-full grid grid-cols-1 items-stretch justify-items-center gap-10 lg:gap-24 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 lg:p-24 dark:from-gray-900 dark:to-black lg:grid-cols-2 xl:grid-cols-3">
+          <div className="ombre-background rounded-2xl p-2">
+            <div className="grid w-full max-w-96 grid-cols-1 items-stretch justify-items-center gap-10 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:max-w-full lg:grid-cols-2 lg:gap-24 lg:p-24 xl:grid-cols-3">
               {SponsorInfo.map((sponsor) => (
                 <SponsorCard
                   key={sponsor.company}

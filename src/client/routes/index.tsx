@@ -1,20 +1,20 @@
 import MemberCard from "@/client/components/custom_ui/MemberCard";
 import MissionCard from "@/client/components/custom_ui/MissionCard";
+import MobileMemberCard from "@/client/components/custom_ui/MobileMemberCard";
+import SponsorCard from "@/client/components/custom_ui/SponsorCard";
+import { MobileMissionCarousel } from "@/client/components/home/MobileMissionCarousel";
+import { Missions } from "@/client/information/Missions";
 import SponsorInfo from "@/client/information/Sponsors";
+import { cn } from "@/shared/utils";
 import BoardPic from "@assets/home/Board.png";
 import { imageUrls } from "@assets/imageUrls";
 import Carousel from "@components/carousel/Carousel";
-import { Missions } from "@/client/information/Missions";
-import MobileMemberCard from "@/client/components/custom_ui/MobileMemberCard";
-import { MobileMissionCarousel } from "@/client/components/home/MobileMissionCarousel";
-import SponsorCard from "@/client/components/custom_ui/SponsorCard";
+import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { useIsMobile } from "@hooks/useIsMobile";
+import { PIEBoard } from "@information/People";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { seo } from "../utils/seo";
-import { PIEBoard } from "@information/People";
-import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
-import { cn } from "@/shared/utils";
 
 export const Route = createFileRoute("/")({
   meta: () => [
@@ -35,7 +35,7 @@ export const Route = createFileRoute("/")({
         {/* Title & Image Section */}
         <div className="flex w-full flex-col items-center">
           <img src={BoardPic} alt="2023-2024 SASE Board" className="relative h-auto w-full" />
-          <div className="absolute w-full items-center px-[10%] font-oswald font-bold italic text-white text-3xl pt-[30%] sm:text-5xl lg:text-7xl xl:pt-[35%]">
+          <div className="absolute w-full items-center px-[10%] pt-[30%] font-oswald text-3xl font-bold italic text-white sm:text-5xl lg:text-7xl xl:pt-[35%]">
             <h1 className="flex w-full items-center">
               <span>S </span>
               <img src={imageUrls["WhiteLogo.png"]} alt="SASE Logo" className="inline-block h-[1.5em] align-middle" />
@@ -47,9 +47,11 @@ export const Route = createFileRoute("/")({
 
         {/* Video & Description Section */}
         <div className="flex flex-col items-center bg-black py-10">
-          <div className="rounded-2xl w-9/12 ombre-background p-1">
-            <div className={cn({"text-start p-10" : !isMobile, "text-center p-4" : isMobile},"flex h-full flex-col rounded-2xl bg-gray-950" )}>
-              <h1 className={cn({"text-3xl" : isMobile, "text-5xl" : !isMobile},"pb-10 font-medium text-white font-oswald" )}>University of Florida Chapter</h1>
+          <div className="ombre-background w-9/12 rounded-2xl p-1">
+            <div className={cn({ "p-10 text-start": !isMobile, "p-4 text-center": isMobile }, "flex h-full flex-col rounded-2xl bg-gray-950")}>
+              <h1 className={cn({ "text-3xl": isMobile, "text-5xl": !isMobile }, "pb-10 font-oswald font-medium text-white")}>
+                University of Florida Chapter
+              </h1>
               <div>
                 {/* Video for sm-xl screens */}
                 <iframe
@@ -70,7 +72,7 @@ export const Route = createFileRoute("/")({
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
-                <p className={cn({"text-lg" : !isMobile, "text-sm" : isMobile}, "font-redhat text-white")}>
+                <p className={cn({ "text-lg": !isMobile, "text-sm": isMobile }, "font-redhat text-white")}>
                   The <span className="font-semibold">Society of Asian Scientists & Engineers </span> is a vibrant and dynamic organization at the
                   University of Florida. We are committed to fostering meaningful connections across cultures and empowering{" "}
                   <span className="font-semibold">Asian Pacific Islander Desi American (APIDA) </span>
@@ -80,7 +82,7 @@ export const Route = createFileRoute("/")({
                 {!isMobile || expanded ? (
                   <>
                     <br />
-                <p className={cn({"text-lg" : !isMobile, "text-sm" : isMobile}, "font-redhat text-white")}>
+                    <p className={cn({ "text-lg": !isMobile, "text-sm": isMobile }, "font-redhat text-white")}>
                       Through <span className="font-semibold">engaging meetings and events</span>, we provide a nurturing environment where you can
                       acquire <span className="font-semibold">essential skills and knowledge </span>
                       to excel in the professional world. Our <span className="font-semibold">inclusive community </span>
@@ -93,7 +95,7 @@ export const Route = createFileRoute("/")({
                 ) : null}
 
                 {isMobile && (
-                  <button className="mt-4 text-saseGreen underline font-redhat text-lg" onClick={() => setExpanded(!expanded)}>
+                  <button className="mt-4 font-redhat text-lg text-saseGreen underline" onClick={() => setExpanded(!expanded)}>
                     {expanded ? "Read Less" : "Read More"}
                   </button>
                 )}
@@ -129,11 +131,11 @@ export const Route = createFileRoute("/")({
         </div>
 
         {/* Images of PIE Board */}
-        <OmbreDivider/>
-        <OmbreDivider/>
+        <OmbreDivider />
+        <OmbreDivider />
         {isMobile ? (
           <>
-            <div className="flex w-full flex-col items-center bg-white px-4 py-10 gap-4 dark:bg-black">
+            <div className="flex w-full flex-col items-center gap-4 bg-white px-4 py-10 dark:bg-black">
               {PIEBoard.map((p, i) => (
                 <div key={i} className="flex flex-col gap-4">
                   <MobileMemberCard
@@ -144,7 +146,7 @@ export const Route = createFileRoute("/")({
                     image={p.image}
                     imageSide={p.mobileAlignment}
                   />
-                  {i < PIEBoard.length - 1 && <OmbreDivider/>}
+                  {i < PIEBoard.length - 1 && <OmbreDivider />}
                 </div>
               ))}
             </div>
@@ -156,19 +158,19 @@ export const Route = createFileRoute("/")({
             ))}
           </div>
         )}
-        <OmbreDivider/>
-        <OmbreDivider/>
+        <OmbreDivider />
+        <OmbreDivider />
 
         {/* Values Section */}
-        <div className="w-full flex flex-col items-center bg-black py-10 px-4">
+        <div className="flex w-full flex-col items-center bg-black px-4 py-10">
           <h1 className="subheader-text text-white">Our Values</h1>
           <Carousel prog="N/A" purpose="Values" />
         </div>
 
         {/* Sponsors Section */}
-        <div className="flex w-full flex-col items-center justify-center bg-saseGray pt-10 pb-14 dark:bg-greenBackground">
+        <div className="flex w-full flex-col items-center justify-center bg-saseGray pb-14 pt-10 dark:bg-greenBackground">
           <h1 className="subheader-text">Sponsors</h1>
-          <div className="w-10/12 flex justify-center items-center">
+          <div className="flex w-10/12 items-center justify-center">
             {isMobile ? (
               <div className="relative flex flex-col items-center rounded-2xl border-4 border-border bg-muted p-4 shadow-[12px_12px_0px_#7DC242]">
                 <p className="mb-8 text-center font-redhat text-sm">
@@ -184,7 +186,7 @@ export const Route = createFileRoute("/")({
                 </p>
 
                 {/* Sponsors inside the box on mobile */}
-                <div className="max-w-60 w-1/2">
+                <div className="w-1/2 max-w-60">
                   {SponsorInfo.map((s) =>
                     s.tier === "Diamond" ? (
                       <SponsorCard
@@ -204,8 +206,8 @@ export const Route = createFileRoute("/")({
                 <p className="mt-6 w-full text-center font-redhat text-sm italic text-foreground">Current Featured Sponsor</p>
               </div>
             ) : (
-              <div className="flex flex-row items-start justify-center h-96">
-                <div className="flex w-full h-full flex-col items-center rounded-2xl border-4 border-border bg-muted p-10 shadow-[12px_12px_0px_#7DC242]">
+              <div className="flex h-96 flex-row items-start justify-center">
+                <div className="flex h-full w-full flex-col items-center rounded-2xl border-4 border-border bg-muted p-10 shadow-[12px_12px_0px_#7DC242]">
                   <p className="p-4 text-left font-redhat text-lg">
                     Are you interested in becoming a partner with the UF Society of Asian Scientists and Engineers (SASE) Chapter?
                     <br />
@@ -219,8 +221,8 @@ export const Route = createFileRoute("/")({
                   </p>
                 </div>
 
-                <div className="flex w-full flex-col items-center gap-4 h-full">
-                  <div className="grid max-w-1/2 grid-cols-1 justify-items-center">
+                <div className="flex h-full w-full flex-col items-center gap-4">
+                  <div className="max-w-1/2 grid grid-cols-1 justify-items-center">
                     {SponsorInfo.map((sponsor) =>
                       sponsor.tier === "Diamond" ? (
                         <SponsorCard

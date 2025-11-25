@@ -2,7 +2,11 @@ export const pages = [
   { name: "Home", path: "/", aliases: ["Main", "Homepage"] },
   { name: "About", path: "/about", aliases: ["About Us", "Info"] },
   { name: "Board", path: "/board", aliases: ["Executive Team", "Leadership", "Officers", "E board", "E-Board", "President"] },
-  { name: "Past Board", path: "/past-board", aliases: ["Executive Team", "Leadership", "Officers", "E board", "E-Board", "President", "Past leadership", "Past officers"] },
+  {
+    name: "Past Board",
+    path: "/past-board",
+    aliases: ["Executive Team", "Leadership", "Officers", "E board", "E-Board", "President", "Past leadership", "Past officers"],
+  },
   { name: "Sponsors", path: "/sponsors", aliases: ["Partners", "Supporters", "Sponsorships"] },
   { name: "Events", path: "/events", aliases: ["Meetings", "Workshops", "Slides"] },
   { name: "Gallery", path: "/gallery", aliases: ["Photos", "Images", "Media"] },

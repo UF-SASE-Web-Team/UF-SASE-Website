@@ -28,12 +28,12 @@ export const MobileMissionCarousel: React.FC<MobileMissionCarouselProps> = ({ sl
       <div
         ref={ref}
         onScroll={onScroll}
-        className="relative w-full pb-8 snap-x snap-mandatory overflow-x-auto overscroll-x-contain scrollbar-none"
+        className="relative w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain pb-8 scrollbar-none"
         style={{ scrollBehavior: "smooth" }}
       >
         <div className="flex">
           {slides.map((s) => (
-            <div key={s.mission} className="w-full shrink-0 snap-start flex items-center justify-center">
+            <div key={s.mission} className="flex w-full shrink-0 snap-start items-center justify-center">
               <div className="h-[275px] w-[275px]">
                 <MissionCard image={s.image} mission={s.mission} text={s.homeText} shadow={s.shadow} />
               </div>

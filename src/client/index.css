@@ -192,21 +192,21 @@
 }
 
 .header-text {
-  @apply font-oswald text-7xl font-semibold pb-10;
+  @apply pb-10 font-oswald text-7xl font-semibold;
 }
 
 .subheader-text {
-  @apply font-oswald text-5xl font-medium pb-10;
+  @apply pb-10 font-oswald text-5xl font-medium;
 }
 
 .ombre-background {
-  @apply relative bg-gradient-to-r from-saseBlue to-saseGreen
+  @apply relative bg-gradient-to-r from-saseBlue to-saseGreen;
 }
 
 .ombre-background-transparent {
-  @apply relative bg-gradient-to-r from-saseBlue/40 to-saseGreen/40
+  @apply relative bg-gradient-to-r from-saseBlue/40 to-saseGreen/40;
 }
 
 .ombre-text {
-  @apply inline-block bg-gradient-to-r from-saseBlue to-saseGreen bg-clip-text text-transparent
+  @apply inline-block bg-gradient-to-r from-saseBlue to-saseGreen bg-clip-text text-transparent;
 }

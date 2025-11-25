@@ -47,7 +47,9 @@ const MobileMemberCard = ({
         </div>
         {quote ? <p className={cn({ "text-right": imageSide == "right" }, `pt-[25%] font-redhat text-lg`)}>"{quote}"</p> : null}
       </div>
-      {imageSide == "right" ? <img src={image} alt={name} className="aspect-square max-h-96 w-full rounded-2xl object-cover object-[5%] p-1" /> : null}
+      {imageSide == "right" ? (
+        <img src={image} alt={name} className="aspect-square max-h-96 w-full rounded-2xl object-cover object-[5%] p-1" />
+      ) : null}
     </div>
   );
 };

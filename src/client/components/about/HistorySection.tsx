@@ -8,7 +8,7 @@ const HistorySection = () => {
 
   return (
     <>
-      <div className="max-w-5xl w-full px-4 font-redhat">
+      <div className="w-full max-w-5xl px-4 font-redhat">
         <p className={isMobile ? "mb-4 text-sm text-foreground" : "mb-4 text-lg text-foreground"}>
           <strong>Since being founded during the summer of 2010,</strong> the University of Florida chapter has had an abundant effort put forth for
           the development of our members.

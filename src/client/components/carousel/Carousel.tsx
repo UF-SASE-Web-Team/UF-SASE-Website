@@ -1,9 +1,9 @@
-import { Values } from "@client/information/Values";
-import { useIsMobile } from "@/client/hooks/useIsMobile";
-import { cn } from "@/shared/utils";
 import PastBoardImages from "@/client/components/board/PastBoardImages";
+import { useIsMobile } from "@/client/hooks/useIsMobile";
 import ProgramImages from "@/client/information/ProgramImages";
 import Testimonials from "@/client/information/ProgramTestimonials";
+import { cn } from "@/shared/utils";
+import { Values } from "@client/information/Values";
 import type { EmblaCarouselType, EmblaEventType, EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
@@ -211,7 +211,7 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
                           <p className="text-center font-redhat text-3xl font-semibold text-black transition-opacity duration-300 group-hover:opacity-0">
                             {slide.value}
                           </p>
-                          <p className="absolute bottom-[-20%] px-4 text-center font-redhat font-medium text-lg text-black opacity-0 transition-all duration-500 group-hover:bottom-1/2 group-hover:translate-y-1/2 group-hover:opacity-100">
+                          <p className="absolute bottom-[-20%] px-4 text-center font-redhat text-lg font-medium text-black opacity-0 transition-all duration-500 group-hover:bottom-1/2 group-hover:translate-y-1/2 group-hover:opacity-100">
                             {slide.text}
                           </p>
                         </div>
@@ -292,7 +292,7 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
 
       {purpose === "Images" && currentYear && (
         <div className="mt-2 flex justify-center">
-          <p className="text-lg italic text-foreground font-redhat">{currentYear}</p>
+          <p className="font-redhat text-lg italic text-foreground">{currentYear}</p>
         </div>
       )}
       {/* Slider Icon & Arrows for mobile version */}
@@ -300,26 +300,27 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
         <div className="mt-6 flex h-fit flex-row items-center justify-center gap-12">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} purpose={purpose} className="static" />
           <div className="flex items-center justify-center gap-2">
-        {snaps.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => emblaApi?.scrollTo(i)}
-            className={`h-2 w-2 rounded-full transition-all dark:bg-white ${selected === i ? "w-6 bg-black" : "bg-black/40 hover:bg-black/70"}`}
-          />
-        ))}
-      </div>
+            {snaps.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => emblaApi?.scrollTo(i)}
+                className={`h-2 w-2 rounded-full transition-all dark:bg-white ${selected === i ? "w-6 bg-black" : "bg-black/40 hover:bg-black/70"}`}
+              />
+            ))}
+          </div>
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} purpose={purpose} className="static" />
         </div>
-      ) : <div className="mt-6 flex justify-center items-center gap-2">
-        {snaps.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => emblaApi?.scrollTo(i)}
-            className={`h-2 w-2 rounded-full transition-all dark:bg-white ${selected === i ? "w-6 bg-black" : "bg-black/40 hover:bg-black/70"}`}
-          />
-        ))}
-      </div>}
-
+      ) : (
+        <div className="mt-6 flex items-center justify-center gap-2">
+          {snaps.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => emblaApi?.scrollTo(i)}
+              className={`h-2 w-2 rounded-full transition-all dark:bg-white ${selected === i ? "w-6 bg-black" : "bg-black/40 hover:bg-black/70"}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

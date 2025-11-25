@@ -1,5 +1,6 @@
 import TimelineMobile from "@/client/components/about/TimelineMobile";
 import { cn } from "@/shared/utils";
+import { imageUrls } from "@assets/imageUrls";
 import AboutCard from "@components/about/AboutCard";
 import ContactForm from "@components/about/ContactForm";
 import HistorySection from "@components/about/HistorySection";
@@ -7,12 +8,11 @@ import MissionSection from "@components/about/MissionSection";
 import MissionSectionMobile from "@components/about/MissionSectionMobile";
 import Timeline from "@components/about/Timeline";
 import YoutubeSection from "@components/about/YoutubeSection";
-import { imageUrls } from "@assets/imageUrls";
+import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
+import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
-import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
-import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 
 export const Route = createFileRoute("/about")({
   meta: () => [
@@ -27,11 +27,11 @@ export const Route = createFileRoute("/about")({
     const isMobile = useIsMobile();
 
     return (
-      <div className="max-w-8xl w-full py-10 flex min-h-screen flex-col items-center justify-center overflow-x-hidden bg-background">
+      <div className="max-w-8xl flex min-h-screen w-full flex-col items-center justify-center overflow-x-hidden bg-background py-10">
         <h1 className="header-text ombre-text">ABOUT</h1>
-        
+
         {/* Summary & Buttons to Board/Sponsors */}
-        <AboutCard/>
+        <AboutCard />
         <div className="max-w-8xl w-7xl mb-10 flex justify-center font-redhat">
           <div className="flex space-x-4 sm:space-x-6">
             <Link
@@ -50,39 +50,39 @@ export const Route = createFileRoute("/about")({
         </div>
 
         {/* Youtube Video */}
-        <OmbreDivider/>
-        <OmbreDivider/>
+        <OmbreDivider />
+        <OmbreDivider />
         <div className="ombre-background-transparent w-full">
           <section className={cn("my-16 flex justify-center")}>
             <YoutubeSection />
           </section>
         </div>
-        <OmbreDivider/>
-        <OmbreDivider/>
+        <OmbreDivider />
+        <OmbreDivider />
 
         {/* Mission */}
-        <section className={cn("w-full py-10 max-w-7xl")}>
-          <HeaderWithGreenBorder text="Mission Statement" type="Subheader"/>
+        <section className={cn("w-full max-w-7xl py-10")}>
+          <HeaderWithGreenBorder text="Mission Statement" type="Subheader" />
           {isMobile ? <MissionSectionMobile /> : <MissionSection />}
         </section>
-        <OmbreDivider/>
+        <OmbreDivider />
 
         {/* History */}
-        <section className={cn("w-full max-w-7xl flex-col py-10 flex items-center justify-center")}>
-          <HeaderWithGreenBorder text="History" type="Subheader"/>
+        <section className={cn("flex w-full max-w-7xl flex-col items-center justify-center py-10")}>
+          <HeaderWithGreenBorder text="History" type="Subheader" />
           <HistorySection />
         </section>
 
         {/* Timeline */}
         <section className={cn("w-full max-w-7xl py-10")}>
-          <HeaderWithGreenBorder text="Timeline of Achievements" type="Subheader"/>
+          <HeaderWithGreenBorder text="Timeline of Achievements" type="Subheader" />
           {isMobile ? <TimelineMobile /> : <Timeline />}
         </section>
-        <OmbreDivider/>
+        <OmbreDivider />
 
         {/* Contact Us */}
         <section className={cn("w-full max-w-7xl py-10")}>
-          <HeaderWithGreenBorder text="Contact Us" type="Subheader"/>
+          <HeaderWithGreenBorder text="Contact Us" type="Subheader" />
           <ContactForm />
         </section>
       </div>

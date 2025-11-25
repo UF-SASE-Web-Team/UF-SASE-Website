@@ -1,8 +1,8 @@
 import { resendVerifyCode, verifyCode } from "@/client/api/auth";
 import { imageUrls } from "@assets/imageUrls";
-import type { FormData } from "@components/AuthForm";
-import AuthForm from "@components/AuthForm";
-import AuthLayout from "@components/AuthLayout";
+import type { FormData } from "@components/auth/AuthForm";
+import AuthForm from "@components/auth/AuthForm";
+import AuthLayout from "@components/auth/AuthLayout";
 import { Page } from "@components/Page";
 import { SuccessModal } from "@components/SuccessModal";
 import { useMutation } from "@tanstack/react-query";

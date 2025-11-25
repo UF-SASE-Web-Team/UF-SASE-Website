@@ -3,9 +3,9 @@ import { Page } from "@components/Page";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import AuthForm from "../components/AuthForm";
-import AuthLayout from "../components/AuthLayout";
-import { SuccessModal } from "../components/SuccessModal";
+import AuthForm from "@components/auth/AuthForm";
+import AuthLayout from "@components/auth/AuthLayout";
+import { SuccessModal } from "@components/SuccessModal";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/forgot-password")({

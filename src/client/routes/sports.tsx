@@ -9,6 +9,7 @@ import { seo } from "../utils/seo";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { cn } from "@/shared/utils";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
+import { SportGoals } from "@information/ProgramGoals";
 
 export const Route = createFileRoute("/sports")({
   meta: () => [
@@ -59,13 +60,13 @@ export const Route = createFileRoute("/sports")({
           </div>
 
           {/* Goals & Outcomes */}
-          <div className="w-full py-10 bg-saseGrayLight flex justify-center">
+          <div className="w-full py-10 bg-saseGrayLight flex justify-center dark:bg-black">
             <div className="w-full max-w-7xl">
               <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader"/>
               <div className={cn({"flex-col gap-10" : isMobile, "flex-row gap-36" : !isMobile},"px-8 flex flex-nowrap items-center justify-center")}>
-                <GoalCard text="> Meet new people with common interests." color="blue" mobileAlign="left"/>
-                <GoalCard text="> Have fun and compete in a friendly yet competitive environment." color="green" mobileAlign="right"/>
-                <GoalCard text="> Develop your athletic ability in a variety of disciplines." color="blue" mobileAlign="left"/>
+                {SportGoals.map((goal, index) => (
+                  <GoalCard text={goal.text} color={goal.color} mobileAlign={goal.mobileAlign} key={index}/>
+                ))}  
               </div>
             </div>
           </div>

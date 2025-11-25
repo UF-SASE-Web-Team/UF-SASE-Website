@@ -1,7 +1,7 @@
 import { Values } from "@client/information/Values";
 import { useIsMobile } from "@/client/hooks/useIsMobile";
 import { cn } from "@/shared/utils";
-import PastBoardImages from "@components/programs/PastBoardImages";
+import PastBoardImages from "@/client/components/board/PastBoardImages";
 import ProgramImages from "@/client/information/ProgramImages";
 import Testimonials from "@/client/information/ProgramTestimonials";
 import type { EmblaCarouselType, EmblaEventType, EmblaOptionsType } from "embla-carousel";

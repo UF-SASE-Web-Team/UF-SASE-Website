@@ -1,5 +1,5 @@
 import { cn } from "@/shared/utils";
-import { Missions } from "../../information/Missions";
+import { Missions } from "@information/Missions";
 
 const MissionSectionMobile: React.FC = () => (
   <div>

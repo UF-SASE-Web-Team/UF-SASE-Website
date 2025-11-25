@@ -11,6 +11,7 @@ import { cn } from "@/shared/utils";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 import InternsPhoto from "@assets/interns/SaseInterns.png"
 import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
+import { InternGoals } from "@information/ProgramGoals";
 
 export const Route = createFileRoute("/interns")({
   meta: () => [
@@ -63,13 +64,13 @@ export const Route = createFileRoute("/interns")({
           </div>
 
           {/* Goals & Outcomes */}
-          <div className="w-full py-10 bg-saseGrayLight flex justify-center">
+          <div className="w-full py-10 bg-saseGrayLight flex justify-center dark:bg-black">
             <div className="w-full max-w-7xl">
               <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader"/>
               <div className={cn({"flex-col gap-10" : isMobile, "flex-row gap-36" : !isMobile},"px-8 flex flex-nowrap items-center justify-center")}>
-                <GoalCard text="> Get more involved in SASE, especially for first and second years." color="blue" mobileAlign="left"/>
-                <GoalCard text="> Develop essential professional skills and experiences to add to your resume." color="green" mobileAlign="right"/>
-                <GoalCard text="> Connect with other SASErs and board members through intern-exclusive networking events." color="blue" mobileAlign="left"/>
+                {InternGoals.map((goal, index) => (
+                  <GoalCard text={goal.text} color={goal.color} mobileAlign={goal.mobileAlign} key={index}/>
+                ))}
               </div>
             </div>
           </div>

@@ -120,28 +120,7 @@ export const Route = createFileRoute("/")({
               <div className="mx-auto grid max-w-7xl grid-cols-3 items-stretch gap-10 px-6">
                 {Missions.map((s) => (
                   <div key={s.mission} className="flex justify-center">
-                    <div
-                      className={[
-                        "relative h-full min-h-[330px] w-full max-w-[560px] lg:min-h-[330px]",
-                        "[&>div]:h-full",
-                        "[&>div>div:nth-child(2)]:h-full",
-                        "[&>div>div:nth-child(2)>div]:h-full",
-                        // hide the background copy on desktop
-                        "[&>div>div:first-child]:hidden",
-                        // scale whole card on hover
-                        "[&>div]:transition-transform",
-                        "[&>div]:duration-300",
-                        "[&>div]:transform-gpu",
-                        "hover:[&>div]:scale-105",
-                        s.shadow === "blue"
-                          ? "hover:[&>div>div:nth-child(2)]:shadow-[12px_12px_0_#0668B3]"
-                          : "hover:[&>div>div:nth-child(2)]:shadow-[12px_12px_0_#7DC242]",
-                        // prevent inner double-scale
-                        "[&>div>div:nth-child(2)>div:hover]:scale-100",
-                      ].join(" ")}
-                    >
-                      <MissionCard image={s.image} mission={s.mission} text={s.homeText} shadow={s.shadow} />
-                    </div>
+                    <MissionCard image={s.image} mission={s.mission} text={s.homeText} shadow={s.shadow} />
                   </div>
                 ))}
               </div>
@@ -154,7 +133,7 @@ export const Route = createFileRoute("/")({
         <OmbreDivider/>
         {isMobile ? (
           <>
-            <div className="flex w-full flex-col items-center bg-white px-4 gap-4 dark:bg-black">
+            <div className="flex w-full flex-col items-center bg-white px-4 py-10 gap-4 dark:bg-black">
               {PIEBoard.map((p, i) => (
                 <div key={i} className="flex flex-col gap-4">
                   <MobileMemberCard

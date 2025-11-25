@@ -1,23 +1,23 @@
 import { DarkModeContext } from "@/client/components/custom_ui/DarkModeProvider";
+import MemberCard from "@/client/components/custom_ui/MemberCard";
+import MobileMemberCard from "@/client/components/custom_ui/MobileMemberCard";
 import { cn } from "@/shared/utils";
+import { imageUrls } from "@assets/imageUrls";
 import WebTeamGroupImage from "@assets/webdev/WebDevTeamCropped.png";
 import WebTeamDescription from "@assets/webdev/WebDevTerminal.png";
 import WebTeam from "@assets/webdev/WebTeam.png";
-import MemberCard from "@/client/components/custom_ui/MemberCard";
-import MobileMemberCard from "@/client/components/custom_ui/MobileMemberCard";
+import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
+import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
+import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
 import FAQ from "@components/programs/FAQCard";
-import { SwtFAQ } from "@information/ProgramFAQs";
+import GoalCard from "@components/programs/GoalCard";
 import { useIsMobile } from "@hooks/useIsMobile";
+import { SWTTeamLeads, Webmasters } from "@information/People";
+import { SwtFAQ } from "@information/ProgramFAQs";
+import { SwtGoals } from "@information/ProgramGoals";
 import { createFileRoute } from "@tanstack/react-router";
 import { useContext, useState } from "react";
-import { imageUrls } from "@assets/imageUrls";
 import { seo } from "../utils/seo";
-import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
-import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
-import { SwtGoals } from "@information/ProgramGoals";
-import GoalCard from "@components/programs/GoalCard";
-import { Webmasters , SWTTeamLeads } from "@information/People";
-import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 
 export const Route = createFileRoute("/webdev")({
   meta: () => [
@@ -32,18 +32,18 @@ export const Route = createFileRoute("/webdev")({
     const isMobile = useIsMobile();
     const [buttonIndex, setIndex] = useState(1);
     const { darkMode } = useContext(DarkModeContext);
-    const currentWebmastersInfo = Webmasters.find((team: { team: string; }) => team.team == "Current")?.information; 
-    const pastWebmastersInfo = Webmasters.find((team: { team: string; }) => team.team == "Past")?.information; 
-    const websiteLeads = SWTTeamLeads.find((team: { team: string; }) => team.team == "Website")?.information; 
-    const projectLeads = SWTTeamLeads.find((team: { team: string; }) => team.team == "Semester Project")?.information; 
+    const currentWebmastersInfo = Webmasters.find((team: { team: string }) => team.team == "Current")?.information;
+    const pastWebmastersInfo = Webmasters.find((team: { team: string }) => team.team == "Past")?.information;
+    const websiteLeads = SWTTeamLeads.find((team: { team: string }) => team.team == "Website")?.information;
+    const projectLeads = SWTTeamLeads.find((team: { team: string }) => team.team == "Semester Project")?.information;
 
     const buttonState = (position: number) => {
       setIndex(position);
     };
 
     return (
-      <div className="py-10 flex min-h-screen flex-col items-center bg-background w-full">
-        <div className={cn({"flex-col items-center" : isMobile, "flex-row gap-10": !isMobile}, "flex w-full max-w-7xl")}>
+      <div className="flex min-h-screen w-full flex-col items-center bg-background py-10">
+        <div className={cn({ "flex-col items-center": isMobile, "flex-row gap-10": !isMobile }, "flex w-full max-w-7xl")}>
           <div className="relative mx-auto w-[75%] sm:w-2/5">
             <img
               src={WebTeam}
@@ -58,47 +58,44 @@ export const Route = createFileRoute("/webdev")({
           </div>
         </div>
 
-        <div className="w-full py-10 flex flex-col items-center">
+        <div className="flex w-full flex-col items-center py-10">
           {/* Group Picture & App Status */}
-          <div className="bg-black py-10 w-full flex flex-col justify-center items-center">
-            <ApplicationPhoto image={WebTeamGroupImage} applicationStatus="CLOSED" nextSemester="Spring 2026"/>
+          <div className="flex w-full flex-col items-center justify-center bg-black py-10">
+            <ApplicationPhoto image={WebTeamGroupImage} applicationStatus="CLOSED" nextSemester="Spring 2026" />
           </div>
-          
+
           {/* Leadership Display Toggle */}
           <div
-            className={cn(
-              `mt-10 w-auto flex rounded-full border-2 border-black bg-muted font-redhat text-3xl font-medium dark:border-white`,
-              {
-                "text-lg": isMobile,
-              },
-            )}
+            className={cn(`mt-10 flex w-auto rounded-full border-2 border-black bg-muted font-redhat text-3xl font-medium dark:border-white`, {
+              "text-lg": isMobile,
+            })}
           >
             <button
               onClick={() => buttonState(1)}
-              className={cn(`flex-grow rounded-full py-4 px-10 transition duration-300 hover:brightness-90`, {
+              className={cn(`flex-grow rounded-full px-10 py-4 transition duration-300 hover:brightness-90`, {
                 "bg-saseGreen": buttonIndex === 1,
                 "bg-muted": buttonIndex !== 1,
-                "px-4" : isMobile
+                "px-4": isMobile,
               })}
             >
               Website
             </button>
             <button
               onClick={() => buttonState(2)}
-              className={cn(`flex-grow rounded-full bg-muted py-4 px-10 transition duration-300 hover:brightness-90`, {
+              className={cn(`flex-grow rounded-full bg-muted px-10 py-4 transition duration-300 hover:brightness-90`, {
                 "bg-saseGreen": buttonIndex === 2,
                 "bg-muted": buttonIndex !== 2,
-                "px-4" : isMobile
+                "px-4": isMobile,
               })}
             >
               Project
             </button>
             <button
               onClick={() => buttonState(3)}
-              className={cn(`flex-grow rounded-full py-4 px-10 transition duration-300 hover:brightness-90`, {
+              className={cn(`flex-grow rounded-full px-10 py-4 transition duration-300 hover:brightness-90`, {
                 "bg-saseGreen": buttonIndex === 3,
                 "bg-muted": buttonIndex !== 3,
-                "px-4" : isMobile
+                "px-4": isMobile,
               })}
             >
               Past Webmasters
@@ -107,56 +104,105 @@ export const Route = createFileRoute("/webdev")({
 
           {/* Leadership */}
           <header className="flex w-full justify-center py-10">
-            <h2 className="ombre-text font-silkscreen text-5xl font-medium">
-              Leadership
-            </h2>
+            <h2 className="ombre-text font-silkscreen text-5xl font-medium">Leadership</h2>
           </header>
           {isMobile ? (
             // Mobile Leadership Display
-            <div className="pb-10 px-4">
+            <div className="px-4 pb-10">
               {buttonIndex !== 3 ? (
                 <>
                   {/* Current Webmasters */}
-                  {currentWebmastersInfo?.map((lead: { image: string; name: string; year: string; textColor: string; quote: string | undefined; mobileAlign: string;}, index) => (
-                     <div key={index} className="flex flex-col gap-4">
-                      <MobileMemberCard image={lead.image} name={lead.name} role="Webmaster" textColor={lead.textColor} quote={lead.quote} imageSide={lead.mobileAlign}/>
-                      <OmbreDivider/>
-                    </div>
-                  ))}
+                  {currentWebmastersInfo?.map(
+                    (
+                      lead: { image: string; name: string; year: string; textColor: string; quote: string | undefined; mobileAlign: string },
+                      index,
+                    ) => (
+                      <div key={index} className="flex flex-col gap-4">
+                        <MobileMemberCard
+                          image={lead.image}
+                          name={lead.name}
+                          role="Webmaster"
+                          textColor={lead.textColor}
+                          quote={lead.quote}
+                          imageSide={lead.mobileAlign}
+                        />
+                        <OmbreDivider />
+                      </div>
+                    ),
+                  )}
                 </>
               ) : (
                 <>
                   {/* Past Webmasters */}
-                  {pastWebmastersInfo?.map((lead: { image: string; name: string; year: string; textColor: string; quote: string | undefined; mobileAlign: string;}, index) => (
-                     <div key={index} className="flex flex-col gap-4">
-                      <MobileMemberCard image={lead.image} name={lead.name} role={lead.year} textColor={lead.textColor} imageSide={lead.mobileAlign}/>
-                      {index < pastWebmastersInfo.length - 1 &&  <div className="mb-4"><OmbreDivider/></div>}
-                    </div>
-                  ))}
+                  {pastWebmastersInfo?.map(
+                    (
+                      lead: { image: string; name: string; year: string; textColor: string; quote: string | undefined; mobileAlign: string },
+                      index,
+                    ) => (
+                      <div key={index} className="flex flex-col gap-4">
+                        <MobileMemberCard
+                          image={lead.image}
+                          name={lead.name}
+                          role={lead.year}
+                          textColor={lead.textColor}
+                          imageSide={lead.mobileAlign}
+                        />
+                        {index < pastWebmastersInfo.length - 1 && (
+                          <div className="mb-4">
+                            <OmbreDivider />
+                          </div>
+                        )}
+                      </div>
+                    ),
+                  )}
                 </>
               )}
 
               {/* Web Maintenance Team Leads */}
               {buttonIndex === 1 && (
                 <>
-                  {websiteLeads?.map((lead: { image: string; name: string; role: string; quote: string | undefined; mobileAlign: string; mobileColor: string}, index) => (
+                  {websiteLeads?.map(
+                    (
+                      lead: { image: string; name: string; role: string; quote: string | undefined; mobileAlign: string; mobileColor: string },
+                      index,
+                    ) => (
                       <div key={index} className="flex flex-col gap-4">
-                      <MobileMemberCard image={lead.image} name={lead.name} role={lead.role} textColor={lead.mobileColor} quote={lead.quote} imageSide={lead.mobileAlign}/>
-                      {index < websiteLeads.length - 1 && <OmbreDivider/>}
-                    </div>                  
-                  ))}
+                        <MobileMemberCard
+                          image={lead.image}
+                          name={lead.name}
+                          role={lead.role}
+                          textColor={lead.mobileColor}
+                          quote={lead.quote}
+                          imageSide={lead.mobileAlign}
+                        />
+                        {index < websiteLeads.length - 1 && <OmbreDivider />}
+                      </div>
+                    ),
+                  )}
                 </>
               )}
 
               {/* Semester Project Team Leads */}
               {buttonIndex === 2 && (
                 <>
-                  {projectLeads?.map((lead: { image: string; name: string; role: string; quote: string | undefined; mobileAlign: string; mobileColor: string}, index) => (
-                    <div key={index} className="flex flex-col gap-4">
-                      <MobileMemberCard image={lead.image} name={lead.name} role={lead.role} textColor={lead.mobileColor} quote={lead.quote} imageSide={lead.mobileAlign}/>
-                      {index < projectLeads.length - 1 && <OmbreDivider/>}
-                    </div>                  
-                  ))}
+                  {projectLeads?.map(
+                    (
+                      lead: { image: string; name: string; role: string; quote: string | undefined; mobileAlign: string; mobileColor: string },
+                      index,
+                    ) => (
+                      <div key={index} className="flex flex-col gap-4">
+                        <MobileMemberCard
+                          image={lead.image}
+                          name={lead.name}
+                          role={lead.role}
+                          textColor={lead.mobileColor}
+                          quote={lead.quote}
+                          imageSide={lead.mobileAlign}
+                        />
+                        {index < projectLeads.length - 1 && <OmbreDivider />}
+                      </div>
+                    ),
+                  )}
                 </>
               )}
             </div>
@@ -167,15 +213,17 @@ export const Route = createFileRoute("/webdev")({
                 {buttonIndex !== 3 ? (
                   <>
                     {/* Current Webmasters */}
-                    {currentWebmastersInfo?.map((lead: { image: string; name: string; year: string; textColor: string; quote: string | undefined; }) => (
-                      <MemberCard image={lead.image} name={lead.name} role="Webmaster" textColor="blue" quote={lead.quote}/>
-                    ))}
+                    {currentWebmastersInfo?.map(
+                      (lead: { image: string; name: string; year: string; textColor: string; quote: string | undefined }) => (
+                        <MemberCard image={lead.image} name={lead.name} role="Webmaster" textColor="blue" quote={lead.quote} />
+                      ),
+                    )}
                   </>
                 ) : (
                   <>
                     {/* Past Webmasters */}
-                    {pastWebmastersInfo?.map((lead: { image: string; name: string; year: string; textColor: string; quote: string | undefined; }) => (
-                      <MemberCard image={lead.image} name={lead.name} role={lead.year} textColor={lead.textColor}/>
+                    {pastWebmastersInfo?.map((lead: { image: string; name: string; year: string; textColor: string; quote: string | undefined }) => (
+                      <MemberCard image={lead.image} name={lead.name} role={lead.year} textColor={lead.textColor} />
                     ))}
                   </>
                 )}
@@ -185,8 +233,8 @@ export const Route = createFileRoute("/webdev")({
                 {/* Web Maintenance Team Leads */}
                 {buttonIndex === 1 && (
                   <>
-                    {websiteLeads?.map((lead: { image: string; name: string; role: string; quote: string | undefined; }) => (
-                      <MemberCard image={lead.image} name={lead.name} role={lead.role} textColor="green" quote={lead.quote}/>
+                    {websiteLeads?.map((lead: { image: string; name: string; role: string; quote: string | undefined }) => (
+                      <MemberCard image={lead.image} name={lead.name} role={lead.role} textColor="green" quote={lead.quote} />
                     ))}
                   </>
                 )}
@@ -194,8 +242,8 @@ export const Route = createFileRoute("/webdev")({
                 {/* Semester Project Team Leads */}
                 {buttonIndex === 2 && (
                   <>
-                    {projectLeads?.map((lead: { image: string; name: string; role: string; quote: string | undefined; }) => (
-                      <MemberCard image={lead.image} name={lead.name} role={lead.role} textColor="green" quote={lead.quote}/>
+                    {projectLeads?.map((lead: { image: string; name: string; role: string; quote: string | undefined }) => (
+                      <MemberCard image={lead.image} name={lead.name} role={lead.role} textColor="green" quote={lead.quote} />
                     ))}
                   </>
                 )}
@@ -204,20 +252,20 @@ export const Route = createFileRoute("/webdev")({
           )}
 
           {/* Goals & Outcomes */}
-          <div className="w-full py-10 bg-saseGrayLight flex justify-center dark:bg-black">
+          <div className="flex w-full justify-center bg-saseGrayLight py-10 dark:bg-black">
             <div className="w-full max-w-7xl">
-              <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader"/>
-              <div className={cn({"flex-col gap-10" : isMobile, "flex-row gap-36" : !isMobile},"px-8 flex flex-nowrap items-center justify-center")}>
+              <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader" />
+              <div className={cn({ "flex-col gap-10": isMobile, "flex-row gap-36": !isMobile }, "flex flex-nowrap items-center justify-center px-8")}>
                 {SwtGoals.map((goal, index) => (
-                  <GoalCard text={goal.text} color={goal.color} mobileAlign={goal.mobileAlign} key={index}/>
+                  <GoalCard text={goal.text} color={goal.color} mobileAlign={goal.mobileAlign} key={index} />
                 ))}
               </div>
             </div>
           </div>
 
           {/* FAQs */}
-          <div className="pt-10 w-full max-w-7xl">
-            <HeaderWithGreenBorder text="FAQs" type="Subheader"/>
+          <div className="w-full max-w-7xl pt-10">
+            <HeaderWithGreenBorder text="FAQs" type="Subheader" />
             <FAQ faqData={SwtFAQ} />
           </div>
         </div>

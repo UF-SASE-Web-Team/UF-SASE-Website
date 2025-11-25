@@ -3,9 +3,9 @@ import PastBoardDropDown from "@/client/components/board/PastBoardDropDown";
 import { imageUrls } from "@assets/imageUrls";
 import pastBoardInfo from "@components/board/PastBoardInfo";
 import Carousel from "@components/carousel/Carousel";
+import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
-import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 
 export const Route = createFileRoute("/past-board")({
   meta: () => [
@@ -16,26 +16,25 @@ export const Route = createFileRoute("/past-board")({
     }),
   ],
   component: () => {
- 
     return (
-      <div className="min-h-screen px-4 py-10 flex flex-col items-center">
+      <div className="flex min-h-screen flex-col items-center px-4 py-10">
         <div className="text-center">
           <h1 className="header-text ombre-text">PAST BOARD</h1>
-          <p className="font-oswald text-3xl pb-10">Meet our past Board Members from previous years!</p>
+          <p className="pb-10 font-oswald text-3xl">Meet our past Board Members from previous years!</p>
         </div>
 
-          <OmbreDivider/>
+        <OmbreDivider />
         <div className="mb-8 mt-10 flex justify-center font-[Poppins]">
           <Carousel purpose="Images" prog="Past Board" />
         </div>
-        <OmbreDivider/>
+        <OmbreDivider />
 
         <PastBoardDropDown title="2024-25">
           {pastBoardInfo.map((section, idx) => (
             <div key={idx} className="mb-12">
-              <h2 className="text-center text-3xl font-semibold font-oswald">{section.section}</h2>
+              <h2 className="text-center font-oswald text-3xl font-semibold">{section.section}</h2>
               <div className="flex justify-center">
-                <div className="grid max-w-screen-lg grid-cols-1 justify-items-center gap-y-5 gap-x-16 md:grid-cols-3">
+                <div className="grid max-w-screen-lg grid-cols-1 justify-items-center gap-x-16 gap-y-5 md:grid-cols-3">
                   {section.members.map((member, idx) => (
                     <BoardMemberCard key={idx} member={member} />
                   ))}

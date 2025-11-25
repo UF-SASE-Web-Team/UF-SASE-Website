@@ -1,11 +1,11 @@
 import { cn } from "@/shared/utils";
+import { Logo } from "@navigation/Logo";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@ui/button";
 import { Input } from "@ui/input";
 import React from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import { Logo } from "@navigation/Logo";
 
 interface AuthFormProps {
   onSubmit: (data: FormData) => void;

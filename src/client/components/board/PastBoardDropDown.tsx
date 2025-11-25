@@ -13,7 +13,7 @@ const PastBoardDropDown: React.FC<BoardDropdown> = ({ children, title }) => {
       <div className="overflow-hidden rounded-2xl border border-border">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="flex w-full items-center justify-between bg-muted px-6 py-5 font-oswald text-left text-3xl text-foreground focus:outline-none"
+          className="flex w-full items-center justify-between bg-muted px-6 py-5 text-left font-oswald text-3xl text-foreground focus:outline-none"
         >
           <span>{title}</span>
           <span className={`transform text-3xl transition-transform duration-200 ${isOpen ? "rotate-180" : "rotate-0"}`}>{isOpen ? "−" : "+"}</span>

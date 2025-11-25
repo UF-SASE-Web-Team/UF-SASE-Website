@@ -11,7 +11,7 @@ const GoalCard = ({ color, mobileAlign, text }: GoalCardProps) => {
   const isMobile = useIsMobile();
 
   return (
-    <div className={cn({"justify-end" : mobileAlign == "right" && isMobile, "justify-center" : !isMobile}, "w-full flex")}>
+    <div className={cn({ "justify-end": mobileAlign == "right" && isMobile, "justify-center": !isMobile }, "flex w-full")}>
       <div
         className={cn(
           `flex h-56 w-56 transform flex-col items-center justify-center rounded-2xl border-2 border-border bg-black p-6 transition duration-300 hover:scale-105`,
@@ -21,7 +21,7 @@ const GoalCard = ({ color, mobileAlign, text }: GoalCardProps) => {
           },
         )}
       >
-        <p className="font-redhat text-lg text-white font-medium">{text}</p>
+        <p className="font-redhat text-lg font-medium text-white">{text}</p>
       </div>
     </div>
   );

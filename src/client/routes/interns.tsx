@@ -1,17 +1,17 @@
+import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
+import InternsPhoto from "@assets/interns/SaseInterns.png";
 import Carousel from "@components/carousel/Carousel";
+import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
+import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
 import FAQ from "@components/programs/FAQCard";
-import { InternsFAQ } from "../information/ProgramFAQs";
 import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
-import { createFileRoute } from "@tanstack/react-router";
-import { seo } from "../utils/seo";
 import { useIsMobile } from "@hooks/useIsMobile";
-import { cn } from "@/shared/utils";
-import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
-import InternsPhoto from "@assets/interns/SaseInterns.png"
-import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
 import { InternGoals } from "@information/ProgramGoals";
+import { createFileRoute } from "@tanstack/react-router";
+import { InternsFAQ } from "../information/ProgramFAQs";
+import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/interns")({
   meta: () => [
@@ -27,11 +27,11 @@ export const Route = createFileRoute("/interns")({
     const isMobile = useIsMobile();
 
     return (
-      <div className="py-10 flex min-h-screen w-full flex-col justify-center items-center bg-background">
-        <div className={cn({"flex-row gap-24" : !isMobile, "flex-col gap-4": isMobile},"px-4 flex w-full max-w-7xl items-start pb-10")}>
+      <div className="flex min-h-screen w-full flex-col items-center justify-center bg-background py-10">
+        <div className={cn({ "flex-row gap-24": !isMobile, "flex-col gap-4": isMobile }, "flex w-full max-w-7xl items-start px-4 pb-10")}>
           <header className="flex items-center">
             {/* Green Line and Text in Row */}
-            <div className="mr-5 h-40 w-1.5 bg-saseGreen rounded-sm"></div>
+            <div className="mr-5 h-40 w-1.5 rounded-sm bg-saseGreen"></div>
             <h2 className="font-oswald text-7xl font-semibold leading-tight text-foreground">
               SASE
               <br />
@@ -51,33 +51,33 @@ export const Route = createFileRoute("/interns")({
           />
         </div>
 
-        <div className="w-full pb-10 flex flex-col items-center">
+        <div className="flex w-full flex-col items-center pb-10">
           {/* Group Picture & App Status */}
-          <div className="bg-black py-10 w-full flex flex-col justify-center items-center">
-            <ApplicationPhoto image={InternsPhoto} applicationStatus="CLOSED" nextSemester="Spring 2026"/>
+          <div className="flex w-full flex-col items-center justify-center bg-black py-10">
+            <ApplicationPhoto image={InternsPhoto} applicationStatus="CLOSED" nextSemester="Spring 2026" />
           </div>
 
           {/* Testimonials */}
-          <div className="py-10 max-w-7xl">
-            <HeaderWithGreenBorder text="Testimonials" type="Subheader"/>
+          <div className="max-w-7xl py-10">
+            <HeaderWithGreenBorder text="Testimonials" type="Subheader" />
             <Carousel purpose="Testimonials" prog="Interns" />
           </div>
 
           {/* Goals & Outcomes */}
-          <div className="w-full py-10 bg-saseGrayLight flex justify-center dark:bg-black">
+          <div className="flex w-full justify-center bg-saseGrayLight py-10 dark:bg-black">
             <div className="w-full max-w-7xl">
-              <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader"/>
-              <div className={cn({"flex-col gap-10" : isMobile, "flex-row gap-36" : !isMobile},"px-8 flex flex-nowrap items-center justify-center")}>
+              <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader" />
+              <div className={cn({ "flex-col gap-10": isMobile, "flex-row gap-36": !isMobile }, "flex flex-nowrap items-center justify-center px-8")}>
                 {InternGoals.map((goal, index) => (
-                  <GoalCard text={goal.text} color={goal.color} mobileAlign={goal.mobileAlign} key={index}/>
+                  <GoalCard text={goal.text} color={goal.color} mobileAlign={goal.mobileAlign} key={index} />
                 ))}
               </div>
             </div>
           </div>
 
           {/* FAQs */}
-          <div className="pt-10 max-w-7xl">
-            <HeaderWithGreenBorder text="FAQs" type="Subheader"/>
+          <div className="max-w-7xl pt-10">
+            <HeaderWithGreenBorder text="FAQs" type="Subheader" />
             <FAQ faqData={InternsFAQ} />
           </div>
         </div>

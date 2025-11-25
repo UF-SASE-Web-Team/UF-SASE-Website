@@ -24,7 +24,7 @@ const MemberCard = ({ image, name, quote, role, textColor }: { image: string; na
             `border-b-2 pb-2`,
           )}
         >
-          <p className="text-center font-semibold text-3xl">{name}</p>
+          <p className="text-center text-3xl font-semibold">{name}</p>
           <p className="text-center text-lg font-medium italic">{role}</p>
         </div>
         {quote && (

@@ -44,7 +44,7 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
         {/* learn more */}
         {!isExpanded && (
           <div className="absolute inset-0 flex items-start justify-center bg-white bg-opacity-60 p-[1vw] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <span className="font-semibold text-black underline text-lg">Learn More</span>
+            <span className="text-lg font-semibold text-black underline">Learn More</span>
           </div>
         )}
 
@@ -58,17 +58,13 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
               <h3 className="cursor-pointer text-lg font-bold" onClick={() => setExpanded(false)}>
                 {member.role}
               </h3>
-              <h4 className="cursor-pointer text-md font-semibold" onClick={() => setExpanded(false)}>
+              <h4 className="text-md cursor-pointer font-semibold" onClick={() => setExpanded(false)}>
                 {member.name}
               </h4>
               <p className="cursor-pointer text-sm text-black dark:text-saseGray" onClick={() => setExpanded(false)}>
                 {member.major}
               </p>
-              <a
-                href={`mailto:${member.contact}`}
-                className="cursor-pointer text-sm text-blue-500 underline"
-                onClick={(e) => e.stopPropagation()}
-              >
+              <a href={`mailto:${member.contact}`} className="cursor-pointer text-sm text-blue-500 underline" onClick={(e) => e.stopPropagation()}>
                 {member.contact}
               </a>
               <p

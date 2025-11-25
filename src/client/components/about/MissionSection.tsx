@@ -1,9 +1,8 @@
-import { cn } from "@/shared/utils";
 import MissionCard from "@/client/components/custom_ui/MissionCard";
 import { Missions } from "@/client/information/Missions";
+import { cn } from "@/shared/utils";
 
 const MissionSection: React.FC = () => {
-
   return (
     <div className="px-4 font-redhat">
       <p className={cn("mb-8 text-center text-3xl")}>To create a welcoming community where members:</p>

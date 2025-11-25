@@ -1,17 +1,17 @@
 import Carousel from "@/client/components/carousel/Carousel";
+import { cn } from "@/shared/utils";
+import SETPhoto from "@assets/set/SETPHOTO3.jpg";
+import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
+import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
 import FAQ from "@components/programs/FAQCard";
 import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
+import { useIsMobile } from "@hooks/useIsMobile";
+import { SetGoals } from "@information/ProgramGoals";
 import { createFileRoute } from "@tanstack/react-router";
 import { imageUrls } from "../assets/imageUrls";
 import { SetFAQ } from "../information/ProgramFAQs";
 import { seo } from "../utils/seo";
-import { cn } from "@/shared/utils";
-import { useIsMobile } from "@hooks/useIsMobile";
-import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
-import SETPhoto from "@assets/set/SETPHOTO3.jpg"
-import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
-import { SetGoals } from "@information/ProgramGoals";
 
 export const Route = createFileRoute("/set")({
   meta: () => [
@@ -24,14 +24,14 @@ export const Route = createFileRoute("/set")({
   ],
   component: () => {
     const isMobile = useIsMobile();
-    
+
     return (
-      <div className="py-10 flex min-h-screen w-full flex-col justify-center items-center bg-background">
-        <div className={cn({"flex-row gap-24" : !isMobile, "flex-col gap-4": isMobile},"px-4 flex w-full max-w-7xl items-start pb-10")}>
+      <div className="flex min-h-screen w-full flex-col items-center justify-center bg-background py-10">
+        <div className={cn({ "flex-row gap-24": !isMobile, "flex-col gap-4": isMobile }, "flex w-full max-w-7xl items-start px-4 pb-10")}>
           <header className="flex items-center">
             {/* Green Line and Text in Row */}
-            <div className="mr-5 h-52 w-1.5 bg-saseGreen rounded-sm"></div>
-            <h2 className="font-oswald text-6xl sm:text-7xl font-semibold leading-tight text-foreground">
+            <div className="mr-5 h-52 w-1.5 rounded-sm bg-saseGreen"></div>
+            <h2 className="font-oswald text-6xl font-semibold leading-tight text-foreground sm:text-7xl">
               SASE
               <br />
               ENGINEERING
@@ -52,33 +52,33 @@ export const Route = createFileRoute("/set")({
           />
         </div>
 
-        <div className="w-full pb-10 flex flex-col items-center">
+        <div className="flex w-full flex-col items-center pb-10">
           {/* Group Picture & App Status */}
-          <div className="bg-black py-10 w-full flex flex-col justify-center items-center">
-            <ApplicationPhoto image={SETPhoto} applicationStatus="CLOSED" nextSemester="Spring 2026"/>
+          <div className="flex w-full flex-col items-center justify-center bg-black py-10">
+            <ApplicationPhoto image={SETPhoto} applicationStatus="CLOSED" nextSemester="Spring 2026" />
           </div>
 
-           {/* Past Projects */}
-          <div className="py-10 max-w-7xl">
-            <HeaderWithGreenBorder text="Past Projects" type="Subheader"/>
+          {/* Past Projects */}
+          <div className="max-w-7xl py-10">
+            <HeaderWithGreenBorder text="Past Projects" type="Subheader" />
             <Carousel purpose="Testimonials" prog="SET" />
           </div>
 
           {/* Goals & Outcomes */}
-          <div className="w-full py-10 bg-saseGrayLight flex justify-center dark:bg-black">
+          <div className="flex w-full justify-center bg-saseGrayLight py-10 dark:bg-black">
             <div className="w-full max-w-7xl">
-              <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader"/>
-              <div className={cn({"flex-col gap-10" : isMobile, "flex-row gap-36" : !isMobile},"px-8 flex flex-nowrap items-center justify-center")}>
+              <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader" />
+              <div className={cn({ "flex-col gap-10": isMobile, "flex-row gap-36": !isMobile }, "flex flex-nowrap items-center justify-center px-8")}>
                 {SetGoals.map((goal, index) => (
-                  <GoalCard text={goal.text} color={goal.color} mobileAlign={goal.mobileAlign} key={index}/>
-                ))}  
+                  <GoalCard text={goal.text} color={goal.color} mobileAlign={goal.mobileAlign} key={index} />
+                ))}
               </div>
             </div>
           </div>
 
-         {/* FAQs */}
-          <div className="pt-10 max-w-7xl">
-            <HeaderWithGreenBorder text="FAQs" type="Subheader"/>
+          {/* FAQs */}
+          <div className="max-w-7xl pt-10">
+            <HeaderWithGreenBorder text="FAQs" type="Subheader" />
             <FAQ faqData={SetFAQ} />
           </div>
         </div>

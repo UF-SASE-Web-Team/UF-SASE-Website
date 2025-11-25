@@ -1,12 +1,12 @@
 import type { FormData } from "@components/auth/AuthForm";
 import AuthForm from "@components/auth/AuthForm";
+import AuthLayout from "@components/auth/AuthLayout";
 import { Page } from "@components/Page";
 import { useAuth } from "@hooks/AuthContext";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
-import AuthLayout from "@components/auth/AuthLayout";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/login")({

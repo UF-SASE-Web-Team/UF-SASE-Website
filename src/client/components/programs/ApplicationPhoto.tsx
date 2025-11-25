@@ -1,8 +1,16 @@
-export const ApplicationPhoto = ({applicationStatus, image, nextSemester} : {image: string, applicationStatus : "OPEN" | "CLOSED", nextSemester: string}) => {
+export const ApplicationPhoto = ({
+  applicationStatus,
+  image,
+  nextSemester,
+}: {
+  image: string;
+  applicationStatus: "OPEN" | "CLOSED";
+  nextSemester: string;
+}) => {
   return (
     <div className="max-w-3xl px-4">
-      <img src={image} alt="Picture" className="w-full rounded-2xl mb-4"/>
-      <p className="font-silkscreen text-3xl text-left text-white mb-4">
+      <img src={image} alt="Picture" className="mb-4 w-full rounded-2xl" />
+      <p className="mb-4 text-left font-silkscreen text-3xl text-white">
         &gt; &gt; APPLICATIONS: <span className="text-saseBlue">{applicationStatus}</span>
       </p>
       <p className="font-redhat text-lg text-white">
@@ -18,4 +26,4 @@ export const ApplicationPhoto = ({applicationStatus, image, nextSemester} : {ima
       </p>
     </div>
   );
-}
+};

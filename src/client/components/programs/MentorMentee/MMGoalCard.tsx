@@ -9,9 +9,9 @@ interface MMGoalCarProps {
 
 export const MMGoalCard = ({ cardColor, mobileAlign, text }: MMGoalCarProps) => {
   const isMobile = useIsMobile();
-  
+
   return (
-    <div className={cn({"justify-end" : mobileAlign == "right" && isMobile, "justify-center" : !isMobile}, "w-full flex")}>
+    <div className={cn({ "justify-end": mobileAlign == "right" && isMobile, "justify-center": !isMobile }, "flex w-full")}>
       <div
         className={cn(
           {

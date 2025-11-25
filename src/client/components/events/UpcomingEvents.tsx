@@ -317,7 +317,7 @@ export default function UpcomingEventsBox({ days = 7, icsUrl, limit = 5, showDes
                         </div>
 
                         <div className="min-w-0 flex-1">
-                          <div className="truncate font-semibold text-neutral-900 text-lg">{e.title}</div>
+                          <div className="truncate text-lg font-semibold text-neutral-900">{e.title}</div>
                           <div className="text-sm text-neutral-600">{fmt.format(e.start)}</div>
                           {e.location && <div className="text-xs text-neutral-600">{e.location}</div>}
 

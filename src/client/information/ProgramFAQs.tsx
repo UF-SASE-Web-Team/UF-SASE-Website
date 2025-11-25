@@ -174,4 +174,3 @@ export const MMFAQ = [
       "Feel free to ask your questions in the SASE Discord channel or contact our Member Involvement Chairs, Michael and Connie, through Discord.",
   },
 ];
-

@@ -52,7 +52,7 @@ export const Route = createFileRoute("/set")({
           />
         </div>
 
-        <div className="w-full py-10 flex flex-col items-center">
+        <div className="w-full pb-10 flex flex-col items-center">
           {/* Group Picture & App Status */}
           <div className="bg-black py-10 w-full flex flex-col justify-center items-center">
             <ApplicationPhoto image={SETPhoto} applicationStatus="CLOSED" nextSemester="Spring 2026"/>

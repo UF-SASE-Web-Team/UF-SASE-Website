@@ -1,14 +1,30 @@
 import { imageUrls } from "@assets/imageUrls";
 import React from "react";
 
-const GalleryYearbook = () => {
+type Props = {
+  year: "2023-2024" | "2024-2025";
+};
+
+const GalleryYearbook = ({ year }: Props) => {
+  const previewImage = year === "2023-2024" ? imageUrls["fall2023_7.JPG"] : imageUrls["fall2024_11.JPG"];
+
   return (
-    <div>
-      <div className="flex justify-center pb-16 pt-6">
-        <div className="font-redhat text-6xl font-bold text-background">UF SASE 2024-2025</div>
-      </div>
-      <div className="flex border-4 border-background">
-        <img src={imageUrls["fall2024_11.JPG"]} alt="yearbook" />
+    <div className="w-full max-w-3xl">
+      <div className="relative">
+        <div className="flex items-stretch">
+          {/* Left rectangle */}
+          <div className="w-10 shrink-0 rounded-[4px] bg-[#c9ddff]" />
+
+          {/* Frame */}
+          <div className="ml-3 flex-1 rounded-[4px] border-[10px] border-[#bcdcff] md:border-[14px]">
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-[4px] bg-white">
+              <img src={previewImage} alt="Yearbook preview" className="h-full w-full object-cover" />
+            </div>
+          </div>
+        </div>
+
+        {/* SASE logo */}
+        <img src={imageUrls["SASELogoWithoutText.png"]} className="absolute -bottom-6 -right-2 w-20 md:-bottom-10 md:-right-20 md:w-60" />
       </div>
     </div>
   );

@@ -4,10 +4,19 @@ import { useEffect, useState } from "react";
 import { IoMdLink, IoMdPlay } from "react-icons/io";
 import GalleryYearbook from "../components/gallery/GalleryYearbook";
 import GalleryZipExtraction from "../components/gallery/GalleryZipExtraction";
+import SlideshowIndicator from "../components/gallery/SlideshowIndicator";
 import { applyOmbreDivider } from "../utils/ombre-divider.js";
 import { seo } from "../utils/seo";
 
-const slideshowLinks: Record<string, string> = {
+const slideshowLabels = {
+  "Fall 2024": "FALL 2024",
+  "Spring 2024": "SPRING 2024",
+  "Fall 2023": "FALL 2023",
+} as const;
+
+type SlideshowKey = keyof typeof slideshowLabels;
+
+const slideshowLinks: Record<SlideshowKey, string> = {
   "Fall 2024": "https://docs.google.com/document/d/1gjG2aHkh-IYXLQ5vTfmd6uphP7AYYN0M4liorjPt77k/edit?tab=t.0",
   "Spring 2024": "https://docs.google.com/document/d/1SohQfPM2D8fQhf4vkeWPfC9xTE3my4XTfVA-BNYYA9s/edit?tab=t.0",
   "Fall 2023": "https://docs.google.com/document/d/18brpCElaHqD-rFcKd2eG4FGfjnBWXSthrI-aNdqoHYk/edit?tab=t.0",
@@ -37,14 +46,14 @@ export const Route = createFileRoute("/gallery")({
     }),
   ],
   component: () => {
-    const [slideshow, setSlideshow] = useState<string>("Fall 2024");
+    const [slideshow, setSlideshow] = useState<SlideshowKey>("Fall 2024");
     const [activeYearbook, setActiveYearbook] = useState<YearbookId>("2024-2025");
 
     useEffect(() => {
       applyOmbreDivider();
     }, []);
 
-    const entries = Object.entries(slideshowLinks);
+    const entries = Object.entries(slideshowLinks) as Array<[SlideshowKey, string]>;
     const previewHref = yearbookLinks[activeYearbook];
 
     return (
@@ -56,55 +65,68 @@ export const Route = createFileRoute("/gallery")({
 
         {/* Main gallery grid */}
         <section className="mx-auto mt-16 max-w-6xl px-4 md:px-8">
-          <div className="rounded-3xl bg-white/80 px-4 py-6 shadow-[0_10px_0_0_rgb(203,203,212)] md:px-6 md:py-8">
-            <GalleryZipExtraction slideshow={slideshow} />
+          <div className="flex gap-10">
+            {/* LEFT VERTICAL INDICATOR – only the active slideshow */}
+            <div className="flex flex-col items-center">
+              <SlideshowIndicator label={slideshowLabels[slideshow]} />
+            </div>
+
+            {/* SLIDESHOW */}
+            <div className="flex-1">
+              <GalleryZipExtraction slideshow={slideshow} />
+            </div>
           </div>
         </section>
 
         {/* Google Drive Links box */}
         <section className="mx-auto mt-16 max-w-4xl px-4 md:px-8">
-          <div className="flex flex-col gap-6 rounded-3xl border-[3px] border-black bg-white px-8 py-8 md:flex-row md:items-center">
+          <div className="flex flex-col gap-4 rounded-2xl border-[4px] border-black bg-white px-4 py-5 md:flex-row md:items-center md:gap-6 md:px-8 md:py-8">
             {/* Left text */}
-            <div className="flex flex-col items-center md:items-start">
-              <p className="text-center font-oswald text-3xl leading-tight md:text-3xl">
-                <span className="block text-saseBlue">Google</span>
-                <span className="block text-saseBlue">Drive</span>
-                <span className="block text-saseGreen">Links</span>
+            <div className="-mt-1 flex flex-col items-center md:items-start">
+              <p className="text-center font-oswald text-2xl leading-tight md:text-3xl">
+                <span className="text-saseBlue">
+                  Google <span className="inline md:block">Drive</span>
+                </span>
+                <span className="-mt-1 block text-saseGreen">Links</span>
               </p>
             </div>
 
             {/* Divider */}
-            <div className="hidden h-28 w-[2px] bg-black md:block" />
+            <div className="hidden h-32 w-[4px] bg-black md:block" />
 
             {/* Right: semesters grid */}
             <div className="flex-1">
-              <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-3 sm:gap-y-10">
+              <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-3 sm:gap-y-8">
                 {entries.map(([label, link]) => (
-                  <div key={label} className="flex flex-col items-center gap-3">
-                    {/* Label – changes slideshow only */}
-                    <button type="button" onClick={() => setSlideshow(label)} className="font-redhat text-lg font-medium hover:underline">
+                  <div key={label} className="flex flex-col items-center gap-1 md:gap-3">
+                    {/* Label */}
+                    <button
+                      type="button"
+                      onClick={() => setSlideshow(label)}
+                      className="font-redhat text-base font-medium hover:underline md:text-lg"
+                    >
                       {label}
                     </button>
 
                     {/* Icons row */}
-                    <div className="flex gap-3">
-                      {/* Link icon – opens Drive */}
+                    <div className="flex gap-2 md:gap-3">
+                      {/* Link icon */}
                       <a
                         href={link}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex h-8 w-8 items-center justify-center rounded-[6px] border-[2px] border-[#3f8f35] text-[#3f8f35] transition hover:bg-[#e9f7e7]"
+                        className="flex h-7 w-7 items-center justify-center rounded-[6px] border-[3px] border-[#3f8f35] text-[#3f8f35] transition hover:bg-[#e9f7e7] md:h-8 md:w-8"
                       >
-                        <IoMdLink size={18} />
+                        <IoMdLink size={16} className="md:size-18" />
                       </a>
 
                       {/* Play icon */}
                       <button
                         type="button"
                         onClick={() => setSlideshow(label)}
-                        className="flex h-8 w-8 items-center justify-center rounded-[6px] border-[2px] border-saseBlue text-saseBlue transition hover:bg-[#e9f7e7]"
+                        className="flex h-7 w-7 items-center justify-center rounded-[6px] border-[3px] border-saseBlue text-saseBlue transition hover:bg-[#e9f7e7] md:h-8 md:w-8"
                       >
-                        <IoMdPlay size={18} />
+                        <IoMdPlay size={16} className="md:size-18" />
                       </button>
                     </div>
                   </div>
@@ -116,27 +138,26 @@ export const Route = createFileRoute("/gallery")({
 
         {/* Yearbook Section */}
         <section className="mx-auto mt-16 max-w-6xl px-4 md:px-8">
-          <h2 className="font-oswald text-4xl md:text-5xl">UF SASE YEARBOOK</h2>
+          <h2 className="mb-4 font-oswald text-4xl md:text-5xl">UF SASE YEARBOOK</h2>
 
-          <div className="mt-8 flex flex-col gap-6 md:flex-row">
-            {/* Left Year Buttons */}
+          <div className="mt-8 flex flex-col md:flex-row md:items-start md:gap-28">
+            {/* Year Buttons */}
             <div className="flex flex-col gap-3">
               {yearbooks.map((yb) => {
                 const isActive = activeYearbook === yb.id;
-
                 return (
                   <button
                     key={yb.id}
                     onClick={() => setActiveYearbook(yb.id)}
                     className={[
                       "inline-flex w-36 items-center justify-center",
-                      "rounded-[4px] border border-black",
+                      "rounded-[1px]",
                       "px-4 py-2 font-redhat text-[15px] font-medium tracking-[0.06em]",
                       "text-white",
                       "transition-transform duration-150",
                       isActive
-                        ? "bg-[#3f8f35] shadow-[1px_1px_0_0_rgba(0,0,0,0.4)]"
-                        : "bg-saseGreen shadow-[3px_3px_0_0_rgba(0,0,0,0.35)] hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[4px_4px_0_0_rgba(0,0,0,0.35)]",
+                        ? "bg-[#3f8f35]"
+                        : "bg-saseGreen hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[4px_4px_0_0_rgba(0,0,0,0.35)]",
                     ].join(" ")}
                   >
                     {yb.label}
@@ -145,13 +166,12 @@ export const Route = createFileRoute("/gallery")({
               })}
             </div>
 
-            {/* Yearbook Frame Component */}
-            <div className="flex flex-1 flex-col items-center">
+            {/* Frame and Preview */}
+            <div className="flex flex-1 flex-col items-center md:items-start">
               <GalleryYearbook year={activeYearbook} />
 
-              {/* Preview Button */}
-              <a href={previewHref} target="_blank" rel="noreferrer" className="mt-10">
-                <button className="inline-flex items-center justify-center rounded-[4px] border border-black bg-saseBlue px-7 py-2 font-redhat text-[16px] tracking-[0.12em] text-white shadow-[3px_3px_0_0_rgba(0,0,0,0.35)] transition-transform duration-150 hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[5px_5px_0_0_rgba(0,0,0,0.3)]">
+              <a href={previewHref} target="_blank" rel="noreferrer" className="mt-6 self-center md:self-start">
+                <button className="inline-flex items-center justify-center rounded-[4px] border-[3px] border-black bg-saseBlue px-7 py-2 font-redhat text-[20px] tracking-[0.12em] text-white shadow-[3px_3px_0_0_rgba(0,0,0,0.35)] transition-transform duration-150 hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[5px_5px_0_0_rgba(0,0,0,0.3)]">
                   Preview
                 </button>
               </a>

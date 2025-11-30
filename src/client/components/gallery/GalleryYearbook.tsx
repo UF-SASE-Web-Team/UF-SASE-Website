@@ -6,36 +6,25 @@ type Props = {
 };
 
 const GalleryYearbook = ({ year }: Props) => {
-  const displayLabel = year === "2023-2024" ? "UF SASE 2023–2024" : "UF SASE 2024–2025";
-
   const previewImage = year === "2023-2024" ? imageUrls["fall2023_7.JPG"] : imageUrls["fall2024_11.JPG"];
 
   return (
-    <div className="flex w-full max-w-4xl flex-col items-center">
-      {/* Title */}
-      <div className="mb-6 mt-4 text-center">
-        <h3 className="font-oswald text-5xl font-bold text-background">{displayLabel}</h3>
-      </div>
+    <div className="w-full max-w-3xl">
+      <div className="relative">
+        <div className="flex items-stretch">
+          {/* Left rectangle */}
+          <div className="w-10 shrink-0 rounded-[4px] bg-[#c9ddff]" />
 
-      {/* Frame block */}
-      <div className="relative w-full">
-        {/* Outer large rounded rectangle */}
-        <div className="rounded-[32px] bg-[#e0ecff] p-4 shadow-[0_0_0_6px_#8cb8f7]">
-          {/* Left vertical bar */}
-          <div className="flex">
-            <div className="mr-4 w-10 rounded-[20px] bg-[#c9ddff]" />
-
-            {/* Inner frame */}
-            <div className="flex-1 rounded-[20px] border-[10px] border-[#9dc4ff] bg-white p-2">
-              <div className="aspect-[4/3] overflow-hidden rounded-[12px] bg-gray-100">
-                <img src={previewImage} className="h-full w-full object-cover" />
-              </div>
+          {/* Frame */}
+          <div className="ml-3 flex-1 rounded-[4px] border-[10px] border-[#bcdcff] md:border-[14px]">
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-[4px] bg-white">
+              <img src={previewImage} alt="Yearbook preview" className="h-full w-full object-cover" />
             </div>
           </div>
         </div>
 
-        {/* SASE logo overlapping bottom-right */}
-        <img src={imageUrls["SASELogoWithoutText.png"]} className="absolute -bottom-12 -right-12 w-40 drop-shadow-lg" />
+        {/* SASE logo */}
+        <img src={imageUrls["SASELogoWithoutText.png"]} className="absolute -bottom-6 -right-2 w-20 md:-bottom-10 md:-right-20 md:w-60" />
       </div>
     </div>
   );

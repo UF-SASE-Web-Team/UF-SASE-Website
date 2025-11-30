@@ -1,7 +1,7 @@
 import { imageUrls } from "@assets/imageUrls";
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { IoMdLink } from "react-icons/io";
+import { IoMdLink, IoMdPlay } from "react-icons/io";
 import GalleryYearbook from "../components/gallery/GalleryYearbook";
 import GalleryZipExtraction from "../components/gallery/GalleryZipExtraction";
 import { applyOmbreDivider } from "../utils/ombre-divider.js";
@@ -62,35 +62,54 @@ export const Route = createFileRoute("/gallery")({
         </section>
 
         {/* Google Drive Links box */}
-        <section className="mx-auto mt-16 max-w-6xl px-4 md:px-8">
-          <div className="flex flex-col gap-6 rounded-3xl border-2 border-border bg-background/80 px-6 py-5 shadow-[0_8px_0_0_rgb(6,104,179)] md:flex-row md:items-stretch">
-            {/* Left vertical text: Google Drive Links */}
-            <div className="flex items-center justify-center border-b border-border/40 pb-4 md:w-40 md:border-b-0 md:border-r md:pb-0 md:pr-6">
-              <p className="text-center font-oswald text-2xl leading-tight">
-                <span className="block">Google</span>
-                <span className="block">Drive</span>
-                <span className="block">Links</span>
+        <section className="mx-auto mt-16 max-w-4xl px-4 md:px-8">
+          <div className="flex flex-col gap-6 rounded-3xl border-[3px] border-black bg-white px-8 py-8 md:flex-row md:items-center">
+            {/* Left text */}
+            <div className="flex flex-col items-center md:items-start">
+              <p className="text-center font-oswald text-3xl leading-tight md:text-3xl">
+                <span className="block text-saseBlue">Google</span>
+                <span className="block text-saseBlue">Drive</span>
+                <span className="block text-saseGreen">Links</span>
               </p>
             </div>
 
+            {/* Divider */}
+            <div className="hidden h-28 w-[2px] bg-black md:block" />
+
             {/* Right: semesters grid */}
-            <div className="grid flex-1 grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {entries.map(([label, link]) => (
-                <a
-                  key={label}
-                  href={link}
-                  target="__blank"
-                  rel="noreferrer"
-                  onClick={() => setSlideshow(label)}
-                  className="flex flex-col justify-between rounded-2xl border border-border/60 bg-white px-3 py-2 text-left shadow-[0_3px_0_0_rgb(203,203,212)] transition hover:-translate-y-0.5 hover:border-saseBlue hover:shadow-[0_6px_0_0_rgb(6,104,179)]"
-                >
-                  <span className="font-redhat text-sm">{label}</span>
-                  <span className="mt-2 inline-flex items-center gap-1 self-start rounded-full border border-border bg-saseBlue px-2 py-1 text-[11px] font-medium text-white">
-                    <IoMdLink size={12} />
-                    Slideshow / Drive
-                  </span>
-                </a>
-              ))}
+            <div className="flex-1">
+              <div className="grid grid-cols-1 gap-y-8 sm:grid-cols-3 sm:gap-y-10">
+                {entries.map(([label, link]) => (
+                  <div key={label} className="flex flex-col items-center gap-3">
+                    {/* Label – changes slideshow only */}
+                    <button type="button" onClick={() => setSlideshow(label)} className="font-redhat text-lg font-medium hover:underline">
+                      {label}
+                    </button>
+
+                    {/* Icons row */}
+                    <div className="flex gap-3">
+                      {/* Link icon – opens Drive */}
+                      <a
+                        href={link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex h-8 w-8 items-center justify-center rounded-[6px] border-[2px] border-[#3f8f35] text-[#3f8f35] transition hover:bg-[#e9f7e7]"
+                      >
+                        <IoMdLink size={18} />
+                      </a>
+
+                      {/* Play icon */}
+                      <button
+                        type="button"
+                        onClick={() => setSlideshow(label)}
+                        className="flex h-8 w-8 items-center justify-center rounded-[6px] border-[2px] border-saseBlue text-saseBlue transition hover:bg-[#e9f7e7]"
+                      >
+                        <IoMdPlay size={18} />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </section>

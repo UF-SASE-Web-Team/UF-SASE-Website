@@ -15,16 +15,17 @@ const slideshowLinks: Record<string, string> = {
 
 // yearbooks shown in the left buttons
 const yearbooks = [
-  { id: "2023-2024", label: "2023 – 2024", colorClass: "bg-saseGreen text-black" },
   { id: "2024-2025", label: "2024 – 2025", colorClass: "bg-saseBlue text-white" },
+  { id: "2023-2024", label: "2023 – 2024", colorClass: "bg-saseGreen text-black" },
 ] as const;
 
 type YearbookId = (typeof yearbooks)[number]["id"];
 
 // per-year preview links
 const yearbookLinks: Record<YearbookId, string> = {
-  "2023-2024": "#",
-  "2024-2025": "https://www.mixbook.com/photo-books/interests/blank-canvas-34402104?vk=dlMW6WL1SBIaedVXgd2n", // TODO: replace
+  "2023-2024": "https://www.mixbook.com/photo-books/interests/blank-canvas-34402104?vk=dlMW6WL1SBIaedVXgd2n",
+
+  "2024-2025": "https://drive.google.com/file/d/149a7tGFOGFzxnqQK9odW5dgDkWENrlrT/view?usp=drive_link",
 };
 
 export const Route = createFileRoute("/gallery")({
@@ -37,7 +38,7 @@ export const Route = createFileRoute("/gallery")({
   ],
   component: () => {
     const [slideshow, setSlideshow] = useState<string>("Fall 2024");
-    const [activeYearbook, setActiveYearbook] = useState<YearbookId>("2023-2024");
+    const [activeYearbook, setActiveYearbook] = useState<YearbookId>("2024-2025");
 
     useEffect(() => {
       applyOmbreDivider();
@@ -59,7 +60,6 @@ export const Route = createFileRoute("/gallery")({
             <GalleryZipExtraction slideshow={slideshow} />
           </div>
         </section>
-        
 
         {/* Google Drive Links box */}
         <section className="mx-auto mt-16 max-w-6xl px-4 md:px-8">
@@ -95,25 +95,29 @@ export const Route = createFileRoute("/gallery")({
           </div>
         </section>
 
-        {/* Yearbook section */}
+        {/* Yearbook Section */}
         <section className="mx-auto mt-16 max-w-6xl px-4 md:px-8">
           <h2 className="font-oswald text-4xl md:text-5xl">UF SASE YEARBOOK</h2>
 
-          <div className="mt-6 flex flex-col gap-6 rounded-3xl bg-blue-300 px-4 py-5 shadow-[10px_10px_0_0_rgb(6,104,179)] transition duration-150 hover:scale-[1.01] md:flex-row md:px-6 md:py-6">
-            {/* Left year buttons */}
-            <div className="flex flex-row gap-2 md:flex-col md:gap-3">
+          <div className="mt-8 flex flex-col gap-6 md:flex-row">
+            {/* Left Year Buttons */}
+            <div className="flex flex-col gap-3">
               {yearbooks.map((yb) => {
                 const isActive = activeYearbook === yb.id;
+
                 return (
                   <button
                     key={yb.id}
-                    type="button"
                     onClick={() => setActiveYearbook(yb.id)}
                     className={[
-                      "rounded-md px-3 py-2 font-redhat text-xs transition md:text-sm",
-                      yb.colorClass,
-                      "border border-transparent",
-                      isActive ? "shadow-[inset_0_0_0_2px_rgba(0,0,0,0.4)]" : "hover:shadow-[0_0_0_1px_rgba(0,0,0,0.25)]",
+                      "inline-flex w-36 items-center justify-center",
+                      "rounded-[4px] border border-black",
+                      "px-4 py-2 font-redhat text-[15px] font-medium tracking-[0.06em]",
+                      "text-white",
+                      "transition-transform duration-150",
+                      isActive
+                        ? "bg-[#3f8f35] shadow-[1px_1px_0_0_rgba(0,0,0,0.4)]"
+                        : "bg-saseGreen shadow-[3px_3px_0_0_rgba(0,0,0,0.35)] hover:-translate-x-[1px] hover:-translate-y-[1px] hover:shadow-[4px_4px_0_0_rgba(0,0,0,0.35)]",
                     ].join(" ")}
                   >
                     {yb.label}
@@ -122,20 +126,13 @@ export const Route = createFileRoute("/gallery")({
               })}
             </div>
 
-            {/* Yearbook preview graphic / component */}
-            <div className="flex-1">
-              {/* If you later want GalleryYearbook to change per year,
-                  add a prop like year={activeYearbook}. */}
-              <GalleryYearbook />
-            </div>
+            {/* Yearbook Frame Component */}
+            <div className="flex flex-1 flex-col items-center">
+              <GalleryYearbook year={activeYearbook} />
 
-            {/* Preview button (changes link based on selected yearbook) */}
-            <div className="flex items-end justify-start md:justify-end">
-              <a href={previewHref} target="_blank" rel="noreferrer">
-                <button
-                  className="flex h-10 items-center justify-center rounded-full border-2 border-gray-700 bg-saseBlue px-6 font-redhat text-sm text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)] transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black"
-                  disabled={previewHref === "#"}
-                >
+              {/* Preview Button */}
+              <a href={previewHref} target="_blank" rel="noreferrer" className="mt-10">
+                <button className="inline-flex items-center justify-center rounded-[4px] border border-black bg-saseBlue px-7 py-2 font-redhat text-[16px] tracking-[0.12em] text-white shadow-[3px_3px_0_0_rgba(0,0,0,0.35)] transition-transform duration-150 hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[5px_5px_0_0_rgba(0,0,0,0.3)]">
                   Preview
                 </button>
               </a>

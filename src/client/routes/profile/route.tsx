@@ -35,12 +35,12 @@ export const Route = createFileRoute("/profile")({
     };
 
     return (
-      <div className="flex min-h-screen bg-muted p-10">
+      <div className="flex min-h-screen w-full flex-col gap-6 bg-muted p-4 md:flex-row md:p-10">
         {errorMessage && <div className="mb-4 rounded bg-red-100 p-2 text-red-700">{errorMessage}</div>}
-        <div className="flex items-start">
+        <div className="w-full flex-shrink-0 md:w-60">
           <ProfileNav profileName={user.username} update={updateComponent} activeSection={activeSection} />
         </div>
-        <div className="flex w-full flex-col items-center justify-between py-6">
+        <div className="flex w-full flex-1 flex-col items-center py-6">
           <Outlet />
         </div>
       </div>

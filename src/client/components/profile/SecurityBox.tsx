@@ -9,7 +9,7 @@ const SecurityBox: React.FC = () => {
   };
 
   return (
-    <div className="min-h-[500px] w-3/4 rounded-2xl bg-background px-10 py-6 shadow-xl">
+    <div className="group w-full rounded-2xl bg-background px-4 py-6 shadow-xl md:w-3/4 md:px-10">
       <h2 className="mb-10 text-3xl font-bold">Security</h2>
 
       <div className="flex justify-between">

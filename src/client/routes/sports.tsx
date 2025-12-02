@@ -3,13 +3,13 @@ import { imageUrls } from "@assets/imageUrls";
 import Carousel from "@components/carousel/Carousel";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 import FAQ from "@components/programs/FAQCard";
-import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { SportsFAQ } from "@information/ProgramFAQs";
 import { SportGoals } from "@information/ProgramGoals";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
+import { GoalsSection } from "@components/programs/GoalsSection";
 
 export const Route = createFileRoute("/sports")({
   meta: () => [
@@ -60,16 +60,7 @@ export const Route = createFileRoute("/sports")({
           </div>
 
           {/* Goals & Outcomes */}
-          <div className="flex w-full justify-center bg-saseGrayLight py-10 dark:bg-black">
-            <div className="w-full max-w-7xl">
-              <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader" />
-              <div className={cn({ "flex-col gap-10": isMobile, "flex-row gap-36": !isMobile }, "flex flex-nowrap items-center justify-center px-8")}>
-                {SportGoals.map((goal, index) => (
-                  <GoalCard text={goal.text} color={goal.color} mobileAlign={goal.mobileAlign} key={index} />
-                ))}
-              </div>
-            </div>
-          </div>
+          <GoalsSection goals={SportGoals}/>
 
           {/* FAQs */}
           <div className="max-w-7xl pt-10">

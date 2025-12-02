@@ -10,7 +10,6 @@ import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBord
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
 import FAQ from "@components/programs/FAQCard";
-import GoalCard from "@components/programs/GoalCard";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { SWTTeamLeads, Webmasters } from "@information/People";
 import { SwtFAQ } from "@information/ProgramFAQs";
@@ -18,6 +17,7 @@ import { SwtGoals } from "@information/ProgramGoals";
 import { createFileRoute } from "@tanstack/react-router";
 import { useContext, useState } from "react";
 import { seo } from "../utils/seo";
+import { GoalsSection } from "@components/programs/GoalsSection";
 
 export const Route = createFileRoute("/webdev")({
   meta: () => [
@@ -71,7 +71,7 @@ export const Route = createFileRoute("/webdev")({
 
         <div className="flex w-full flex-col items-center py-10">
           {/* Group Picture & App Status */}
-          <div className="flex w-full flex-col items-center justify-center bg-black py-10">
+          <div className="flex w-full flex-col items-center justify-center bg-black py-10 dark:bg-greenBackground">
             <ApplicationPhoto image={WebTeamGroupImage} applicationStatus="CLOSED" nextSemester="Spring 2026" />
           </div>
 
@@ -263,16 +263,7 @@ export const Route = createFileRoute("/webdev")({
           )}
 
           {/* Goals & Outcomes */}
-          <div className="flex w-full justify-center bg-saseGrayLight py-10 dark:bg-black">
-            <div className="w-full max-w-7xl">
-              <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader" />
-              <div className={cn({ "flex-col gap-10": isMobile, "flex-row gap-36": !isMobile }, "flex flex-nowrap items-center justify-center px-8")}>
-                {SwtGoals.map((goal, index) => (
-                  <GoalCard text={goal.text} color={goal.color} mobileAlign={goal.mobileAlign} key={index} />
-                ))}
-              </div>
-            </div>
-          </div>
+          <GoalsSection goals={SwtGoals}/>
 
           {/* FAQs */}
           <div className="w-full max-w-7xl pt-10">

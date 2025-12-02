@@ -1,4 +1,4 @@
-export const faqFreshmenList: Array<{ category: string; heading: string; questions: Array<{ question: string; answer: string | React.ReactNode }> }> =
+export const FreshmanFAQList: Array<{ category: string; heading: string; questions: Array<{ question: string; answer: string | React.ReactNode }> }> =
   [
     {
       category: "Academic",

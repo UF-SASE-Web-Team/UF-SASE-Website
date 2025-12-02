@@ -5,13 +5,13 @@ import Carousel from "@components/carousel/Carousel";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
 import FAQ from "@components/programs/FAQCard";
-import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { InternGoals } from "@information/ProgramGoals";
 import { createFileRoute } from "@tanstack/react-router";
 import { InternsFAQ } from "../information/ProgramFAQs";
 import { seo } from "../utils/seo";
+import { GoalsSection } from "@/client/components/programs/GoalsSection";
 
 export const Route = createFileRoute("/interns")({
   meta: () => [
@@ -53,7 +53,7 @@ export const Route = createFileRoute("/interns")({
 
         <div className="flex w-full flex-col items-center pb-10">
           {/* Group Picture & App Status */}
-          <div className="flex w-full flex-col items-center justify-center bg-black py-10">
+          <div className="flex w-full flex-col items-center justify-center bg-black py-10 dark:bg-greenBackground">
             <ApplicationPhoto image={InternsPhoto} applicationStatus="CLOSED" nextSemester="Spring 2026" />
           </div>
 
@@ -64,16 +64,7 @@ export const Route = createFileRoute("/interns")({
           </div>
 
           {/* Goals & Outcomes */}
-          <div className="flex w-full justify-center bg-saseGrayLight py-10 dark:bg-black">
-            <div className="w-full max-w-7xl">
-              <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader" />
-              <div className={cn({ "flex-col gap-10": isMobile, "flex-row gap-36": !isMobile }, "flex flex-nowrap items-center justify-center px-8")}>
-                {InternGoals.map((goal, index) => (
-                  <GoalCard text={goal.text} color={goal.color} mobileAlign={goal.mobileAlign} key={index} />
-                ))}
-              </div>
-            </div>
-          </div>
+          <GoalsSection goals={InternGoals}/>
 
           {/* FAQs */}
           <div className="max-w-7xl pt-10">

@@ -7,7 +7,7 @@ const MissionCard = ({ image, mission, shadow, text }: { image: string; mission:
   return (
     <div className="relative z-0 h-full w-full">
       {isMobile ? (
-        <div className="pointer-events-none absolute inset-0 z-0 translate-x-[20px] translate-y-[20px] rounded-2xl border-4 border-black bg-muted" />
+        <div className="pointer-events-none absolute inset-0 z-0 translate-x-[12px] translate-y-[12px] rounded-2xl border-4 border-black bg-muted" />
       ) : null}
 
       <div

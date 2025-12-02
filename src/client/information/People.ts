@@ -43,7 +43,7 @@ export const PIEBoard: Array<{
     fullName: "Manav Sanghvi",
     position: "External Vice President",
     image: ManavSanghvi,
-    quote: "SASE community's great 😄",
+    quote: "The SASE community is incredible 😄",
     fontColor: "blue",
     mobileAlignment: "left",
   },

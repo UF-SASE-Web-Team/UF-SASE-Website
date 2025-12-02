@@ -110,7 +110,7 @@ export const Route = createFileRoute("/")({
         </div>
 
         {/* Mission Section */}
-        <div className="flex w-full flex-col items-center bg-saseGray px-12 py-10 dark:bg-greenBackground">
+        <div className="flex w-full flex-col items-center bg-saseGray px-10 py-10 dark:bg-greenBackground">
           <h1 className="subheader-text">Our Mission</h1>
 
           {isMobile ? (
@@ -212,7 +212,7 @@ export const Route = createFileRoute("/")({
                     Are you interested in becoming a partner with the UF Society of Asian Scientists and Engineers (SASE) Chapter?
                     <br />
                     <br />
-                    To get access to our sponsorship packet, please contact our External Vice President, Manav Sanghvi at
+                    To get access to our sponsorship packet, please contact our External Vice President, Manav Sanghvi, at
                     <a href="mailto:ufsase.evp@gmail.com" className="text-saseGreen underline">
                       {" "}
                       ufsase.evp@gmail.com

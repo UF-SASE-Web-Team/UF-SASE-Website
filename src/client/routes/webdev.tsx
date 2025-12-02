@@ -3,8 +3,8 @@ import MemberCard from "@/client/components/custom_ui/MemberCard";
 import MobileMemberCard from "@/client/components/custom_ui/MobileMemberCard";
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
+import bash from "@assets/webdev/Bash.png";
 import WebTeamGroupImage from "@assets/webdev/WebDevTeamCropped.png";
-import WebTeamDescription from "@assets/webdev/WebDevTerminal.png";
 import WebTeam from "@assets/webdev/WebTeam.png";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
@@ -43,8 +43,8 @@ export const Route = createFileRoute("/webdev")({
 
     return (
       <div className="flex min-h-screen w-full flex-col items-center bg-background py-10">
-        <div className={cn({ "flex-col items-center": isMobile, "flex-row gap-10": !isMobile }, "flex w-full max-w-7xl")}>
-          <div className="relative mx-auto w-[75%] sm:w-2/5">
+        <div className={cn({ "flex flex-col items-center": isMobile, "grid grid-cols-[1fr_2fr]": !isMobile }, "w-full max-w-7xl")}>
+          <div className="relative mx-auto w-[75%]">
             <img
               src={WebTeam}
               alt="Web Team"
@@ -53,8 +53,19 @@ export const Route = createFileRoute("/webdev")({
               })}
             />
           </div>
-          <div className="relative w-full sm:w-4/5">
-            <img src={WebTeamDescription} alt="Terminal" className="h-auto w-full px-2" />
+          <div className="mx-2 rounded-2xl bg-[length:100%_100%] bg-no-repeat" style={{ backgroundImage: `url(${bash})` }}>
+            {/* <img src={WebTeamDescription} alt="Terminal" className="h-auto w-full px-2" /> */}
+            <div className={cn({ "px-10": !isMobile, "px-4": isMobile }, "mt-14 text-white")}>
+              <ul className="mb-4 font-silkscreen text-3xl">
+                <li>&gt; WEBSITE MAINTENANCE TEAM</li>
+                <li>&gt; SEMESTER PROJECT</li>
+              </ul>
+              <p className={cn({ "text-lg": !isMobile, "text-sm": isMobile }, "py-4 font-redhat")}>
+                Are you looking to expand your skill set and gain experience with agile practices commonly used in the industry? Do you want to apply
+                your technical experience for the good of all SASE? We’re seeking committed members to bring our ideas to life and publish an
+                improved, self-hosted version of our website. We encourage people of all skill levels to apply!
+              </p>
+            </div>
           </div>
         </div>
 

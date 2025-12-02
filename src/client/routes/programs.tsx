@@ -26,11 +26,11 @@ export const Route = createFileRoute("/programs")({
           <h1 className="header-text ombre-text pb-10">PROGRAMS</h1>
           <div className="ombre-background mx-4 mb-10 rounded-2xl p-1">
             <div className="flex h-full flex-col rounded-2xl bg-saseGrayLight p-4 text-center dark:bg-black">
-              <p className="text-center font-redhat text-lg font-semibold text-black dark:text-white">
-                <span className="font-bold text-saseBlue">SASE programs</span> allow members opportunities to work on{" "}
-                <span className="font-bold text-saseGreen">long-term technical projects</span> and promote{" "}
-                <span className="font-bold text-saseGreen">geniune connections</span> among members through a vareity of professional teams and social
-                groups.
+              <p className="text-center font-redhat text-lg font-medium text-black dark:text-white">
+                <span className="font-semibold text-saseBlue">SASE programs</span> allow members opportunities to work on{" "}
+                <span className="font-semibold text-saseGreen">long-term technical projects</span> and promote{" "}
+                <span className="font-semibold text-saseGreen">geniune connections</span> among members through a variety of professional teams and
+                social groups.
               </p>
             </div>
           </div>

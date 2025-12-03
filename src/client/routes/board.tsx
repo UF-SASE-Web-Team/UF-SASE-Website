@@ -81,7 +81,7 @@ export const Route = createFileRoute("/board")({
 
         {openMember && (
           <div
-            className="fixed inset-0 z-50 flex items-end justify-center bg-black/20 backdrop-blur-[1px] md:items-center"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-[1px] md:items-center"
             onClick={() => {
               const name = openMember?.name;
               setOpenMember(null);

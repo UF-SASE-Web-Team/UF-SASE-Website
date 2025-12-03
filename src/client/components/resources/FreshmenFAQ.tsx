@@ -1,32 +1,32 @@
 import { cn } from "@/shared/utils";
 import FAQ from "@components/programs/FAQCard";
+import { FreshmanFAQList } from "@information/FreshmenFAQList";
 import { useEffect, useRef, useState } from "react";
-import { faqFreshmenList } from "./faqFreshmenList";
 
 const FreshmenFAQ = () => {
   const resourceTabs: Record<string, React.ReactNode> = {
     Academic: (
       <div>
-        <p className="px-8 font-redhat text-lg font-medium">{faqFreshmenList[0].heading}</p>
-        <FAQ faqData={faqFreshmenList[0].questions} />
+        <p className="px-8 font-redhat text-lg font-medium">{FreshmanFAQList[0].heading}</p>
+        <FAQ faqData={FreshmanFAQList[0].questions} />
       </div>
     ),
     Professional: (
       <div>
-        <p className="px-8 font-redhat text-lg font-medium">{faqFreshmenList[1].heading}</p>
-        <FAQ faqData={faqFreshmenList[1].questions} />
+        <p className="px-8 font-redhat text-lg font-medium">{FreshmanFAQList[1].heading}</p>
+        <FAQ faqData={FreshmanFAQList[1].questions} />
       </div>
     ),
     Extracurricular: (
       <div>
-        <p className="px-8 font-redhat text-lg font-medium">{faqFreshmenList[2].heading}</p>
-        <FAQ faqData={faqFreshmenList[2].questions} />
+        <p className="px-8 font-redhat text-lg font-medium">{FreshmanFAQList[2].heading}</p>
+        <FAQ faqData={FreshmanFAQList[2].questions} />
       </div>
     ),
     Miscellaneous: (
       <div>
-        <p className="px-8 font-redhat text-lg font-medium">{faqFreshmenList[3].heading}</p>
-        <FAQ faqData={faqFreshmenList[3].questions} />
+        <p className="px-8 font-redhat text-lg font-medium">{FreshmanFAQList[3].heading}</p>
+        <FAQ faqData={FreshmanFAQList[3].questions} />
       </div>
     ),
   };

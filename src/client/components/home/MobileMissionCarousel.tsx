@@ -1,11 +1,12 @@
-import MissionCard from "@/client/components/home/MissionCard";
+import MissionCard from "@/client/components/custom_ui/MissionCard";
 import React, { useRef, useState } from "react";
 
 interface MobileMissionCarouselProps {
   slides: Array<{
     image: string;
     mission: string;
-    text: string;
+    homeText: string;
+    aboutText: string;
     shadow: "green" | "blue";
   }>;
 }
@@ -27,14 +28,14 @@ export const MobileMissionCarousel: React.FC<MobileMissionCarouselProps> = ({ sl
       <div
         ref={ref}
         onScroll={onScroll}
-        className="relative w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain scrollbar-none"
+        className="relative w-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain pb-8 scrollbar-none"
         style={{ scrollBehavior: "smooth" }}
       >
         <div className="flex">
           {slides.map((s) => (
-            <div key={s.mission} className="w-full shrink-0 snap-start px-6 py-6">
-              <div className="mx-auto h-[400px] max-w-sm [&>div>div:nth-child(2)>div:hover]:scale-100 [&>div>div:nth-child(2)>div]:h-full [&>div>div:nth-child(2)]:h-full [&>div]:h-full">
-                <MissionCard image={s.image} mission={s.mission} text={s.text} shadow={s.shadow} />
+            <div key={s.mission} className="flex w-full shrink-0 snap-start items-center justify-center">
+              <div className="h-[275px] w-[275px]">
+                <MissionCard image={s.image} mission={s.mission} text={s.homeText} shadow={s.shadow} />
               </div>
             </div>
           ))}

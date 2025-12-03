@@ -14,14 +14,6 @@ const BlogContainer = ({ children }: { children: ReactNode }) => {
       ref={containerRef}
       className="relative mx-auto mt-5 max-w-6xl rounded-[70px] bg-gradient-to-tr from-gray-50 from-30% via-greenShadow to-saseGreenLight p-6 shadow-md"
     >
-      {/* blue shadow */}
-      <div
-        className="absolute right-0 top-0 z-0 h-32 w-32 rounded-[70px] sm:h-40 sm:w-40 md:h-48 md:w-48 lg:h-56 lg:w-56"
-        style={{
-          background: "radial-gradient(circle at top right, #A8D8F0, transparent 50%)",
-        }}
-      ></div>
-
       <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden rounded-[70px]">
         <svg key={key} width="100%" height="100%" className="absolute inset-0" preserveAspectRatio="none">
           <defs>

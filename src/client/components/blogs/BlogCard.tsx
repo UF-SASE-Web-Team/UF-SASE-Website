@@ -65,9 +65,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
               )}
             </div>
             {/* author, date */}
-            <p className="mt-2 font-serif text-sm italic text-gray-600 sm:text-lg">
-              {blog.author}, {formattedDate}
-            </p>
+            <p className="mt-2 font-serif text-sm italic text-gray-600 sm:text-lg">{formattedDate}</p>
 
             {/* read time */}
             {blog.read_time && <span className="mt-2 rounded-full bg-gray-100 px-4 py-1 text-sm text-gray-600">{blog.read_time} read</span>}

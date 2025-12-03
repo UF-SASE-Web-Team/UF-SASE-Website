@@ -16,7 +16,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ answer, question }) => {
     <div
       className={`transition-shadow duration-200 ${
         isOpen ? "shadow-[8px_8px_0px_#7DC242]" : "shadow-none"
-      } my-6 overflow-hidden rounded-3xl border border-border`}
+      } my-6 overflow-hidden rounded-2xl border border-border`}
     >
       {/* Question Section */}
       <button
@@ -34,7 +34,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ answer, question }) => {
         } bg-muted-background overflow-hidden border-t border-gray-300 px-6`}
         style={{ transitionProperty: "max-height, opacity, padding" }}
       >
-        <div className="text-xl text-foreground">{answer}</div>
+        <div className="text-lg text-foreground">{answer}</div>
       </div>
     </div>
   );
@@ -42,7 +42,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ answer, question }) => {
 
 const FAQ: React.FC<FAQProps> = ({ faqData }) => {
   return (
-    <div className="w-full p-8 font-redhat">
+    <div className="w-full font-redhat">
       {faqData.map((item, index) => (
         <FAQItem key={index} question={item.question} answer={item.answer} />
       ))}

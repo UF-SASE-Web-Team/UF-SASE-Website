@@ -7,13 +7,13 @@ const HistorySection = () => {
   const isMobile = useIsMobile();
 
   return (
-    <section className="mb-8">
-      <div className={isMobile ? "max-w-full px-4" : "max-w-5xl"}>
-        <p className={isMobile ? "mb-3 text-sm text-foreground" : "mb-4 text-lg text-foreground"}>
+    <>
+      <div className="w-full max-w-5xl px-4 font-redhat">
+        <p className={isMobile ? "mb-4 text-sm text-foreground" : "mb-4 text-lg text-foreground"}>
           <strong>Since being founded during the summer of 2010,</strong> the University of Florida chapter has had an abundant effort put forth for
           the development of our members.
         </p>
-        <p className={isMobile ? "mb-3 text-sm text-foreground" : "mb-4 text-lg text-foreground"}>
+        <p className={isMobile ? "mb-4 text-sm text-foreground" : "mb-4 text-lg text-foreground"}>
           This development is centered on <strong>five core values</strong> of our mission statement:{" "}
           <strong>leadership, professionalism, service, academics,</strong> and <strong>diversity.</strong> Our meetings and events are catered to
           ensure that not only our mission is being fulfilled, but also that a community of support among Asian heritage students is being built. We
@@ -70,7 +70,7 @@ const HistorySection = () => {
       </div>
 
       {/* Constitution Link */}
-      <div className="mt-4 text-center">
+      <div className="mt-4 text-center font-redhat">
         <a
           href="2024-2025-SASE-Constitution.docx.pdf"
           className="mt-6 inline-block transform rounded-full border-2 border-black bg-[#0f6cb6] px-12 py-2 italic text-white underline transition duration-300 hover:scale-105"
@@ -80,7 +80,7 @@ const HistorySection = () => {
           2024-2025 SASE Constitution
         </a>
       </div>
-    </section>
+    </>
   );
 };
 

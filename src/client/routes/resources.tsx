@@ -1,12 +1,11 @@
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
+import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { ResourceCard } from "@components/resources/ResourceCard";
 import { ResourceHeader } from "@components/resources/ResourceHeader";
-import { AcademicResources, ProfessionalResources, SaseResources, TopResources } from "@components/resources/Resources";
+import { AcademicResources, ProfessionalResources, SaseResources, TopResources } from "@information/Resources";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
 import { IoMdLink } from "react-icons/io";
-import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/resources")({
@@ -19,19 +18,15 @@ export const Route = createFileRoute("/resources")({
     }),
   ],
   component: () => {
-    useEffect(() => {
-      applyOmbreDivider();
-    }, []);
-
     return (
-      <div className="w-full">
+      <div className="w-full py-10">
         <div className="text-center">
-          <h1 className="mt-4 pb-8 font-oswald text-5xl font-medium sm:text-6xl md:text-7xl">RESOURCES</h1>
+          <h1 className="header-text ombre-text">RESOURCES</h1>
         </div>
 
-        <div className="ombre-divider"></div>
+        <OmbreDivider />
 
-        <div className="pt-8">
+        <div className="py-10">
           <ResourceHeader label="Top Resources" />
           <div className="mx-auto mb-12 max-w-5xl px-4">
             <div className="flex flex-wrap items-stretch justify-center gap-6">
@@ -60,7 +55,7 @@ export const Route = createFileRoute("/resources")({
           </div>
 
           <ResourceHeader label="Professional Resources" />
-          <div className="mx-auto mb-12 max-w-5xl px-4">
+          <div className="mx-auto max-w-5xl px-4">
             <div className="flex flex-wrap items-stretch justify-center gap-6">
               {ProfessionalResources.map((r) => (
                 <ResourceCard key={r.title} {...r} />
@@ -69,15 +64,15 @@ export const Route = createFileRoute("/resources")({
           </div>
         </div>
 
-        <div className="ombre-divider"></div>
+        <OmbreDivider />
 
-        <div className="flex justify-center py-8">
+        <div className="flex justify-center py-10">
           <a href="#" target="_blank" rel="noopener noreferrer">
             <div
               className={cn(
                 "mx-auto flex h-10 w-fit items-center justify-center rounded-full border-2",
                 "border-gray-700 bg-saseBlue px-4 text-white shadow-[0px_5px_0px_0px_rgb(203,203,212)]",
-                "transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-saseGreen hover:text-black",
+                "transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-105 hover:bg-saseGreen hover:text-black",
               )}
             >
               <div className="pr-2 font-redhat">Linktree Default</div>

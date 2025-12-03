@@ -1,9 +1,9 @@
-import { Values } from "@/client/components/home/HomePageInfoArrays";
+import PastBoardImages from "@/client/components/board/PastBoardImages";
 import { useIsMobile } from "@/client/hooks/useIsMobile";
+import ProgramImages from "@/client/information/ProgramImages";
+import Testimonials from "@/client/information/ProgramTestimonials";
 import { cn } from "@/shared/utils";
-import PastBoardImages from "@components/programs/PastBoardImages";
-import ProgramImages from "@components/programs/ProgramImages";
-import Testimonials from "@components/programs/Testimonials";
+import { Values } from "@client/information/Values";
 import type { EmblaCarouselType, EmblaEventType, EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import React, { useCallback, useEffect, useRef, useState } from "react";
@@ -178,7 +178,7 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
 
         {/* Gradient Shading on left side */}
         {purpose === "Images" ? (
-          <div className="absolute left-0 top-0 z-10 h-full w-[25%] bg-gradient-to-r from-white to-transparent dark:from-black" />
+          <div className="absolute left-0 top-0 z-10 h-full w-[25%] bg-gradient-to-r from-white to-transparent dark:from-background" />
         ) : null}
         {purpose === "Values" ? <div className="absolute left-0 top-0 z-10 h-full w-[25%] bg-gradient-to-r from-black to-transparent" /> : null}
 
@@ -190,7 +190,7 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
                 className={cn(
                   {
                     "flex-[0_0_100%]": isMobile || (checkIsPastBoard(slide) && isShortCarousel),
-                    "flex-[0_0_50%]": !isMobile && !(checkIsPastBoard(slide) && isShortCarousel),
+                    "flex-[0_0_40%]": !isMobile && !(checkIsPastBoard(slide) && isShortCarousel),
                   },
                   `flex min-w-0 items-center justify-center [transform:translate3d(0,0,0)]`,
                 )}
@@ -234,7 +234,7 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
                             <p
                               className={cn(
                                 { "opacity-100 transition duration-300 group-hover:opacity-0": prog != "M&M" },
-                                `absolute pb-10 font-redhat text-xl font-semibold text-black`,
+                                `absolute pb-10 font-redhat text-lg font-semibold text-black`,
                               )}
                               style={{
                                 textShadow: `0.7px 0 white,-0.7px 0 white,0 0.7px white,0 -0.7px white`,
@@ -256,7 +256,7 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
                             </p>
 
                             {checkisTestimonial(slide) ? (
-                              <p className="flex h-0 w-full items-center justify-center overflow-hidden px-4 text-center font-redhat text-base font-medium text-black opacity-0 transition-all duration-700 ease-in-out group-hover:h-full group-hover:translate-y-0 group-hover:opacity-100">
+                              <p className="flex h-0 w-full items-center justify-center overflow-hidden px-4 text-center font-redhat text-lg font-medium text-black opacity-0 transition-all duration-700 ease-in-out group-hover:h-full group-hover:translate-y-0 group-hover:opacity-100">
                                 "{slide.quote}"
                               </p>
                             ) : null}
@@ -278,7 +278,7 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
 
         {/* Gradient Shading on right side */}
         {purpose === "Images" ? (
-          <div className="absolute right-0 top-0 z-10 h-full w-[25%] bg-gradient-to-l from-white to-transparent dark:from-black" />
+          <div className="absolute right-0 top-0 z-10 h-full w-[25%] bg-gradient-to-l from-white to-transparent dark:from-background" />
         ) : null}
         {purpose === "Values" ? <div className="absolute right-0 top-0 z-10 h-full w-[25%] bg-gradient-to-l from-black to-transparent" /> : null}
 
@@ -291,28 +291,36 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
       </div>
 
       {purpose === "Images" && currentYear && (
-        <div className="mt-4 flex justify-center">
-          <p className="mb-8 mt-8 text-lg italic text-foreground sm:text-xl md:text-2xl">{currentYear}</p>
+        <div className="mt-2 flex justify-center">
+          <p className="font-redhat text-lg italic text-foreground">{currentYear}</p>
         </div>
       )}
-      {/* Arrows for mobile version */}
+      {/* Slider Icon & Arrows for mobile version */}
       {isMobile ? (
         <div className="mt-6 flex h-fit flex-row items-center justify-center gap-12">
           <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} purpose={purpose} className="static" />
+          <div className="flex items-center justify-center gap-2">
+            {snaps.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => emblaApi?.scrollTo(i)}
+                className={`h-2 w-2 rounded-full transition-all dark:bg-white ${selected === i ? "w-6 bg-black" : "bg-black/40 hover:bg-black/70"}`}
+              />
+            ))}
+          </div>
           <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} purpose={purpose} className="static" />
         </div>
-      ) : null}
-
-      {/* Slider icon */}
-      <div className="mt-6 flex justify-center gap-2">
-        {snaps.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => emblaApi?.scrollTo(i)}
-            className={`h-2 w-2 rounded-full transition-all dark:bg-white ${selected === i ? "w-6 bg-black" : "bg-black/40 hover:bg-black/70"}`}
-          />
-        ))}
-      </div>
+      ) : (
+        <div className="mt-6 flex items-center justify-center gap-2">
+          {snaps.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => emblaApi?.scrollTo(i)}
+              className={`h-2 w-2 rounded-full transition-all dark:bg-white ${selected === i ? "w-6 bg-black" : "bg-black/40 hover:bg-black/70"}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

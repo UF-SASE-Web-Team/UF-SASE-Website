@@ -3,9 +3,8 @@ import PastBoardDropDown from "@/client/components/board/PastBoardDropDown";
 import { imageUrls } from "@assets/imageUrls";
 import pastBoardInfo from "@components/board/PastBoardInfo";
 import Carousel from "@components/carousel/Carousel";
+import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { applyOmbreDivider } from "../utils/ombre-divider";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/past-board")({
@@ -17,37 +16,40 @@ export const Route = createFileRoute("/past-board")({
     }),
   ],
   component: () => {
-    useEffect(() => {
-      applyOmbreDivider();
-    }, []);
     return (
-      <div className="min-h-screen px-4 py-8 font-[Poppins] md:px-16">
+      <div className="flex min-h-screen flex-col items-center px-4 py-10">
         <div className="text-center">
-          <h1 className="font-oswald text-5xl font-medium sm:text-6xl md:text-7xl">PAST BOARD</h1>
-          <p className="mb-8 mt-8 text-lg text-foreground sm:text-xl md:text-2xl">Meet our past Board Members from previous years!</p>
-          <hr className="w-7/8 mx-auto my-4 border-t-2 border-green-500" />
+          <h1 className="header-text ombre-text">PAST BOARD</h1>
+          <p className="pb-10 font-oswald text-3xl">Meet our past Board Members from previous years!</p>
         </div>
 
+        <OmbreDivider />
         <div className="mb-8 mt-10 flex justify-center font-[Poppins]">
           <Carousel purpose="Images" prog="Past Board" />
         </div>
-        <div className="text-center">
-          <hr className="w-7/8 mb-10 mt-16 border-t-2 border-blue-500" />
-        </div>
+        <OmbreDivider />
+
         <PastBoardDropDown title="2024-25">
           {pastBoardInfo.map((section, idx) => (
             <div key={idx} className="mb-12">
-              <h2 className="mb-6 text-center font-oswald text-3xl sm:text-4xl md:text-5xl">{section.section}</h2>
+              <h2 className="text-center font-oswald text-3xl font-semibold">{section.section}</h2>
               <div className="flex justify-center">
-                <div className="grid max-w-screen-lg grid-cols-2 justify-items-center gap-x-10 gap-y-12 sm:grid-cols-2 md:grid-cols-3">
+                <div className="grid max-w-screen-lg grid-cols-1 justify-items-center gap-x-16 gap-y-5 md:grid-cols-3">
                   {section.members.map((member, idx) => (
-                    <BoardMemberCard key={idx} member={member} />
+                    <div
+                      key={idx}
+                      id={`member-${member.name}`}
+                      className="flex aspect-square w-full max-w-[300px] cursor-pointer items-center justify-center"
+                    >
+                      <BoardMemberCard member={member} pastMember={true} />
+                    </div>
                   ))}
                 </div>
               </div>
             </div>
           ))}
         </PastBoardDropDown>
+
         <div className="flex justify-center">
           <Link
             to="/board"

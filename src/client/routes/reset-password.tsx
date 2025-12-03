@@ -1,12 +1,12 @@
-import AuthForm from "@components/AuthForm";
-import type { FormData } from "@components/AuthForm";
+import { imageUrls } from "@assets/imageUrls";
+import AuthForm from "@components/auth/AuthForm";
+import type { FormData } from "@components/auth/AuthForm";
+import AuthLayout from "@components/auth/AuthLayout";
 import { Page } from "@components/Page";
+import { SuccessModal } from "@components/SuccessModal";
 import { useMutation } from "@tanstack/react-query";
 import { createFileRoute, useLocation, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { imageUrls } from "../assets/imageUrls";
-import AuthLayout from "../components/AuthLayout";
-import { SuccessModal } from "../components/SuccessModal";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/reset-password")({

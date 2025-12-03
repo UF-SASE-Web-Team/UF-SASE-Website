@@ -150,7 +150,7 @@ const Timeline: React.FC<TimelineProps> = ({ items = defaultItems }) => {
   }, []);
 
   return (
-    <div className="relative mx-auto h-[35rem] max-w-7xl">
+    <div className="relative mx-auto h-[35rem] max-w-7xl font-redhat">
       {/* Gradient Overlay Container */}
       <div className="pointer-events-none absolute inset-0 z-20 flex justify-between">
         {/* Left Gradient Overlay */}

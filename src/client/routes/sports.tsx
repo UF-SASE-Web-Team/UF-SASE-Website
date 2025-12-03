@@ -1,10 +1,14 @@
+import { cn } from "@/shared/utils";
+import { imageUrls } from "@assets/imageUrls";
+import Carousel from "@components/carousel/Carousel";
+import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 import FAQ from "@components/programs/FAQCard";
-import GoalCard from "@components/programs/GoalCard";
+import { GoalsSection } from "@components/programs/GoalsSection";
 import InfoCard from "@components/programs/InfoCard";
+import { useIsMobile } from "@hooks/useIsMobile";
+import { SportsFAQ } from "@information/ProgramFAQs";
+import { SportGoals } from "@information/ProgramGoals";
 import { createFileRoute } from "@tanstack/react-router";
-import { imageUrls } from "../assets/imageUrls";
-import Carousel from "../components/carousel/Carousel";
-import { faqData } from "../components/programs/faqSports";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/sports")({
@@ -17,12 +21,14 @@ export const Route = createFileRoute("/sports")({
   ],
 
   component: () => {
+    const isMobile = useIsMobile();
+
     return (
-      <div className="mt-12 flex min-h-screen flex-col items-center bg-background">
-        <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 sm:flex-row">
-          <header className="mr-8 mt-10 flex items-center px-5">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center bg-background py-10">
+        <div className={cn({ "flex-row gap-24": !isMobile, "flex-col gap-4": isMobile }, "flex w-full max-w-7xl items-start px-4 pb-10")}>
+          <header className="flex items-center">
             {/* Green Line and Text in Row */}
-            <div className="mr-5 h-40 w-1.5 bg-saseGreen"></div>
+            <div className="mr-5 h-40 w-1.5 rounded-sm bg-saseGreen"></div>
             <h2 className="font-oswald text-7xl font-semibold leading-tight text-foreground">
               SASE
               <br />
@@ -40,30 +46,27 @@ export const Route = createFileRoute("/sports")({
             }
           />
         </div>
-        {/* Placeholder Image */}
-        <div className="w-full max-w-7xl px-4 py-8">
-          <Carousel purpose="Images" prog="Sports" />
-          <div className="mb-24" />
-          <header className="mb-6 flex max-w-7xl items-center px-5">
-            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="font-oswald text-4xl text-foreground">Testimonials</h2>
-          </header>
-          <Carousel purpose="Testimonials" prog="Sports" />
-          <div className="mb-24" />
-          <header className="mb-12 flex max-w-7xl items-center px-5">
-            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="font-oswald text-4xl text-foreground">Goals & Outcomes</h2>
-          </header>
-          <div className="mb-24 flex flex-col flex-nowrap items-center justify-center gap-10 md:flex-row lg:gap-36">
-            <GoalCard text="Meet new people with common interests." color="blue" />
-            <GoalCard text="Have fun and compete in a friendly yet competitive environment." color="green" />
-            <GoalCard text="Develop your athletic ability in a variety of disciplines." color="blue" />
+
+        <div className="flex w-full flex-col items-center pb-10">
+          <div className="max-w-7xl">
+            <Carousel purpose="Images" prog="Sports" />
+            <div className="mb-10" />
           </div>
-          <header className="flex max-w-7xl items-center px-5">
-            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="font-oswald text-4xl text-foreground">FAQs</h2>
-          </header>
-          <FAQ faqData={faqData} />
+
+          {/* Testimonials */}
+          <div className="max-w-7xl py-10">
+            <HeaderWithGreenBorder text="Testimonials" type="Subheader" />
+            <Carousel purpose="Testimonials" prog="Sports" />
+          </div>
+
+          {/* Goals & Outcomes */}
+          <GoalsSection goals={SportGoals} />
+
+          {/* FAQs */}
+          <div className="max-w-7xl pt-10">
+            <HeaderWithGreenBorder text="FAQs" type="Subheader" />
+            <FAQ faqData={SportsFAQ} />
+          </div>
         </div>
       </div>
     );

@@ -2,9 +2,9 @@ import BoardMemberCard from "@/client/components/board/BoardMemberCard";
 import BoardPic from "@assets/board/25-26Board.jpg";
 import { imageUrls } from "@assets/imageUrls";
 import boardInfo from "@components/board/BoardInfo";
+import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { applyOmbreDivider } from "../utils/ombre-divider";
+import { useState } from "react";
 import { seo } from "../utils/seo";
 
 interface Member {
@@ -26,21 +26,18 @@ export const Route = createFileRoute("/board")({
   ],
   component: () => {
     const [openMember, setOpenMember] = useState<Member | null>(null);
-    useEffect(() => {
-      applyOmbreDivider();
-    }, []);
+
     return (
-      <div className="min-h-screen px-4 py-8 font-[Poppins] md:px-16">
+      <div className="min-h-screen px-4 py-10">
         {/* title */}
         <div className="text-center">
-          <h1 className="font-oswald text-5xl font-medium sm:text-6xl md:text-7xl">BOARD</h1>
-          <p className="mb-14 mt-8 text-lg text-foreground sm:text-xl md:text-2xl">Meet our 2024-2025 SASE Board Members!</p>
-          {/*<hr className="w-7/8 mx-auto my-4 border-t-2 border-green-500" /> */}
+          <h1 className="header-text ombre-text">BOARD</h1>
+          <p className="pb-10 font-oswald text-3xl">Meet our 2025-2026 SASE Board Members!</p>
+          <OmbreDivider />
         </div>
 
         {/* group picture */}
-
-        <div className="mb-16 mt-10 flex justify-center font-[Poppins]">
+        <div className="mb-16 mt-10 flex justify-center">
           {/*Gradient/shadow*/}
           <div className="relative w-full max-w-5xl">
             <div className="pointer-events-none absolute inset-0 translate-x-4 translate-y-4 rounded-2xl bg-gradient-to-tr from-[#7DC242] to-[#0668B3] opacity-75" />
@@ -57,13 +54,13 @@ export const Route = createFileRoute("/board")({
         <hr className="w-7/8 mb-10 mt-16 border-t-2 border-blue-500" />
 
         {boardInfo.map((section, idx) => (
-          <div key={idx} className="mb-12">
+          <div key={idx} className="mb-10">
             {section.section === "Chair Board" && <hr className="w-7/8 my-10 border-t-2 border-green-500" />}
-            <h2 className="mb-6 text-center font-oswald text-3xl sm:text-4xl md:text-5xl">{section.section}</h2>
+            <h2 className="subheader-text text-center">{section.section}</h2>
 
             {/* Centering the grid properly */}
             <div className="flex justify-center">
-              <div className="grid max-w-screen-lg grid-cols-2 justify-items-center gap-x-10 gap-y-12 sm:grid-cols-2 md:grid-cols-3">
+              <div className="grid max-w-screen-lg grid-cols-1 justify-items-center gap-x-16 gap-y-5 md:grid-cols-3">
                 {section.members.map((member, idx) => (
                   <div
                     key={idx}
@@ -81,7 +78,7 @@ export const Route = createFileRoute("/board")({
 
         {openMember && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-[1px] md:items-center"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-[1px]"
             onClick={() => {
               const name = openMember?.name;
               setOpenMember(null);
@@ -100,7 +97,7 @@ export const Route = createFileRoute("/board")({
             }}
           >
             <div
-              className="relative mx-auto w-[min(95vw,1100px)] rounded-2xl border border-black/5 bg-white p-4 shadow-[0_15px_40px_rgba(0,0,0,0.2)] sm:p-6 md:p-8"
+              className="relative mx-auto w-[min(95vw,1100px)] rounded-2xl border border-black/5 bg-white p-4 shadow-[0_15px_40px_rgba(0,0,0,0.2)] dark:bg-black md:p-8"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -120,33 +117,30 @@ export const Route = createFileRoute("/board")({
                     }, 200);
                   });
                 }}
-                className="absolute right-3 top-3 rounded-full p-2 text-black/60 hover:bg-black/5"
+                className="absolute right-2 top-2 rounded-full p-2 text-foreground/60 hover:bg-foreground/5"
               >
                 ×
               </button>
 
               <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-[1fr_340px] md:gap-8">
                 <div>
-                  <p className="font-oswald text-xl font-semibold text-[#0668B3] md:text-2xl">{openMember.role}</p>
-                  <p className="mt-1 font-oswald text-lg font-semibold md:text-xl">{openMember.name}</p>
-                  {openMember.major && <p className="font-redhat text-base italic text-black">{openMember.major}</p>}
+                  <p className="font-oswald text-xl font-semibold text-[#0668B3] md:text-3xl">{openMember.role}</p>
+                  <p className="pt-1 font-oswald text-lg font-semibold">{openMember.name}</p>
+                  {openMember.major && <p className="pt-1 font-redhat text-sm italic text-foreground">{openMember.major}</p>}
                   {openMember.contact && (
-                    <p className="mt-1 text-sm md:text-base">
+                    <p className="pt-1 text-sm">
                       <a className="font-oswald text-lg text-[#0668B3]" href={`mailto:${openMember.contact}`}>
                         {openMember.contact}
                       </a>
                     </p>
                   )}
-                  <div className="mt-4 space-y-2 font-redhat text-sm leading-relaxed md:mt-6 md:text-base">
+                  <div className="space-y-2 pt-4 font-redhat text-sm leading-relaxed md:pt-6">
                     {openMember.description?.split("\n").map((p, i) => <p key={i}>{p}</p>)}
                   </div>
                 </div>
 
-                <div className="relative aspect-square w-full max-w-[340px] justify-self-center">
-                  <div className="absolute inset-0 rounded-[22px] bg-gradient-to-br from-[#0668B3]/90 to-[#7DC242]/90" />
-                  <div className="bg-white] absolute inset-[6px] overflow-hidden rounded-[18px]">
-                    <img src={openMember.image} alt={`${openMember.name}'s photo`} className="h-full w-full object-cover" />
-                  </div>
+                <div className="ombre-background aspect-square w-full max-w-[340px] justify-self-center overflow-hidden rounded-2xl p-2">
+                  <img src={openMember.image} alt={`${openMember.name}'s photo`} className="h-full w-full rounded-2xl object-cover" />
                 </div>
               </div>
             </div>
@@ -155,9 +149,9 @@ export const Route = createFileRoute("/board")({
         <div className="flex justify-center">
           <Link
             to="/past-board"
-            className="flex h-9 w-40 items-center justify-center whitespace-nowrap rounded-xl border border-black bg-gradient-to-r from-saseGreen to-white px-6 py-2 text-xs italic tracking-wide text-black shadow-[2px_2px_2px_rgba(0,0,0,0.10)] transition duration-300 hover:scale-105 sm:h-10 sm:w-60 sm:px-7 sm:text-[18px]"
+            className="flex h-10 items-center justify-center whitespace-nowrap rounded-2xl border border-black bg-gradient-to-r from-saseGreen to-white px-6 py-2 font-redhat text-lg italic tracking-wide text-black shadow-[2px_2px_2px_rgba(0,0,0,0.10)] transition duration-300 hover:scale-105"
           >
-            PAST BOARD MEMBERS
+            Past Board Members
           </Link>
         </div>
       </div>

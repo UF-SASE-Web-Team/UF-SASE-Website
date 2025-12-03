@@ -3,7 +3,7 @@ import { cn } from "@/shared/utils";
 const MemberCard = ({ image, name, quote, role, textColor }: { image: string; name: string; role: string; textColor: string; quote?: string }) => {
   return (
     <div
-      className="relative flex h-[420px] w-[250px] flex-col justify-center rounded-2xl bg-cover bg-center pb-2"
+      className="relative flex h-[420px] w-[280px] flex-col justify-center rounded-2xl bg-cover bg-center pb-2"
       style={{ backgroundImage: `url(${image})` }}
     >
       {/* Gradient Overlay */}
@@ -24,12 +24,12 @@ const MemberCard = ({ image, name, quote, role, textColor }: { image: string; na
             `border-b-2 pb-2`,
           )}
         >
-          <p className="text-center font-semibold">{name}</p>
-          <p className="text-center italic">{role}</p>
+          <p className="text-center text-3xl font-semibold">{name}</p>
+          <p className="text-center text-lg font-medium italic">{role}</p>
         </div>
         {quote && (
           <>
-            <p className="w-full p-2 text-center font-redhat text-xl text-white">"{quote}"</p>
+            <p className="w-full p-2 text-center text-lg text-white">"{quote}"</p>
           </>
         )}
       </div>

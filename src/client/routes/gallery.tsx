@@ -1,11 +1,11 @@
 import { imageUrls } from "@assets/imageUrls";
+import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
+import GalleryYearbook from "@components/gallery/GalleryYearbook";
+import GalleryZipExtraction from "@components/gallery/GalleryZipExtraction";
+import SlideshowIndicator from "@components/gallery/SlideshowIndicator";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoMdLink, IoMdPlay } from "react-icons/io";
-import GalleryYearbook from "../components/gallery/GalleryYearbook";
-import GalleryZipExtraction from "../components/gallery/GalleryZipExtraction";
-import SlideshowIndicator from "../components/gallery/SlideshowIndicator";
-import { applyOmbreDivider } from "../utils/ombre-divider.js";
 import { seo } from "../utils/seo";
 
 const slideshowLabels = {
@@ -48,23 +48,19 @@ export const Route = createFileRoute("/gallery")({
   component: () => {
     const [slideshow, setSlideshow] = useState<SlideshowKey>("Fall 2024");
     const [activeYearbook, setActiveYearbook] = useState<YearbookId>("2024-2025");
-
-    useEffect(() => {
-      applyOmbreDivider();
-    }, []);
-
     const entries = Object.entries(slideshowLinks) as Array<[SlideshowKey, string]>;
     const previewHref = yearbookLinks[activeYearbook];
 
     return (
-      <div className="pb-20">
-        {/* Title */}
-        <p className="mt-6 flex justify-center pb-5 text-center font-oswald text-7xl">GALLERY</p>
+      <div className="py-10">
+        <div className="flex w-full justify-center">
+          <p className="header-text ombre-text text-center">GALLERY</p>
+        </div>
 
-        <div className="ombre-divider" />
+        <OmbreDivider />
 
         {/* Main gallery grid */}
-        <section className="mx-auto mt-16 max-w-6xl px-4 md:px-8">
+        <section className="mx-auto max-w-6xl px-4 py-10 md:px-8">
           <div className="flex gap-10">
             {/* LEFT VERTICAL INDICATOR – only the active slideshow */}
             <div className="flex flex-col items-center">
@@ -79,11 +75,11 @@ export const Route = createFileRoute("/gallery")({
         </section>
 
         {/* Google Drive Links box */}
-        <section className="mx-auto mt-16 max-w-4xl px-4 md:px-8">
-          <div className="flex flex-col gap-4 rounded-2xl border-[4px] border-black bg-white px-4 py-5 md:flex-row md:items-center md:gap-6 md:px-8 md:py-8">
+        <section className="mx-auto max-w-4xl px-4 pb-10 md:px-8">
+          <div className="flex flex-col gap-4 rounded-2xl border-[4px] border-black bg-white px-4 py-5 dark:bg-greenBackground md:flex-row md:items-center md:gap-6 md:px-8 md:py-8">
             {/* Left text */}
             <div className="-mt-1 flex flex-col items-center md:items-start">
-              <p className="text-center font-oswald text-2xl leading-tight md:text-3xl">
+              <p className="text-center font-oswald text-3xl leading-tight">
                 <span className="text-saseBlue">
                   Google <span className="inline md:block">Drive</span>
                 </span>
@@ -94,17 +90,13 @@ export const Route = createFileRoute("/gallery")({
             {/* Divider */}
             <div className="hidden h-32 w-[4px] bg-black md:block" />
 
-            {/* Right: semesters grid */}
+            {/* Right: Semesters grid */}
             <div className="flex-1">
               <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-3 sm:gap-y-8">
                 {entries.map(([label, link]) => (
                   <div key={label} className="flex flex-col items-center gap-1 md:gap-3">
                     {/* Label */}
-                    <button
-                      type="button"
-                      onClick={() => setSlideshow(label)}
-                      className="font-redhat text-base font-medium hover:underline md:text-lg"
-                    >
+                    <button type="button" onClick={() => setSlideshow(label)} className="font-redhat text-lg font-medium hover:underline">
                       {label}
                     </button>
 
@@ -136,13 +128,15 @@ export const Route = createFileRoute("/gallery")({
           </div>
         </section>
 
-        {/* Yearbook Section */}
-        <section className="mx-auto mt-16 max-w-6xl px-4 md:px-8">
-          <h2 className="mb-4 font-oswald text-4xl md:text-5xl">UF SASE YEARBOOK</h2>
+        <OmbreDivider />
 
-          <div className="mt-8 flex flex-col md:flex-row md:items-start md:gap-28">
+        {/* Yearbook Section */}
+        <section className="mx-auto max-w-6xl px-4 pt-10 md:px-8">
+          <h2 className="subheader-text w-full text-center md:text-left">UF SASE YEARBOOK</h2>
+
+          <div className="flex flex-col gap-10 md:flex-row md:items-start md:gap-28">
             {/* Year Buttons */}
-            <div className="flex flex-col gap-3">
+            <div className="flex flex-row justify-center gap-3 md:flex-col">
               {yearbooks.map((yb) => {
                 const isActive = activeYearbook === yb.id;
                 return (
@@ -171,7 +165,7 @@ export const Route = createFileRoute("/gallery")({
               <GalleryYearbook year={activeYearbook} />
 
               <a href={previewHref} target="_blank" rel="noreferrer" className="mt-6 self-center md:self-start">
-                <button className="inline-flex items-center justify-center rounded-[4px] border-[3px] border-black bg-saseBlue px-7 py-2 font-redhat text-[20px] tracking-[0.12em] text-white shadow-[3px_3px_0_0_rgba(0,0,0,0.35)] transition-transform duration-150 hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[5px_5px_0_0_rgba(0,0,0,0.3)]">
+                <button className="inline-flex items-center justify-center rounded-[4px] border-[3px] border-black bg-saseBlue px-7 py-2 font-redhat text-lg tracking-[0.12em] text-white shadow-[3px_3px_0_0_rgba(0,0,0,0.35)] transition-transform duration-150 hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-[5px_5px_0_0_rgba(0,0,0,0.3)]">
                   Preview
                 </button>
               </a>

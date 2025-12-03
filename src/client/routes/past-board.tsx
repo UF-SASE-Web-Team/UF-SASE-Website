@@ -36,7 +36,13 @@ export const Route = createFileRoute("/past-board")({
               <div className="flex justify-center">
                 <div className="grid max-w-screen-lg grid-cols-1 justify-items-center gap-x-16 gap-y-5 md:grid-cols-3">
                   {section.members.map((member, idx) => (
-                    <BoardMemberCard key={idx} member={member} />
+                    <div
+                      key={idx}
+                      id={`member-${member.name}`}
+                      className="flex aspect-square w-full max-w-[300px] cursor-pointer items-center justify-center"
+                    >
+                      <BoardMemberCard member={member} pastMember={true} />
+                    </div>
                   ))}
                 </div>
               </div>

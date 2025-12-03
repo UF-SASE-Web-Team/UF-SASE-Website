@@ -4,6 +4,7 @@ import { imageUrls } from "@assets/imageUrls";
 import boardInfo from "@components/board/BoardInfo";
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useState } from "react";
 import { seo } from "../utils/seo";
 
 interface Member {
@@ -25,9 +26,7 @@ export const Route = createFileRoute("/board")({
   ],
   component: () => {
     const [openMember, setOpenMember] = useState<Member | null>(null);
-    useEffect(() => {
-      applyOmbreDivider();
-    }, []);
+
     return (
       <div className="min-h-screen px-4 py-10">
         {/* title */}
@@ -38,8 +37,7 @@ export const Route = createFileRoute("/board")({
         </div>
 
         {/* group picture */}
-
-        <div className="mb-16 mt-10 flex justify-center font-[Poppins]">
+        <div className="mb-16 mt-10 flex justify-center">
           {/*Gradient/shadow*/}
           <div className="relative w-full max-w-5xl">
             <div className="pointer-events-none absolute inset-0 translate-x-4 translate-y-4 rounded-2xl bg-gradient-to-tr from-[#7DC242] to-[#0668B3] opacity-75" />
@@ -80,7 +78,7 @@ export const Route = createFileRoute("/board")({
 
         {openMember && (
           <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-[1px] md:items-center"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-[1px]"
             onClick={() => {
               const name = openMember?.name;
               setOpenMember(null);
@@ -99,7 +97,7 @@ export const Route = createFileRoute("/board")({
             }}
           >
             <div
-              className="relative mx-auto w-[min(95vw,1100px)] rounded-2xl border border-black/5 bg-white p-4 shadow-[0_15px_40px_rgba(0,0,0,0.2)] sm:p-6 md:p-8"
+              className="relative mx-auto w-[min(95vw,1100px)] rounded-2xl border border-black/5 bg-white p-4 shadow-[0_15px_40px_rgba(0,0,0,0.2)] dark:bg-black md:p-8"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -119,33 +117,30 @@ export const Route = createFileRoute("/board")({
                     }, 200);
                   });
                 }}
-                className="absolute right-3 top-3 rounded-full p-2 text-black/60 hover:bg-black/5"
+                className="absolute right-2 top-2 rounded-full p-2 text-foreground/60 hover:bg-foreground/5"
               >
                 ×
               </button>
 
               <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-[1fr_340px] md:gap-8">
                 <div>
-                  <p className="font-oswald text-xl font-semibold text-[#0668B3] md:text-2xl">{openMember.role}</p>
-                  <p className="mt-1 font-oswald text-lg font-semibold md:text-xl">{openMember.name}</p>
-                  {openMember.major && <p className="font-redhat text-base italic text-black">{openMember.major}</p>}
+                  <p className="font-oswald text-xl font-semibold text-[#0668B3] md:text-3xl">{openMember.role}</p>
+                  <p className="pt-1 font-oswald text-lg font-semibold">{openMember.name}</p>
+                  {openMember.major && <p className="pt-1 font-redhat text-sm italic text-foreground">{openMember.major}</p>}
                   {openMember.contact && (
-                    <p className="mt-1 text-sm md:text-base">
+                    <p className="pt-1 text-sm">
                       <a className="font-oswald text-lg text-[#0668B3]" href={`mailto:${openMember.contact}`}>
                         {openMember.contact}
                       </a>
                     </p>
                   )}
-                  <div className="mt-4 space-y-2 font-redhat text-sm leading-relaxed md:mt-6 md:text-base">
+                  <div className="space-y-2 pt-4 font-redhat text-sm leading-relaxed md:pt-6">
                     {openMember.description?.split("\n").map((p, i) => <p key={i}>{p}</p>)}
                   </div>
                 </div>
 
-                <div className="relative aspect-square w-full max-w-[340px] justify-self-center">
-                  <div className="absolute inset-0 rounded-[22px] bg-gradient-to-br from-[#0668B3]/90 to-[#7DC242]/90" />
-                  <div className="bg-white] absolute inset-[6px] overflow-hidden rounded-[18px]">
-                    <img src={openMember.image} alt={`${openMember.name}'s photo`} className="h-full w-full object-cover" />
-                  </div>
+                <div className="ombre-background aspect-square w-full max-w-[340px] justify-self-center overflow-hidden rounded-2xl p-2">
+                  <img src={openMember.image} alt={`${openMember.name}'s photo`} className="h-full w-full rounded-2xl object-cover" />
                 </div>
               </div>
             </div>

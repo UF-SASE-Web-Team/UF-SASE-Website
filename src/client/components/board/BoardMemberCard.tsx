@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 interface Member {
   role: string;
   image: string;
@@ -10,23 +8,16 @@ interface Member {
 }
 
 const BoardMemberCard = ({ member }: { member: Member }) => {
-  const [isExpanded, setExpanded] = useState(false);
-
-  const handleToggleExpand = () => {
-    setExpanded(!isExpanded);
-  };
-
   // check if role is single line or not
   const isSingleLine = member.role.length <= 20;
 
   return (
     <div
-      className={`group relative flex flex-col items-center p-4 text-center transition-transform duration-500 ease-in-out ${isExpanded ? "scale-105 cursor-default" : "scale-100 cursor-pointer"} w-full max-w-[110%] sm:max-w-[300px] md:max-w-[350px]`}
-      onClick={() => !isExpanded && handleToggleExpand()}
+      className={`group relative flex w-full max-w-[110%] flex-col items-center p-4 text-center transition-transform duration-500 ease-in-out sm:max-w-[300px] md:max-w-[350px]`}
     >
       {/* role */}
       <p
-        className={`my-2 flex h-10 w-48 items-center justify-center whitespace-nowrap text-center ${isExpanded ? "invisible" : "font-medium italic text-blue-500"} text-base sm:text-lg md:text-2xl`}
+        className={`mb-3 flex h-[2.5rem] items-center justify-center text-center text-lg font-medium italic leading-tight tracking-wide text-[#0668B3] sm:text-xl md:text-2xl`}
         style={{ paddingTop: isSingleLine ? "0.5rem" : "0" }}
       >
         {member.role}
@@ -34,57 +25,21 @@ const BoardMemberCard = ({ member }: { member: Member }) => {
 
       {/* image */}
       <div
-        className={`relative overflow-hidden rounded-2xl border-[0.15vw] border-black shadow-[0.5vw_0.5vw_0px_0px_rgb(61,137,196)] transition-transform duration-500 ease-in-out ${
-          isExpanded ? "scale-110" : "scale-100"
-        } aspect-square w-full max-w-[300px] sm:max-w-[300px] md:max-w-[400px]`}
-        onClick={handleToggleExpand}
+        className={`group relative aspect-square w-full max-w-[300px] transition-transform duration-500 ease-in-out sm:max-w-[300px] md:max-w-[400px]`}
       >
-        <img src={member.image} alt={`${member.name}'s photo`} className="h-full w-full object-cover" />
+        <div className="absolute inset-0 rounded-[18px] bg-gradient-to-br from-[#0668B3] to-[#7DC242] pt-[0.8rem]" />
+        <div className="[0.25vw] absolute inset-[4px] overflow-hidden rounded-[18px] bg-white shadow-[0.6vw_0.6vw_0_rgba(125,194,66,0.6)]">
+          <img src={member.image} alt={`${member.name}'s photo`} className="h-full w-full rounded-[18px] object-cover" />
+        </div>
 
-        {/* learn more */}
-        {!isExpanded && (
-          <div className="absolute inset-0 flex items-start justify-center bg-white bg-opacity-60 p-[1vw] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-            <span className="text-base font-semibold text-black underline sm:text-lg md:text-xl">Learn More</span>
-          </div>
-        )}
-
-        {isExpanded && (
-          <div
-            className="scrollbar-thinner absolute inset-0 flex cursor-pointer flex-col overflow-y-auto bg-background bg-opacity-95 p-[1vw] pt-[0.5vw] transition-opacity duration-500 ease-in-out"
-            onClick={() => setExpanded(false)}
-          >
-            {/* expanded content */}
-            <div className="mt-[1.5vw] cursor-pointer text-left" onClick={(e) => e.stopPropagation()}>
-              <h3 className="cursor-pointer text-base font-bold sm:text-lg md:text-xl" onClick={() => setExpanded(false)}>
-                {member.role}
-              </h3>
-              <h4 className="cursor-pointer text-sm font-semibold sm:text-base md:text-lg" onClick={() => setExpanded(false)}>
-                {member.name}
-              </h4>
-              <p className="cursor-pointer text-xs text-black dark:text-saseGray sm:text-sm md:text-base" onClick={() => setExpanded(false)}>
-                {member.major}
-              </p>
-              <a
-                href={`mailto:${member.contact}`}
-                className="cursor-pointer text-xs text-blue-500 underline sm:text-sm md:text-base"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {member.contact}
-              </a>
-              <p
-                className="mt-[1vw] cursor-pointer text-xs text-black dark:text-saseGray sm:text-xs md:text-xs"
-                onClick={() => setExpanded(false)}
-                style={{ marginTop: "1vw" }}
-              >
-                {member.description}
-              </p>
-            </div>
-          </div>
-        )}
+        {/*hover overlay*/}
+        <div className="absolute inset-[4px] flex items-start justify-center rounded-[18px] bg-white bg-opacity-60 pt-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <span className="text-sm text-black underline sm:text-base md:text-[1rem]">Learn More...</span>
+        </div>
       </div>
 
       {/* name turns invisible on click of learn more */}
-      <p className={`mt-[1.5vw] text-base sm:text-lg md:text-2xl ${isExpanded ? "invisible" : "text-foreground"}`}>{member.name}</p>
+      <p className={`mt-3 text-lg text-foreground sm:text-xl md:text-2xl`}>{member.name}</p>
     </div>
   );
 };

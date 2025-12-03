@@ -1,10 +1,16 @@
+import { GoalsSection } from "@/client/components/programs/GoalsSection";
+import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
+import InternsPhoto from "@assets/interns/SaseInterns.png";
 import Carousel from "@components/carousel/Carousel";
+import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
+import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
 import FAQ from "@components/programs/FAQCard";
-import { faqData } from "@components/programs/faqInterns";
-import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
+import { useIsMobile } from "@hooks/useIsMobile";
+import { InternGoals } from "@information/ProgramGoals";
 import { createFileRoute } from "@tanstack/react-router";
+import { InternsFAQ } from "../information/ProgramFAQs";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/interns")({
@@ -18,12 +24,14 @@ export const Route = createFileRoute("/interns")({
   ],
 
   component: () => {
+    const isMobile = useIsMobile();
+
     return (
-      <div className="mt-12 flex min-h-screen flex-col items-center bg-background">
-        <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 sm:flex-row">
-          <header className="mr-8 mt-10 flex items-center px-5">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center bg-background py-10">
+        <div className={cn({ "flex-row gap-24": !isMobile, "flex-col gap-4": isMobile }, "flex w-full max-w-7xl items-start px-4 pb-10")}>
+          <header className="flex items-center">
             {/* Green Line and Text in Row */}
-            <div className="mr-5 h-40 w-1.5 bg-saseGreen"></div>
+            <div className="mr-5 h-40 w-1.5 rounded-sm bg-saseGreen"></div>
             <h2 className="font-oswald text-7xl font-semibold leading-tight text-foreground">
               SASE
               <br />
@@ -42,29 +50,27 @@ export const Route = createFileRoute("/interns")({
             }
           />
         </div>
-        <div className="w-full max-w-7xl px-4 py-8">
-          <Carousel purpose="Images" prog="Interns" />
-          <div className="mb-24" />
-          <header className="mb-6 flex max-w-7xl items-center px-5 font-oswald">
-            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="text-4xl text-foreground">Testimonials</h2>
-          </header>
-          <Carousel purpose="Testimonials" prog="Interns" />
-          <div className="mb-24" />
-          <header className="mb-12 flex max-w-7xl items-center px-5 font-oswald">
-            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="text-4xl text-foreground">Goals & Outcomes</h2>
-          </header>
-          <div className="mb-24 flex flex-col flex-nowrap items-center justify-center gap-10 md:flex-row lg:gap-36">
-            <GoalCard text="Get more involved in SASE, especially for first and second years." color="blue" />
-            <GoalCard text="Develop essential professional skills and experiences to add to your resume." color="green" />
-            <GoalCard text="Connect with other SASErs and board members through intern-exclusive networking events." color="blue" />
+
+        <div className="flex w-full flex-col items-center pb-10">
+          {/* Group Picture & App Status */}
+          <div className="flex w-full flex-col items-center justify-center bg-black py-10 dark:bg-greenBackground">
+            <ApplicationPhoto image={InternsPhoto} applicationStatus="CLOSED" nextSemester="Spring 2026" />
           </div>
-          <header className="flex max-w-7xl items-center px-5 font-oswald">
-            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="text-4xl text-foreground">FAQs</h2>
-          </header>
-          <FAQ faqData={faqData} />
+
+          {/* Testimonials */}
+          <div className="max-w-7xl py-10">
+            <HeaderWithGreenBorder text="Testimonials" type="Subheader" />
+            <Carousel purpose="Testimonials" prog="Interns" />
+          </div>
+
+          {/* Goals & Outcomes */}
+          <GoalsSection goals={InternGoals} />
+
+          {/* FAQs */}
+          <div className="max-w-7xl pt-10">
+            <HeaderWithGreenBorder text="FAQs" type="Subheader" />
+            <FAQ faqData={InternsFAQ} />
+          </div>
         </div>
       </div>
     );

@@ -11,6 +11,7 @@ export const Route = createFileRoute("/profile/info")({
 
     if (isLoading) return <div>Loading…</div>;
     if (error) return <div>Error: {error.message}</div>;
+    if (!professionalInfo) return <div>Professional info not found</div>;
 
     const handleSave = async (updates: Partial<typeof professionalInfo>) => {
       await updateProfessionalInfo.mutateAsync(updates);

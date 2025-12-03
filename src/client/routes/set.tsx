@@ -1,10 +1,16 @@
 import Carousel from "@/client/components/carousel/Carousel";
+import { GoalsSection } from "@/client/components/programs/GoalsSection";
+import { cn } from "@/shared/utils";
+import { imageUrls } from "@assets/imageUrls";
+import SETPhoto from "@assets/set/SETPHOTO3.jpg";
+import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
+import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
 import FAQ from "@components/programs/FAQCard";
-import GoalCard from "@components/programs/GoalCard";
 import InfoCard from "@components/programs/InfoCard";
+import { useIsMobile } from "@hooks/useIsMobile";
+import { SetFAQ } from "@information/ProgramFAQs";
+import { SetGoals } from "@information/ProgramGoals";
 import { createFileRoute } from "@tanstack/react-router";
-import { imageUrls } from "../assets/imageUrls";
-import { faqData } from "../components/programs/faqSet";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/set")({
@@ -17,13 +23,15 @@ export const Route = createFileRoute("/set")({
     }),
   ],
   component: () => {
+    const isMobile = useIsMobile();
+
     return (
-      <div className="mt-12 flex min-h-screen flex-col items-center bg-background">
-        <div className="flex w-full max-w-7xl flex-col items-start px-4 py-8 lg:flex-row">
-          <header className="mr-8 mt-10 flex items-center px-5">
+      <div className="flex min-h-screen w-full flex-col items-center justify-center bg-background py-10">
+        <div className={cn({ "flex-row gap-24": !isMobile, "flex-col gap-4": isMobile }, "flex w-full max-w-7xl items-start px-4 pb-10")}>
+          <header className="flex items-center">
             {/* Green Line and Text in Row */}
-            <div className="mr-5 h-52 w-1.5 bg-saseGreen"></div>
-            <h2 className="font-oswald text-5xl font-semibold leading-tight text-foreground sm:text-7xl">
+            <div className="mr-5 h-52 w-1.5 rounded-sm bg-saseGreen"></div>
+            <h2 className="font-oswald text-6xl font-semibold leading-tight text-foreground sm:text-7xl">
               SASE
               <br />
               ENGINEERING
@@ -43,29 +51,27 @@ export const Route = createFileRoute("/set")({
             }
           />
         </div>
-        <div className="w-full max-w-7xl px-4 py-8">
-          <Carousel purpose="Images" prog="SET" />
-          <div className="mb-16" />
-          <header className="mb-6 flex max-w-7xl items-center px-5">
-            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="font-oswald text-4xl text-foreground">Past Projects</h2>
-          </header>
-          <Carousel purpose="Testimonials" prog="SET" />
-          <div className="mb-16" />
-          <header className="mb-12 flex max-w-7xl items-center px-5">
-            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="font-oswald text-4xl text-foreground">Goals & Outcomes</h2>
-          </header>
-          <div className="mb-16 flex flex-col flex-nowrap items-center justify-center gap-10 md:flex-row lg:gap-36">
-            <GoalCard text="Get more involved in SASE, especially for first and second years." color="blue" />
-            <GoalCard text="Develop essential technical skills and experiences to add to your resume." color="green" />
-            <GoalCard text="Connect with other SASErs and develop leadership skills through hands-on projects." color="blue" />
+
+        <div className="flex w-full flex-col items-center pb-10">
+          {/* Group Picture & App Status */}
+          <div className="flex w-full flex-col items-center justify-center bg-black py-10 dark:bg-greenBackground">
+            <ApplicationPhoto image={SETPhoto} applicationStatus="CLOSED" nextSemester="Spring 2026" />
           </div>
-          <header className="flex max-w-7xl items-center px-5">
-            <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-            <h2 className="font-oswald text-4xl text-foreground">FAQs</h2>
-          </header>
-          <FAQ faqData={faqData} />
+
+          {/* Past Projects */}
+          <div className="max-w-7xl py-10">
+            <HeaderWithGreenBorder text="Past Projects" type="Subheader" />
+            <Carousel purpose="Testimonials" prog="SET" />
+          </div>
+
+          {/* Goals & Outcomes */}
+          <GoalsSection goals={SetGoals} />
+
+          {/* FAQs */}
+          <div className="max-w-7xl pt-10">
+            <HeaderWithGreenBorder text="FAQs" type="Subheader" />
+            <FAQ faqData={SetFAQ} />
+          </div>
         </div>
       </div>
     );

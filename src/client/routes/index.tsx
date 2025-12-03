@@ -1,18 +1,19 @@
-import MemberCard from "@/client/components/home/MemberCard";
-import MissionCard from "@/client/components/home/MissionCard";
-import SponsorInfo from "@/client/components/sponsors/SponsorInfo";
+import MemberCard from "@/client/components/custom_ui/MemberCard";
+import MissionCard from "@/client/components/custom_ui/MissionCard";
+import MobileMemberCard from "@/client/components/custom_ui/MobileMemberCard";
+import SponsorCard from "@/client/components/custom_ui/SponsorCard";
+import { MobileMissionCarousel } from "@/client/components/home/MobileMissionCarousel";
+import { Missions } from "@/client/information/Missions";
+import SponsorInfo from "@/client/information/Sponsors";
 import { cn } from "@/shared/utils";
 import BoardPic from "@assets/home/Board.png";
 import { imageUrls } from "@assets/imageUrls";
 import Carousel from "@components/carousel/Carousel";
-import { Missions, People } from "@components/home/HomePageInfoArrays";
-import MobileMemberCard from "@components/mobile/MobileMemberCard";
-import { MobileMissionCarousel } from "@components/mobile/MobileMissionCarousel";
-import SponsorCard from "@components/sponsors/SponsorCard";
+import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { useIsMobile } from "@hooks/useIsMobile";
+import { PIEBoard } from "@information/People";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { applyOmbreDivider } from "../utils/ombre-divider";
+import { useState } from "react";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/")({
@@ -29,35 +30,33 @@ export const Route = createFileRoute("/")({
     const isMobile = useIsMobile();
     const [expanded, setExpanded] = useState(false);
 
-    useEffect(() => {
-      applyOmbreDivider();
-    });
-
     return (
       <div className="flex flex-col items-center">
         {/* Title & Image Section */}
         <div className="flex w-full flex-col items-center">
           <img src={BoardPic} alt="2023-2024 SASE Board" className="relative h-auto w-full" />
-          <div className="absolute w-full items-center p-8 pt-[35%] font-oswald text-3xl font-bold italic text-white sm:text-5xl lg:text-6xl xl:text-7xl">
-            <h1 className="flex w-full items-center pl-[5%] sm:pl-[10%]">
+          <div className="absolute w-full items-center px-[10%] pt-[30%] font-oswald text-3xl font-bold italic text-white sm:text-5xl lg:text-7xl xl:pt-[35%]">
+            <h1 className="flex w-full items-center">
               <span>S </span>
               <img src={imageUrls["WhiteLogo.png"]} alt="SASE Logo" className="inline-block h-[1.5em] align-middle" />
               <span>CIETY OF ASIAN</span>
             </h1>
-            <h1 className="w-full pr-[5%] text-right sm:pr-[10%]">SCIENTISTS & ENGINEERS</h1>
+            <h1 className="w-full text-right">SCIENTISTS & ENGINEERS</h1>
           </div>
         </div>
 
-        {/* Video & Descritpion Section */}
-        <div className="flex flex-col items-center bg-black px-0 py-14 md:px-8 lg:px-12">
-          <div className="relative w-9/12 rounded-2xl bg-gradient-to-r from-saseBlue via-[#7DC242] to-saseGreen p-[4px]">
-            <div className="flex h-full flex-col rounded-2xl bg-gray-950 p-4 text-center lg:p-10 lg:text-start">
-              <h1 className="pb-12 font-oswald text-3xl font-medium text-white sm:text-5xl">University of Florida Chapter</h1>
+        {/* Video & Description Section */}
+        <div className="flex flex-col items-center bg-black py-10">
+          <div className="ombre-background w-9/12 rounded-2xl p-1">
+            <div className={cn({ "p-10 text-start": !isMobile, "p-4 text-center": isMobile }, "flex h-full flex-col rounded-2xl bg-gray-950")}>
+              <h1 className={cn({ "text-3xl": isMobile, "text-5xl": !isMobile }, "pb-10 font-oswald font-medium text-white")}>
+                University of Florida Chapter
+              </h1>
               <div>
                 {/* Video for sm-xl screens */}
                 <iframe
                   className="block aspect-video w-full pb-8 pl-2 pr-2 xl:hidden"
-                  src="https://www.youtube.com/embed/JV9HAUhVet8"
+                  src="https://www.youtube.com/embed/UymaxCaKkMU"
                   title="UF SASE Video"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -67,13 +66,13 @@ export const Route = createFileRoute("/")({
                 {/* Video for xl+ screen */}
                 <iframe
                   className="float-right hidden aspect-video w-1/2 pb-2 pl-8 xl:block"
-                  src="https://www.youtube.com/embed/JV9HAUhVet8"
+                  src="https://www.youtube.com/embed/UymaxCaKkMU"
                   title="UF SASE Video"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
-                <p className="font-redhat text-lg text-white md:text-xl">
+                <p className={cn({ "text-lg": !isMobile, "text-sm": isMobile }, "font-redhat text-white")}>
                   The <span className="font-semibold">Society of Asian Scientists & Engineers </span> is a vibrant and dynamic organization at the
                   University of Florida. We are committed to fostering meaningful connections across cultures and empowering{" "}
                   <span className="font-semibold">Asian Pacific Islander Desi American (APIDA) </span>
@@ -83,7 +82,7 @@ export const Route = createFileRoute("/")({
                 {!isMobile || expanded ? (
                   <>
                     <br />
-                    <p className="font-redhat text-lg text-white md:text-xl">
+                    <p className={cn({ "text-lg": !isMobile, "text-sm": isMobile }, "font-redhat text-white")}>
                       Through <span className="font-semibold">engaging meetings and events</span>, we provide a nurturing environment where you can
                       acquire <span className="font-semibold">essential skills and knowledge </span>
                       to excel in the professional world. Our <span className="font-semibold">inclusive community </span>
@@ -96,7 +95,7 @@ export const Route = createFileRoute("/")({
                 ) : null}
 
                 {isMobile && (
-                  <button className="mt-4 text-saseGreen underline" onClick={() => setExpanded(!expanded)}>
+                  <button className="mt-4 font-redhat text-lg text-saseGreen underline" onClick={() => setExpanded(!expanded)}>
                     {expanded ? "Read Less" : "Read More"}
                   </button>
                 )}
@@ -111,8 +110,8 @@ export const Route = createFileRoute("/")({
         </div>
 
         {/* Mission Section */}
-        <div className="flex w-full flex-col items-center bg-saseGray p-12 dark:bg-greenBackground">
-          <h1 className={cn({ "pb-5": isMobile, "pb-12": !isMobile }, `text-center font-oswald text-6xl font-medium`)}>Our Mission</h1>
+        <div className="flex w-full flex-col items-center bg-saseGray px-10 py-10 dark:bg-greenBackground">
+          <h1 className="subheader-text">Our Mission</h1>
 
           {isMobile ? (
             <div className="w-full">
@@ -123,28 +122,7 @@ export const Route = createFileRoute("/")({
               <div className="mx-auto grid max-w-7xl grid-cols-3 items-stretch gap-10 px-6">
                 {Missions.map((s) => (
                   <div key={s.mission} className="flex justify-center">
-                    <div
-                      className={[
-                        "relative h-full min-h-[330px] w-full max-w-[560px] lg:min-h-[330px]",
-                        "[&>div]:h-full",
-                        "[&>div>div:nth-child(2)]:h-full",
-                        "[&>div>div:nth-child(2)>div]:h-full",
-                        // hide the background copy on desktop
-                        "[&>div>div:first-child]:hidden",
-                        // scale whole card on hover
-                        "[&>div]:transition-transform",
-                        "[&>div]:duration-300",
-                        "[&>div]:transform-gpu",
-                        "hover:[&>div]:scale-105",
-                        s.shadow === "blue"
-                          ? "hover:[&>div>div:nth-child(2)]:shadow-[12px_12px_0_#0668B3]"
-                          : "hover:[&>div>div:nth-child(2)]:shadow-[12px_12px_0_#7DC242]",
-                        // prevent inner double-scale
-                        "[&>div>div:nth-child(2)>div:hover]:scale-100",
-                      ].join(" ")}
-                    >
-                      <MissionCard image={s.image} mission={s.mission} text={s.text} shadow={s.shadow} />
-                    </div>
+                    <MissionCard image={s.image} mission={s.mission} text={s.homeText} shadow={s.shadow} />
                   </div>
                 ))}
               </div>
@@ -152,16 +130,14 @@ export const Route = createFileRoute("/")({
           )}
         </div>
 
-        {/* Images of Vincent, Bryan, Kayleen */}
-        <div className="relative grid h-2 w-full grid-cols-2">
-          <div className="w-full bg-gradient-to-r from-transparent via-[#7DC242] to-[#42957B]" />
-          <div className="w-full bg-gradient-to-r from-[#42957B] via-[#0668B3] to-transparent" />
-        </div>
+        {/* Images of PIE Board */}
+        <OmbreDivider />
+        <OmbreDivider />
         {isMobile ? (
           <>
-            <div className="flex w-full flex-col items-center bg-white px-12 py-8 dark:bg-black">
-              {People.map((p, i) => (
-                <div key={i}>
+            <div className="flex w-full flex-col items-center gap-4 bg-white px-4 py-10 dark:bg-black">
+              {PIEBoard.map((p, i) => (
+                <div key={i} className="flex flex-col gap-4">
                   <MobileMemberCard
                     name={p.fullName}
                     role={p.position}
@@ -170,40 +146,38 @@ export const Route = createFileRoute("/")({
                     image={p.image}
                     imageSide={p.mobileAlignment}
                   />
-                  {i < People.length - 1 && <div className="ombre-divider" />}
+                  {i < PIEBoard.length - 1 && <OmbreDivider />}
                 </div>
               ))}
             </div>
           </>
         ) : (
-          <div className="grid grid-cols-3 gap-12 bg-white p-12 dark:bg-black">
-            {People.map((p, i) => (
+          <div className="grid grid-cols-3 gap-12 bg-white p-10 dark:bg-black">
+            {PIEBoard.map((p, i) => (
               <MemberCard name={p.fullName} role={p.position} textColor={p.fontColor} quote={p.quote} image={p.image} key={i} />
             ))}
           </div>
         )}
-        <div className="relative mx-12 grid h-2 w-full grid-cols-2">
-          <div className="w-full bg-gradient-to-r from-transparent via-[#7DC242] to-[#42957B]" />
-          <div className="w-full bg-gradient-to-r from-[#42957B] via-[#0668B3] to-transparent" />
-        </div>
+        <OmbreDivider />
+        <OmbreDivider />
 
         {/* Values Section */}
-        <div className={cn({ "py-10": isMobile, "p-10": !isMobile }, `w-full bg-black py-10`)}>
-          <h1 className="w-full pb-12 text-center font-oswald text-6xl font-medium text-white">Our Values</h1>
+        <div className="flex w-full flex-col items-center bg-black px-4 py-10">
+          <h1 className="subheader-text text-white">Our Values</h1>
           <Carousel prog="N/A" purpose="Values" />
         </div>
 
-        {/* --- Sponsors Section --- */}
-        <div className="flex w-full flex-col items-center justify-center bg-saseGray p-10 dark:bg-greenBackground">
-          <h1 className="w-full pb-12 text-center font-oswald text-6xl font-medium">Sponsors</h1>
-          <div className="w-11/12">
+        {/* Sponsors Section */}
+        <div className="flex w-full flex-col items-center justify-center bg-saseGray pb-14 pt-10 dark:bg-greenBackground">
+          <h1 className="subheader-text">Sponsors</h1>
+          <div className="flex w-10/12 items-center justify-center">
             {isMobile ? (
-              <div className="relative rounded-2xl border-4 border-border bg-muted px-12 py-8 shadow-[12px_12px_0px_#7DC242]">
-                <p className="mb-8 text-left font-redhat text-xl">
+              <div className="relative flex flex-col items-center rounded-2xl border-4 border-border bg-muted p-4 shadow-[12px_12px_0px_#7DC242]">
+                <p className="mb-8 text-center font-redhat text-sm">
                   Are you interested in becoming a partner with the UF Society of Asian Scientists and Engineers (SASE) Chapter?
                   <br />
                   <br />
-                  To get access to our sponsorship packet, please contact our External Vice President at
+                  To get access to our sponsorship packet, please contact our External Vice President, Manav Sanghvi, at
                   <a href="mailto:ufsase.evp@gmail.com" className="text-saseGreen underline">
                     {" "}
                     ufsase.evp@gmail.com
@@ -212,7 +186,7 @@ export const Route = createFileRoute("/")({
                 </p>
 
                 {/* Sponsors inside the box on mobile */}
-                <div className="grid w-full grid-cols-2 place-items-stretch gap-8">
+                <div className="w-1/2 max-w-60">
                   {SponsorInfo.map((s) =>
                     s.tier === "Diamond" ? (
                       <SponsorCard
@@ -229,16 +203,16 @@ export const Route = createFileRoute("/")({
                   )}
                 </div>
 
-                <p className="mt-6 w-full text-center font-redhat text-xl italic text-foreground">Current Featured Sponsors</p>
+                <p className="mt-6 w-full text-center font-redhat text-sm italic text-foreground">Current Featured Sponsor</p>
               </div>
             ) : (
-              <div className="mb-20 flex w-full flex-row items-start gap-16">
-                <div className="flex w-full flex-col items-center rounded-2xl border-4 border-border bg-muted p-10 shadow-[12px_12px_0px_#7DC242]">
-                  <p className="p-4 text-left font-redhat text-xl sm:text-2xl">
+              <div className="flex h-96 flex-row items-start justify-center">
+                <div className="flex h-full w-full flex-col items-center rounded-2xl border-4 border-border bg-muted p-10 shadow-[12px_12px_0px_#7DC242]">
+                  <p className="p-4 text-left font-redhat text-lg">
                     Are you interested in becoming a partner with the UF Society of Asian Scientists and Engineers (SASE) Chapter?
                     <br />
                     <br />
-                    To get access to our sponsorship packet, please contact our External Vice President at
+                    To get access to our sponsorship packet, please contact our External Vice President, Manav Sanghvi, at
                     <a href="mailto:ufsase.evp@gmail.com" className="text-saseGreen underline">
                       {" "}
                       ufsase.evp@gmail.com
@@ -247,8 +221,8 @@ export const Route = createFileRoute("/")({
                   </p>
                 </div>
 
-                <div className="flex w-full flex-col items-center gap-12">
-                  <div className="grid w-full grid-cols-2 gap-14">
+                <div className="flex h-full w-full flex-col items-center gap-4">
+                  <div className="max-w-1/2 grid grid-cols-1 justify-items-center">
                     {SponsorInfo.map((sponsor) =>
                       sponsor.tier === "Diamond" ? (
                         <SponsorCard
@@ -263,7 +237,7 @@ export const Route = createFileRoute("/")({
                       ) : null,
                     )}
                   </div>
-                  <p className="mt-[-30px] w-full text-center font-redhat text-2xl italic text-foreground xl:text-3xl">Current Featured Sponsors</p>
+                  <p className="w-full text-center font-redhat text-lg italic">Current Featured Sponsor</p>
                 </div>
               </div>
             )}

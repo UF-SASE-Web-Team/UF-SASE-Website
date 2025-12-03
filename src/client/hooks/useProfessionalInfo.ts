@@ -8,19 +8,8 @@ export const useProfessionalInfo = (id: string) => {
 
   const infoQuery = useQuery<ProfessionalInfo, Error>({
     queryKey: ["professionalInfo", id],
-    initialData: {
-      userId: id,
-      phone: "",
-      discord: "",
-      bio: "",
-      resumePath: "",
-      linkedin: "",
-      portfolio: "",
-      majors: "",
-      minors: "",
-      graduationSemester: "",
-    },
     queryFn: () => (id ? fetchProfessionalInfo(id) : Promise.reject(new Error("User ID is required"))),
+    enabled: !!id,
   });
 
   const createMutation = useMutation<ProfessionalInfo, Error, ProfessionalInfoInsert>({

@@ -22,6 +22,7 @@ import { Route as SearchImport } from './routes/search'
 import { Route as ResourcesImport } from './routes/resources'
 import { Route as ResetPasswordImport } from './routes/reset-password'
 import { Route as ProgramsImport } from './routes/programs'
+import { Route as PastBoardImport } from './routes/past-board'
 import { Route as MentorMenteeImport } from './routes/mentor-mentee'
 import { Route as LoginImport } from './routes/login'
 import { Route as InternsImport } from './routes/interns'
@@ -38,7 +39,6 @@ import { Route as ProfileIndexImport } from './routes/profile/index'
 import { Route as ProfileSettingsImport } from './routes/profile/settings'
 import { Route as ProfileSecurityImport } from './routes/profile/security'
 import { Route as ProfileInfoImport } from './routes/profile/info'
-import { Route as ProfileDashboardImport } from './routes/profile/dashboard'
 import { Route as UsersUsernameIdImport } from './routes/users/$username/$id'
 
 // Create/Update Routes
@@ -106,6 +106,12 @@ const ResetPasswordRoute = ResetPasswordImport.update({
 const ProgramsRoute = ProgramsImport.update({
   id: '/programs',
   path: '/programs',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PastBoardRoute = PastBoardImport.update({
+  id: '/past-board',
+  path: '/past-board',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -205,12 +211,6 @@ const ProfileInfoRoute = ProfileInfoImport.update({
   getParentRoute: () => ProfileRouteRoute,
 } as any)
 
-const ProfileDashboardRoute = ProfileDashboardImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => ProfileRouteRoute,
-} as any)
-
 const UsersUsernameIdRoute = UsersUsernameIdImport.update({
   id: '/users/$username/$id',
   path: '/users/$username/$id',
@@ -305,6 +305,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MentorMenteeImport
       parentRoute: typeof rootRoute
     }
+    '/past-board': {
+      id: '/past-board'
+      path: '/past-board'
+      fullPath: '/past-board'
+      preLoaderRoute: typeof PastBoardImport
+      parentRoute: typeof rootRoute
+    }
     '/programs': {
       id: '/programs'
       path: '/programs'
@@ -382,13 +389,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WebdevImport
       parentRoute: typeof rootRoute
     }
-    '/profile/dashboard': {
-      id: '/profile/dashboard'
-      path: '/dashboard'
-      fullPath: '/profile/dashboard'
-      preLoaderRoute: typeof ProfileDashboardImport
-      parentRoute: typeof ProfileRouteImport
-    }
     '/profile/info': {
       id: '/profile/info'
       path: '/info'
@@ -430,7 +430,6 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface ProfileRouteRouteChildren {
-  ProfileDashboardRoute: typeof ProfileDashboardRoute
   ProfileInfoRoute: typeof ProfileInfoRoute
   ProfileSecurityRoute: typeof ProfileSecurityRoute
   ProfileSettingsRoute: typeof ProfileSettingsRoute
@@ -438,7 +437,6 @@ interface ProfileRouteRouteChildren {
 }
 
 const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
-  ProfileDashboardRoute: ProfileDashboardRoute,
   ProfileInfoRoute: ProfileInfoRoute,
   ProfileSecurityRoute: ProfileSecurityRoute,
   ProfileSettingsRoute: ProfileSettingsRoute,
@@ -462,6 +460,7 @@ export interface FileRoutesByFullPath {
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
+  '/past-board': typeof PastBoardRoute
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
@@ -473,7 +472,6 @@ export interface FileRoutesByFullPath {
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
-  '/profile/dashboard': typeof ProfileDashboardRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -493,6 +491,7 @@ export interface FileRoutesByTo {
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
+  '/past-board': typeof PastBoardRoute
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
@@ -504,7 +503,6 @@ export interface FileRoutesByTo {
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
-  '/profile/dashboard': typeof ProfileDashboardRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -526,6 +524,7 @@ export interface FileRoutesById {
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
+  '/past-board': typeof PastBoardRoute
   '/programs': typeof ProgramsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
@@ -537,7 +536,6 @@ export interface FileRoutesById {
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
-  '/profile/dashboard': typeof ProfileDashboardRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -560,6 +558,7 @@ export interface FileRouteTypes {
     | '/interns'
     | '/login'
     | '/mentor-mentee'
+    | '/past-board'
     | '/programs'
     | '/reset-password'
     | '/resources'
@@ -571,7 +570,6 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/verify-email'
     | '/webdev'
-    | '/profile/dashboard'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -590,6 +588,7 @@ export interface FileRouteTypes {
     | '/interns'
     | '/login'
     | '/mentor-mentee'
+    | '/past-board'
     | '/programs'
     | '/reset-password'
     | '/resources'
@@ -601,7 +600,6 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/verify-email'
     | '/webdev'
-    | '/profile/dashboard'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -621,6 +619,7 @@ export interface FileRouteTypes {
     | '/interns'
     | '/login'
     | '/mentor-mentee'
+    | '/past-board'
     | '/programs'
     | '/reset-password'
     | '/resources'
@@ -632,7 +631,6 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/verify-email'
     | '/webdev'
-    | '/profile/dashboard'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -654,6 +652,7 @@ export interface RootRouteChildren {
   InternsRoute: typeof InternsRoute
   LoginRoute: typeof LoginRoute
   MentorMenteeRoute: typeof MentorMenteeRoute
+  PastBoardRoute: typeof PastBoardRoute
   ProgramsRoute: typeof ProgramsRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ResourcesRoute: typeof ResourcesRoute
@@ -681,6 +680,7 @@ const rootRouteChildren: RootRouteChildren = {
   InternsRoute: InternsRoute,
   LoginRoute: LoginRoute,
   MentorMenteeRoute: MentorMenteeRoute,
+  PastBoardRoute: PastBoardRoute,
   ProgramsRoute: ProgramsRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ResourcesRoute: ResourcesRoute,
@@ -717,6 +717,7 @@ export const routeTree = rootRoute
         "/interns",
         "/login",
         "/mentor-mentee",
+        "/past-board",
         "/programs",
         "/reset-password",
         "/resources",
@@ -737,7 +738,6 @@ export const routeTree = rootRoute
     "/profile": {
       "filePath": "profile/route.tsx",
       "children": [
-        "/profile/dashboard",
         "/profile/info",
         "/profile/security",
         "/profile/settings",
@@ -774,6 +774,9 @@ export const routeTree = rootRoute
     "/mentor-mentee": {
       "filePath": "mentor-mentee.tsx"
     },
+    "/past-board": {
+      "filePath": "past-board.tsx"
+    },
     "/programs": {
       "filePath": "programs.tsx"
     },
@@ -806,10 +809,6 @@ export const routeTree = rootRoute
     },
     "/webdev": {
       "filePath": "webdev.tsx"
-    },
-    "/profile/dashboard": {
-      "filePath": "profile/dashboard.tsx",
-      "parent": "/profile"
     },
     "/profile/info": {
       "filePath": "profile/info.tsx",

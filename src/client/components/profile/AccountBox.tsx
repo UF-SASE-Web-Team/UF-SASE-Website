@@ -9,32 +9,28 @@ import { ConfigurableAccountBox } from "./ConfigurableAccountBox";
 type User = z.infer<typeof userSchema>;
 
 interface AccountBoxProps {
-  username: User["username"];
+  adminView: boolean;
   email: User["email"];
   firstName?: User["firstName"];
   lastName?: User["lastName"];
-  timeAdded: number;
-  timeUpdated: number;
   points?: number;
   roles?: string;
-  adminView: boolean;
+  username: User["username"];
 }
 
 export default function AccountBox(props: AccountBoxProps) {
   const [info, setInfo] = useState({
-    username: props.username,
     email: props.email,
     firstName: props.firstName ?? "",
     lastName: props.lastName ?? "",
-    timeAdded: props.timeAdded.toString(),
-    timeUpdated: props.timeUpdated.toString(),
     points: (props.points ?? 0).toString(),
     roles: props.roles ?? "",
+    username: props.username,
   });
 
   const fieldConfigs: Array<FieldConfig> = [
-    { name: "username", label: "Username", type: "text", editable: true },
-    { name: "email", label: "Email", type: "email", editable: true },
+    { name: "username", label: "Username", type: "text", editable: false },
+    { name: "email", label: "Email", type: "email", editable: false },
     {
       name: "password",
       label: "Password",
@@ -46,9 +42,7 @@ export default function AccountBox(props: AccountBoxProps) {
     { name: "firstName", label: "First Name", type: "text", editable: true },
     { name: "lastName", label: "Last Name", type: "text", editable: true },
     { name: "roles", label: "Roles", type: "text", editable: props.roles != undefined && props.roles.match(/(admin|board)/) != null },
-    { name: "points", label: "Points", type: "number", editable: true },
-    { name: "timeAdded", label: "Time Added", type: "text", editable: false },
-    { name: "timeUpdated", label: "Time Updated", type: "text", editable: false },
+    { name: "points", label: "Points", type: "number", editable: false },
   ];
 
   const adminConfigs: Array<FieldConfig> = [
@@ -66,20 +60,16 @@ export default function AccountBox(props: AccountBoxProps) {
     { name: "lastName", label: "Last Name", type: "text", editable: true },
     { name: "roles", label: "Roles", type: "text", editable: true },
     { name: "points", label: "Points", type: "number", editable: true },
-    { name: "timeAdded", label: "Time Added", type: "text", editable: true },
-    { name: "timeUpdated", label: "Time Updated", type: "text", editable: true },
   ];
 
   const initialData: Record<string, string> = {
-    username: info.username,
     email: info.email,
-    password: "",
     firstName: info.firstName,
     lastName: info.lastName,
-    roles: info.roles,
+    password: "",
     points: info.points,
-    timeAdded: info.timeAdded,
-    timeUpdated: info.timeUpdated,
+    roles: info.roles,
+    username: info.username,
   };
 
   const handleSave = async (updates: Record<string, string>) => {
@@ -99,5 +89,9 @@ export default function AccountBox(props: AccountBoxProps) {
     }
   };
 
-  return <ConfigurableAccountBox initialData={initialData} fieldConfigs={props.adminView ? adminConfigs : fieldConfigs} onSave={handleSave} />;
+  return (
+    <div className="group w-full rounded-2xl bg-background px-4 py-6 shadow-xl md:w-3/4 md:px-10">
+      <ConfigurableAccountBox initialData={initialData} fieldConfigs={props.adminView ? adminConfigs : fieldConfigs} onSave={handleSave} />
+    </div>
+  );
 }

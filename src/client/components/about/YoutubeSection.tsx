@@ -3,7 +3,7 @@ const YouTubeVideoSection = () => (
     <div className="relative pb-[56.25%]">
       <iframe
         className="absolute left-0 top-0 h-full w-full rounded-lg"
-        src="https://www.youtube.com/embed/JV9HAUhVet8"
+        src="https://www.youtube.com/embed/UymaxCaKkMU"
         title="UF SASE Video"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -263,12 +263,12 @@ export default function UpcomingEventsBox({ days = 7, icsUrl, limit = 5, showDes
       <div className="overflow-wrap relative rounded-2xl border-[3px] border-black bg-white">
         {/* header */}
         <div className="rounded-t-xl bg-saseGreen text-center">
-          <h3 className="py-3 font-oswald text-xl tracking-wide text-black md:text-2xl">Upcoming This Week</h3>
+          <h3 className="py-3 font-oswald text-3xl tracking-wide text-black">Upcoming This Week</h3>
           <div className="h-[3px] w-full bg-black/70" />
         </div>
 
         {/* body */}
-        <div className="p-4">
+        <div className="p-4 font-redhat">
           {loading && <p className="py-8 text-center text-sm text-neutral-600">Loading…</p>}
 
           {!loading && items.length === 0 && <p className="py-10 text-center text-lg font-medium text-neutral-800">Nothing</p>}
@@ -317,7 +317,7 @@ export default function UpcomingEventsBox({ days = 7, icsUrl, limit = 5, showDes
                         </div>
 
                         <div className="min-w-0 flex-1">
-                          <div className="truncate font-semibold text-neutral-900">{e.title}</div>
+                          <div className="truncate text-lg font-semibold text-neutral-900">{e.title}</div>
                           <div className="text-sm text-neutral-600">{fmt.format(e.start)}</div>
                           {e.location && <div className="text-xs text-neutral-600">{e.location}</div>}
 

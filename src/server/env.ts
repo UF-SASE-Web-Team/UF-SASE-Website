@@ -4,7 +4,7 @@ import { z } from "zod";
 
 dotenv.config();
 
-// This parses the enviorment variables according to a zod schema and provides them to the server
+// This parses the environment variables according to a zod schema and provides them to the server
 export const SERVER_ENV = createEnv({
   server: {
     DATABASE_URL: z.string().url(),
@@ -31,6 +31,9 @@ export const SERVER_ENV = createEnv({
         universe_domain: z.string().optional(),
       }),
     ),
+    GOOGLE_OAUTH_CLIENT_ID: z.string(),
+    GOOGLE_OAUTH_CLIENT_SECRET: z.string(),
+    GOOGLE_OAUTH_REDIRECT_URI: z.string().url(),
   },
   runtimeEnv: process.env,
 });

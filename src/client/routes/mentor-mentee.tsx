@@ -1,18 +1,19 @@
-import { faqData as mentorFaqData } from "@/client/components/programs/MentorMentee/MMfaq";
 import { imageUrls } from "@assets/imageUrls";
 import MMGraphic from "@assets/programs/MMgraphic.png";
 import StarBulletPoint from "@assets/programs/StarBulletPoint.png";
 import Carousel from "@components/carousel/Carousel";
-import { OmbreBackground } from "@components/custom_ui/OmbreBackground";
+import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
+import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import FAQ from "@components/programs/FAQCard";
 import InfoCard from "@components/programs/InfoCard";
 import { MMGoalCard } from "@components/programs/MentorMentee/MMGoalCard";
 import MMPairingForm from "@components/programs/MentorMentee/MMPairingForm";
 import { useIsMobile } from "@hooks/useIsMobile";
+import { MMFAQ } from "@information/ProgramFAQs";
+import { MMGoals } from "@information/ProgramGoals";
 import { ClientOnly, cn } from "@shared/utils";
 import { createFileRoute } from "@tanstack/react-router";
-import { lazy, Suspense, useEffect } from "react";
-import { applyOmbreDivider } from "../utils/ombre-divider";
+import { lazy, Suspense } from "react";
 import { seo } from "../utils/seo";
 
 const MentorMenteeGraph = lazy(() => import("@/client/components/programs/MentorMentee/MMGraph"));
@@ -29,12 +30,9 @@ export const Route = createFileRoute("/mentor-mentee")({
 
   component: () => {
     const isMobile = useIsMobile();
-    useEffect(() => {
-      applyOmbreDivider();
-    });
 
     return (
-      <div className="flex min-h-screen flex-col items-center bg-background">
+      <div className="flex min-h-screen flex-col items-center bg-background pb-10">
         <ClientOnly>
           <div className="flex w-full flex-1">
             <Suspense
@@ -52,101 +50,89 @@ export const Route = createFileRoute("/mentor-mentee")({
         <MMPairingForm />
 
         {/* Header Section */}
-        <div className={cn({ "flex-col gap-4": isMobile, "flex-row, justify-between": !isMobile }, `flex max-w-7xl py-8`)}>
-          <header className="mr-8 mt-10 flex items-center px-5">
-            <div className="mr-5 h-40 w-1.5 bg-saseGreen"></div>
+        <div className={cn({ "grid grid-cols-2 gap-24": !isMobile, "flex flex-col gap-4": isMobile }, "w-full max-w-7xl items-start px-4 py-10")}>
+          <header className="my-10 flex items-center justify-center">
+            {/* Green Line and Text in Row */}
+            <div className="mr-5 h-52 w-1.5 rounded-sm bg-saseGreen"></div>
             <h2 className="font-oswald text-7xl font-semibold leading-tight text-foreground">
-              MENTOR MENTEE
+              MENTOR-MENTEE
               <br />
               PROGRAM
             </h2>
           </header>
-          <div className={cn({ "w-1/2": !isMobile })}>
-            <InfoCard
-              text={
-                <>
-                  The SASE Mentor Mentee program aims to <strong>pair mentees with mentors </strong> who can help <strong>guide them</strong> through
-                  life:
-                  <strong> professionally, academically, and personally</strong>. This is a great way to get involved with SASE, or open up doors to
-                  new opportunities and connections!
-                </>
-              }
-            />
-          </div>
+          <InfoCard
+            text={
+              <>
+                The SASE Mentor Mentee program aims to <strong>pair mentees with mentors </strong> who can help <strong>guide them</strong> through
+                life:
+                <strong> professionally, academically, and personally</strong>. This is a great way to get involved with SASE, or open up doors to new
+                opportunities and connections!
+              </>
+            }
+          />
         </div>
 
         {/* Image & Bullet Points on Ombre Background */}
-        <div className="w-full max-w-7xl">
-          <OmbreBackground
-            innerComponent={
-              <div
-                className={cn({ "flex flex-col": isMobile, "grid grid-cols-[1fr_2fr]": !isMobile }, `items-center justify-center gap-4 px-8 py-4`)}
-              >
-                <img src={MMGraphic} alt="Mentor-Mentee Graphic" className="max-w-sm object-contain" />
+        <div className="ombre-background mb-10 w-full max-w-7xl rounded-2xl">
+          <div className={cn({ "flex flex-col": isMobile, "grid grid-cols-[1fr_2fr]": !isMobile }, `items-center justify-center gap-4 px-8 py-4`)}>
+            <img src={MMGraphic} alt="Mentor-Mentee Graphic" className="max-w-sm object-contain" />
 
-                <ul className="flex h-full flex-col justify-between space-y-6 py-12">
-                  {[
-                    "Available both Fall and Spring Semesters",
-                    "Anyone can apply to be a mentee regardless of grade or major!",
-                    "Apply as soon as possible to ensure you are assigned a mentor!",
-                  ].map((text, index) => (
-                    <li key={index} className="flex items-center">
-                      <img src={StarBulletPoint} alt="bullet" className="mr-4 h-12 w-12" />
-                      <span className="font-redhat text-3xl font-medium leading-[35px] text-white"> {text}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            }
-          />
+            <ul className="flex h-full flex-col justify-between space-y-6 pb-10 pt-6">
+              {[
+                "Available both Fall and Spring Semesters",
+                "Anyone can apply to be a mentee regardless of grade or major!",
+                "Apply as soon as possible to ensure you are assigned a mentor!",
+              ].map((text, index) => (
+                <li key={index} className="flex items-center">
+                  <img src={StarBulletPoint} alt="bullet" className="mr-4 h-12 w-12" />
+                  <span className="font-redhat text-xl font-medium text-white"> {text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* M&M Events Section */}
-        <div className="ombre-divider max-w-7xl" />
-        <div className="my-[-20px] flex w-full flex-col gap-8 bg-saseGrayLight px-[10%] py-8">
-          <h1 className="w-full text-center font-oswald text-6xl font-medium text-black">M&M Events</h1>
-          <OmbreBackground
-            innerComponent={
-              <div className="rounded-2xl bg-saseGrayLight p-4">
-                <p className="text-center font-redhat text-xl">
-                  Join us for some fun and lighthearted events designed to <strong>spark meaningful interactions between mentors and mentees!</strong>{" "}
-                  Participate in a variety of silly and competitive challenges that encourage teamwork, laughter, and connection.
-                </p>
-                <br />
-                <p className="text-center font-redhat text-xl">
-                  Our <strong>featured event</strong> is our <span className="font-medium text-saseBlue">Mentor</span> &{" "}
-                  <span className="font-medium text-saseGreen">Mentee</span> Cup. Earn points by completing activities together, and see how many
-                  challenges you can conquer with your mentor or mentee. It's all about bonding, having fun, and maybe even winning some bragging
-                  rights!
-                </p>
-              </div>
-            }
-          />
-          <Carousel purpose="Testimonials" prog="M&M" />
-        </div>
-        <div className="ombre-divider max-w-7xl" />
-
-        {/* Goals & Outcomes and FAQ Section */}
-        <div className="mt-8 flex max-w-7xl flex-col gap-[16px]">
-          <div className="flex w-full flex-col">
-            <header className="mb-8 flex items-center px-5 font-oswald">
-              <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-              <h2 className="text-4xl text-foreground">Goals & Outcomes</h2>
-            </header>
-            <div className="relative mx-auto mb-24 flex max-w-7xl flex-wrap items-center justify-center gap-12 px-4">
-              <MMGoalCard text="Build meaningful, genuine friendships with new people that go beyond academics!" cardColor="green" />
-              <MMGoalCard text="Bond, explore, and create unforgettable memories along the way!" cardColor="blue" />
-              <MMGoalCard text="Surround yourself with a reliable support system of mentors and peers!" cardColor="green" />
+        <OmbreDivider />
+        <div className="flex w-full flex-col items-center justify-center bg-saseGrayLight px-[10%] py-10 dark:bg-black">
+          <h1 className="subheader-text w-full text-center">M&M Events</h1>
+          <div className="ombre-background mb-10 max-w-7xl rounded-2xl p-1">
+            <div className="rounded-2xl bg-saseGrayLight p-4 dark:bg-black">
+              <p className={cn({ "text-lg": !isMobile, "text-sm": isMobile }, "text-center font-redhat")}>
+                Join us for some fun and lighthearted events designed to <strong>spark meaningful interactions between mentors and mentees!</strong>{" "}
+                Participate in a variety of silly and competitive challenges that encourage teamwork, laughter, and connection.
+              </p>
+              <br />
+              <p className={cn({ "text-lg": !isMobile, "text-sm": isMobile }, "text-center font-redhat")}>
+                Our <strong>featured event</strong> is our{" "}
+                <strong>
+                  <span className="font-bold text-saseBlue">Mentor</span> & <span className="font-bold text-saseGreen">Mentee</span> Cup{" "}
+                </strong>
+                . Earn points by completing activities together, and see how many challenges you can conquer with your mentor or mentee. It's all
+                about bonding, having fun, and maybe even winning some bragging rights!
+              </p>
             </div>
           </div>
+          <Carousel purpose="Testimonials" prog="M&M" />
+        </div>
+        <OmbreDivider />
 
-          <div className="flex w-full flex-col">
-            <header className="flex max-w-7xl items-center px-5">
-              <div className="mr-3 h-11 w-1.5 bg-saseGreen"></div>
-              <h2 className="font-oswald text-4xl text-foreground">FAQs</h2>
-            </header>
-            <FAQ faqData={mentorFaqData} />
+        {/* Goals & Outcomes */}
+        <div className="flex w-full justify-center py-10">
+          <div className="w-full max-w-7xl">
+            <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader" />
+            <div className={cn({ "flex-col gap-10": isMobile, "flex-row gap-16": !isMobile }, "flex flex-nowrap items-center justify-center px-8")}>
+              {MMGoals.map((goal, index) => (
+                <MMGoalCard text={goal.text} cardColor={goal.color} mobileAlign={goal.mobileAlign} key={index} />
+              ))}
+            </div>
           </div>
+        </div>
+
+        {/* FAQs */}
+        <div className="max-w-7xl pt-10">
+          <HeaderWithGreenBorder text="FAQs" type="Subheader" />
+          <FAQ faqData={MMFAQ} />
         </div>
       </div>
     );

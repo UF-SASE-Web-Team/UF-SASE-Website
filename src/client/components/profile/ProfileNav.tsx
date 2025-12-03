@@ -14,9 +14,8 @@ interface ProfileNavProps {
 }
 
 const NAV_ITEMS = [
-  { to: "/profile/", text: "Account", icon: "mdi:account-circle-outline" },
-  { to: "/profile/dashboard", text: "Dashboard", icon: "mdi:cog-outline" },
-  { to: "/profile/info", text: "User Info", icon: "mdi:information-outline" },
+  { to: "/profile/", text: "Dashboard", icon: "mdi:view-dashboard-outline" },
+  { to: "/profile/info", text: "Profile", icon: "mdi:account-outline" },
   { to: "/profile/security", text: "Security", icon: "mdi:lock-outline" },
   { to: "/profile/settings", text: "Settings", icon: "mdi:cog-outline" },
 ];

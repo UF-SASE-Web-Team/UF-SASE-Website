@@ -1,3 +1,4 @@
+import { GoalsSection } from "@/client/components/programs/GoalsSection";
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
 import InternsPhoto from "@assets/interns/SaseInterns.png";
@@ -11,7 +12,6 @@ import { InternGoals } from "@information/ProgramGoals";
 import { createFileRoute } from "@tanstack/react-router";
 import { InternsFAQ } from "../information/ProgramFAQs";
 import { seo } from "../utils/seo";
-import { GoalsSection } from "@/client/components/programs/GoalsSection";
 
 export const Route = createFileRoute("/interns")({
   meta: () => [
@@ -64,7 +64,7 @@ export const Route = createFileRoute("/interns")({
           </div>
 
           {/* Goals & Outcomes */}
-          <GoalsSection goals={InternGoals}/>
+          <GoalsSection goals={InternGoals} />
 
           {/* FAQs */}
           <div className="max-w-7xl pt-10">

@@ -1,7 +1,7 @@
 import { cn } from "@/shared/utils";
 import FAQ from "@components/programs/FAQCard";
-import { useEffect, useRef, useState } from "react";
 import { FreshmanFAQList } from "@information/FreshmenFAQList";
+import { useEffect, useRef, useState } from "react";
 
 const FreshmenFAQ = () => {
   const resourceTabs: Record<string, React.ReactNode> = {

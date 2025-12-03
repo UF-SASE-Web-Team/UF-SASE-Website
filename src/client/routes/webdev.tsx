@@ -10,6 +10,7 @@ import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBord
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
 import FAQ from "@components/programs/FAQCard";
+import { GoalsSection } from "@components/programs/GoalsSection";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { SWTTeamLeads, Webmasters } from "@information/People";
 import { SwtFAQ } from "@information/ProgramFAQs";
@@ -17,7 +18,6 @@ import { SwtGoals } from "@information/ProgramGoals";
 import { createFileRoute } from "@tanstack/react-router";
 import { useContext, useState } from "react";
 import { seo } from "../utils/seo";
-import { GoalsSection } from "@components/programs/GoalsSection";
 
 export const Route = createFileRoute("/webdev")({
   meta: () => [
@@ -263,7 +263,7 @@ export const Route = createFileRoute("/webdev")({
           )}
 
           {/* Goals & Outcomes */}
-          <GoalsSection goals={SwtGoals}/>
+          <GoalsSection goals={SwtGoals} />
 
           {/* FAQs */}
           <div className="w-full max-w-7xl pt-10">

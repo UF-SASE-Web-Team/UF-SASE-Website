@@ -1,17 +1,17 @@
 import Carousel from "@/client/components/carousel/Carousel";
+import { GoalsSection } from "@/client/components/programs/GoalsSection";
 import { cn } from "@/shared/utils";
+import { imageUrls } from "@assets/imageUrls";
 import SETPhoto from "@assets/set/SETPHOTO3.jpg";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
 import FAQ from "@components/programs/FAQCard";
 import InfoCard from "@components/programs/InfoCard";
 import { useIsMobile } from "@hooks/useIsMobile";
+import { SetFAQ } from "@information/ProgramFAQs";
 import { SetGoals } from "@information/ProgramGoals";
 import { createFileRoute } from "@tanstack/react-router";
-import { imageUrls } from "@assets/imageUrls";
-import { SetFAQ } from "@information/ProgramFAQs";
 import { seo } from "../utils/seo";
-import { GoalsSection } from "@/client/components/programs/GoalsSection";
 
 export const Route = createFileRoute("/set")({
   meta: () => [
@@ -65,7 +65,7 @@ export const Route = createFileRoute("/set")({
           </div>
 
           {/* Goals & Outcomes */}
-          <GoalsSection goals={SetGoals}/>
+          <GoalsSection goals={SetGoals} />
 
           {/* FAQs */}
           <div className="max-w-7xl pt-10">

@@ -3,13 +3,13 @@ import { imageUrls } from "@assets/imageUrls";
 import Carousel from "@components/carousel/Carousel";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 import FAQ from "@components/programs/FAQCard";
+import { GoalsSection } from "@components/programs/GoalsSection";
 import InfoCard from "@components/programs/InfoCard";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { SportsFAQ } from "@information/ProgramFAQs";
 import { SportGoals } from "@information/ProgramGoals";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
-import { GoalsSection } from "@components/programs/GoalsSection";
 
 export const Route = createFileRoute("/sports")({
   meta: () => [
@@ -60,7 +60,7 @@ export const Route = createFileRoute("/sports")({
           </div>
 
           {/* Goals & Outcomes */}
-          <GoalsSection goals={SportGoals}/>
+          <GoalsSection goals={SportGoals} />
 
           {/* FAQs */}
           <div className="max-w-7xl pt-10">

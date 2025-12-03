@@ -1,16 +1,16 @@
 import JustinDoan from "@assets/board/JustinDoan.jpg";
 import LeannTang from "@assets/board/LeannTang.jpg";
 import ManavSanghvi from "@assets/board/ManavSanghvi.jpg";
-import AadithiArjun from "@assets/webdev/AadithiArjun.jpeg";
+import AadithiArjun from "@assets/webdev/AadithiArjun.jpg";
 import GurleenDhillon from "@assets/webdev/GurleenDhillon.jpeg";
 import HelenZou from "@assets/webdev/HelenZou.png";
 import JordanKusuda from "@assets/webdev/JordanKusuda.jpeg";
 import JuliaLe from "@assets/webdev/JuliaLe.jpeg";
-import KenzoFukuda from "@assets/webdev/KenzoFukuda.jpeg";
+import KenzoFukuda from "@assets/webdev/KenzoFukuda.jpg";
 import LynetteHemingway from "@assets/webdev/LynetteHemingway.png";
 import MarenHeck from "@assets/webdev/MarenHeck.jpeg";
 import RickyZhang from "@assets/webdev/RickyZhang.jpg";
-import RJTabelon from "@assets/webdev/RJTabelon.png";
+import RJTabelon from "@assets/webdev/RJTabelon.jpeg";
 import StephanieFong from "@assets/webdev/StephanieFong.png";
 import ThuyLe from "@assets/webdev/ThuyLe.png";
 import VincentLin from "@assets/webdev/VincentLin.jpeg";
@@ -166,15 +166,15 @@ export const SWTTeamLeads: Array<{
       {
         name: "Kenzo Fukuda",
         image: KenzoFukuda,
-        quote: "i love sase!",
+        quote: "skating into the codebase",
         role: "Frontend & UI/UX",
         mobileAlign: "left",
         mobileColor: "green",
       },
       {
-        name: "Aadithi Arju",
+        name: "Aadithi Arjun",
         image: AadithiArjun,
-        quote: "i love sase!",
+        quote: "it's a moo point",
         role: "Frontend & UI/UX",
         mobileAlign: "right",
         mobileColor: "blue",
@@ -182,7 +182,7 @@ export const SWTTeamLeads: Array<{
       {
         name: "Vincent Lin",
         image: VincentLin,
-        quote: "i love sase!",
+        quote: "i love my goated swt",
         role: "Backend",
         mobileAlign: "left",
         mobileColor: "green",
@@ -190,7 +190,7 @@ export const SWTTeamLeads: Array<{
       {
         name: "Jordan Kusuda",
         image: JordanKusuda,
-        quote: "i love sase!",
+        quote: "Because bread tastes better than key",
         role: "Backend",
         mobileAlign: "right",
         mobileColor: "blue",

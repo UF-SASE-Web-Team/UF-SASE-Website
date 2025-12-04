@@ -32,42 +32,93 @@ const MentorMenteeGraph: React.FC = () => {
   const [containerRef, dims] = useDimensions<HTMLElement>();
   const fgRef = useRef<ForceGraphMethods<FgNode, FgLink> | null>(null);
   const [graphData, setGraphData] = useState<GraphData | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const centerRef = useRef<d3.ForceCenter<FgNode> | null>(null);
   const navigate = useNavigate();
 
   // fetch mentors & mentees once on mount
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     async function fetchData() {
       try {
+        timeoutId = setTimeout(() => {
+          setError("Request timed out. Please refresh the page.");
+        }, 10000);
+
+        console.log("Fetching mentor-mentee relations...");
         const relations = await fetchMentorMenteeRelations();
+        console.log("Relations fetched:", relations);
+
+        if (!relations || relations.length === 0) {
+          clearTimeout(timeoutId);
+          setGraphData({ nodes: [], links: [] });
+          return;
+        }
+
         const links = relations.map(({ menteeId: t, mentorId: m }) => ({
           source: m,
           target: t,
         }));
+
         const uniqueIds = Array.from(new Set(relations.flatMap(({ menteeId, mentorId }) => [mentorId, menteeId])));
-        const users = await Promise.all(uniqueIds.map((id) => fetchUser(id)));
+
+        //fetch users with error handling for each user
+        const userPromises = uniqueIds.map(async (id) => {
+          try {
+            return await fetchUser(id);
+          } catch (err) {
+            console.error(`Failed to fetch user ${id}:`, err);
+            return null; //return null for failed fetches
+          }
+        });
+
+        const usersWithNulls = await Promise.all(userPromises);
+        const users = usersWithNulls.filter((u) => u !== null); //filter out failed fetches
+
+        console.log("Users fetched:", users);
+
+        if (users.length === 0) {
+          clearTimeout(timeoutId);
+          setError("No valid users found in mentor-mentee relationships.");
+          return;
+        }
+
         const mentorsSet = new Set(relations.map((r) => r.mentorId));
         const menteesSet = new Set(relations.map((r) => r.menteeId));
         const nodes: Array<GraphNode> = users.map((u) => {
           const isMentor = mentorsSet.has(u.id);
           const isMentee = menteesSet.has(u.id);
           const role: GraphNode["role"] = isMentor && isMentee ? "both" : isMentor ? "mentor" : "mentee";
+
+          //use username if firstName/lastName empty
+          const fullName = u.firstName && u.lastName ? `${u.firstName} ${u.lastName}`.trim() : u.firstName || u.lastName || u.username;
+
           return {
             id: u.id,
-            name: `${u.firstName} ${u.lastName}`,
+            name: fullName,
             username: u.username,
             role,
           };
         });
 
-        setGraphData({ nodes, links });
+        //filter out links where either user wasn't found
+        const validUserIds = new Set(users.map((u) => u.id));
+        const validLinks = links.filter((link) => validUserIds.has(link.source) && validUserIds.has(link.target));
+
+        clearTimeout(timeoutId);
+        setGraphData({ nodes, links: validLinks });
       } catch (err) {
+        clearTimeout(timeoutId);
         console.error("Failed to load graph data", err);
+        setError("Failed to load graph data. Please try again.");
       }
     }
-    // setGraphData(debugData);
 
     fetchData();
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
   }, []);
 
   // reconfigure forces & zoom on size or data change
@@ -136,9 +187,23 @@ const MentorMenteeGraph: React.FC = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
+          backgroundColor: "#f5f5f5",
         }}
       >
-        {!graphData && (
+        {error && (
+          <p
+            style={{
+              fontSize: "1.5rem",
+              fontWeight: 500,
+              color: "#ef4444",
+              textAlign: "center",
+              padding: "20px",
+            }}
+          >
+            {error}
+          </p>
+        )}
+        {!graphData && !error && (
           <p
             style={{
               fontSize: "2.25rem",
@@ -147,19 +212,28 @@ const MentorMenteeGraph: React.FC = () => {
           >
             Loading data…
           </p>
-        )}{" "}
-        {graphData && (
+        )}
+        {graphData && !error && (
           <ForceGraph2D
             nodeCanvasObjectMode={() => "after"}
             nodeCanvasObject={(node, ctx, globalScale) => {
-              // Adjust font size based on zoom
-              const fontSize = 12 / globalScale;
+              const nodeRadius = 5;
+              const fontSize = Math.max(12 / globalScale, 3);
+              const x = node.x ?? 0;
+              const y = node.y ?? 0;
               ctx.font = `${fontSize}px Sans-Serif`;
               ctx.textAlign = "center";
               ctx.textBaseline = "top";
-              ctx.fillStyle = "#222"; // pick a legible color
-              // Draw the full name (node.name) just below the circle
-              ctx.fillText(node.name, node.x ?? 0, (node.y ?? 0) + (node.r ?? 5) + 2);
+              const text = node.name || "";
+              const textMetrics = ctx.measureText(text);
+              const textWidth = textMetrics.width;
+              const textHeight = fontSize;
+              const padding = 2;
+              //background rectangle
+              ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+              ctx.fillRect(x - textWidth / 2 - padding, y + nodeRadius + 2 - padding, textWidth + padding * 2, textHeight + padding * 2);
+              ctx.fillStyle = "#000";
+              ctx.fillText(text, x, y + nodeRadius + 2);
             }}
             nodeColor={(node) => {
               switch (node.role) {

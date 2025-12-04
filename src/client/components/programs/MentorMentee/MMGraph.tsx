@@ -46,9 +46,7 @@ const MentorMenteeGraph: React.FC = () => {
           setError("Request timed out. Please refresh the page.");
         }, 10000);
 
-        console.log("Fetching mentor-mentee relations...");
         const relations = await fetchMentorMenteeRelations();
-        console.log("Relations fetched:", relations);
 
         if (!relations || relations.length === 0) {
           clearTimeout(timeoutId);
@@ -75,8 +73,6 @@ const MentorMenteeGraph: React.FC = () => {
 
         const usersWithNulls = await Promise.all(userPromises);
         const users = usersWithNulls.filter((u) => u !== null); //filter out failed fetches
-
-        console.log("Users fetched:", users);
 
         if (users.length === 0) {
           clearTimeout(timeoutId);

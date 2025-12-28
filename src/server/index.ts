@@ -1,6 +1,7 @@
 // import * as Schema from "./db/schema";
 // import { eq } from "drizzle-orm";
 import infoRoutes from "@/server/api/professionalInfo";
+import { uploadRouter } from "@/server/api/uploadthing";
 import authRoutes from "@api/auth";
 import blogRoutes from "@api/blogs";
 import contactRoutes from "@api/contact";
@@ -16,12 +17,8 @@ import tagRoutes from "@api/tags";
 import userRoutes from "@api/user";
 import type { MiddlewareHandler } from "hono";
 import { Hono } from "hono";
+import { createRouteHandler } from "uploadthing/server";
 import { eventHandler, toWebRequest } from "vinxi/http";
-
-const logger: MiddlewareHandler = async (c, next) => {
-  console.log(`${c.req.method} ${c.req.url}`);
-  await next();
-};
 
 // This is the (actual) entry point, which we just redirect to the Hono server (https://h3.unjs.io/guide/event-handler)
 export default eventHandler(async (event) => {
@@ -32,8 +29,22 @@ export default eventHandler(async (event) => {
 // This is the entry point for our server which lives on the /api path
 const app = new Hono();
 
+const logger: MiddlewareHandler = async (c, next) => {
+  console.log(`${c.req.method} ${c.req.url}`);
+  await next();
+};
+app.use("*", logger);
+
 const CAL_ID = "37ac4d5540136c7524b9a64daa11762754c52afa770f3f12e1ac6edca7cb59a3@group.calendar.google.com";
 const ICS_URL = `https://calendar.google.com/calendar/ical/${encodeURIComponent(CAL_ID)}/public/basic.ics`;
+
+const uploadthingHandler = createRouteHandler({
+  router: uploadRouter,
+  config: {},
+});
+
+app.all("/api/uploadthing/*", (c) => uploadthingHandler(c.req.raw));
+app.all("/api/uploadthing", (c) => uploadthingHandler(c.req.raw));
 
 app.get("/api/calendar/ics", async (c) => {
   try {
@@ -62,7 +73,6 @@ app.routes.forEach((route) => {
   console.log(`Method: ${route.method}, Path: ${route.path}`);
 });
 
-app.use("*", logger);
 app
   .get("/", (c) => c.text("TEST"))
   .route("/api", userRoutes)

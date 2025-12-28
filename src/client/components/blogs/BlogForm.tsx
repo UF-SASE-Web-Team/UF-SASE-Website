@@ -3,9 +3,11 @@ import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 import { Textarea } from "@components/ui/textarea";
 import { useEffect } from "react";
+import BlogImageUploader from "@components/blogs/BlogImageUploader";
 
 const BlogForm: React.FC<BlogFormProps> = ({
   error,
+  images,
   isCreating,
   newBlogContent,
   newBlogTags,
@@ -15,6 +17,7 @@ const BlogForm: React.FC<BlogFormProps> = ({
   onSubmit,
   onTagsChange,
   onTitleChange,
+  setImages,
   setTagsInput,
   tagsInput,
 }) => {
@@ -48,6 +51,10 @@ const BlogForm: React.FC<BlogFormProps> = ({
             placeholder="Enter blog content"
             className="min-h-[200px] w-full"
           />
+        </div>
+        <div className="mt-4">
+          <label className="mb-2 block text-sm font-medium text-gray-700">Images</label>
+          <BlogImageUploader images={images} setImages={setImages} />
         </div>
         <div>
           <label className="mb-1 block text-sm font-medium text-gray-700">Tags</label>

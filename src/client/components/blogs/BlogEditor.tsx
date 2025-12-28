@@ -8,9 +8,10 @@ import BlogCarousel from "./BlogCarousel";
 import BlogForm from "./BlogForm";
 
 const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onClose, setIsEditing, showBackButton = true }) => {
-  const { error, handleUpdateBlog, newBlogContent, newBlogTags, newBlogTitle, setCurrentBlog, setNewBlogContent, setNewBlogTags, setNewBlogTitle } =
+  const { error, handleUpdateBlog, newBlogContent, newBlogImages, newBlogTags, newBlogTitle, setCurrentBlog, setNewBlogContent, setNewBlogImages, setNewBlogTags, setNewBlogTitle } =
     useBlogFunctions();
   const [tagsInput, setTagsInput] = useState<string>("");
+  const [blogImages, setBlogImages] = useState<Array<string>>([]);
   useEffect(() => {
     const originalStyle = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = "hidden";
@@ -20,10 +21,11 @@ const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onCl
     setNewBlogTitle(blog.title);
     setNewBlogContent(blog.content);
     setTagsInput(blog.tags.join(","));
+    setBlogImages(blog.images ?? []);
     return () => {
       document.body.style.overflow = originalStyle;
     };
-  }, [blog, setCurrentBlog, setNewBlogContent, setNewBlogTags, setNewBlogTitle]);
+  }, [blog, setCurrentBlog, setNewBlogContent, setNewBlogImages, setNewBlogTags, setNewBlogTitle]);
 
   const handleClose = () => {
     console.log("Close button clicked");
@@ -98,8 +100,8 @@ const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onCl
 
             {/* carousel */}
             <div className="mb-6 mt-4">
-              {blog.images.length > 0 ? (
-                <BlogCarousel images={blog.images} />
+              {blogImages.length > 0 ? (
+                <BlogCarousel images={blogImages} />
               ) : (
                 <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-200 text-gray-500">No images available</div>
               )}
@@ -111,6 +113,8 @@ const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onCl
             {/* content */}
             <BlogForm
               isCreating={false}
+              images={newBlogImages}
+              setImages={setNewBlogImages}
               isEditing={isEditing}
               newBlogTitle={newBlogTitle}
               newBlogContent={newBlogContent}

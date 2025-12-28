@@ -40,6 +40,7 @@ function BlogsPage() {
     isCreating,
     isEditing,
     newBlogContent,
+    newBlogImages,
     newBlogTags,
     newBlogTitle,
     resetForm,
@@ -47,6 +48,7 @@ function BlogsPage() {
     setIsCreating,
     setIsEditing,
     setNewBlogContent,
+    setNewBlogImages,
     setNewBlogTags,
     setNewBlogTitle,
     setSearchQuery,
@@ -159,6 +161,8 @@ function BlogsPage() {
               newBlogTitle={newBlogTitle}
               newBlogContent={newBlogContent}
               newBlogTags={newBlogTags}
+              images={newBlogImages}
+              setImages={setNewBlogImages}
               error={error}
               onTitleChange={setNewBlogTitle}
               onContentChange={setNewBlogContent}

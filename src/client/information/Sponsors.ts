@@ -1,7 +1,6 @@
 import { imageUrls } from "@assets/imageUrls";
 import ExxonMobilLogo from "@assets/other/ExxonMobilLogo.png";
 import ProctorGambleLogo from "@assets/other/P&GLogo.jpeg";
-import SandiaLogo from "@assets/other/SandiaLogo.jpg";
 
 const SponsorInfo = [
   {
@@ -14,7 +13,7 @@ const SponsorInfo = [
   {
     company: "Sandia",
     tier: "Silver",
-    image: SandiaLogo,
+    image: imageUrls["SandiaLogo.jpg"],
     shadow_color: "shadow-[#FFD700]",
     link: "https://www.sandia.gov/",
   },

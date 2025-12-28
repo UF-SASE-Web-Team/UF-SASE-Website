@@ -19,6 +19,7 @@ export const useBlogFunctions = () => {
   const [error, setError] = useState<string | null>(null);
   const [activeTag, setActiveTag] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [newBlogImages, setNewBlogImages] = useState<Array<string>>([]);
 
   // filtered blogs query
   const filteredBlogsQuery = useQuery({
@@ -45,7 +46,7 @@ export const useBlogFunctions = () => {
         content: newBlogContent,
         tags: newBlogTags,
         authorId: id,
-        images: [],
+        images: newBlogImages,
       } as unknown as BlogBase,
       {
         onError: (error: Error) => setError(error.message),
@@ -74,6 +75,7 @@ export const useBlogFunctions = () => {
         title: newBlogTitle,
         content: newBlogContent,
         tags: newBlogTags,
+        images: newBlogImages,
       },
       {
         onError: (error: Error) => setError(error.message),
@@ -92,6 +94,7 @@ export const useBlogFunctions = () => {
     setNewBlogTitle(blog.title);
     setNewBlogContent(blog.content);
     setNewBlogTags(blog.tags || []);
+    setNewBlogImages(blog.images || []);
     setIsEditing(true);
     setError(null);
   };
@@ -105,6 +108,7 @@ export const useBlogFunctions = () => {
     setNewBlogTitle("");
     setNewBlogContent("");
     setNewBlogTags([]);
+    setNewBlogImages([]);
     setError(null);
   };
 
@@ -142,6 +146,8 @@ export const useBlogFunctions = () => {
     setNewBlogContent,
     newBlogTags,
     setNewBlogTags,
+    newBlogImages,
+    setNewBlogImages,
     error,
     activeTag,
     setActiveTag,

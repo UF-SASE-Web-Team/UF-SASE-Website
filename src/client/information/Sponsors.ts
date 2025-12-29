@@ -1,6 +1,4 @@
 import { imageUrls } from "@assets/imageUrls";
-import ExxonMobilLogo from "@assets/other/ExxonMobilLogo.png";
-import ProctorGambleLogo from "@assets/other/P&GLogo.jpeg";
 
 const SponsorInfo = [
   {
@@ -20,14 +18,14 @@ const SponsorInfo = [
   {
     company: "ExxonMobil",
     tier: "Bronze",
-    image: ExxonMobilLogo,
+    image: imageUrls["ExxonMobilLogo.png"],
     shadow_color: "shadow-[#CD7F32]",
     link: "https://corporate.exxonmobil.com/",
   },
   {
     company: "P&G",
     tier: "Bronze",
-    image: ProctorGambleLogo,
+    image: imageUrls["P&GLogo.jpeg"],
     shadow_color: "shadow-[#CD7F32]",
     link: "https://us.pg.com/",
   },

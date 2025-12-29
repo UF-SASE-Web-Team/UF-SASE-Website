@@ -76,22 +76,22 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
       <div className="mx-auto max-w-full px-4 py-8 sm:max-w-6xl">
         {/* header */}
         <div className="relative mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-        {showBackButton && (
-          <button
-            className={cn("flex cursor-pointer items-center font-pixelify font-semibold tracking-wider text-xl sm:text-3xl")}
-            onClick={handleClose}
-          >
-            <span className="mr-3 bg-gradient-to-r from-saseGreen to-saseBlue bg-clip-text text-transparent">≪</span>
-            <span className="bg-gradient-to-r from-saseGreen to-saseBlue bg-clip-text text-transparent">BACK</span>
-          </button>
-        )}
+          {showBackButton && (
+            <button
+              className={cn("flex cursor-pointer items-center font-pixelify text-xl font-semibold tracking-wider sm:text-3xl")}
+              onClick={handleClose}
+            >
+              <span className="mr-3 bg-gradient-to-r from-saseGreen to-saseBlue bg-clip-text text-transparent">≪</span>
+              <span className="bg-gradient-to-r from-saseGreen to-saseBlue bg-clip-text text-transparent">BACK</span>
+            </button>
+          )}
 
-        {blog.displayEditButton && (
-          <Button onClick={handleEditButtonClicked} className="w-full sm:w-auto">
-            {!isEditing ? "Edit Post" : "Close Editor"}
-          </Button>
-        )}
-      </div>
+          {blog.displayEditButton && (
+            <Button onClick={handleEditButtonClicked} className="w-full sm:w-auto">
+              {!isEditing ? "Edit Post" : "Close Editor"}
+            </Button>
+          )}
+        </div>
 
         <div className="relative">
           {/* shadow card */}

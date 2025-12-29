@@ -8,8 +8,19 @@ import BlogCarousel from "./BlogCarousel";
 import BlogForm from "./BlogForm";
 
 const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onClose, setIsEditing, showBackButton = true }) => {
-  const { error, handleUpdateBlog, newBlogContent, newBlogImages, newBlogTags, newBlogTitle, setCurrentBlog, setNewBlogContent, setNewBlogImages, setNewBlogTags, setNewBlogTitle } =
-    useBlogFunctions();
+  const {
+    error,
+    handleUpdateBlog,
+    newBlogContent,
+    newBlogImages,
+    newBlogTags,
+    newBlogTitle,
+    setCurrentBlog,
+    setNewBlogContent,
+    setNewBlogImages,
+    setNewBlogTags,
+    setNewBlogTitle,
+  } = useBlogFunctions();
   const [tagsInput, setTagsInput] = useState<string>("");
   const [blogImages, setBlogImages] = useState<Array<string>>([]);
   useEffect(() => {

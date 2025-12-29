@@ -1,3 +1,4 @@
+import { imageUrls } from "@assets/imageUrls";
 import React from "react";
 
 interface TimelineItem {
@@ -117,7 +118,7 @@ const TimelineMobile = () => {
                 {/* Optional Stars */}
                 {showTopLeftStar && (
                   <div className="absolute -left-5 -top-5 z-20 animate-pulse">
-                    <svg xmlns="@assets/programs/StarBulletPoint.png" fill="#0668B3" viewBox="0 0 24 24" className="h-12 w-12 drop-shadow-md">
+                    <svg xmlns={imageUrls["StarBulletPoint.png"]} fill="#0668B3" viewBox="0 0 24 24" className="h-12 w-12 drop-shadow-md">
                       <path d="M12 3l2.5 6.5L21 10l-5 4 1.5 7L12 17l-5.5 4L8 14 3 10l6.5-.5L12 3z" />
                     </svg>
                   </div>

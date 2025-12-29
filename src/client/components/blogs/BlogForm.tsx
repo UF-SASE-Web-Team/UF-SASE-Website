@@ -1,9 +1,9 @@
 import type { BlogFormProps } from "@/shared/types/blogTypes";
+import BlogImageUploader from "@components/blogs/BlogImageUploader";
 import { Button } from "@components/ui/button";
 import { Input } from "@components/ui/input";
 import { Textarea } from "@components/ui/textarea";
 import { useEffect } from "react";
-import BlogImageUploader from "@components/blogs/BlogImageUploader";
 
 const BlogForm: React.FC<BlogFormProps> = ({
   error,

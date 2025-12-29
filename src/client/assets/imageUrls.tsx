@@ -209,7 +209,23 @@ export const imageUrls = {
   "S&L.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIFffk9tAU3c5JO1RsA0miEYz4B7LpDWSZVIbo",
   "FMGlobal.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIjWwbrTqPXFgMeIkVs28LhKWNr1H9atGfnUQc",
   "Axogen.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIA6ua0cvaeNxvjzd0UG2fgEqpQBwIDXHh3iCm",
-  "Arthrex.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sItFbu8hJWHS9gPO56IAk0pvFRnCDxZscEjwlr"
+  "Arthrex.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sItFbu8hJWHS9gPO56IAk0pvFRnCDxZscEjwlr",
+  "SETPHOTO7.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sInHZeLXQX9dVgjiwAazMhQorPFyvWpKtcOe5N",
+  "SETPHOTO6.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIfnI2agyixepMOaG7mPgcvnKLTX9UZBtlzSbd",
+  "CameronMcMullenTestimonial.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIADPd4RvaeNxvjzd0UG2fgEqpQBwIDXHh3iCm",
+  "WebDevTeam3.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIkEBWd2YJsm0tbroQvWV1BwXen3YuNhU9axlq",
+  "SETPHOTO1.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIoitNIShDJighcSZmqsKCAzTIOvLHd7u1nV2b",
+  "WebDevTeam2.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIKUh4Rh1vFCLMTeyStlfUQNij8whZRPs0m3Hc",
+  "SETPHOTO2.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIL94XRm97KGJRCX4fmq2pu9s8jvPVUM0eIH3B",
+  "SetPhoto.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIHotRTCza6JSB10Of93kqCgmyXtKQiITGZV8z",
+  "WebDevTeamCropped.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sINJGkSaIOhLMSWtjn5ErwKaF987lzcI6podYA",
+  "SETPHOTO5.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIdzaxwocD8AHikJfDB6Fzx0Mjm5yPSUbtEncC",
+  "WebDevTeam4.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIkAnhXyCYJsm0tbroQvWV1BwXen3YuNhU9axl",
+  "WebTeamWinterBanquet2025.JPG": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIA1NnpCfvaeNxvjzd0UG2fgEqpQBwIDXHh3iC",
+  "SETPHOTO4.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIH1SsHYza6JSB10Of93kqCgmyXtKQiITGZV8z",
+  "WebDevTerminal.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIJ99Kc8TybceI05vNVOwxQPMK3zgXrB1ns92C",
+  "Spring Web Dev.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI1JGGPHBt1GIKa0NBDlAXZoMOpV4eTgW3UQCL",
+  "DSC04286.JPG": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI4qPeDmg6GrX0VJTYsuv13NAKF7jfE89pI4HB",
 } as const;
 
 export type imageName = keyof typeof imageUrls;

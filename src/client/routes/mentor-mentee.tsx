@@ -1,6 +1,4 @@
 import { imageUrls } from "@assets/imageUrls";
-import MMGraphic from "@assets/programs/MMgraphic.png";
-import StarBulletPoint from "@assets/programs/StarBulletPoint.png";
 import Carousel from "@components/carousel/Carousel";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
@@ -75,7 +73,7 @@ export const Route = createFileRoute("/mentor-mentee")({
         {/* Image & Bullet Points on Ombre Background */}
         <div className="ombre-background mb-10 w-full max-w-7xl rounded-2xl">
           <div className={cn({ "flex flex-col": isMobile, "grid grid-cols-[1fr_2fr]": !isMobile }, `items-center justify-center gap-4 px-8 py-4`)}>
-            <img src={MMGraphic} alt="Mentor-Mentee Graphic" className="max-w-sm object-contain" />
+            <img src={imageUrls["MMgraphic.png"]} alt="Mentor-Mentee Graphic" className="max-w-sm object-contain" />
 
             <ul className="flex h-full flex-col justify-between space-y-6 pb-10 pt-6">
               {[
@@ -84,7 +82,7 @@ export const Route = createFileRoute("/mentor-mentee")({
                 "Apply as soon as possible to ensure you are assigned a mentor!",
               ].map((text, index) => (
                 <li key={index} className="flex items-center">
-                  <img src={StarBulletPoint} alt="bullet" className="mr-4 h-12 w-12" />
+                  <img src={imageUrls["StarBulletPoint.png"]} alt="bullet" className="mr-4 h-12 w-12" />
                   <span className="font-redhat text-xl font-medium text-white"> {text}</span>
                 </li>
               ))}

@@ -41,11 +41,7 @@ const Footer: React.FC = () => {
               <Button asChild variant="link" size="default">
                 <Link
                   to="/about"
-                  onClick={() => {
-                    setTimeout(() => {
-                      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-                    }, 100);
-                  }}
+                  hash="#contact"
                   className="relative flex h-9 items-center rounded-[55px] border-2 border-black bg-saseGreen px-6 text-sm italic text-black transition-all hover:-translate-y-0.5"
                 >
                   Contact Us!

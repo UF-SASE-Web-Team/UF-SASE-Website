@@ -2,7 +2,6 @@ import Carousel from "@/client/components/carousel/Carousel";
 import { GoalsSection } from "@/client/components/programs/GoalsSection";
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
-import SETPhoto from "@assets/set/SETPHOTO3.jpg";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
 import FAQ from "@components/programs/FAQCard";
@@ -55,7 +54,7 @@ export const Route = createFileRoute("/set")({
         <div className="flex w-full flex-col items-center pb-10">
           {/* Group Picture & App Status */}
           <div className="flex w-full flex-col items-center justify-center bg-black py-10 dark:bg-greenBackground">
-            <ApplicationPhoto image={SETPhoto} applicationStatus="CLOSED" nextSemester="Spring 2026" />
+            <ApplicationPhoto image={imageUrls["SETPHOTO3.jpg"]} applicationStatus="CLOSED" nextSemester="Spring 2026" />
           </div>
 
           {/* Past Projects */}

@@ -81,7 +81,7 @@ export const Route = createFileRoute("/about")({
         <OmbreDivider />
 
         {/* Contact Us */}
-        <section className={cn("w-full max-w-7xl pt-10")}>
+        <section id="contact" className={cn("w-full max-w-7xl pt-10")}>
           <HeaderWithGreenBorder text="Contact Us" type="Subheader" />
           <ContactForm />
         </section>

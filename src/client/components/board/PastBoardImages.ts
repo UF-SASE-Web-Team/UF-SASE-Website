@@ -1,5 +1,4 @@
-import BoardPic2 from "@assets/board/23-24Board.jpg";
-import BoardPic1 from "@assets/board/24-25Board.jpg";
+import { imageUrls } from "@assets/imageUrls";
 
 export type PastBoardSlide = {
   src: string;
@@ -10,8 +9,8 @@ const PastBoardImages = [
   {
     program: "Past Board",
     images: [
-      { src: BoardPic1, year: "2024–25" },
-      { src: BoardPic2, year: "2023–24" },
+      { src: imageUrls["24-25Board.jpg"], year: "2024–25" },
+      { src: imageUrls["23-24Board.jpg"], year: "2023–24" },
     ],
   },
 ];

@@ -35,7 +35,7 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/d3": "^7.4.3",
     "@types/react-d3-graph": "^2.6.7",
-    "@uploadthing/react": "^7.3.0",
+    "@uploadthing/react": "^7.3.3",
     "@vinxi/react": "^0.2.5",
     "@vitejs/plugin-react": "^4.3.1",
     "arctic": "^3.7.0",
@@ -81,7 +81,7 @@
     "tailwind-merge": "^2.5.5",
     "tailwind-scrollbar": "^3.1.0",
     "tailwindcss-animate": "^1.0.7",
-    "uploadthing": "^7.5.2",
+    "uploadthing": "^7.7.4",
     "vinxi": "^0.5.1",
     "vite-plugin-image-optimizer": "^1.1.8",
     "zod": "^3.23.8"

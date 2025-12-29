@@ -123,6 +123,7 @@ export const blogs = sqliteTable("blog", {
   title: text("title").notNull().unique(),
   content: text("content").notNull(), // Assuming markdown content
   authorId: text("author_id").references(() => users.id, { onDelete: "cascade" }),
+  images: text("images", { mode: "json" }).$type<Array<string>>().notNull().default([]),
   publishedDate: integer("published_date", { mode: "timestamp" })
     .notNull()
     .$defaultFn(() => new Date()),

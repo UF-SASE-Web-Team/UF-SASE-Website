@@ -1,19 +1,4 @@
-import JustinDoan from "@assets/board/JustinDoan.jpg";
-import LeannTang from "@assets/board/LeannTang.jpg";
-import ManavSanghvi from "@assets/board/ManavSanghvi.jpg";
-import AadithiArjun from "@assets/webdev/AadithiArjun.jpg";
-import GurleenDhillon from "@assets/webdev/GurleenDhillon.jpeg";
-import HelenZou from "@assets/webdev/HelenZou.png";
-import JordanKusuda from "@assets/webdev/JordanKusuda.jpeg";
-import JuliaLe from "@assets/webdev/JuliaLe.jpeg";
-import KenzoFukuda from "@assets/webdev/KenzoFukuda.jpg";
-import LynetteHemingway from "@assets/webdev/LynetteHemingway.png";
-import MarenHeck from "@assets/webdev/MarenHeck.jpeg";
-import RickyZhang from "@assets/webdev/RickyZhang.jpg";
-import RJTabelon from "@assets/webdev/RJTabelon.jpeg";
-import StephanieFong from "@assets/webdev/StephanieFong.png";
-import ThuyLe from "@assets/webdev/ThuyLe.png";
-import VincentLin from "@assets/webdev/VincentLin.jpeg";
+import { imageUrls } from "@assets/imageUrls";
 
 export const PIEBoard: Array<{
   fullName: string;
@@ -26,7 +11,7 @@ export const PIEBoard: Array<{
   {
     fullName: "Justin Doan",
     position: "President",
-    image: JustinDoan,
+    image: imageUrls["JustinDoan.jpg"],
     quote: "Advance your career with SASE!",
     fontColor: "blue",
     mobileAlignment: "left",
@@ -34,7 +19,7 @@ export const PIEBoard: Array<{
   {
     fullName: "Leann Tang",
     position: "Internal Vice President",
-    image: LeannTang,
+    image: imageUrls["LeannTang.jpg"],
     quote: "💖⋆˙⟡ I love SASE!! ⋆˙⟡💖",
     fontColor: "green",
     mobileAlignment: "right",
@@ -42,7 +27,7 @@ export const PIEBoard: Array<{
   {
     fullName: "Manav Sanghvi",
     position: "External Vice President",
-    image: ManavSanghvi,
+    image: imageUrls["ManavSanghvi.jpg"],
     quote: "The SASE community is incredible 😄",
     fontColor: "blue",
     mobileAlignment: "left",
@@ -65,7 +50,7 @@ export const Webmasters: Array<{
     information: [
       {
         name: "Thuy Le",
-        image: ThuyLe,
+        image: imageUrls["ThuyLe.png"],
         quote: "SWT is sweet",
         year: "2025-26",
         textColor: "green",
@@ -73,7 +58,7 @@ export const Webmasters: Array<{
       },
       {
         name: "Lynette Hemingway",
-        image: LynetteHemingway,
+        image: imageUrls["LynetteHemingway.png"],
         quote: "...sandwiches",
         year: "2025-26",
         textColor: "blue",
@@ -86,7 +71,7 @@ export const Webmasters: Array<{
     information: [
       {
         name: "Ricky Zhang",
-        image: RickyZhang,
+        image: imageUrls["RickyZhang.jpg"],
         quote: "",
         year: "2024-25",
         textColor: "blue",
@@ -94,7 +79,7 @@ export const Webmasters: Array<{
       },
       {
         name: "Gurleen Dhillon",
-        image: GurleenDhillon,
+        image: imageUrls["GurleenDhillon.jpeg"],
         quote: "",
         year: "2023-24",
         textColor: "green",
@@ -102,7 +87,7 @@ export const Webmasters: Array<{
       },
       {
         name: "Maren Heck",
-        image: MarenHeck,
+        image: imageUrls["MarenHeck.jpeg"],
         quote: "",
         year: "2022-23",
         textColor: "blue",
@@ -110,7 +95,7 @@ export const Webmasters: Array<{
       },
       {
         name: "Julia Le",
-        image: JuliaLe,
+        image: imageUrls["JuliaLe.jpeg"],
         quote: "",
         year: "2021-22",
         textColor: "green",
@@ -136,7 +121,7 @@ export const SWTTeamLeads: Array<{
     information: [
       {
         name: "Stephanie Fong",
-        image: StephanieFong,
+        image: imageUrls["StephanieFong.png"],
         quote: "food, family, friends, front-end",
         role: "Frontend",
         mobileAlign: "left",
@@ -144,7 +129,7 @@ export const SWTTeamLeads: Array<{
       },
       {
         name: "RJ Tabelon",
-        image: RJTabelon,
+        image: imageUrls["RJTabelon.jpeg"],
         quote: "Lynette thinks we're doing quotes together",
         role: "Backend",
         mobileAlign: "right",
@@ -152,7 +137,7 @@ export const SWTTeamLeads: Array<{
       },
       {
         name: "Helen Zou",
-        image: HelenZou,
+        image: imageUrls["HelenZou.png"],
         quote: "herm",
         role: "UI/UX",
         mobileAlign: "left",
@@ -165,7 +150,7 @@ export const SWTTeamLeads: Array<{
     information: [
       {
         name: "Kenzo Fukuda",
-        image: KenzoFukuda,
+        image: imageUrls["KenzoFukuda.jpeg"],
         quote: "skating into the codebase",
         role: "Frontend & UI/UX",
         mobileAlign: "left",
@@ -173,7 +158,7 @@ export const SWTTeamLeads: Array<{
       },
       {
         name: "Aadithi Arjun",
-        image: AadithiArjun,
+        image: imageUrls["AadithiArjun.jpeg"],
         quote: "it's a moo point",
         role: "Frontend & UI/UX",
         mobileAlign: "right",
@@ -181,7 +166,7 @@ export const SWTTeamLeads: Array<{
       },
       {
         name: "Vincent Lin",
-        image: VincentLin,
+        image: imageUrls["VincentLin.jpeg"],
         quote: "i love my goated swt",
         role: "Backend",
         mobileAlign: "left",
@@ -189,7 +174,7 @@ export const SWTTeamLeads: Array<{
       },
       {
         name: "Jordan Kusuda",
-        image: JordanKusuda,
+        image: imageUrls["JordanKusuda.jpeg"],
         quote: "Because bread tastes better than key",
         role: "Backend",
         mobileAlign: "right",

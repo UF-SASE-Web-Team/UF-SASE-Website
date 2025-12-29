@@ -1,27 +1,4 @@
-import AdrielPoon from "@assets/board/AdrielPoon.jpg";
-import BryantCao from "@assets/board/BryantCao.jpg";
-import CadeFarrell from "@assets/board/CadeFarell.jpg";
-import ConnieHuang from "@assets/board/ConnieHuang.jpg";
-import GregoryPeiris from "@assets/board/GregoryPeiris.jpg";
-import HelenZou from "@assets/board/HelenZou.jpg";
-import IsabellaNunag from "@assets/board/IsabellaNunag.jpg";
-import JustinDoan from "@assets/board/JustinDoan.jpg";
-import KarenLiang from "@assets/board/KarenLiang.jpg";
-import KaylaChen from "@assets/board/KaylaChen.jpg";
-import KevinTang from "@assets/board/KevinTang.jpg";
-import LeannTang from "@assets/board/LeannTang.jpg";
-import LoganThompson from "@assets/board/LoganThompson.jpg";
-import LynetteHemingway from "@assets/board/LynetteHemingway.jpg";
-import ManavSanghvi from "@assets/board/ManavSanghvi.jpg";
-import MatthewTang from "@assets/board/MatthewTang.jpg";
-import MelissaZhang from "@assets/board/MelissaZhang.jpg";
-import MichaelHemingway from "@assets/board/MichaelHemingway.jpg";
-import PaddyLin from "@assets/board/PaddyLin.jpg";
-import SavinKarki from "@assets/board/SavinKarki.jpg";
-import SharleneKho from "@assets/board/SharleneKho.jpg";
-import ThuyLe from "@assets/board/ThuyLe.jpg";
-import VincentLin from "@assets/board/VincentLin.jpg";
-import VishalVittal from "@assets/board/VishalVittal.jpg";
+import { imageUrls } from "@assets/imageUrls";
 
 const boardInfo = [
   {
@@ -30,7 +7,7 @@ const boardInfo = [
       {
         name: "Justin Doan",
         role: "President",
-        image: JustinDoan,
+        image: imageUrls["JustinDoan.jpg"],
         major: "3rd Year Environmental Engineering",
         contact: "ufsase.president@gmail.com",
         description:
@@ -39,7 +16,7 @@ const boardInfo = [
       {
         name: "Leann Tang",
         role: "Internal Vice President",
-        image: LeannTang,
+        image: imageUrls["LeannTang.jpg"],
         major: "3rd Year Mechanical Engineering",
         contact: "ufsase.vp@gmail.com",
         description:
@@ -48,7 +25,7 @@ const boardInfo = [
       {
         name: "Manav Sanghvi",
         role: "External Vice President",
-        image: ManavSanghvi,
+        image: imageUrls["ManavSanghvi.jpg"],
         major: "3rd Year Computer Science & Statistics",
         contact: "ufsase.evp@gmail.com",
         description:
@@ -57,7 +34,7 @@ const boardInfo = [
       {
         name: "Kevin Tang",
         role: "Treasurer",
-        image: KevinTang,
+        image: imageUrls["KevinTang.jpg"],
         major: "3rd Year Mechanical Engineering",
         contact: "ufsase.treasurer@gmail.com",
         description:
@@ -66,7 +43,7 @@ const boardInfo = [
       {
         name: "Helen Zou",
         role: "Secretary",
-        image: HelenZou,
+        image: imageUrls["HelenZou.jpg"],
         major: "3nd Year Computer Science",
         contact: "ufsase.secretary@gmail.com",
         description:
@@ -75,7 +52,7 @@ const boardInfo = [
       {
         name: "Adriel Poon",
         role: "Public Relations",
-        image: AdrielPoon,
+        image: imageUrls["AdrielPoon.jpg"],
         major: "3rd Year Computer Engineering",
         contact: "ufsase.pr@gmail.com",
         description:
@@ -89,7 +66,7 @@ const boardInfo = [
       {
         name: "Bryant Cao",
         role: "Advancement",
-        image: BryantCao,
+        image: imageUrls["BryantCao.jpg"],
         major: "3rd Year Industrial and Systems Engineering",
         contact: "ufsase.academic@gmail.com",
         description:
@@ -98,7 +75,7 @@ const boardInfo = [
       {
         name: "Karen Liang",
         role: "Fundraising",
-        image: KarenLiang,
+        image: imageUrls["KarenLiang.jpg"],
         major: "2nd Year Data Science",
         contact: "ufsase.fundraising@gmail.com",
         description:
@@ -107,7 +84,7 @@ const boardInfo = [
       {
         name: "Vincent Lin",
         role: "Historian",
-        image: VincentLin,
+        image: imageUrls["VincentLin.jpg"],
         major: "3rd Year Computer Science",
         contact: "ufsase.historian@gmail.com",
         description:
@@ -116,7 +93,7 @@ const boardInfo = [
       {
         name: "Michael Hemingway",
         role: "Member Involvement",
-        image: MichaelHemingway,
+        image: imageUrls["MichaelHemingway.jpg"],
         major: "2nd Year Electrical Engineering",
         contact: "ufsase.moc@gmail.com",
         description:
@@ -125,7 +102,7 @@ const boardInfo = [
       {
         name: "Connie Huang",
         role: "Member Involvement",
-        image: ConnieHuang,
+        image: imageUrls["ConnieHuang.jpg"],
         major: "2nd Year Health Science",
         contact: "ufsase.moc@gmail.com",
         description:
@@ -135,7 +112,7 @@ const boardInfo = [
       {
         name: "Savin Karki",
         role: "Multimedia",
-        image: SavinKarki,
+        image: imageUrls["SavinKarki.jpg"],
         major: "2nd Year Health Science",
         contact: "ufsase.multimedia@gmail.com",
         description:
@@ -144,7 +121,7 @@ const boardInfo = [
       {
         name: "Paddy Lin",
         role: "Multimedia",
-        image: PaddyLin,
+        image: imageUrls["PaddyLin.jpg"],
         major: "2nd Year Data Science & Political Science",
         contact: "ufsase.multimedia@gmail.com",
         description:
@@ -153,7 +130,7 @@ const boardInfo = [
       {
         name: "Sharlene Kho",
         role: "Network",
-        image: SharleneKho,
+        image: imageUrls["SharleneKho.jpg"],
         major: "2nd Year Computer Science",
         contact: "ufsase.alumni@gmail.com",
         description:
@@ -162,7 +139,7 @@ const boardInfo = [
       {
         name: "Melissa Zhang",
         role: "Pre-Collegiate",
-        image: MelissaZhang,
+        image: imageUrls["MelissaZhang.jpg"],
         major: "3rd Year Psych BCN",
         contact: "ufsase.precollegiate@gmail.com",
         description:
@@ -171,7 +148,7 @@ const boardInfo = [
       {
         name: "Gregory Peiris",
         role: "Science",
-        image: GregoryPeiris,
+        image: imageUrls["GregoryPeiris.jpg"],
         major: "5th Year Materials Science and Engineering",
         contact: "ufsase.service@gmail.com",
         description:
@@ -180,7 +157,7 @@ const boardInfo = [
       {
         name: "Logan Thompson",
         role: "Service",
-        image: LoganThompson,
+        image: imageUrls["LoganThompson.jpg"],
         major: "2nd Year Nuclear Engineering",
         contact: "ufsase.service@gmail.com",
         description:
@@ -189,7 +166,7 @@ const boardInfo = [
       {
         name: "Isabella Nunag",
         role: "Social",
-        image: IsabellaNunag,
+        image: imageUrls["IsabellaNunag.jpg"],
         major: "2nd Year Microbiology",
         contact: "ufsase.social@gmail.com",
         description:
@@ -198,7 +175,7 @@ const boardInfo = [
       {
         name: "Kayla Chen",
         role: "Sports Coordinator",
-        image: KaylaChen,
+        image: imageUrls["KaylaChen.jpg"],
         major: "2nd Year Computer Science",
         contact: "ufsase.sports@gmail.com",
         description:
@@ -207,7 +184,7 @@ const boardInfo = [
       {
         name: "Cade Farrell",
         role: "Sports Coordinator",
-        image: CadeFarrell,
+        image: imageUrls["CadeFarell.jpg"],
         major: "3rd Year Industrial and Systems Engineering",
         contact: "ufsase.sports@gmail.com",
         description:
@@ -216,7 +193,7 @@ const boardInfo = [
       {
         name: "Matthew Tang",
         role: "Technical",
-        image: MatthewTang,
+        image: imageUrls["MatthewTang.jpg"],
         major: "2nd Year Mechanical Engineering",
         contact: "ufsase.tech@gmail.com",
         description:
@@ -225,7 +202,7 @@ const boardInfo = [
       {
         name: "Vishal Vittal",
         role: "Technical",
-        image: VishalVittal,
+        image: imageUrls["VishalVittal.jpg"],
         major: "2nd Year Computer Engineering",
         contact: "ufsase.tech@gmail.com",
         description:
@@ -234,7 +211,7 @@ const boardInfo = [
       {
         name: "Lynette Hemingway",
         role: "Webmaster",
-        image: LynetteHemingway,
+        image: imageUrls["LynetteHemingway.jpg"],
         major: "3rd Year Computer Science",
         contact: "ufsase.webmaster@gmail.com",
         description:
@@ -243,7 +220,7 @@ const boardInfo = [
       {
         name: "Thuy Le",
         role: "Webmaster",
-        image: ThuyLe,
+        image: imageUrls["ThuyLe.jpg"],
         major: "3rd Year Computer Science",
         contact: "ufsase.webmaster@gmail.com",
         description:

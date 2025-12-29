@@ -45,6 +45,11 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
             "h-[450px] w-full shadow-lg transition sm:h-[600px] sm:flex-col",
           )}
         >
+          {blog.displayEditButton && (
+            <Button className="absolute right-4 top-4 z-20 shadow-sm sm:right-4 sm:top-4" onClick={onEditButtonClicked}>
+              {!isEditing ? "Edit" : "Close"}
+            </Button>
+          )}
           {/* image */}
           <figure className="mb-6 aspect-video w-full overflow-hidden rounded-[35px]">
             {blog.images && blog.images.length > 0 ? (
@@ -57,12 +62,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
           <div className="flex w-full flex-1 flex-col items-stretch">
             <div className="relative flex items-center justify-center">
               {/* title */}
-              <h2 className={cn("place-content-start font-oswald font-bold text-gray-800", "text-2xl sm:text-4xl")}>{blog.title}</h2>
-              {blog.displayEditButton && (
-                <Button className={cn("absolute right-0")} onClick={onEditButtonClicked}>
-                  {!isEditing ? "Edit" : "Close Editor"}
-                </Button>
-              )}
+              <div className="relative mb-2 flex w-full items-start justify-start">
+                <h2 className={cn("font-oswald text-2xl font-bold text-gray-800 sm:text-4xl")}>{blog.title}</h2>
+              </div>
             </div>
             {/* author, date */}
             <p className="mt-2 font-serif text-sm italic text-gray-600 sm:text-lg">{formattedDate}</p>

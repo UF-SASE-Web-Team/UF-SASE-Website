@@ -74,17 +74,24 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden bg-white">
       <div className="mx-auto max-w-full px-4 py-8 sm:max-w-6xl">
-        {/* back button */}
-        {showBackButton && (
-          <button
-            className={cn("mb-6 flex cursor-pointer items-center font-pixelify font-semibold tracking-wider", "text-3xl")}
-            onClick={handleClose}
-            aria-label="Back to all posts"
-          >
-            <span className="mr-3 bg-gradient-to-r from-saseGreen to-saseBlue bg-clip-text text-transparent">≪</span>
-            <span className="bg-gradient-to-r from-saseGreen to-saseBlue bg-clip-text text-transparent">BACK TO ALL POSTS</span>
-          </button>
-        )}
+        {/* header */}
+        <div className="relative mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+          {showBackButton && (
+            <button
+              className={cn("flex cursor-pointer items-center font-pixelify text-xl font-semibold tracking-wider sm:text-3xl")}
+              onClick={handleClose}
+            >
+              <span className="mr-3 bg-gradient-to-r from-saseGreen to-saseBlue bg-clip-text text-transparent">≪</span>
+              <span className="bg-gradient-to-r from-saseGreen to-saseBlue bg-clip-text text-transparent">BACK</span>
+            </button>
+          )}
+
+          {blog.displayEditButton && (
+            <Button onClick={handleEditButtonClicked} className="w-full sm:w-auto">
+              {!isEditing ? "Edit Post" : "Close Editor"}
+            </Button>
+          )}
+        </div>
 
         <div className="relative">
           {/* shadow card */}
@@ -132,11 +139,6 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
                 <div className="px-4 py-2 text-center">
                   <div className="relative flex items-center justify-center">
                     <h1 className={cn("font-oswald font-bold text-gray-800", "text-xl sm:text-4xl")}>{blog.title}</h1>
-                    {blog.displayEditButton && (
-                      <Button className="absolute right-0" onClick={handleEditButtonClicked}>
-                        {!isEditing ? "Edit" : "Close Editor"}
-                      </Button>
-                    )}
                   </div>
                   <div className={cn("mt-2 flex items-center justify-center font-redhat", "text-sm text-gray-600 sm:text-base")}>
                     <span className="mr-2 font-bold text-[#0668B3]">{blog.read_time || "15 min"} read</span>

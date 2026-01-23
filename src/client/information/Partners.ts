@@ -1,6 +1,6 @@
 import Citi from "@assets/Citi.jpg";
 import DraftKings from "@assets/DraftKings.png";
-import GEVervova from "@assets/GEVervova.png";
+import GEVernova from "@assets/GEVernova.png";
 import { imageUrls } from "@assets/imageUrls";
 import Micron from "@assets/Micron.png";
 import Solidgm from "@assets/Solidgm.png";
@@ -32,10 +32,10 @@ const SponsorInfo = [
     link: "https://www.draftkings.com/",
   },
   {
-    company: "GE Vervova",
-    image: GEVervova,
+    company: "GE Vernova",
+    image: GEVernova,
     shadow_color: "shadow-[#CD7F32]",
-    link: "https://www.gevervova.com/",
+    link: "https://www.gevernova.com/",
   },
   {
     company: "Solidgm",

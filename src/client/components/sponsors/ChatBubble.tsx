@@ -12,8 +12,8 @@ export const ChatBubble = ({ children, tailSide }: { children: React.ReactNode; 
       {/* Message Tail */}
       <div
         className={cn(
-          { "left-24 rotate-45": tailSide == "left", "right-28 ml-auto rotate-45": tailSide == "right" },
-          "relative bottom-11 h-20 w-20 rounded-br-lg bg-saseGreen",
+          { "left-24": tailSide == "left", "right-28 ml-auto": tailSide == "right" },
+          "relative bottom-11 h-20 w-20 rotate-45 rounded-br-lg bg-saseGreen",
         )}
       >
         <div className="absolute bottom-2 right-2 h-full w-full rounded-br-lg bg-muted" />

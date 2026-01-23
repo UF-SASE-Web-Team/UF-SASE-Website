@@ -1,13 +1,6 @@
 import { cn } from "@/shared/utils";
 import { Link } from "@tanstack/react-router";
 
-interface SponsorStyle {
-  src: string;
-  size: string;
-  translateY: string;
-  rotate?: string;
-}
-
 interface SponsorCardProps {
   companyName: string;
   image: string;

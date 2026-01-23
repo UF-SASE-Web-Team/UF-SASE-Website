@@ -49,7 +49,7 @@ export const Route = createFileRoute("/sponsors")({
 
         <div className={`${isMobile ? "mt-40" : "mt-24"} relative mb-24 flex max-w-7xl flex-col items-center justify-center`}>
           <div className="ombre-background rounded-2xl p-2">
-            <div className="grid w-full max-w-96 grid-cols-1 items-stretch rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:max-w-full lg:grid-cols-3 lg:gap-12 lg:p-24 xl:grid-cols-4">
+            <div className="grid w-full max-w-96 grid-cols-1 items-stretch gap-12 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:max-w-full lg:grid-cols-3 lg:p-24 xl:grid-cols-4">
               {PartnerInfo.map((partner) => (
                 <PartnerCard
                   key={partner.company}
@@ -63,7 +63,7 @@ export const Route = createFileRoute("/sponsors")({
           </div>
         </div>
 
-        <div className={isMobile ? "relative max-w-xs pt-10 sm:max-w-2xl" : "relative right-24 max-w-6xl pt-10"}>
+        <div className={isMobile ? "relative max-w-xs pt-10 sm:max-w-2xl" : "relative max-w-6xl pt-10"}>
           <ChatBubble tailSide="left">
             <>
               Become a <span className="font-bold">partner</span> of the{" "}
@@ -72,14 +72,14 @@ export const Route = createFileRoute("/sponsors")({
           </ChatBubble>
         </div>
 
-        <div>
-          <div className="max-w-8xl relative right-36 mb-20 grid w-full grid-cols-[1fr_2fr]">
+        <div className={isMobile ? "max-w-8xl relative left-32" : "mx-auto"}>
+          <div className="relative right-36 mb-20 grid w-full grid-cols-[1fr_2fr]">
             {/* Logo Image*/}
             <img
               src={imageUrls["SASELogoWithoutText.png"]}
               alt="SASE Logo"
-              style={{ width: "210px", height: "275px" }}
-              className="relative ml-auto [transform:scaleX(-1)]"
+              style={{ maxWidth: "210px", maxHeight: "275px" }}
+              className="ml-auto [transform:scaleX(-1)]"
             />
 
             <div className={isMobile ? "relative max-w-xs sm:max-w-2xl" : "relative bottom-12 right-20 ml-24 max-w-5xl"}>

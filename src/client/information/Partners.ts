@@ -1,5 +1,5 @@
 import Citi from "@assets/Citi.jpg";
-import DraftKings from "@assets/DraftKings.svg";
+import DraftKings from "@assets/DraftKings.png";
 import GEVervova from "@assets/GEVervova.png";
 import { imageUrls } from "@assets/imageUrls";
 import Micron from "@assets/Micron.png";

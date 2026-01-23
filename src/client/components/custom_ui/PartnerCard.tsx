@@ -36,7 +36,7 @@ const SponsorCard = ({ companyName, image, indexSizing = false, link, mobileVari
 
         {/* Logo area */}
         <div className="aspect-3/2 my-auto w-full overflow-hidden rounded-2xl">
-          <img src={image} alt="Company Logo" className={cn("h-full w-full rounded-2xl", (compact || indexSizing) && "object-contain")} />
+          <img src={image} alt="Company Logo" className={cn("my-auto h-full w-full rounded-2xl", (compact || indexSizing) && "object-contain")} />
         </div>
 
         {/* Company name */}

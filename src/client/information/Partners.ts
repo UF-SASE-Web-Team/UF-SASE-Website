@@ -3,7 +3,7 @@ import DraftKings from "@assets/DraftKings.png";
 import GEVernova from "@assets/GEVernova.png";
 import { imageUrls } from "@assets/imageUrls";
 import Micron from "@assets/Micron.png";
-import Solidgm from "@assets/Solidgm.png";
+import Solidigm from "@assets/Solidigm.png";
 import UKG from "@assets/UKG.png";
 
 const SponsorInfo = [
@@ -38,10 +38,10 @@ const SponsorInfo = [
     link: "https://www.gevernova.com/",
   },
   {
-    company: "Solidgm",
-    image: Solidgm,
+    company: "Solidigm",
+    image: Solidigm,
     shadow_color: "shadow-[#CD7F32]",
-    link: "https://www.solidgm.com/",
+    link: "https://www.solidigm.com/",
   },
   {
     company: "Google",

@@ -63,7 +63,7 @@ export const Route = createFileRoute("/sponsors")({
           </div>
         </div>
 
-        <div className={isMobile ? "relative max-w-xs pt-10 sm:max-w-2xl" : "relative max-w-6xl pt-10"}>
+        <div className={isMobile ? "relative right-16 max-w-xs pt-10 sm:max-w-2xl" : "relative max-w-6xl pt-10"}>
           <ChatBubble tailSide="left">
             <>
               Become a <span className="font-bold">partner</span> of the{" "}

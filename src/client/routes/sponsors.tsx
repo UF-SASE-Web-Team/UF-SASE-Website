@@ -1,4 +1,6 @@
+import PartnerCard from "@/client/components/custom_ui/PartnerCard";
 import SponsorCard from "@/client/components/custom_ui/SponsorCard";
+import PartnerInfo from "@/client/information/Partners";
 import SponsorInfo from "@/client/information/Sponsors";
 import { imageUrls } from "@assets/imageUrls";
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
@@ -45,24 +47,23 @@ export const Route = createFileRoute("/sponsors")({
         <OmbreDivider />
         <OmbreDivider />
 
-        <div className={`${isMobile ? "mt-40" : "mt-24"} relative flex max-w-7xl flex-col items-center justify-center`}>
+        <div className={`${isMobile ? "mt-40" : "mt-24"} relative mb-24 flex max-w-7xl flex-col items-center justify-center`}>
           <div className="ombre-background rounded-2xl p-2">
-            <div className="grid w-full max-w-96 grid-cols-1 items-stretch justify-items-center gap-10 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:max-w-full lg:grid-cols-2 lg:gap-24 lg:p-24 xl:grid-cols-3">
-              {SponsorInfo.map((sponsor) => (
-                <SponsorCard
-                  key={sponsor.company}
-                  image={sponsor.image}
-                  companyName={sponsor.company}
-                  type={sponsor.tier as "Diamond" | "Gold" | "Silver" | "Bronze"}
-                  shadowcolor={sponsor.shadow_color}
-                  link={sponsor.link}
+            <div className="grid w-full max-w-96 grid-cols-1 items-stretch rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:max-w-full lg:grid-cols-3 lg:gap-12 lg:p-24 xl:grid-cols-4">
+              {PartnerInfo.map((partner) => (
+                <PartnerCard
+                  key={partner.company}
+                  image={partner.image}
+                  companyName={partner.company}
+                  shadowcolor={partner.shadow_color}
+                  link={partner.link}
                 />
               ))}
             </div>
           </div>
         </div>
 
-        <div className={isMobile ? "relative max-w-xs pt-10 sm:max-w-2xl" : "relative right-48 max-w-6xl pt-10"}>
+        <div className={isMobile ? "relative max-w-xs pt-10 sm:max-w-2xl" : "relative right-24 max-w-6xl pt-10"}>
           <ChatBubble tailSide="left">
             <>
               Become a <span className="font-bold">partner</span> of the{" "}
@@ -71,24 +72,28 @@ export const Route = createFileRoute("/sponsors")({
           </ChatBubble>
         </div>
 
-        {/* Logo Image*/}
-        <img
-            src={imageUrls["SASELogoWithoutText.png"]}
-            alt="SASE Logo"
-            style={{ width: "10%", height: "10%" }}
-            className="relative right-1/3 [transform:scaleX(-1)]"
-        />
+        <div>
+          <div className="max-w-8xl relative right-36 mb-20 grid w-full grid-cols-[1fr_2fr]">
+            {/* Logo Image*/}
+            <img
+              src={imageUrls["SASELogoWithoutText.png"]}
+              alt="SASE Logo"
+              style={{ width: "210px", height: "275px" }}
+              className="relative ml-auto [transform:scaleX(-1)]"
+            />
 
-        <div className={isMobile ? "relative max-w-xs sm:max-w-2xl" : "relative left-20 max-w-5xl"}>
-          <ChatBubble tailSide="left">
-            <>
-              To view our sponsorship packet, or for any related questions, please contact our External Vice President at{" "}
-              <a href={`mailto:ufsase.evp@gmail.com`} className="font-bold underline">
-                ufsase.evp@gmail.com
-              </a>
-              .
-            </>
-          </ChatBubble>
+            <div className={isMobile ? "relative max-w-xs sm:max-w-2xl" : "relative bottom-12 right-20 ml-24 max-w-5xl"}>
+              <ChatBubble tailSide="left">
+                <>
+                  To view our sponsorship packet, or for any related questions, please contact our External Vice President at{" "}
+                  <a href={`mailto:ufsase.evp@gmail.com`} className="font-bold underline">
+                    ufsase.evp@gmail.com
+                  </a>
+                  .
+                </>
+              </ChatBubble>
+            </div>
+          </div>
         </div>
       </div>
     );

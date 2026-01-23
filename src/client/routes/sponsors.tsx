@@ -26,7 +26,7 @@ export const Route = createFileRoute("/sponsors")({
         <OmbreDivider />
         <OmbreDivider />
 
-        <div className={`${isMobile ? "mt-40" : "mt-24"} relative flex max-w-7xl flex-col items-center justify-center`}>
+        <div className="relative mt-24 flex max-w-7xl flex-col items-center justify-center">
           <div className="ombre-background rounded-2xl p-2">
             <div className="grid w-full max-w-96 grid-cols-1 items-stretch justify-items-center gap-10 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:max-w-full lg:grid-cols-2 lg:gap-24 lg:p-24 xl:grid-cols-3">
               {SponsorInfo.map((sponsor) => (
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/sponsors")({
         <OmbreDivider />
         <OmbreDivider />
 
-        <div className={`${isMobile ? "mt-40" : "mt-24"} relative mb-24 flex max-w-7xl flex-col items-center justify-center`}>
+        <div className="relative mb-24 mt-24 flex max-w-7xl flex-col items-center justify-center">
           <div className="ombre-background rounded-2xl p-2">
             <div className="grid w-full max-w-96 grid-cols-1 items-stretch gap-12 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:max-w-full lg:grid-cols-3 lg:p-24 xl:grid-cols-4">
               {PartnerInfo.map((partner) => (

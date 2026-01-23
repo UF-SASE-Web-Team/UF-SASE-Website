@@ -5,7 +5,7 @@ export const ChatBubble = ({ children, tailSide }: { children: React.ReactNode; 
     <>
       <div className="rounded-full bg-gradient-to-b from-saseBlue to-saseGreen p-2">
         <div className="rounded-full bg-muted p-10 font-redhat font-medium">
-          <div className="relative z-10 text-lg">{children}</div>
+          <div className="relative z-10 sm:text-2xl md:text-3xl">{children}</div>
         </div>
       </div>
 

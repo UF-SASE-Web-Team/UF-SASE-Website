@@ -24,41 +24,7 @@ export const Route = createFileRoute("/sponsors")({
         <OmbreDivider />
         <OmbreDivider />
 
-        <div className={isMobile ? "relative max-w-xs pt-10 sm:max-w-2xl" : "relative right-20 max-w-7xl pt-10"}>
-          <ChatBubble tailSide="left">
-            <>
-              Become a <span className="font-bold">partner</span> of the{" "}
-              <span className="font-bold">UF Society of Asian Scientists and Engineers (SASE)</span> Chapter!
-            </>
-          </ChatBubble>
-        </div>
-
-        <div className={isMobile ? "relative max-w-xs sm:max-w-2xl" : "relative left-20 max-w-5xl"}>
-          <ChatBubble tailSide="right">
-            <>
-              To view our sponsorship packet, or for any related questions, please contact our External Vice President at{" "}
-              <a href={`mailto:ufsase.evp@gmail.com`} className="font-bold underline">
-                ufsase.evp@gmail.com
-              </a>
-              .
-            </>
-          </ChatBubble>
-        </div>
-
-        <div className={`${isMobile ? "mt-40" : "mt-28"} relative flex max-w-7xl flex-col items-center justify-center`}>
-          <div className={`${isMobile ? "-left-4 -top-40" : "-top-28 left-24"} absolute z-10`}>
-            {/* Chat Bubble */}
-            <ChatBubble tailSide="left">
-              <div className="font-bold">Check Out Our Super Sponsors!</div>
-            </ChatBubble>
-          </div>
-
-          <img
-            src={imageUrls["SASELogoStar.png"]}
-            alt="Logo"
-            className={`absolute z-20 object-contain ${isMobile ? "-right-10 -top-14 h-[125px] w-[125px]" : "-right-20 -top-20 h-[200px] w-[200px]"}`}
-          />
-
+        <div className={`${isMobile ? "mt-40" : "mt-24"} relative flex max-w-7xl flex-col items-center justify-center`}>
           <div className="ombre-background rounded-2xl p-2">
             <div className="grid w-full max-w-96 grid-cols-1 items-stretch justify-items-center gap-10 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:max-w-full lg:grid-cols-2 lg:gap-24 lg:p-24 xl:grid-cols-3">
               {SponsorInfo.map((sponsor) => (
@@ -73,6 +39,56 @@ export const Route = createFileRoute("/sponsors")({
               ))}
             </div>
           </div>
+        </div>
+
+        <h1 className="header-text ombre-text mt-24 text-center">CURRENT PARTNERS</h1>
+        <OmbreDivider />
+        <OmbreDivider />
+
+        <div className={`${isMobile ? "mt-40" : "mt-24"} relative flex max-w-7xl flex-col items-center justify-center`}>
+          <div className="ombre-background rounded-2xl p-2">
+            <div className="grid w-full max-w-96 grid-cols-1 items-stretch justify-items-center gap-10 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:max-w-full lg:grid-cols-2 lg:gap-24 lg:p-24 xl:grid-cols-3">
+              {SponsorInfo.map((sponsor) => (
+                <SponsorCard
+                  key={sponsor.company}
+                  image={sponsor.image}
+                  companyName={sponsor.company}
+                  type={sponsor.tier as "Diamond" | "Gold" | "Silver" | "Bronze"}
+                  shadowcolor={sponsor.shadow_color}
+                  link={sponsor.link}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className={isMobile ? "relative max-w-xs pt-10 sm:max-w-2xl" : "relative right-48 max-w-6xl pt-10"}>
+          <ChatBubble tailSide="left">
+            <>
+              Become a <span className="font-bold">partner</span> of the{" "}
+              <span className="font-bold">UF Society of Asian Scientists and Engineers (SASE)</span> Chapter!
+            </>
+          </ChatBubble>
+        </div>
+
+        {/* Logo Image*/}
+        <img
+            src={imageUrls["SASELogoWithoutText.png"]}
+            alt="SASE Logo"
+            style={{ width: "10%", height: "10%" }}
+            className="relative right-1/3 [transform:scaleX(-1)]"
+        />
+
+        <div className={isMobile ? "relative max-w-xs sm:max-w-2xl" : "relative left-20 max-w-5xl"}>
+          <ChatBubble tailSide="left">
+            <>
+              To view our sponsorship packet, or for any related questions, please contact our External Vice President at{" "}
+              <a href={`mailto:ufsase.evp@gmail.com`} className="font-bold underline">
+                ufsase.evp@gmail.com
+              </a>
+              .
+            </>
+          </ChatBubble>
         </div>
       </div>
     );

@@ -72,8 +72,8 @@ export const Route = createFileRoute("/sponsors")({
           </ChatBubble>
         </div>
 
-        <div className={isMobile ? "max-w-8xl relative left-32" : "mx-auto"}>
-          <div className="relative right-36 mb-20 grid w-full grid-cols-[1fr_2fr]">
+        <div className={"mx-auto"}>
+          <div className="relative mb-20 grid w-full grid-cols-[1fr_2fr]">
             {/* Logo Image*/}
             <img
               src={imageUrls["SASELogoWithoutText.png"]}
@@ -82,7 +82,7 @@ export const Route = createFileRoute("/sponsors")({
               className="ml-auto [transform:scaleX(-1)]"
             />
 
-            <div className={isMobile ? "relative max-w-xs sm:max-w-2xl" : "relative bottom-12 right-20 ml-24 max-w-5xl"}>
+            <div className={isMobile ? "relative ml-4 max-w-xs" : "relative bottom-12 right-20 ml-24 max-w-5xl"}>
               <ChatBubble tailSide="left">
                 <>
                   To view our sponsorship packet, or for any related questions, please contact our External Vice President at{" "}

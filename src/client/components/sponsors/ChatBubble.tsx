@@ -1,6 +1,6 @@
 import { cn } from "@/shared/utils";
 
-export const ChatBubble = ({ children, tailSide }: { children: React.ReactNode; tailSide: "left" | "right" }) => {
+export const ChatBubble = ({ children, tailSide, upsideDown }: { children: React.ReactNode; tailSide: "left" | "right"; upsideDown?: true }) => {
   return (
     <>
       <div className="rounded-full bg-gradient-to-b from-saseBlue to-saseGreen p-2">
@@ -12,8 +12,13 @@ export const ChatBubble = ({ children, tailSide }: { children: React.ReactNode; 
       {/* Message Tail */}
       <div
         className={cn(
-          { "left-24": tailSide == "left", "right-28 ml-auto": tailSide == "right" },
-          "relative bottom-11 h-20 w-20 rotate-45 rounded-br-lg bg-saseGreen",
+          {
+            "left-24": tailSide == "left",
+            "right-28 ml-auto": tailSide == "right",
+            "absolute bottom-32 -rotate-[135deg] bg-saseBlue sm:bottom-52 md:bottom-64": upsideDown,
+            "relative bottom-11 rotate-45 bg-saseGreen": !upsideDown,
+          },
+          "h-20 w-20 rounded-br-lg",
         )}
       >
         <div className="absolute bottom-2 right-2 h-full w-full rounded-br-lg bg-muted" />

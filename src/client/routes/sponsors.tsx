@@ -80,7 +80,7 @@ export const Route = createFileRoute("/sponsors")({
                 src={imageUrls["SASELogoWithoutText.png"]}
                 alt="SASE Logo"
                 style={{ maxWidth: "210px", maxHeight: "275px" }}
-                className={"mb-20 [transform:scaleX(-1)]"}
+                className={"[transform:scaleX(-1)]"}
               />
 
               <div className={"relative max-w-md"}>

@@ -1,6 +1,7 @@
 import { cn } from "@/shared/utils";
 import FAQ from "@components/programs/FAQCard";
 import { FreshmanFAQList } from "@information/FreshmenFAQList";
+import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 
 const FreshmenFAQ = () => {
@@ -52,6 +53,15 @@ const FreshmenFAQ = () => {
 
   return (
     <div>
+      <div className="px-8 pt-6">
+        <Link
+          to="/resources"
+          className="inline-flex items-center gap-2 rounded-lg border-2 border-saseBlue px-4 py-2 font-redhat text-sm font-semibold text-saseBlue transition-colors hover:bg-saseBlue hover:text-background"
+        >
+          ← Back to Resources
+        </Link>
+      </div>
+
       <div className="mt-6 flex justify-center border-b">
         <ul className="relative flex space-x-4 px-4">
           <div className="absolute bottom-0 h-1 bg-saseBlue transition-all duration-300" style={sliderStyle} />

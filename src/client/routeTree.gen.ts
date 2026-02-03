@@ -27,6 +27,7 @@ import { Route as MentorMenteeImport } from './routes/mentor-mentee'
 import { Route as LoginImport } from './routes/login'
 import { Route as InternsImport } from './routes/interns'
 import { Route as GalleryImport } from './routes/gallery'
+import { Route as FreshmanFaqImport } from './routes/freshman-faq'
 import { Route as ForgotPasswordImport } from './routes/forgot-password'
 import { Route as EventsImport } from './routes/events'
 import { Route as BoardImport } from './routes/board'
@@ -136,6 +137,12 @@ const InternsRoute = InternsImport.update({
 const GalleryRoute = GalleryImport.update({
   id: '/gallery',
   path: '/gallery',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const FreshmanFaqRoute = FreshmanFaqImport.update({
+  id: '/freshman-faq',
+  path: '/freshman-faq',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -275,6 +282,13 @@ declare module '@tanstack/react-router' {
       path: '/forgot-password'
       fullPath: '/forgot-password'
       preLoaderRoute: typeof ForgotPasswordImport
+      parentRoute: typeof rootRoute
+    }
+    '/freshman-faq': {
+      id: '/freshman-faq'
+      path: '/freshman-faq'
+      fullPath: '/freshman-faq'
+      preLoaderRoute: typeof FreshmanFaqImport
       parentRoute: typeof rootRoute
     }
     '/gallery': {
@@ -456,6 +470,7 @@ export interface FileRoutesByFullPath {
   '/board': typeof BoardRoute
   '/events': typeof EventsRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/freshman-faq': typeof FreshmanFaqRoute
   '/gallery': typeof GalleryRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
@@ -487,6 +502,7 @@ export interface FileRoutesByTo {
   '/board': typeof BoardRoute
   '/events': typeof EventsRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/freshman-faq': typeof FreshmanFaqRoute
   '/gallery': typeof GalleryRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
@@ -520,6 +536,7 @@ export interface FileRoutesById {
   '/board': typeof BoardRoute
   '/events': typeof EventsRoute
   '/forgot-password': typeof ForgotPasswordRoute
+  '/freshman-faq': typeof FreshmanFaqRoute
   '/gallery': typeof GalleryRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
@@ -554,6 +571,7 @@ export interface FileRouteTypes {
     | '/board'
     | '/events'
     | '/forgot-password'
+    | '/freshman-faq'
     | '/gallery'
     | '/interns'
     | '/login'
@@ -584,6 +602,7 @@ export interface FileRouteTypes {
     | '/board'
     | '/events'
     | '/forgot-password'
+    | '/freshman-faq'
     | '/gallery'
     | '/interns'
     | '/login'
@@ -615,6 +634,7 @@ export interface FileRouteTypes {
     | '/board'
     | '/events'
     | '/forgot-password'
+    | '/freshman-faq'
     | '/gallery'
     | '/interns'
     | '/login'
@@ -648,6 +668,7 @@ export interface RootRouteChildren {
   BoardRoute: typeof BoardRoute
   EventsRoute: typeof EventsRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
+  FreshmanFaqRoute: typeof FreshmanFaqRoute
   GalleryRoute: typeof GalleryRoute
   InternsRoute: typeof InternsRoute
   LoginRoute: typeof LoginRoute
@@ -676,6 +697,7 @@ const rootRouteChildren: RootRouteChildren = {
   BoardRoute: BoardRoute,
   EventsRoute: EventsRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
+  FreshmanFaqRoute: FreshmanFaqRoute,
   GalleryRoute: GalleryRoute,
   InternsRoute: InternsRoute,
   LoginRoute: LoginRoute,
@@ -713,6 +735,7 @@ export const routeTree = rootRoute
         "/board",
         "/events",
         "/forgot-password",
+        "/freshman-faq",
         "/gallery",
         "/interns",
         "/login",
@@ -761,6 +784,9 @@ export const routeTree = rootRoute
     },
     "/forgot-password": {
       "filePath": "forgot-password.tsx"
+    },
+    "/freshman-faq": {
+      "filePath": "freshman-faq.tsx"
     },
     "/gallery": {
       "filePath": "gallery.tsx"

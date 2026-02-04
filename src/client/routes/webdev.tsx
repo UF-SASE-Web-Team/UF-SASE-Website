@@ -69,7 +69,7 @@ export const Route = createFileRoute("/webdev")({
         <div className="flex w-full flex-col items-center py-10">
           {/* Group Picture & App Status */}
           <div className="flex w-full flex-col items-center justify-center bg-black py-10 dark:bg-greenBackground">
-            <ApplicationPhoto image={imageUrls["WebTeamWinterBanquet2025.JPG"]} applicationStatus="CLOSED" nextSemester="Spring 2026" />
+            <ApplicationPhoto image={imageUrls["WebTeamWinterBanquet2025.JPG"]} applicationStatus="CLOSED" nextSemester="Fall 2026" />
           </div>
 
           {/* Leadership Display Toggle */}

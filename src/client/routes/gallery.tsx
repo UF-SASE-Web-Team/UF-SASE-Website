@@ -9,6 +9,9 @@ import { IoMdLink, IoMdPlay } from "react-icons/io";
 import { seo } from "../utils/seo";
 
 const slideshowLabels = {
+  "Spring 2026": "SPRING 2026",
+  "Fall 2025": "FALL 2025",
+  "Spring 2025": "SPRING 2025",
   "Fall 2024": "FALL 2024",
   "Spring 2024": "SPRING 2024",
   "Fall 2023": "FALL 2023",
@@ -17,6 +20,9 @@ const slideshowLabels = {
 type SlideshowKey = keyof typeof slideshowLabels;
 
 const slideshowLinks: Record<SlideshowKey, string> = {
+  "Spring 2026": "",
+  "Fall 2025": "",
+  "Spring 2025": "",
   "Fall 2024": "https://docs.google.com/document/d/1gjG2aHkh-IYXLQ5vTfmd6uphP7AYYN0M4liorjPt77k/edit?tab=t.0",
   "Spring 2024": "https://docs.google.com/document/d/1SohQfPM2D8fQhf4vkeWPfC9xTE3my4XTfVA-BNYYA9s/edit?tab=t.0",
   "Fall 2023": "https://docs.google.com/document/d/18brpCElaHqD-rFcKd2eG4FGfjnBWXSthrI-aNdqoHYk/edit?tab=t.0",

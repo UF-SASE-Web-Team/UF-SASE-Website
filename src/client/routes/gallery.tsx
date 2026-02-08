@@ -75,8 +75,10 @@ export const Route = createFileRoute("/gallery")({
 
             {/* SLIDESHOW */}
             <div className="flex-1">
-              <div className="h-[600px] overflow-y-auto rounded-2xl border-[4px] border-black bg-white px-6 py-4 dark:bg-greenBackground">
-                <GalleryZipExtraction slideshow={slideshow} />
+              <div className="overflow-hidden rounded-2xl border-[4px] border-black bg-white dark:bg-greenBackground">
+                <div className="h-[600px] overflow-y-auto px-6 py-4">
+                  <GalleryZipExtraction slideshow={slideshow} />
+                </div>
               </div>
             </div>
           </div>

@@ -20,9 +20,9 @@ const slideshowLabels = {
 type SlideshowKey = keyof typeof slideshowLabels;
 
 const slideshowLinks: Record<SlideshowKey, string> = {
-  "Spring 2026": "",
-  "Fall 2025": "",
-  "Spring 2025": "",
+  "Spring 2026": "https://docs.google.com/spreadsheets/d/1oTtYo7tPoc8v9WXV2YGbtdu76oY20sWbTvU7nyRmrAk/edit?gid=2033700077#gid=2033700077",
+  "Fall 2025": "https://docs.google.com/spreadsheets/d/1oTtYo7tPoc8v9WXV2YGbtdu76oY20sWbTvU7nyRmrAk/edit?gid=0#gid=0",
+  "Spring 2025": "https://docs.google.com/document/d/1o95D2LVVjhrH78EEyg-3TPFtObrKLhqAd9iQJctvx-8/edit?tab=t.0",
   "Fall 2024": "https://docs.google.com/document/d/1gjG2aHkh-IYXLQ5vTfmd6uphP7AYYN0M4liorjPt77k/edit?tab=t.0",
   "Spring 2024": "https://docs.google.com/document/d/1SohQfPM2D8fQhf4vkeWPfC9xTE3my4XTfVA-BNYYA9s/edit?tab=t.0",
   "Fall 2023": "https://docs.google.com/document/d/18brpCElaHqD-rFcKd2eG4FGfjnBWXSthrI-aNdqoHYk/edit?tab=t.0",

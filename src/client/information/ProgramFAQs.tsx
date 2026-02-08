@@ -3,7 +3,7 @@ export const InternsFAQ: Array<{ question: string; answer: string | React.ReactN
     question: "How do I sign up?",
     answer: (
       <>
-        <strong>Spring 2026</strong> applications will open in early December and close in early January! Keep an eye out on UF SASE’s{" "}
+        <strong>Fall 2026</strong> applications will open in late August and close in early September! Keep an eye out on UF SASE’s{" "}
         <a href="https://www.instagram.com/ufsase/" target="_blank" rel="noopener noreferrer" className="text-saseGreen underline">
           Instagram
         </a>{" "}
@@ -43,7 +43,7 @@ export const SetFAQ: Array<{ question: string; answer: string | React.ReactNode 
     question: "How do I sign up?",
     answer: (
       <>
-        This semester's application is closed, but feel free to apply in <strong>Spring 2026</strong> to be a part of 2025-2026 SET!
+        This semester's application is closed, but feel free to apply in <strong>Fall 2026</strong> to be a part of 2026-2027 SET!
       </>
     ),
   },

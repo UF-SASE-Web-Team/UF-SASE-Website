@@ -52,7 +52,7 @@ export const Route = createFileRoute("/gallery")({
     }),
   ],
   component: () => {
-    const [slideshow, setSlideshow] = useState<SlideshowKey>("Fall 2024");
+    const [slideshow, setSlideshow] = useState<SlideshowKey>("Spring 2026");
     const [activeYearbook, setActiveYearbook] = useState<YearbookId>("2024-2025");
     const entries = Object.entries(slideshowLinks) as Array<[SlideshowKey, string]>;
     const previewHref = yearbookLinks[activeYearbook];

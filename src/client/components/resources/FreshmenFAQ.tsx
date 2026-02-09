@@ -8,25 +8,25 @@ const FreshmenFAQ = () => {
   const resourceTabs: Record<string, React.ReactNode> = {
     Academic: (
       <div>
-        <p className="px-8 font-redhat text-lg font-medium">{FreshmanFAQList[0].heading}</p>
+        <p className="px-8 font-redhat text-base font-medium">{FreshmanFAQList[0].heading}</p>
         <FAQ faqData={FreshmanFAQList[0].questions} />
       </div>
     ),
     Professional: (
       <div>
-        <p className="px-8 font-redhat text-lg font-medium">{FreshmanFAQList[1].heading}</p>
+        <p className="px-8 font-redhat text-base font-medium">{FreshmanFAQList[1].heading}</p>
         <FAQ faqData={FreshmanFAQList[1].questions} />
       </div>
     ),
     Extracurricular: (
       <div>
-        <p className="px-8 font-redhat text-lg font-medium">{FreshmanFAQList[2].heading}</p>
+        <p className="px-8 font-redhat text-base font-medium">{FreshmanFAQList[2].heading}</p>
         <FAQ faqData={FreshmanFAQList[2].questions} />
       </div>
     ),
     Miscellaneous: (
       <div>
-        <p className="px-8 font-redhat text-lg font-medium">{FreshmanFAQList[3].heading}</p>
+        <p className="px-8 font-redhat text-base font-medium">{FreshmanFAQList[3].heading}</p>
         <FAQ faqData={FreshmanFAQList[3].questions} />
       </div>
     ),
@@ -52,8 +52,8 @@ const FreshmenFAQ = () => {
   }, [activeTab, categories]);
 
   return (
-    <div>
-      <div className="px-8 pt-6">
+    <div className="pb-10">
+      <div className="px-8 py-6">
         <Link
           to="/resources"
           className="inline-flex items-center gap-2 rounded-lg border-2 border-saseBlue px-4 py-2 font-redhat text-sm font-semibold text-saseBlue transition-colors hover:bg-saseBlue hover:text-background"

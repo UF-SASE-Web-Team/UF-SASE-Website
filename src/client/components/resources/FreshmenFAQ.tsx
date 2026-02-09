@@ -62,8 +62,12 @@ const FreshmenFAQ = () => {
         </Link>
       </div>
 
+      <div className="text-center">
+        <h1 className="header-text ombre-text">Freshman FAQS</h1>
+      </div>
+
       <div className="mt-6 flex justify-center border-b">
-        <ul className="relative flex space-x-4 px-4">
+        <ul className="relative grid grid-cols-2 gap-2 px-4 md:flex md:space-x-4">
           <div className="absolute bottom-0 h-1 bg-saseBlue transition-all duration-300" style={sliderStyle} />
           {categories.map((category, idx) => {
             const isActive = category === activeTab;
@@ -75,7 +79,7 @@ const FreshmenFAQ = () => {
                   }}
                   onClick={() => setActiveTab(category as keyof typeof resourceTabs)}
                   className={cn(
-                    "relative whitespace-nowrap px-4 py-2 text-base font-semibold transition-colors",
+                    "relative w-full whitespace-nowrap px-4 py-2 text-base font-semibold transition-colors md:w-auto",
                     isActive ? "text-saseBlue" : "text-foreground hover:text-saseBlue",
                   )}
                 >

@@ -3,6 +3,7 @@ import Carousel from "@components/carousel/Carousel";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import FAQ from "@components/programs/FAQCard";
+import { GoalsSection } from "@components/programs/GoalsSection";
 import InfoCard from "@components/programs/InfoCard";
 import { MMGoalCard } from "@components/programs/MentorMentee/MMGoalCard";
 import MMPairingForm from "@components/programs/MentorMentee/MMPairingForm";
@@ -116,16 +117,7 @@ export const Route = createFileRoute("/mentor-mentee")({
         <OmbreDivider />
 
         {/* Goals & Outcomes */}
-        <div className="flex w-full justify-center py-10">
-          <div className="w-full max-w-7xl">
-            <HeaderWithGreenBorder text="Goals & Outcomes" type="Subheader" />
-            <div className={cn({ "flex-col gap-10": isMobile, "flex-row gap-16": !isMobile }, "flex flex-nowrap items-center justify-center px-8")}>
-              {MMGoals.map((goal, index) => (
-                <MMGoalCard text={goal.text} cardColor={goal.color} mobileAlign={goal.mobileAlign} key={index} />
-              ))}
-            </div>
-          </div>
-        </div>
+        <GoalsSection goals={MMGoals} />
 
         {/* FAQs */}
         <div className="max-w-7xl pt-10">

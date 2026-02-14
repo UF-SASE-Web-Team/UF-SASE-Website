@@ -129,7 +129,9 @@ export const Route = createFileRoute("/board")({
                     </p>
                   )}
                   <div className="space-y-2 pt-4 font-redhat text-sm leading-relaxed md:pt-6">
-                    {openMember.description?.split("\n").map((p, i) => <p key={i}>{p}</p>)}
+                    {openMember.description?.split("\n").map((p, i) => (
+                      <p key={i}>{p}</p>
+                    ))}
                   </div>
                 </div>
 

@@ -21,7 +21,7 @@ jobs:
           title: "update on ${{ github.ref_name }}"
           url: ${{ github.event.pull_request.html_url || github.event.repository.html_url }}
           description: ""
-          
+
           # Green for PR merge, Blue for PR open, Purple for Push
           color: >-
             ${{ 

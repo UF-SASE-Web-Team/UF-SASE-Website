@@ -19,7 +19,7 @@ export const Route = createFileRoute("/profile/settings")({
     if (!user) return <div className="p-10 text-center">User data unavailable</div>;
 
     return (
-      <div className="mx-auto w-full max-w-4xl">
+      <div className="group mx-auto w-full max-w-5xl rounded-2xl bg-background px-4 py-6 shadow-xl md:px-10">
         <SettingsBox
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}

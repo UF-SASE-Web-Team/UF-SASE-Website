@@ -61,7 +61,7 @@ const NavItem: React.FC<{ to: string; icon: string; text: string; color: string;
   return (
     <Link
       to={to}
-      // activeOptions={{ exact: to === "/profile" }} // Ensures Dashboard isn't always active
+      activeOptions={{ exact: to === "/profile" }} // Ensures Dashboard isn't always active
       className="group relative flex items-center space-x-2 px-6 py-4 transition-all md:rounded-xl md:px-4 md:py-3"
       activeProps={{
         className: cn("bg-gray-50 md:bg-muted", color, "font-bold"),
@@ -73,7 +73,7 @@ const NavItem: React.FC<{ to: string; icon: string; text: string; color: string;
           <span
             className={cn(
               "whitespace-nowrap text-sm font-medium transition-colors",
-              isActive ? "text-gray-900" : "text-gray-500 group-hover:text-gray-900",
+              isActive ? `text-${color}` : "text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white",
             )}
           >
             {text}

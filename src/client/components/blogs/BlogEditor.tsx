@@ -70,7 +70,7 @@ const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onCl
         {/* back button */}
         {showBackButton && (
           <button
-            className={cn("mb-6 flex cursor-pointer items-center font-pixelify font-semibold tracking-wider", "text-3xl")}
+            className={cn("mb-6 flex cursor-pointer items-center font-silkscreen font-semibold tracking-wider", "text-3xl")}
             onClick={handleClose}
             aria-label="Back to all posts"
           >
@@ -142,7 +142,7 @@ const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onCl
             {/* nav buttons */}
             <div className="mb-2 mt-auto flex items-center justify-between px-4">
               <Button className={cn("rounded-full bg-saseBlue px-6 py-2 text-white", "transition hover:bg-saseBlue/80", "font-redhat font-medium")}>
-                &lt; Read last post
+                &lt; Last Post
               </Button>
 
               <div className="absolute bottom-0 right-10 -mb-6">
@@ -152,7 +152,7 @@ const BlogEditor: React.FC<BlogExpandedProps> = ({ blog, isEditing = false, onCl
               </div>
 
               <Button className={cn("rounded-full bg-saseBlue px-6 py-2 text-white", "transition hover:bg-saseBlue/80", "font-redhat font-medium")}>
-                Read next post &gt;
+                Next Post &gt;
               </Button>
             </div>
           </div>

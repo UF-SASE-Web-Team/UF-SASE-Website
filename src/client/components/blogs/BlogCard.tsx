@@ -83,7 +83,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
                 <div className="absolute -inset-0.5 rounded-full bg-white shadow-md" />
                 <Button
                   className={cn(
-                    "relative rounded-full bg-saseBlue font-serif italic",
+                    "relative rounded-full bg-saseBlue font-serif",
                     "text-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
                     "underline decoration-1 underline-offset-4",
                     "z-10 px-8 py-3",
@@ -93,7 +93,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
                     setExpandedBlogId(blog.id);
                   }}
                 >
-                  Read more...
+                  More ...
                 </Button>
               </div>
             </div>

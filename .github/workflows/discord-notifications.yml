@@ -18,7 +18,7 @@ jobs:
           avatar_url: "https://github.com/${{ github.actor }}.png"
           username: "${{ github.actor }}"
 
-          title: "Update on ${{ github.ref_name }}"
+          title: "update on ${{ github.ref_name }}"
           url: ${{ github.event.pull_request.html_url || github.event.repository.html_url }}
           description: ""
           

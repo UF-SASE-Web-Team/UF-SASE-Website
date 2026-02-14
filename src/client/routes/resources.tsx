@@ -1,11 +1,9 @@
-import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { ResourceCard } from "@components/resources/ResourceCard";
 import { ResourceHeader } from "@components/resources/ResourceHeader";
 import { AcademicResources, ProfessionalResources, SaseResources, TopResources } from "@information/Resources";
 import { createFileRoute } from "@tanstack/react-router";
-import { IoMdLink } from "react-icons/io";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/resources")({

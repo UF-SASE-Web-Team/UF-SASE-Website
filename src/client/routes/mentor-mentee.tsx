@@ -5,7 +5,6 @@ import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import FAQ from "@components/programs/FAQCard";
 import { GoalsSection } from "@components/programs/GoalsSection";
 import InfoCard from "@components/programs/InfoCard";
-import { MMGoalCard } from "@components/programs/MentorMentee/MMGoalCard";
 import MMPairingForm from "@components/programs/MentorMentee/MMPairingForm";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { MMFAQ } from "@information/ProgramFAQs";

@@ -100,7 +100,7 @@ function BlogsPage() {
   const sectionTitle = cn(
     "text-2xl sm:text-3xl md:text-4xl lg:text-5xl",
     "bg-gradient-to-r from-saseTeal to-saseBlue bg-clip-text text-transparent",
-    "font-pixelify font-semibold tracking-wider",
+    "font-silkscreen font-semibold tracking-wider",
   );
 
   // display logic
@@ -108,7 +108,7 @@ function BlogsPage() {
   const noResultsMessage = activeTag ? `No blogs found with tag: ${activeTag}` : "No blogs found.";
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6 md:px-8">
+    <div className="w-full">
       {/* header */}
       {!expandedBlogId && !activeTag && recentBlogs.length > 0 && (
         <div>
@@ -120,90 +120,91 @@ function BlogsPage() {
           />
         </div>
       )}
-
-      {/* expanded view */}
-      {expandedBlog &&
-        expandedBlogId &&
-        (isEditing ? (
-          <BlogEditor
-            blog={expandedBlog}
-            onClose={handleCloseExpandedBlog}
-            showBackButton={false}
-            isEditing={isEditing}
-            setIsEditing={setIsEditing}
-          />
-        ) : (
-          <BlogExpanded
-            blog={expandedBlog}
-            onClose={handleCloseExpandedBlog}
-            showBackButton={true}
-            isEditing={isEditing}
-            setIsEditing={setIsEditing}
-            onNavigatePrev={prevBlog ? () => setExpandedBlogId(prevBlog.id) : undefined}
-            onNavigateNext={nextBlog ? () => setExpandedBlogId(nextBlog.id) : undefined}
-          />
-        ))}
-
-      {!expandedBlogId && (
-        <>
-          {/* create button */}
-          {isAuthenticated && !isCreating && !isEditing && (
-            <Button onClick={() => setIsCreating(true)} className="mb-4 font-redhat">
-              Create New Blog Post
-            </Button>
-          )}
-
-          {/* blog form */}
-          {isCreating && (
-            <BlogForm
-              isCreating={isCreating}
-              isEditing={false}
-              newBlogTitle={newBlogTitle}
-              newBlogContent={newBlogContent}
-              newBlogTags={newBlogTags}
-              images={newBlogImages}
-              setImages={setNewBlogImages}
-              error={error}
-              onTitleChange={setNewBlogTitle}
-              onContentChange={setNewBlogContent}
-              onTagsChange={setNewBlogTags}
-              onSubmit={isCreating ? handleCreateBlog : handleUpdateBlog}
-              onCancel={handleFormCancel}
+      <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6 md:px-8">
+        {/* expanded view */}
+        {expandedBlog &&
+          expandedBlogId &&
+          (isEditing ? (
+            <BlogEditor
+              blog={expandedBlog}
+              onClose={handleCloseExpandedBlog}
+              showBackButton={false}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
             />
-          )}
+          ) : (
+            <BlogExpanded
+              blog={expandedBlog}
+              onClose={handleCloseExpandedBlog}
+              showBackButton={true}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+              onNavigatePrev={prevBlog ? () => setExpandedBlogId(prevBlog.id) : undefined}
+              onNavigateNext={nextBlog ? () => setExpandedBlogId(nextBlog.id) : undefined}
+            />
+          ))}
 
-          {/* tags */}
-          <BlogTags tags={availableTags} activeTag={activeTag} onTagClick={handleTagClick} onSearch={setSearchQuery} />
+        {!expandedBlogId && (
+          <>
+            {/* create button */}
+            {isAuthenticated && !isCreating && !isEditing && (
+              <Button onClick={() => setIsCreating(true)} className="mb-4 font-redhat">
+                Create New Blog Post
+              </Button>
+            )}
 
-          {/* title */}
-          <div className="mx-auto mb-5 mt-10 max-w-6xl px-2 text-foreground sm:px-0">
-            <h2 className={sectionTitle}>{activeTag ? `POSTS TAGGED: ${activeTag}` : "ALL POSTS"}</h2>
-          </div>
+            {/* blog form */}
+            {isCreating && (
+              <BlogForm
+                isCreating={isCreating}
+                isEditing={false}
+                newBlogTitle={newBlogTitle}
+                newBlogContent={newBlogContent}
+                newBlogTags={newBlogTags}
+                images={newBlogImages}
+                setImages={setNewBlogImages}
+                error={error}
+                onTitleChange={setNewBlogTitle}
+                onContentChange={setNewBlogContent}
+                onTagsChange={setNewBlogTags}
+                onSubmit={isCreating ? handleCreateBlog : handleUpdateBlog}
+                onCancel={handleFormCancel}
+              />
+            )}
 
-          {/* blog grid */}
-          <div className="relative mb-10 mt-8">
-            <BlogContainer>
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                {displayBlogs.length > 0 ? (
-                  displayBlogs.map((blog) => (
-                    <BlogCard
-                      key={blog.id}
-                      blog={blog}
-                      expandedBlogId={expandedBlogId}
-                      setExpandedBlogId={setExpandedBlogId}
-                      isEditing={isEditing}
-                      setIsEditing={setIsEditing}
-                      displayEditButton={isAuthenticated}
-                    />
-                  ))
-                ) : (
-                  <p className="font-redhat text-black">{noResultsMessage}</p>
-                )}
-              </div>
-            </BlogContainer>
-          </div>
-        </>
-      )}
+            {/* tags */}
+            <BlogTags tags={availableTags} activeTag={activeTag} onTagClick={handleTagClick} onSearch={setSearchQuery} />
+
+            {/* title */}
+            <div className="mx-auto mb-5 mt-10 max-w-6xl px-2 text-center text-foreground sm:px-0">
+              <h2 className={sectionTitle}>{activeTag ? `POSTS TAGGED: ${activeTag}` : "ALL POSTS"}</h2>
+            </div>
+
+            {/* blog grid */}
+            <div className="relative mb-10 mt-8">
+              <BlogContainer>
+                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                  {displayBlogs.length > 0 ? (
+                    displayBlogs.map((blog) => (
+                      <BlogCard
+                        key={blog.id}
+                        blog={blog}
+                        expandedBlogId={expandedBlogId}
+                        setExpandedBlogId={setExpandedBlogId}
+                        isEditing={isEditing}
+                        setIsEditing={setIsEditing}
+                        displayEditButton={isAuthenticated}
+                      />
+                    ))
+                  ) : (
+                    <p className="font-redhat text-white">{noResultsMessage}</p>
+                  )}
+                </div>
+              </BlogContainer>
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 }

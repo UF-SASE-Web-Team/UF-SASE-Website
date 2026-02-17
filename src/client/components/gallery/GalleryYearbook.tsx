@@ -6,7 +6,7 @@ type Props = {
 };
 
 const GalleryYearbook = ({ year }: Props) => {
-  const previewImage = year === "2023-2024" ? imageUrls["fall2023_7.JPG"] : imageUrls["fall2024_11.JPG"];
+  const previewImage = year === "2023-2024" ? imageUrls["fall2023_7.jpg"] : imageUrls["fall2024_11.JPG"];
 
   return (
     <div className="w-full max-w-3xl">

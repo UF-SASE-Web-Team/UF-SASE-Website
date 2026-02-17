@@ -78,7 +78,7 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
         <div className="relative mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
           {showBackButton && (
             <button
-              className={cn("flex cursor-pointer items-center font-pixelify text-xl font-semibold tracking-wider sm:text-3xl")}
+              className={cn("flex cursor-pointer items-center font-silkscreen text-xl font-semibold tracking-wider sm:text-3xl")}
               onClick={handleClose}
             >
               <span className="mr-3 bg-gradient-to-r from-saseGreen to-saseBlue bg-clip-text text-transparent">≪</span>
@@ -124,12 +124,7 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
                   )}
                 </figure>
 
-                <div
-                  className={cn(
-                    "mx-4 mb-8 mt-4 w-full overflow-y-auto rounded-2xl border-4 border-dashed bg-gray-100 px-8 py-6",
-                    "max-h-[70vh] border-saseGreen/40 border-r-saseBlue/60",
-                  )}
-                >
+                <div className={cn("mx-4 mb-8 mt-4 w-full overflow-y-auto rounded-2xl border-4 border-dashed border-saseBlue bg-gray-100 px-8 py-6")}>
                   {renderContent()}
                 </div>
               </div>
@@ -164,14 +159,7 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
                   </div>
                 </div>
                 {/* content */}
-                <div
-                  className={cn(
-                    "mx-4 mb-8 overflow-y-auto rounded-2xl border-4 border-dashed px-8 py-6",
-                    "max-h-[70vh] border-saseGreen/40 border-r-saseBlue/60",
-                  )}
-                >
-                  {renderContent()}
-                </div>
+                <div className={cn("mx-4 mb-8 overflow-y-auto rounded-2xl border-4 border-dashed border-saseBlue px-8 py-6")}>{renderContent()}</div>
               </>
             )}
           </div>
@@ -184,13 +172,13 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
               <Button
                 onClick={onNavigatePrev}
                 className={cn(
-                  "relative rounded-full bg-saseBlue font-serif text-lg italic",
+                  "relative rounded-full bg-saseBlue font-serif text-lg",
                   "text-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
                   "underline decoration-1 underline-offset-4",
                   "z-10 px-6 py-2",
                 )}
               >
-                &lt; Read last post
+                &lt; Newer
               </Button>
             </div>
           )}
@@ -200,13 +188,13 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
               <Button
                 onClick={onNavigateNext}
                 className={cn(
-                  "relative rounded-full bg-saseBlue font-serif text-lg italic",
+                  "relative rounded-full bg-saseBlue font-serif text-lg",
                   "text-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
                   "underline decoration-1 underline-offset-4",
                   "z-10 px-6 py-2",
                 )}
               >
-                Read next post &gt;
+                Older &gt;
               </Button>
             </div>
           )}

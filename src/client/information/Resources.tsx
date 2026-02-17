@@ -4,7 +4,7 @@ export const TopResources = [
   {
     title: "Freshman FAQs",
     icon: <img src={imageUrls["FAQ.png"]} width={75} height={75} />,
-    href: "https://docs.google.com/document/d/1gpMn9fMbpp3S3ELU5daBqwKOJXxTaPq5yvwpnjEgCJ0/edit?tab=t.0",
+    href: "/freshman-faq",
   },
   { title: "Linktree", icon: <img src={imageUrls["linktree.png"]} width={75} height={75} />, href: "https://linktr.ee/ufsase" },
   {

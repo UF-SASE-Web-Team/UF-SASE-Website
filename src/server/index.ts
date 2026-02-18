@@ -1,6 +1,7 @@
 // import * as Schema from "./db/schema";
 // import { eq } from "drizzle-orm";
 import infoRoutes from "@/server/api/professionalInfo";
+import { rateLimiter } from "@/server/api/rateLimiting";
 import { uploadRouter } from "@/server/api/uploadthing";
 import authRoutes from "@api/auth";
 import blogRoutes from "@api/blogs";
@@ -19,6 +20,7 @@ import type { MiddlewareHandler } from "hono";
 import { Hono } from "hono";
 import { createRouteHandler } from "uploadthing/server";
 import { eventHandler, toWebRequest } from "vinxi/http";
+import { SERVER_ENV } from "./env";
 
 // This is the (actual) entry point, which we just redirect to the Hono server (https://h3.unjs.io/guide/event-handler)
 export default eventHandler(async (event) => {
@@ -34,6 +36,8 @@ const logger: MiddlewareHandler = async (c, next) => {
   await next();
 };
 app.use("*", logger);
+
+if (SERVER_ENV.RATE_LIMIT_ENABLED) app.use("*", rateLimiter);
 
 const CAL_ID = "37ac4d5540136c7524b9a64daa11762754c52afa770f3f12e1ac6edca7cb59a3@group.calendar.google.com";
 const ICS_URL = `https://calendar.google.com/calendar/ical/${encodeURIComponent(CAL_ID)}/public/basic.ics`;

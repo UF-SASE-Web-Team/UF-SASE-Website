@@ -234,3 +234,13 @@ export const company = sqliteTable("company", {
   role: text("role"),
   isCurrent: integer("is_current").default(0).notNull(),
 });
+
+// Rate Limiting table keep track of attempts
+export const rateLimit = sqliteTable("rate_limit", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  ip: text("ip").notNull(),
+  tokenCount: integer("token_count").default(100).notNull(),
+  lastUpdated: integer("last_updated").notNull(),
+});

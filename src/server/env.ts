@@ -34,6 +34,22 @@ export const SERVER_ENV = createEnv({
     GOOGLE_OAUTH_CLIENT_ID: z.string(),
     GOOGLE_OAUTH_CLIENT_SECRET: z.string(),
     GOOGLE_OAUTH_REDIRECT_URI: z.string().url(),
+    RATE_LIMIT_ENABLED: z
+      .string()
+      .default("true")
+      .transform((val) => val === "true"),
+    RATE_LIMIT_MAX_TOKENS: z
+      .string()
+      .default("100")
+      .transform((val) => parseInt(val)),
+    RATE_LIMIT_REFILL_RATE: z
+      .string()
+      .default("10")
+      .transform((val) => parseInt(val)),
+    RATE_LIMIT_REFILL_WINDOW_MS: z
+      .string()
+      .default("60000")
+      .transform((val) => parseInt(val)),
   },
   runtimeEnv: process.env,
 });

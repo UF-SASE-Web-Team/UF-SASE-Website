@@ -7,3 +7,8 @@ export const alumniBankSchema = z.object({
   currentCompany: z.string(),
   pastCompanies: z.array(z.string()).default([]).optional(),
 });
+
+export const LinkedInRefreshOperationSchema = z.object({
+  updated: z.number().int().min(0),
+  skipped: z.number().int().min(0),
+});

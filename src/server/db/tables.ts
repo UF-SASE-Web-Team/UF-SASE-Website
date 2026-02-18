@@ -95,25 +95,6 @@ export const saseInfo = sqliteTable("sase_info", {
   groups: text("groups"),
 });
 
-// Events table
-export const events = sqliteTable("event", {
-  id: text("id")
-    .primaryKey()
-    .$defaultFn(() => generateIdFromEntropySize(10)),
-  name: text("name").notNull().unique(),
-  description: text("description"),
-  timeAdded: integer("time_added")
-    .notNull()
-    .$defaultFn(() => Date.now()),
-  timeUpdated: integer("time_updated")
-    .notNull()
-    .$onUpdateFn(() => Date.now()),
-  location: text("location").notNull(),
-  startTime: integer("start_time", { mode: "timestamp" }).notNull(),
-  endTime: integer("end_time", { mode: "timestamp" }).notNull(),
-  involvedGroups: text("involved_groups"),
-  slidesUrl: text("slides_url"),
-});
 
 // Blogs table
 export const blogs = sqliteTable("blog", {
@@ -234,3 +215,22 @@ export const company = sqliteTable("company", {
   role: text("role"),
   isCurrent: integer("is_current").default(0).notNull(),
 });
+
+export const event = sqliteTable("event", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  name: text("name").notNull(),
+  description: text("description"),
+  location: text("location").notNull(),
+  code: text("code")
+    .notNull()
+    .unique()
+    .$defaultFn(() => generateIdFromEntropySize(6)),
+  startDatetime: integer("start_datetime", { mode: "timestamp" }).notNull(),
+  endDatetime: integer("end_datetime", { mode: "timestamp" }),
+  timeAdded: integer("time_added")
+    .notNull()
+    .$defaultFn(() => Date.now()),
+});
+

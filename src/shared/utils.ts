@@ -14,6 +14,10 @@ export const SASE_COLORS = {
   blueLight: "#1E77BA",
 };
 
+export const passwordRegex =
+  /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*!@#$%^&*()\-_=+\\|[{}\];:'",<>./?])[A-Za-z\d!@#$%^&*()\-_=+\\|[{}\];:'",<>./?]{8,}$/;
+export const emailRegex = /^[a-zA-Z0-9]+([._+%-][a-zA-Z0-9]+)*@[a-zA-Z0-9]+([.-][a-zA-Z0-9]+)*\.[a-zA-Z]{2,}$/;
+
 // This is for shad-ci ui https://ui.shadcn.com/docs/installation/manual#add-a-cn-helper
 export function cn(...inputs: Array<ClassValue>) {
   return twMerge(clsx(inputs));

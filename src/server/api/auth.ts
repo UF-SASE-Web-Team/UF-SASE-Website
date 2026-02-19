@@ -1,6 +1,6 @@
 import { db } from "@/server/db/db";
 import { VerificationTemplate } from "@/server/email/verification-template";
-import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
+import { createErrorResponse, createSuccessResponse, emailRegex, passwordRegex } from "@/shared/utils";
 import { oauthAccounts, pendingVerifications, professionalInfo, sessions, userRoleRelationship, users } from "@db/tables";
 import { SERVER_ENV } from "@server/env";
 import { generateCodeVerifier, generateState, Google } from "arctic";
@@ -11,9 +11,6 @@ import { generateIdFromEntropySize } from "lucia";
 import { Resend } from "resend";
 
 const { compare, hash } = bcrypt;
-
-const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*!@#$%^&*()\-_=+\\|[{}\];:'",<>./?])[A-Za-z\d!@#$%^&*()\-_=+\\|[{}\];:'",<>./?]{8,}$/;
-const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 const authRoutes = new Hono();
 

@@ -6,7 +6,7 @@ describe("Auth Regex Validators", () => {
     it("should match valid email addresses", () => {
       const validEmails = ["test@example.com", "user.name@domain.co", "user+tag@domain.com", "admin@subdomain.example.org"];
       validEmails.forEach((email) => {
-        expect(emailRegex.test(email)).toBe(true);
+        expect(emailRegex.test(email), `Email "${email}" should be accepted`).toBe(true);
       });
     });
 
@@ -23,7 +23,7 @@ describe("Auth Regex Validators", () => {
         "email..email@example.com",
       ];
       invalidEmails.forEach((email) => {
-        expect(emailRegex.test(email)).toBe(false);
+        expect(emailRegex.test(email), `Email "${email}" should be rejected`).toBe(false);
       });
     });
   });

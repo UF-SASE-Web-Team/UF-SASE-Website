@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
-import { emailRegex, passwordRegex } from "../../shared/utils";
+import { emailRegex, passwordRegex } from "@/shared/utils";
+import { describe, expect, it } from "bun:test";
 
 describe("Auth Regex Validators", () => {
   describe("emailRegex", () => {

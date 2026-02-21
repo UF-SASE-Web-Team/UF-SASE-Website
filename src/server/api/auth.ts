@@ -90,8 +90,8 @@ authRoutes.post("/auth/signup", async (c) => {
 authRoutes.post("/auth/resend-code", async (c) => {
   try {
     const { email } = await c.req.json();
-    if (!email || typeof email !== "string") {
-      return createErrorResponse(c, "INVALID_INPUT", "Invalid email", 400);
+    if (!email || typeof email !== "string" || !emailRegex.test(email)) {
+      return createErrorResponse(c, "INVALID_EMAIL", "Invalid email", 400);
     }
     const pending = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email)).get();
     if (!pending) {

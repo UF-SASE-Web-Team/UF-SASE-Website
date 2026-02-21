@@ -1,9 +1,9 @@
-import { pendingVerifications, sessions, users } from "@/server/db/tables";
+import { oauthAccounts, pendingVerifications, professionalInfo, sessions, userRoleRelationship, users } from "@/server/db/tables";
 import type { Client } from "@libsql/client";
 import type { ErrorResponse, SuccessResponse } from "@schema/responseSchema";
 import bcrypt from "bcryptjs";
 import { afterAll, beforeAll, beforeEach, describe, expect, it, mock } from "bun:test";
-import { count, eq } from "drizzle-orm";
+import { and, count, eq } from "drizzle-orm";
 import { Hono } from "hono";
 import { createTestDatabase, resetTestDatabase } from "./testDb";
 
@@ -37,6 +37,33 @@ let db: Awaited<ReturnType<typeof createTestDatabase>>["db"];
 let emailSendCalls: Array<{ to: Array<string>; subject: string }> = [];
 let app: Hono;
 
+// OAuth mock — stable state string used by arctic mock and callback tests
+const mockOAuthState = "mock-state";
+
+// Default Google user returned by the mocked fetch; override per-test via mockGoogleUserResponse
+const defaultGoogleUser = {
+  id: "google-id-123",
+  email: "googleuser@gmail.com",
+  verified_email: true,
+  name: "Google User",
+  given_name: "Google",
+  family_name: "User",
+};
+
+// Override per test to simulate different Google API responses
+let mockGoogleUserResponse: { ok: boolean; json: () => Promise<Record<string, unknown>> } = {
+  ok: true,
+  json: async () => ({ ...defaultGoogleUser }),
+};
+
+// Intercept Google userinfo fetch — everything else passes through
+const originalFetch = globalThis.fetch;
+globalThis.fetch = (async (input: RequestInfo | URL, init?: RequestInit) => {
+  const url = typeof input === "string" ? input : input instanceof URL ? input.toString() : input.url;
+  if (url.includes("googleapis.com/oauth2/v2/userinfo")) return mockGoogleUserResponse as Response;
+  return originalFetch(input, init);
+}) as typeof fetch;
+
 // Setup mocks
 const mockEmailSend = async (opts: { to: Array<string>; subject: string }) => {
   emailSendCalls.push({ to: opts.to, subject: opts.subject });
@@ -62,6 +89,15 @@ mock.module("@server/env", () => ({
 
 mock.module("@/server/email/verification-template", () => ({
   VerificationTemplate: ({ code }: { code: string }) => `<div>Your code: ${code}</div>`,
+}));
+
+mock.module("arctic", () => ({
+  generateState: () => mockOAuthState,
+  generateCodeVerifier: () => "mock-verifier",
+  Google: class MockGoogle {
+    createAuthorizationURL = async () => new URL(`https://accounts.google.com/o/oauth2/auth?state=${mockOAuthState}`);
+    validateAuthorizationCode = async () => ({ accessToken: () => "mock-token" });
+  },
 }));
 
 // --- Helpers ---
@@ -145,6 +181,15 @@ const logoutViaApi = async (sessionId: string) => {
   });
 };
 
+/** Resend verification code via API */
+const resendCodeViaApi = async (email: string) => {
+  return app.request("/api/auth/resend-code", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email }),
+  });
+};
+
 // --- Test Suite ---
 
 describe("Auth Integration Tests", () => {
@@ -185,11 +230,7 @@ describe("Auth Integration Tests", () => {
       });
 
       it("should reject missing username", async () => {
-        const res = await app.request("/api/auth/signup", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "a@b.com", password: "P@ssword123" }),
-        });
+        const res = await signupViaApi("a@b.com", "P@ssword123", "");
 
         expect(res.status).toBe(400);
         const json = (await res.json()) as ErrorResponse;
@@ -252,17 +293,34 @@ describe("Auth Integration Tests", () => {
         const allPending = await db.select().from(pendingVerifications);
         expect(allPending.length).toBe(2);
       });
+
+      it("should reset attempts counter allowing fresh verification tries", async () => {
+        const email = "resetsattempts@email.com";
+
+        // First signup
+        const { code: code1 } = await signupViaApiAndGetCode(email, "P@ssword123", "attuser1");
+        expect(code1).toBeDefined();
+
+        // Fail twice
+        await verifyViaApi(email, "000000");
+        await verifyViaApi(email, "000000");
+        const [before] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
+        expect(before?.attempts).toBe(2);
+
+        // Re-signup overwrites pending with attempts=0
+        const { code: code2 } = await signupViaApiAndGetCode(email, "P@ssword123", "attuser2");
+        expect(code2).toBeDefined();
+
+        const [after] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
+        expect(after?.attempts).toBe(0);
+      });
     });
   });
 
   describe("POST /api/auth/verify-code", () => {
     describe("input validation", () => {
       it("should reject missing code", async () => {
-        const res = await app.request("/api/auth/verify-code", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email: "a@b.com" }),
-        });
+        const res = await verifyViaApi("a@b.com", "");
 
         expect(res.status).toBe(400);
         const json = (await res.json()) as ErrorResponse;
@@ -270,11 +328,7 @@ describe("Auth Integration Tests", () => {
       });
 
       it("should reject missing email", async () => {
-        const res = await app.request("/api/auth/verify-code", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ code: "123456" }),
-        });
+        const res = await verifyViaApi("", "123456");
 
         expect(res.status).toBe(400);
         const json = (await res.json()) as ErrorResponse;
@@ -431,11 +485,7 @@ describe("Auth Integration Tests", () => {
       });
 
       it("should reject missing password", async () => {
-        const res = await app.request("/api/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username: "testuser" }),
-        });
+        const res = await loginViaApi("testuser", "");
         expect(res.status).toBe(401);
 
         const json = (await res.json()) as ErrorResponse;
@@ -488,7 +538,7 @@ describe("Auth Integration Tests", () => {
         expect(json.error.errCode).toBe("INVALID_PASSWORD");
       });
 
-      it("should reject login for OAuth-only user", async () => {
+      it("should reject login for OAuth-only user (no password)", async () => {
         await insertUser("oauth-user", "googleuser", "google@email.com");
 
         const res = await loginViaApi("googleuser", "P@ssword123");
@@ -516,10 +566,15 @@ describe("Auth Integration Tests", () => {
     });
 
     it("should reject logout with no session cookie", async () => {
-      const res = await app.request("/api/auth/logout", { method: "POST" });
+      const res = await logoutViaApi("");
       expect(res.status).toBe(401);
       const json = (await res.json()) as ErrorResponse;
       expect(json.error.errCode).toBe("NO_SESSION");
+    });
+
+    it("should succeed with non-existent session ID", async () => {
+      const res = await logoutViaApi("totally-fake-session-id");
+      expect(res.status).toBe(200);
     });
   });
 
@@ -540,7 +595,7 @@ describe("Auth Integration Tests", () => {
     });
 
     it("should reject when no session cookie is provided", async () => {
-      const res = await app.request("/api/auth/session");
+      const res = await sessionViaApi("");
       expect(res.status).toBe(401);
 
       const json = (await res.json()) as ErrorResponse;
@@ -657,6 +712,251 @@ describe("Auth Integration Tests", () => {
       expect(res2.status).toBe(400);
       const json = (await res2.json()) as ErrorResponse;
       expect(json.error.errCode).toBe("INVALID_CODE");
+    });
+
+    it("should return roles for valid session", async () => {
+      // Full signup + verify flow to get proper roles
+      const { code } = await signupViaApiAndGetCode("roles@email.com", "P@ssword123", "rolesuser");
+      expect(code).toBeDefined();
+      if (!code) return;
+
+      const verifyRes = await verifyViaApi("roles@email.com", code);
+      const verifyJson = (await verifyRes.json()) as VerifySuccessResponse;
+
+      const sessionRes = await sessionViaApi(verifyJson.data.sessionId);
+      expect(sessionRes.status).toBe(200);
+      const sessionJson = (await sessionRes.json()) as SessionSuccessResponse;
+      expect(sessionJson.data.roles).toBeInstanceOf(Array);
+      expect(sessionJson.data.roles).toContain("user");
+    });
+  });
+
+  describe("POST /api/auth/resend-code", () => {
+    it("should resend code and reset attempts for an existing pending verification", async () => {
+      await createPendingVerification("test@email.com", "testuser", "P@ssword123", "111111");
+
+      // Fail once to bump attempts
+      await verifyViaApi("test@email.com", "000000");
+
+      const prevEmailCount = emailSendCalls.length;
+      const res = await resendCodeViaApi("test@email.com");
+      expect(res.status).toBe(200);
+
+      // New email sent
+      expect(emailSendCalls.length).toBe(prevEmailCount + 1);
+      expect(emailSendCalls[prevEmailCount].to).toEqual(["test@email.com"]);
+
+      // Attempts reset to 0
+      const [pending] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, "test@email.com"));
+      expect(pending?.attempts).toBe(0);
+    });
+
+    it("should invalidate old code after resend", async () => {
+      const email = "test@email.com";
+      const { code: oldCode } = await signupViaApiAndGetCode(email, "P@ssword123", "testold");
+      expect(oldCode).toBeDefined();
+      if (!oldCode) return;
+
+      // Resend
+      const prevEmailCount = emailSendCalls.length;
+      await resendCodeViaApi(email);
+      const newCode = emailSendCalls[prevEmailCount]?.subject.split(" ")[0];
+      expect(newCode).toBeDefined();
+      if (!newCode) return;
+
+      // Old code should fail
+      const oldRes = await verifyViaApi(email, oldCode);
+      expect(oldRes.status).toBe(400);
+
+      // New code should succeed (re-signup to get fresh pending since attempt was used)
+      // Need a fresh pending — resend again to reset attempts consumed above
+      await resendCodeViaApi(email);
+      const freshEmailCount = emailSendCalls.length;
+      const freshCode = emailSendCalls[freshEmailCount - 1]?.subject.split(" ")[0];
+      if (!freshCode) return;
+
+      const newRes = await verifyViaApi(email, freshCode);
+      expect(newRes.status).toBe(200);
+    });
+
+    it("should reject empty email", async () => {
+      const res = await resendCodeViaApi("");
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_EMAIL");
+    });
+
+    it("should reject when no pending verification exists", async () => {
+      const res = await resendCodeViaApi("nobody@email.com");
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("NO_PENDING");
+    });
+
+    it("should allow fresh attempts after resend resets counter", async () => {
+      const email = "test@email.com";
+      await createPendingVerification(email, "testuser", "P@ssword123", "999999");
+
+      // Use up 2 of 3 attempts
+      await verifyViaApi(email, "000000");
+      await verifyViaApi(email, "000000");
+
+      const [beforeResend] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
+      expect(beforeResend?.attempts).toBe(2);
+
+      // Resend resets attempts
+      await resendCodeViaApi(email);
+      const [afterResend] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
+      expect(afterResend?.attempts).toBe(0);
+
+      // Should get 3 fresh attempts — use 2 more without lockout
+      const _newCode = emailSendCalls[emailSendCalls.length - 1]?.subject.split(" ")[0];
+      await verifyViaApi(email, "000000");
+      await verifyViaApi(email, "000000");
+
+      const [afterRetries] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
+      expect(afterRetries?.attempts).toBe(2); // Still alive, not locked out
+
+      // Third wrong attempt should lock out
+      const lockoutRes = await verifyViaApi(email, "000000");
+      expect(lockoutRes.status).toBe(400);
+      const lockoutJson = (await lockoutRes.json()) as ErrorResponse;
+      expect(lockoutJson.error.errCode).toBe("TOO_MANY_ATTEMPTS");
+    });
+  });
+
+  describe("GET /api/auth/google", () => {
+    it("should redirect to Google OAuth URL", async () => {
+      const res = await app.request("/api/auth/google");
+      expect(res.status).toBe(302);
+
+      const location = res.headers.get("Location");
+      expect(location).toContain("accounts.google.com");
+      expect(location).toContain(mockOAuthState);
+    });
+  });
+
+  describe("GET /api/auth/google/callback", () => {
+    it("should reject missing code or state", async () => {
+      const res = await app.request("/api/auth/google/callback?code=abc");
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_CALLBACK");
+
+      const res2 = await app.request("/api/auth/google/callback?state=abc");
+      expect(res2.status).toBe(400);
+      const json2 = (await res2.json()) as ErrorResponse;
+      expect(json2.error.errCode).toBe("INVALID_CALLBACK");
+    });
+
+    it("should reject invalid/unknown state", async () => {
+      const res = await app.request("/api/auth/google/callback?code=abc&state=unknown-state");
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_STATE");
+    });
+
+    it("should reject unverified Google email", async () => {
+      // First hit /auth/google to create the state entry
+      await app.request("/api/auth/google");
+
+      mockGoogleUserResponse = {
+        ok: true,
+        json: async () => ({
+          id: "unverified-id",
+          email: "unverified@gmail.com",
+          verified_email: false,
+          name: "Unverified User",
+        }),
+      };
+
+      const res = await app.request(`/api/auth/google/callback?code=authcode&state=${mockOAuthState}`);
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("UNVERIFIED_EMAIL");
+
+      // Reset mock
+      mockGoogleUserResponse = { ok: true, json: async () => ({ ...defaultGoogleUser }) };
+    });
+
+    it("should create new user, session, and redirect for first-time OAuth login", async () => {
+      // Hit /auth/google to register the state
+      await app.request("/api/auth/google");
+
+      const res = await app.request(`/api/auth/google/callback?code=authcode&state=${mockOAuthState}`);
+      expect(res.status).toBe(302);
+      expect(res.headers.get("Location")).toBe("/");
+
+      // User created
+      const [user] = await db.select().from(users).where(eq(users.email, "googleuser@gmail.com"));
+      expect(user).toBeDefined();
+      expect(user?.firstName).toBe("Google");
+      expect(user?.lastName).toBe("User");
+      expect(user?.password).toBeNull();
+
+      // OAuth account linked
+      const [oauth] = await db
+        .select()
+        .from(oauthAccounts)
+        .where(and(eq(oauthAccounts.provider, "google"), eq(oauthAccounts.providerUserId, "google-id-123")));
+      expect(oauth).toBeDefined();
+      expect(oauth?.userId).toBe(user?.id);
+
+      // Professional info and role created
+      if (!user) return;
+      const [profInfo] = await db.select().from(professionalInfo).where(eq(professionalInfo.userId, user.id));
+      expect(profInfo).toBeDefined();
+
+      const roles = await db.select({ role: userRoleRelationship.role }).from(userRoleRelationship).where(eq(userRoleRelationship.userId, user.id));
+      expect(roles.map((r) => r.role)).toContain("user");
+
+      // Session created (check cookie)
+      const setCookie = res.headers.get("Set-Cookie");
+      expect(setCookie).toContain("sessionId=");
+    });
+
+    it("should link OAuth to existing email user and create session", async () => {
+      // Pre-create user with password (email signup)
+      await insertUser("existing-user", "existinguser", "googleuser@gmail.com", "P@ssword123");
+
+      await app.request("/api/auth/google");
+      const res = await app.request(`/api/auth/google/callback?code=authcode&state=${mockOAuthState}`);
+      expect(res.status).toBe(302);
+
+      // OAuth account linked to existing user
+      const [oauth] = await db
+        .select()
+        .from(oauthAccounts)
+        .where(and(eq(oauthAccounts.provider, "google"), eq(oauthAccounts.providerUserId, "google-id-123")));
+      expect(oauth).toBeDefined();
+      expect(oauth?.userId).toBe("existing-user");
+
+      // Session created
+      const setCookie = res.headers.get("Set-Cookie");
+      expect(setCookie).toContain("sessionId=");
+    });
+
+    it("should reuse existing OAuth account and create session on repeat login", async () => {
+      // First OAuth login
+      await app.request("/api/auth/google");
+      await app.request(`/api/auth/google/callback?code=authcode&state=${mockOAuthState}`);
+
+      // Count users and oauth accounts
+      const [userCount] = await db.select({ count: count() }).from(users).where(eq(users.email, "googleuser@gmail.com"));
+      expect(userCount?.count).toBe(1);
+
+      // Second OAuth login
+      await app.request("/api/auth/google");
+      const res = await app.request(`/api/auth/google/callback?code=authcode&state=${mockOAuthState}`);
+      expect(res.status).toBe(302);
+
+      // Still only one user
+      const [userCount2] = await db.select({ count: count() }).from(users).where(eq(users.email, "googleuser@gmail.com"));
+      expect(userCount2?.count).toBe(1);
+
+      // Session created
+      const setCookie = res.headers.get("Set-Cookie");
+      expect(setCookie).toContain("sessionId=");
     });
   });
 });

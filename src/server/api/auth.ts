@@ -30,7 +30,6 @@ authRoutes.post("/auth/signup", async (c) => {
   }
   //validate email
   if (!email || typeof email !== "string" || !emailRegex.test(email)) {
-    console.log(email);
     return createErrorResponse(c, "INVALID_EMAIL", "Invalid email!", 400);
   }
 
@@ -146,10 +145,8 @@ authRoutes.post("/auth/verify-code", async (c) => {
   const isValidCode = await compare(code, pending.code);
   if (!isValidCode) {
     const newAttempts = pending.attempts + 1;
-    await db
-      .update(pendingVerifications)
-      .set({ attempts: pending.attempts + 1 })
-      .where(eq(pendingVerifications.email, email));
+    await db.update(pendingVerifications).set({ attempts: newAttempts }).where(eq(pendingVerifications.email, email));
+
     if (newAttempts >= 3) {
       await db.delete(pendingVerifications).where(eq(pendingVerifications.email, email));
       return createErrorResponse(c, "TOO_MANY_ATTEMPTS", "Too many attempts, please register again", 400);
@@ -157,13 +154,29 @@ authRoutes.post("/auth/verify-code", async (c) => {
     return createErrorResponse(c, "INVALID_CODE", "Invalid verification code", 400);
   }
 
-  try {
-    const userData = JSON.parse(pending.userData) as {
-      username: string;
-      password: string;
-      email: string;
-    };
+  const userData = JSON.parse(pending.userData) as {
+    username: string;
+    password: string;
+    email: string;
+  };
 
+  // Check if username or email was claimed by another user while pending
+  const [existingEmail, existingUsername] = await Promise.all([
+    db.select().from(users).where(eq(users.email, userData.email)).get(),
+    db.select().from(users).where(eq(users.username, userData.username)).get(),
+  ]);
+
+  if (existingEmail) {
+    await db.delete(pendingVerifications).where(eq(pendingVerifications.email, email));
+    return createErrorResponse(c, "EMAIL_TAKEN", "Email was already registered by another user", 400);
+  }
+
+  if (existingUsername) {
+    await db.delete(pendingVerifications).where(eq(pendingVerifications.email, email));
+    return createErrorResponse(c, "USERNAME_TAKEN", "Username was already taken by another user", 400);
+  }
+
+  try {
     const userId = generateIdFromEntropySize(16);
 
     // Create verified user
@@ -175,13 +188,8 @@ authRoutes.post("/auth/verify-code", async (c) => {
     });
 
     // Set up additional user data
-    await db.insert(professionalInfo).values({ userId });
-    await db.insert(userRoleRelationship).values({
-      userId,
-      role: "user",
-    });
+    await Promise.all([db.insert(professionalInfo).values({ userId }), db.insert(userRoleRelationship).values({ userId, role: "user" })]);
 
-    // Remove pending verification
     await db.delete(pendingVerifications).where(eq(pendingVerifications.email, email));
 
     // Create session and log user in automatically
@@ -191,7 +199,7 @@ authRoutes.post("/auth/verify-code", async (c) => {
 
     return createSuccessResponse(c, { userId, sessionId }, "Account created and logged in");
   } catch (error) {
-    console.error(error);
+    console.error("Error completing verification:", error);
     return createErrorResponse(c, "VERIFICATION_ERROR", "Error completing signup", 500);
   }
 });
@@ -203,7 +211,6 @@ authRoutes.post("/auth/login", async (c) => {
   const password = formData["password"];
 
   if (!username || typeof username !== "string" || username.trim() === "") {
-    console.log("??????");
     return createErrorResponse(c, "INVALID_USERNAME", "Invalid username!", 401);
   }
 
@@ -219,7 +226,6 @@ authRoutes.post("/auth/login", async (c) => {
   }
 
   if (user.length === 0) {
-    console.log(user);
     return createErrorResponse(c, "INVALID_CREDENTIALS", "Invalid username or password!", 401);
   }
 
@@ -251,7 +257,7 @@ authRoutes.post("/auth/logout", async (c) => {
 
     return createSuccessResponse(c, null, "Successfully logged out");
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return createErrorResponse(c, "LOGOUT_ERROR", "Error logging out", 500);
   }
 });
@@ -259,7 +265,6 @@ authRoutes.post("/auth/logout", async (c) => {
 // used for validating sessions
 authRoutes.get("/auth/session", async (c) => {
   const sessionId = c.req.header("Cookie")?.match(/sessionId=([^;]*)/)?.[1];
-  console.log(sessionId);
 
   if (!sessionId) {
     return createErrorResponse(c, "NO_SESSION", "No active session", 401);
@@ -293,7 +298,7 @@ authRoutes.get("/auth/session", async (c) => {
 
     return createSuccessResponse(c, { id: user.id, username: user.username, roles }, "Session valid");
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return createErrorResponse(c, "SESSION_CHECK_ERROR", "Error checking session", 500);
   }
 });
@@ -306,7 +311,7 @@ async function createSession(sessionID: string, userID: string) {
       expiresAt: Date.now() + 3600 * 1000,
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }
 

@@ -212,341 +212,339 @@ describe("Auth Integration Tests", () => {
   });
 
   describe("POST /api/auth/signup", () => {
-    describe("input validation", () => {
-      it("should reject invalid email format", async () => {
-        const res = await signupViaApi("not-an-email", "P@ssword123", "validuser");
+    // -- Input Validation --
 
-        expect(res.status).toBe(400);
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("INVALID_EMAIL");
-      });
+    it("should reject invalid email format", async () => {
+      const res = await signupViaApi("not-an-email", "P@ssword123", "validuser");
 
-      it("should reject invalid password format", async () => {
-        const res = await signupViaApi("valid@email.com", "weakpass", "validuser");
-
-        expect(res.status).toBe(400);
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("INVALID_PASSWORD");
-      });
-
-      it("should reject missing username", async () => {
-        const res = await signupViaApi("a@b.com", "P@ssword123", "");
-
-        expect(res.status).toBe(400);
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("INVALID_USERNAME");
-      });
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_EMAIL");
     });
 
-    describe("duplicate rejection", () => {
-      it("should reject when email is already registered", async () => {
-        await insertUser("existing-id", "existinguser", "taken@email.com", "P@ssword123");
+    it("should reject invalid password format", async () => {
+      const res = await signupViaApi("valid@email.com", "weakpass", "validuser");
 
-        const res = await signupViaApi("taken@email.com", "P@ssword123", "differentuser");
-
-        expect(res.status).toBe(400);
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("EMAIL_TAKEN");
-      });
-
-      it("should reject when username is already registered", async () => {
-        await insertUser("existing-id", "takenuser", "other@email.com", "P@ssword123");
-
-        const res = await signupViaApi("new@email.com", "P@ssword123", "takenuser");
-
-        expect(res.status).toBe(400);
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("USERNAME_TAKEN");
-      });
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_PASSWORD");
     });
 
-    describe("successful signup", () => {
-      it("should create pending verification and send email", async () => {
-        const res = await signupViaApi("testuser@email.com", "P@ssword123", "testuser");
+    it("should reject missing username", async () => {
+      const res = await signupViaApi("a@b.com", "P@ssword123", "");
 
-        expect(res.status).toBe(200);
-
-        const [pending] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, "testuser@email.com"));
-        expect(pending).toBeDefined();
-        if (!pending) return;
-
-        expect(pending.email).toBe("testuser@email.com");
-        expect(pending.expiresAt).toBeGreaterThan(Date.now());
-
-        const userData = JSON.parse(pending.userData) as { username: string; email: string };
-        expect(userData.username).toBe("testuser");
-        expect(userData.email).toBe("testuser@email.com");
-
-        expect(emailSendCalls.length).toBe(1);
-        expect(emailSendCalls[0].to).toEqual(["testuser@email.com"]);
-      });
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_USERNAME");
     });
 
-    describe("re-signup behavior", () => {
-      it("should allow two different emails to have the same pending username", async () => {
-        await createPendingVerification("user@email.com", "john", "P@ssword123", "111111");
+    // -- Duplicate Rejection --
 
-        const res = await signupViaApi("differentuser@email.com", "P@ssword123", "john");
+    it("should reject when email is already registered", async () => {
+      await insertUser("existing-id", "existinguser", "taken@email.com", "P@ssword123");
 
-        expect(res.status).toBe(200);
+      const res = await signupViaApi("taken@email.com", "P@ssword123", "differentuser");
 
-        const allPending = await db.select().from(pendingVerifications);
-        expect(allPending.length).toBe(2);
-      });
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("EMAIL_TAKEN");
+    });
 
-      it("should reset attempts counter allowing fresh verification tries", async () => {
-        const email = "resetsattempts@email.com";
+    it("should reject when username is already registered", async () => {
+      await insertUser("existing-id", "takenuser", "other@email.com", "P@ssword123");
 
-        // First signup
-        const { code: code1 } = await signupViaApiAndGetCode(email, "P@ssword123", "attuser1");
-        expect(code1).toBeDefined();
+      const res = await signupViaApi("new@email.com", "P@ssword123", "takenuser");
 
-        // Fail twice
-        await verifyViaApi(email, "000000");
-        await verifyViaApi(email, "000000");
-        const [before] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
-        expect(before?.attempts).toBe(2);
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("USERNAME_TAKEN");
+    });
 
-        // Re-signup overwrites pending with attempts=0
-        const { code: code2 } = await signupViaApiAndGetCode(email, "P@ssword123", "attuser2");
-        expect(code2).toBeDefined();
+    // -- Successful Signup --
 
-        const [after] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
-        expect(after?.attempts).toBe(0);
-      });
+    it("should create pending verification and send email", async () => {
+      const res = await signupViaApi("testuser@email.com", "P@ssword123", "testuser");
+
+      expect(res.status).toBe(200);
+
+      const [pending] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, "testuser@email.com"));
+      expect(pending).toBeDefined();
+      if (!pending) return;
+
+      expect(pending.email).toBe("testuser@email.com");
+      expect(pending.expiresAt).toBeGreaterThan(Date.now());
+
+      const userData = JSON.parse(pending.userData) as { username: string; email: string };
+      expect(userData.username).toBe("testuser");
+      expect(userData.email).toBe("testuser@email.com");
+
+      expect(emailSendCalls.length).toBe(1);
+      expect(emailSendCalls[0].to).toEqual(["testuser@email.com"]);
+    });
+
+    // -- Race Conditions --
+
+    it("should allow two different emails to have the same pending username", async () => {
+      await createPendingVerification("user@email.com", "john", "P@ssword123", "111111");
+
+      const res = await signupViaApi("differentuser@email.com", "P@ssword123", "john");
+
+      expect(res.status).toBe(200);
+
+      const allPending = await db.select().from(pendingVerifications);
+      expect(allPending.length).toBe(2);
+    });
+
+    it("should reset attempts counter allowing fresh verification tries", async () => {
+      const email = "resetsattempts@email.com";
+
+      // First signup
+      const { code: code1 } = await signupViaApiAndGetCode(email, "P@ssword123", "attuser1");
+      expect(code1).toBeDefined();
+
+      // Fail twice
+      await verifyViaApi(email, "000000");
+      await verifyViaApi(email, "000000");
+      const [before] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
+      expect(before?.attempts).toBe(2);
+
+      // Re-signup overwrites pending with attempts=0
+      const { code: code2 } = await signupViaApiAndGetCode(email, "P@ssword123", "attuser2");
+      expect(code2).toBeDefined();
+
+      const [after] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
+      expect(after?.attempts).toBe(0);
     });
   });
 
   describe("POST /api/auth/verify-code", () => {
-    describe("input validation", () => {
-      it("should reject missing code", async () => {
-        const res = await verifyViaApi("a@b.com", "");
+    // -- Input Validation --
 
-        expect(res.status).toBe(400);
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("INVALID_INPUT");
-      });
-
-      it("should reject missing email", async () => {
-        const res = await verifyViaApi("", "123456");
-
-        expect(res.status).toBe(400);
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("INVALID_INPUT");
-      });
+    it("should reject missing code", async () => {
+      const res = await verifyViaApi("a@b.com", "");
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_INPUT");
     });
 
-    describe("successful verification", () => {
-      it("should create user, session, and clean up pending verification", async () => {
-        const email = "verifytest@email.com";
-        const username = "verifyuser";
-        const knownCode = "123456";
-
-        await createPendingVerification(email, username, "P@ssword123", knownCode);
-
-        const res = await verifyViaApi(email, knownCode);
-
-        expect(res.status).toBe(200);
-        const json = (await res.json()) as VerifySuccessResponse;
-        expect(json.message).toBe("Account created and logged in");
-        expect(json.data.userId).toBeDefined();
-        expect(json.data.sessionId).toBeDefined();
-
-        const [user] = await db.select().from(users).where(eq(users.email, email));
-        expect(user).toBeDefined();
-        expect(user?.username).toBe(username);
-
-        const pendingRows = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
-        expect(pendingRows.length).toBe(0);
-
-        // Session created
-        const [session] = await db.select().from(sessions).where(eq(sessions.id, json.data.sessionId));
-        expect(session).toBeDefined();
-        expect(session?.userId).toBe(json.data.userId);
-      });
+    it("should reject missing email", async () => {
+      const res = await verifyViaApi("", "123456");
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_INPUT");
     });
 
-    describe("code validation failures", () => {
-      it("should reject incorrect code", async () => {
-        await createPendingVerification("wrongcode@email.com", "wrongcodeuser", "P@ssword123", "999999");
+    // -- Successful Verification --
 
-        const res = await verifyViaApi("wrongcode@email.com", "000000");
+    it("should create user, session, and clean up pending verification", async () => {
+      const email = "verifytest@email.com";
+      const username = "verifyuser";
+      const knownCode = "123456";
 
-        expect(res.status).toBe(400);
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("INVALID_CODE");
-      });
+      await createPendingVerification(email, username, "P@ssword123", knownCode);
 
-      it("should reject expired code and clean up pending", async () => {
-        const email = "expired@email.com";
-        const hashedCode = await bcrypt.hash("123456", 10);
+      const res = await verifyViaApi(email, knownCode);
 
-        await db.insert(pendingVerifications).values({
-          email,
-          code: hashedCode,
-          userData: JSON.stringify({ username: "exp", password: "hash", email }),
-          expiresAt: Date.now() - 1000, // Force expiration
-          attempts: 0,
-        });
+      expect(res.status).toBe(200);
+      const json = (await res.json()) as VerifySuccessResponse;
+      expect(json.message).toBe("Account created and logged in");
+      expect(json.data.userId).toBeDefined();
+      expect(json.data.sessionId).toBeDefined();
 
-        const res = await verifyViaApi(email, "123456");
+      const [user] = await db.select().from(users).where(eq(users.email, email));
+      expect(user).toBeDefined();
+      expect(user?.username).toBe(username);
 
-        expect(res.status).toBe(400);
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("CODE_EXPIRED");
+      const pendingRows = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
+      expect(pendingRows.length).toBe(0);
 
-        const pendingRows = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
-        expect(pendingRows.length).toBe(0);
-      });
-
-      it("should reject when no pending verification exists", async () => {
-        const res = await verifyViaApi("nonexistent@email.com", "123456");
-
-        expect(res.status).toBe(400);
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("INVALID_CODE");
-      });
+      // Session created
+      const [session] = await db.select().from(sessions).where(eq(sessions.id, json.data.sessionId));
+      expect(session).toBeDefined();
+      expect(session?.userId).toBe(json.data.userId);
     });
 
-    describe("attempt limiting", () => {
-      it("should lock out after 3 failed attempts and clean up pending", async () => {
-        const email = "lockout@email.com";
-        await createPendingVerification(email, "lockoutuser", "P@ssword123", "999999");
+    // -- Incorrect Code --
 
-        for (let i = 0; i < 3; i++) {
-          const res = await verifyViaApi(email, "000000");
-          expect(res.status).toBe(400);
+    it("should reject incorrect code", async () => {
+      await createPendingVerification("wrongcode@email.com", "wrongcodeuser", "P@ssword123", "999999");
 
-          const json = (await res.json()) as ErrorResponse;
-          if (i < 2) {
-            expect(json.error.errCode).toBe("INVALID_CODE");
-          } else {
-            expect(json.error.errCode).toBe("TOO_MANY_ATTEMPTS");
-          }
+      const res = await verifyViaApi("wrongcode@email.com", "000000");
+
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_CODE");
+    });
+
+    it("should reject expired code and clean up pending", async () => {
+      const email = "expired@email.com";
+      const hashedCode = await bcrypt.hash("123456", 10);
+
+      await db.insert(pendingVerifications).values({
+        email,
+        code: hashedCode,
+        userData: JSON.stringify({ username: "exp", password: "hash", email }),
+        expiresAt: Date.now() - 1000, // Force expiration
+        attempts: 0,
+      });
+
+      const res = await verifyViaApi(email, "123456");
+
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("CODE_EXPIRED");
+
+      const pendingRows = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
+      expect(pendingRows.length).toBe(0);
+    });
+
+    it("should reject when no pending verification exists", async () => {
+      const res = await verifyViaApi("nonexistent@email.com", "123456");
+
+      expect(res.status).toBe(400);
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_CODE");
+    });
+
+    // -- Attempt Limiting --
+
+    it("should lock out after 3 failed attempts and clean up pending", async () => {
+      const email = "lockout@email.com";
+      await createPendingVerification(email, "lockoutuser", "P@ssword123", "999999");
+
+      for (let i = 0; i < 3; i++) {
+        const res = await verifyViaApi(email, "000000");
+        expect(res.status).toBe(400);
+
+        const json = (await res.json()) as ErrorResponse;
+        if (i < 2) {
+          expect(json.error.errCode).toBe("INVALID_CODE");
+        } else {
+          expect(json.error.errCode).toBe("TOO_MANY_ATTEMPTS");
         }
+      }
 
-        const pendingRows = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
-        expect(pendingRows.length).toBe(0);
-      });
+      const pendingRows = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
+      expect(pendingRows.length).toBe(0);
     });
 
-    describe("race conditions", () => {
-      it("should reject verification when username was taken by another user first", async () => {
-        const code1 = "111111";
-        const code2 = "222222";
+    // -- Race Conditions --
 
-        await createPendingVerification("first@email.com", "john", "P@ssword123", code1);
-        await createPendingVerification("second@email.com", "john", "P@ssword123", code2);
+    it("should reject verification when username was taken by another user first", async () => {
+      const code1 = "111111";
+      const code2 = "222222";
 
-        // First user takes username
-        const res1 = await verifyViaApi("first@email.com", code1);
-        expect(res1.status).toBe(200);
+      await createPendingVerification("first@email.com", "john", "P@ssword123", code1);
+      await createPendingVerification("second@email.com", "john", "P@ssword123", code2);
 
-        // Second user tries to verify but username already taken
-        const res2 = await verifyViaApi("second@email.com", code2);
-        expect(res2.status).toBe(400);
+      // First user takes username
+      const res1 = await verifyViaApi("first@email.com", code1);
+      expect(res1.status).toBe(200);
 
-        const json = (await res2.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("USERNAME_TAKEN");
+      // Second user tries to verify but username already taken
+      const res2 = await verifyViaApi("second@email.com", code2);
+      expect(res2.status).toBe(400);
 
-        const pendingRows = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, "second@email.com"));
-        expect(pendingRows.length).toBe(0);
-      });
+      const json = (await res2.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("USERNAME_TAKEN");
 
-      it("should reject verification when email was registered via OAuth before completion", async () => {
-        const email = "oauth@email.com";
-        const code = "123456";
+      const pendingRows = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, "second@email.com"));
+      expect(pendingRows.length).toBe(0);
+    });
 
-        await createPendingVerification(email, "oauthuser", "P@ssword123", code);
+    it("should reject verification when email was registered via OAuth before completion", async () => {
+      const email = "oauth@email.com";
+      const code = "123456";
 
-        // Simulate Google OAuth registering this email first
-        await insertUser("oauth-id", "oauthuser-google", email);
+      await createPendingVerification(email, "oauthuser", "P@ssword123", code);
 
-        const res = await verifyViaApi(email, code);
-        expect(res.status).toBe(400);
+      // Simulate Google OAuth registering this email first
+      await insertUser("oauth-id", "oauthuser-google", email);
 
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("EMAIL_TAKEN");
+      const res = await verifyViaApi(email, code);
+      expect(res.status).toBe(400);
 
-        const pendingRows = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
-        expect(pendingRows.length).toBe(0);
-      });
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("EMAIL_TAKEN");
+
+      const pendingRows = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
+      expect(pendingRows.length).toBe(0);
     });
   });
 
   describe("POST /api/auth/login", () => {
-    describe("input validation", () => {
-      it("should reject missing username", async () => {
-        const res = await loginViaApi("", "P@ssword123");
-        expect(res.status).toBe(401);
+    // -- Input Validation --
 
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("INVALID_USERNAME");
-      });
+    it("should reject missing username", async () => {
+      const res = await loginViaApi("", "P@ssword123");
+      expect(res.status).toBe(401);
 
-      it("should reject missing password", async () => {
-        const res = await loginViaApi("testuser", "");
-        expect(res.status).toBe(401);
-
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("INVALID_PASSWORD");
-      });
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_USERNAME");
     });
 
-    describe("successful login", () => {
-      it("should login with correct username and password", async () => {
-        await insertUser("user", "testuser", "test@email.com", "P@ssword123");
+    it("should reject missing password", async () => {
+      const res = await loginViaApi("testuser", "");
+      expect(res.status).toBe(401);
 
-        const res = await loginViaApi("testuser", "P@ssword123");
-        expect(res.status).toBe(200);
-
-        const json = (await res.json()) as LoginSuccessResponse;
-        expect(json.data.sessionId).toBeDefined();
-
-        const [session] = await db.select().from(sessions).where(eq(sessions.id, json.data.sessionId));
-        expect(session).toBeDefined();
-        expect(session?.userId).toBe("user");
-      });
-
-      it("should login with email instead of username", async () => {
-        await insertUser("user", "testuser", "test@email.com", "P@ssword123");
-
-        const res = await loginViaApi("test@email.com", "P@ssword123");
-        expect(res.status).toBe(200);
-
-        const json = (await res.json()) as LoginSuccessResponse;
-        expect(json.data.sessionId).toBeDefined();
-      });
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_PASSWORD");
     });
 
-    describe("failed login", () => {
-      it("should reject non-existent user", async () => {
-        const res = await loginViaApi("ghost", "P@ssword123");
-        expect(res.status).toBe(401);
+    // -- Successful Login --
 
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("INVALID_CREDENTIALS");
-      });
+    it("should login with correct username and password", async () => {
+      await insertUser("user", "testuser", "test@email.com", "P@ssword123");
 
-      it("should reject incorrect password", async () => {
-        await insertUser("user", "testuser", "test@email.com", "P@ssword123");
+      const res = await loginViaApi("testuser", "P@ssword123");
+      expect(res.status).toBe(200);
 
-        const res = await loginViaApi("testuser", "WrongPassword1!");
-        expect(res.status).toBe(401);
+      const json = (await res.json()) as LoginSuccessResponse;
+      expect(json.data.sessionId).toBeDefined();
 
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("INVALID_PASSWORD");
-      });
+      const [session] = await db.select().from(sessions).where(eq(sessions.id, json.data.sessionId));
+      expect(session).toBeDefined();
+      expect(session?.userId).toBe("user");
+    });
 
-      it("should reject login for OAuth-only user (no password)", async () => {
-        await insertUser("oauth-user", "googleuser", "google@email.com");
+    it("should login with email instead of username", async () => {
+      await insertUser("user", "testuser", "test@email.com", "P@ssword123");
 
-        const res = await loginViaApi("googleuser", "P@ssword123");
-        expect(res.status).toBe(401);
+      const res = await loginViaApi("test@email.com", "P@ssword123");
+      expect(res.status).toBe(200);
 
-        const json = (await res.json()) as ErrorResponse;
-        expect(json.error.errCode).toBe("NO_PASSWORD");
-      });
+      const json = (await res.json()) as LoginSuccessResponse;
+      expect(json.data.sessionId).toBeDefined();
+    });
+
+    // -- Failed Login --
+
+    it("should reject non-existent user", async () => {
+      const res = await loginViaApi("ghost", "P@ssword123");
+      expect(res.status).toBe(401);
+
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_CREDENTIALS");
+    });
+
+    it("should reject incorrect password", async () => {
+      await insertUser("user", "testuser", "test@email.com", "P@ssword123");
+
+      const res = await loginViaApi("testuser", "WrongPassword1!");
+      expect(res.status).toBe(401);
+
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("INVALID_PASSWORD");
+    });
+
+    it("should reject login for OAuth-only user (no password)", async () => {
+      await insertUser("oauth-user", "googleuser", "google@email.com");
+
+      const res = await loginViaApi("googleuser", "P@ssword123");
+      expect(res.status).toBe(401);
+
+      const json = (await res.json()) as ErrorResponse;
+      expect(json.error.errCode).toBe("NO_PASSWORD");
     });
   });
 
@@ -809,13 +807,13 @@ describe("Auth Integration Tests", () => {
       const [afterResend] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
       expect(afterResend?.attempts).toBe(0);
 
-      // Should get 3 fresh attempts — use 2 more without lockout
+      // Should get 3 fresh attempts
       const _newCode = emailSendCalls[emailSendCalls.length - 1]?.subject.split(" ")[0];
       await verifyViaApi(email, "000000");
       await verifyViaApi(email, "000000");
 
       const [afterRetries] = await db.select().from(pendingVerifications).where(eq(pendingVerifications.email, email));
-      expect(afterRetries?.attempts).toBe(2); // Still alive, not locked out
+      expect(afterRetries?.attempts).toBe(2);
 
       // Third wrong attempt should lock out
       const lockoutRes = await verifyViaApi(email, "000000");

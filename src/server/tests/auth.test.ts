@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { afterAll, beforeAll, beforeEach, describe, expect, it, mock } from "bun:test";
 import { and, count, eq } from "drizzle-orm";
 import { Hono } from "hono";
-import { createTestDatabase, resetTestDatabase } from "./testDb";
+import { createTestDatabase, insertTestPendingVerification, insertTestUser, resetTestDatabase } from "./testUtils";
 
 // Verify-code endpoint response type
 interface VerifySuccessResponse extends SuccessResponse {
@@ -104,31 +104,12 @@ mock.module("arctic", () => ({
 
 /** Insert pending verification via DB */
 const createPendingVerification = async (email: string, username: string, password: string, code: string) => {
-  const hashedCode = await bcrypt.hash(code, 10);
-  const hashedPassword = await bcrypt.hash(password, 10);
-  await db.insert(pendingVerifications).values({
-    email,
-    code: hashedCode,
-    userData: JSON.stringify({ username, password: hashedPassword, email }),
-    expiresAt: Date.now() + 10 * 60 * 1000,
-    attempts: 0,
-  });
+  return insertTestPendingVerification(db, email, username, password, code);
 };
 
 /** Insert user via DB */
 const insertUser = async (id: string, username: string, email: string, password?: string) => {
-  const hashedPassword = password ? await bcrypt.hash(password, 10) : null;
-  await db.insert(users).values({
-    id,
-    username,
-    email,
-    password: hashedPassword,
-    firstName: "",
-    lastName: "",
-    timeAdded: Date.now(),
-    timeUpdated: Date.now(),
-    points: 0,
-  });
+  return insertTestUser(db, id, username, email, password);
 };
 
 /** Signup via API */

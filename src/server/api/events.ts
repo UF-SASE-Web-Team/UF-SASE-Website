@@ -27,7 +27,7 @@ eventRoutes.get("/events", async (c) => {
     const eventsData = await db
       .select()
       .from(Schema.events)
-      .where(and(lte(Schema.events.startTime, endDate), gte(Schema.events.endTime, startDate)));
+      .where(and(lte(Schema.events.startDatetime, endDate), gte(Schema.events.endDatetime, startDate)));
     return createSuccessResponse(c, eventsData, "Events retrieved successfully");
   } catch (error) {
     console.log(error);

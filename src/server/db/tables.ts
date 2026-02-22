@@ -216,7 +216,7 @@ export const company = sqliteTable("company", {
   isCurrent: integer("is_current").default(0).notNull(),
 });
 
-export const event = sqliteTable("event", {
+export const events = sqliteTable("event", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),

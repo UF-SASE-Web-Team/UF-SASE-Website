@@ -95,7 +95,6 @@ export const saseInfo = sqliteTable("sase_info", {
   groups: text("groups"),
 });
 
-
 // Blogs table
 export const blogs = sqliteTable("blog", {
   id: text("id")
@@ -233,4 +232,3 @@ export const events = sqliteTable("event", {
     .notNull()
     .$defaultFn(() => Date.now()),
 });
-

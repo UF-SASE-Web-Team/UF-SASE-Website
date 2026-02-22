@@ -1,15 +1,15 @@
 import { db } from "@/server/db/db";
+import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import * as Schema from "@db/tables";
 import { like } from "drizzle-orm";
 import { Hono } from "hono";
-import { HTTPException } from "hono/http-exception";
 
 const boardRoutes = new Hono();
 
 boardRoutes.get("/board/:year", async (c) => {
   const year: number = Number(c.req.param("year"));
   if (isNaN(year) || year <= 2000 || year > 5000) {
-    throw new HTTPException(400, { message: "Invalid year" });
+    return createErrorResponse(c, "INVALID_YEAR", "Invalid year", 400);
   }
 
   const strYear: string = year.toString();
@@ -31,7 +31,7 @@ boardRoutes.get("/board/:year", async (c) => {
     });
   }
 
-  return c.json(data);
+  return createSuccessResponse(c, data, "Board retrieved successfully");
 });
 
 export default boardRoutes;

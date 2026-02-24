@@ -233,3 +233,15 @@ export const company = sqliteTable("company", {
   role: text("role"),
   isCurrent: integer("is_current").default(0).notNull(),
 });
+
+// Alumni Bank table
+export const alumniBank = sqliteTable("alumni_bank", {
+  id: text("id")
+    .primaryKey()
+    .references(() => users.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  major: text("major").notNull(),
+  graduationYear: text("graduation_year").notNull(),
+  currentCompany: text("current_company").notNull(),
+  pastCompanies: text("past_companies", { mode: "json" }).$type<Array<string>>().notNull().default([]),
+});

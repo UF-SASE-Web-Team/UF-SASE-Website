@@ -1,6 +1,5 @@
 import { cn } from "@/shared/utils";
-import BlueStar from "@assets/other/BlueStar.png";
-import GreenStar from "@assets/other/GreenStar.png";
+import { imageUrls } from "@assets/imageUrls";
 import { useIsMobile } from "@hooks/useIsMobile";
 import React from "react";
 
@@ -33,9 +32,9 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ image, link, name, number, te
 
           {/* Stars */}
           <div className="flex w-full flex-row items-center justify-center">
-            <img src={BlueStar} alt="Blue star icon" />
-            <img src={GreenStar} alt="Green star icon" />
-            <img src={BlueStar} alt="Blue star icon" />
+            <img src={imageUrls["BlueStar.png"]} alt="Blue star icon" />
+            <img src={imageUrls["GreenStar.png"]} alt="Green star icon" />
+            <img src={imageUrls["BlueStar.png"]} alt="Blue star icon" />
           </div>
 
           {/* Text Content */}

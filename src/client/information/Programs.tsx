@@ -1,8 +1,4 @@
 import { imageUrls } from "@/client/assets/imageUrls";
-import InternsCard from "@assets/programs/SaseInternsCard.png";
-import SaseSportsCard from "@assets/programs/SaseSportsCard.png";
-import SetCard from "@assets/programs/SetCard.png";
-import WebDevCard from "@assets/programs/WebDevCard.png";
 
 export const GeneralProgramsInfo: Array<{ program: string; description: string | React.ReactNode; image: string; link: string; number: string }> = [
   {
@@ -14,7 +10,7 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
         professional and leadership skill
       </p>
     ),
-    image: InternsCard,
+    image: imageUrls["SaseInternsCard.png"],
     link: "/interns",
     number: "1",
   },
@@ -27,7 +23,7 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
         while growing in a supportive team environment.
       </p>
     ),
-    image: SetCard,
+    image: imageUrls["SetCard.png"],
     link: "/set",
     number: "2",
   },
@@ -40,7 +36,7 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
         platform, sharpening technical and teamwork skills along the way.
       </p>
     ),
-    image: WebDevCard,
+    image: imageUrls["WebDevCard.png"],
     link: "/webdev",
     number: "3",
   },
@@ -52,7 +48,7 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
         Pickleball year-round. It’s a fun way to meet new people, stay active, and enjoy friendly competition—no experience needed!
       </p>
     ),
-    image: SaseSportsCard,
+    image: imageUrls["SaseSportsCard.png"],
     link: "/sports",
     number: "4",
   },

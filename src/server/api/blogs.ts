@@ -119,7 +119,7 @@ blogRoutes.get("/blogs/search/:title", async (c) => {
 blogRoutes.post("/blogs/add", async (c) => {
   try {
     const body = await c.req.json();
-    const { tags = [], ...blogData } = body;
+    const { images = [], tags = [], ...blogData } = body;
 
     // create blog with proper date handling
     const now = new Date();
@@ -127,6 +127,7 @@ blogRoutes.post("/blogs/add", async (c) => {
       .insert(Schema.blogs)
       .values({
         ...blogData,
+        images,
         published_date: now,
         time_updated: now,
       })
@@ -148,7 +149,7 @@ blogRoutes.post("/blogs/add", async (c) => {
 blogRoutes.post("/blogs/update", async (c) => {
   try {
     const body = await c.req.json();
-    const { id, tags, ...update } = body;
+    const { id, images, tags, ...update } = body;
 
     if (!id) {
       return createErrorResponse(c, "MISSING_BLOG_ID", "Blog ID required", 400);
@@ -159,6 +160,7 @@ blogRoutes.post("/blogs/update", async (c) => {
       .update(Schema.blogs)
       .set({
         ...update,
+        images,
         time_updated: new Date(),
       })
       .where(eq(Schema.blogs.id, id))

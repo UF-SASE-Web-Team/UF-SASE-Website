@@ -5,43 +5,8 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1733114337816,
-      "tag": "0000_sour_sugar_man",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1742432569840,
-      "tag": "0001_deep_marrow",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1742861791113,
-      "tag": "0002_noisy_red_ghost",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1745376466126,
-      "tag": "0003_tranquil_shocker",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "6",
-      "when": 1760550382112,
-      "tag": "0004_massive_grim_reaper",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "6",
-      "when": 1760750186028,
-      "tag": "0005_spicy_psynapse",
+      "when": 1771585614006,
+      "tag": "0000_clear_reavers",
       "breakpoints": true
     }
   ]

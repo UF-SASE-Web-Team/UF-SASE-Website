@@ -1,4 +1,4 @@
-import { cn } from "@/shared/utils";
+import { cn, emailRegex, passwordRegex } from "@/shared/utils";
 import { Logo } from "@navigation/Logo";
 import { Link } from "@tanstack/react-router";
 import { Button } from "@ui/button";
@@ -80,8 +80,7 @@ const AuthForm = ({
     const { retypePassword, ...submitData } = data;
     onSubmit(submitData as FormData);
   };
-  const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_\-+=[\]{}\\|;:'",<>./?])[A-Za-z\d!@#$%^&*()_\-+=[\]{}\\|;:'",<>./?]{8,}$/;
-  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
   return (
     <form
       onSubmit={handleSubmit(handleFormSubmit)}

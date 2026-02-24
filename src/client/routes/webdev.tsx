@@ -3,9 +3,6 @@ import MemberCard from "@/client/components/custom_ui/MemberCard";
 import MobileMemberCard from "@/client/components/custom_ui/MobileMemberCard";
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
-import bash from "@assets/webdev/Bash.png";
-import WebTeamGroupImage from "@assets/webdev/WebDevTeamCropped.png";
-import WebTeam from "@assets/webdev/WebTeam.png";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
@@ -46,14 +43,14 @@ export const Route = createFileRoute("/webdev")({
         <div className={cn({ "flex flex-col items-center": isMobile, "grid grid-cols-[1fr_2fr]": !isMobile }, "w-full max-w-7xl")}>
           <div className="relative mx-auto w-[75%]">
             <img
-              src={WebTeam}
+              src={imageUrls["WebTeam.png"]}
               alt="Web Team"
               className={cn(`mx-auto h-auto w-full sm:mx-0`, {
                 invert: !darkMode,
               })}
             />
           </div>
-          <div className="mx-2 rounded-2xl bg-[length:100%_100%] bg-no-repeat" style={{ backgroundImage: `url(${bash})` }}>
+          <div className="mx-2 rounded-2xl bg-[length:100%_100%] bg-no-repeat" style={{ backgroundImage: `url(${imageUrls["Bash.png"]})` }}>
             {/* <img src={WebTeamDescription} alt="Terminal" className="h-auto w-full px-2" /> */}
             <div className={cn({ "px-10": !isMobile, "px-4": isMobile }, "mt-14 text-white")}>
               <ul className="mb-4 font-silkscreen text-3xl">
@@ -72,7 +69,7 @@ export const Route = createFileRoute("/webdev")({
         <div className="flex w-full flex-col items-center py-10">
           {/* Group Picture & App Status */}
           <div className="flex w-full flex-col items-center justify-center bg-black py-10 dark:bg-greenBackground">
-            <ApplicationPhoto image={WebTeamGroupImage} applicationStatus="CLOSED" nextSemester="Spring 2026" />
+            <ApplicationPhoto image={imageUrls["WebTeamWinterBanquet2025.JPG"]} applicationStatus="CLOSED" nextSemester="Spring 2026" />
           </div>
 
           {/* Leadership Display Toggle */}

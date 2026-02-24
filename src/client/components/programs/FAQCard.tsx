@@ -21,10 +21,10 @@ const FAQItem: React.FC<FAQItemProps> = ({ answer, question }) => {
       {/* Question Section */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full items-center justify-between bg-muted px-6 py-5 text-left text-2xl font-semibold text-foreground focus:outline-none"
+        className="flex w-full items-center justify-between bg-muted px-6 py-5 text-left text-lg font-semibold text-foreground focus:outline-none"
       >
         <span>{question}</span>
-        <span className={`transform text-2xl transition-transform duration-200 ${isOpen ? "rotate-180" : "rotate-0"}`}>{isOpen ? "−" : "+"}</span>
+        <span className={`transform text-lg transition-transform duration-200 ${isOpen ? "rotate-180" : "rotate-0"}`}>{isOpen ? "−" : "+"}</span>
       </button>
 
       {/* Answer Section with Smooth Dropdown Animation */}
@@ -34,7 +34,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ answer, question }) => {
         } bg-muted-background overflow-hidden border-t border-gray-300 px-6`}
         style={{ transitionProperty: "max-height, opacity, padding" }}
       >
-        <div className="text-lg text-foreground">{answer}</div>
+        <div className="text-sm text-foreground">{answer}</div>
       </div>
     </div>
   );

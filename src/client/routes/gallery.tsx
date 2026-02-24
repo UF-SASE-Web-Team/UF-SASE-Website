@@ -9,6 +9,9 @@ import { IoMdLink, IoMdPlay } from "react-icons/io";
 import { seo } from "../utils/seo";
 
 const slideshowLabels = {
+  "Spring 2026": "SPRING 2026",
+  "Fall 2025": "FALL 2025",
+  "Spring 2025": "SPRING 2025",
   "Fall 2024": "FALL 2024",
   "Spring 2024": "SPRING 2024",
   "Fall 2023": "FALL 2023",
@@ -17,6 +20,9 @@ const slideshowLabels = {
 type SlideshowKey = keyof typeof slideshowLabels;
 
 const slideshowLinks: Record<SlideshowKey, string> = {
+  "Spring 2026": "https://docs.google.com/spreadsheets/d/1oTtYo7tPoc8v9WXV2YGbtdu76oY20sWbTvU7nyRmrAk/edit?gid=2033700077#gid=2033700077",
+  "Fall 2025": "https://docs.google.com/spreadsheets/d/1oTtYo7tPoc8v9WXV2YGbtdu76oY20sWbTvU7nyRmrAk/edit?gid=0#gid=0",
+  "Spring 2025": "https://docs.google.com/document/d/1o95D2LVVjhrH78EEyg-3TPFtObrKLhqAd9iQJctvx-8/edit?tab=t.0",
   "Fall 2024": "https://docs.google.com/document/d/1gjG2aHkh-IYXLQ5vTfmd6uphP7AYYN0M4liorjPt77k/edit?tab=t.0",
   "Spring 2024": "https://docs.google.com/document/d/1SohQfPM2D8fQhf4vkeWPfC9xTE3my4XTfVA-BNYYA9s/edit?tab=t.0",
   "Fall 2023": "https://docs.google.com/document/d/18brpCElaHqD-rFcKd2eG4FGfjnBWXSthrI-aNdqoHYk/edit?tab=t.0",
@@ -46,7 +52,7 @@ export const Route = createFileRoute("/gallery")({
     }),
   ],
   component: () => {
-    const [slideshow, setSlideshow] = useState<SlideshowKey>("Fall 2024");
+    const [slideshow, setSlideshow] = useState<SlideshowKey>("Spring 2026");
     const [activeYearbook, setActiveYearbook] = useState<YearbookId>("2024-2025");
     const entries = Object.entries(slideshowLinks) as Array<[SlideshowKey, string]>;
     const previewHref = yearbookLinks[activeYearbook];
@@ -69,7 +75,11 @@ export const Route = createFileRoute("/gallery")({
 
             {/* SLIDESHOW */}
             <div className="flex-1">
-              <GalleryZipExtraction slideshow={slideshow} />
+              <div className="overflow-hidden rounded-2xl border-[4px] border-black bg-white dark:bg-greenBackground">
+                <div className="h-[600px] overflow-y-auto px-6 py-4">
+                  <GalleryZipExtraction slideshow={slideshow} />
+                </div>
+              </div>
             </div>
           </div>
         </section>

@@ -55,6 +55,8 @@ export interface BlogHeaderProps {
 export interface BlogFormProps {
   isCreating: boolean;
   isEditing: boolean;
+  images: Array<string>;
+  setImages: (urls: Array<string>) => void;
   newBlogTitle: string;
   newBlogContent: string;
   newBlogTags: Array<string>;

@@ -12,11 +12,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Send Discord Notification
-        uses: Ilshidur/action-discord@master
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: sarisia/actions-status-discord@v1
         with:
-          args: |
-            **Branch:** `${{ github.ref }}`
-            **User:** `${{ github.event.head_commit.author.username }}`
-            **Message:** `${{ github.event.head_commit.message }}`
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          avatar_url: "https://github.com/${{ github.actor }}.png"
+          username: "${{ github.actor }}"
+
+          title: "update on ${{ github.ref_name }}"
+          url: ${{ github.event.pull_request.html_url || github.event.repository.html_url }}
+          description: ""
+
+          # Green for PR merge, Blue for PR open, Purple for Push
+          color: >-
+            ${{ 
+              (github.event.pull_request.merged == true) && '0x28a745' || 
+              (github.event_name == 'pull_request') && '0x005EB8' || 
+              '0x6f42c1' 
+            }}

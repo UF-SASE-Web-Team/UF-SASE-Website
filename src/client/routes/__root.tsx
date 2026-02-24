@@ -2,7 +2,6 @@ import { DefaultCatchBoundary } from "@/client/components/DefaultCatchBoundary";
 import { NotFound } from "@/client/components/NotFound";
 import { imageUrls } from "@assets/imageUrls";
 import { createRootRoute, Outlet, ScrollRestoration } from "@tanstack/react-router";
-import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 import { Body, Head, Html, Meta, Scripts } from "@tanstack/start";
 import * as React from "react";
 import { Toaster } from "react-hot-toast";
@@ -84,7 +83,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
           <Footer />
         </div>
         <ScrollRestoration />
-        <TanStackRouterDevtools position="bottom-right" />
         <Scripts />
       </Body>
     </Html>

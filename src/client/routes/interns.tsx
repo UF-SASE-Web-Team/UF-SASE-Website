@@ -1,7 +1,6 @@
 import { GoalsSection } from "@/client/components/programs/GoalsSection";
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
-import InternsPhoto from "@assets/interns/SaseInterns.png";
 import Carousel from "@components/carousel/Carousel";
 import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBorder";
 import { ApplicationPhoto } from "@components/programs/ApplicationPhoto";
@@ -54,7 +53,7 @@ export const Route = createFileRoute("/interns")({
         <div className="flex w-full flex-col items-center pb-10">
           {/* Group Picture & App Status */}
           <div className="flex w-full flex-col items-center justify-center bg-black py-10 dark:bg-greenBackground">
-            <ApplicationPhoto image={InternsPhoto} applicationStatus="CLOSED" nextSemester="Spring 2026" />
+            <ApplicationPhoto image={imageUrls["SaseInterns.png"]} applicationStatus="CLOSED" nextSemester="Spring 2026" />
           </div>
 
           {/* Testimonials */}

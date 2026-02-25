@@ -1,11 +1,12 @@
-import HackathonSponsors from "@/client/information/HackathonSponsors";
 import { cn } from "@/shared/utils";
 import Calendar from "@assets/Calendar.png";
 import { imageUrls } from "@assets/imageUrls";
 import Pinpoint from "@assets/Pinpoint.png";
 import SASEHacksPoster from "@assets/SASEHacksPoster.png";
+import HackathonCard from "@components/custom_ui/HackathonCard";
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { useIsMobile } from "@hooks/useIsMobile";
+import HackathonSponsors from "@information/HackathonSponsors";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
 
@@ -25,19 +26,22 @@ export const Route = createFileRoute("/sasehacks")({
         <p className="header-text ombre-text text-center">SASEHACKS</p>
         <div className="text-center text-xl font-bold text-saseBlue">For more information, please visit the SASEHACKS website!</div>
 
-        <a className="mb-12 mt-8 rounded-2xl bg-saseBlue px-28 py-5 text-2xl font-semibold text-white shadow-2xl" href="https://www.sasehacks.com">
+        <a
+          className={cn("mb-12 mt-8 rounded-2xl bg-saseBlue py-5 text-2xl font-semibold text-white shadow-xl", isMobile ? "px-16" : "px-28")}
+          href="https://www.sasehacks.com"
+        >
           SASEHACKS WEBSITE
         </a>
 
         <OmbreDivider />
 
-        <div className="my-6 flex flex-row text-xl font-thin sm:gap-24 md:gap-32">
-          <div className="flex flex-row items-center gap-6">
-            <img src={Calendar} alt="Calendar" style={{ width: "50px" }} />
+        <div className="relative my-6 flex flex-row justify-center text-xl font-thin sm:gap-2 md:gap-32 2xl:text-2xl">
+          <div className={cn("flex items-center gap-6 text-center", isMobile ? "flex-[40%] flex-col" : "flex-row")}>
+            <img src={Calendar} alt="Calendar" style={{ width: isMobile ? "40px" : "50px" }} />
             March 7-8, 2026
           </div>
-          <div className="flex flex-row items-center gap-6">
-            <img src={Pinpoint} alt="Pinpoint" style={{ width: "40px" }} />
+          <div className={cn("flex items-center gap-6 text-center", isMobile ? "flex-[60%] flex-col" : "flex-row")}>
+            <img src={Pinpoint} alt="Pinpoint" style={{ width: isMobile ? "30px" : "35px" }} />
             Newell Hall - 1700 Stadium Rd, Gainesville, FL 32611
           </div>
         </div>
@@ -46,8 +50,8 @@ export const Route = createFileRoute("/sasehacks")({
 
         <div
           className={cn(
-            "max-w-8xl flex gap-16 text-xl font-thin sm:my-16 md:text-xl 2xl:text-2xl",
-            isMobile ? "flex-col items-center gap-16 sm:px-12 md:px-40" : "flex-row sm:px-12 md:px-40",
+            "max-w-8xl my-16 flex gap-16 text-2xl font-thin",
+            isMobile ? "mx-6 flex-col items-center gap-16 text-center sm:px-12 md:px-40" : "flex-row sm:px-12 md:px-40",
           )}
         >
           <p>
@@ -55,8 +59,9 @@ export const Route = createFileRoute("/sasehacks")({
             new skills, network, attend workshops, build innovative projects, and compete for exciting category prizes!
             <br></br>
             <br></br>
-            Meals are provided, overnight hacking is encouraged, and all majors and skill levels are welcome. Teams can have between 1 and 4 hackers,
-            and we'll even have a team formation social before we kick off! Spots are limited, so apply now at sasehacks.com!
+            Meals are provided, overnight hacking is encouraged, and all majors and skill levels are welcome. Teams can have between 2 and 4 hackers,
+            and we'll even have a team formation social before we kick off! <strong>Registration for SASEHacks has closed</strong>, but be on the
+            lookout for future hackathon updates!
             <br></br>
             <br></br>
             Whether you want to build alongside a team or share your knowledge with others, we have a spot for you!
@@ -65,8 +70,8 @@ export const Route = createFileRoute("/sasehacks")({
           <img
             src={SASEHacksPoster}
             alt="SASEHacks promotional poster"
-            className="rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
-            style={{ width: "350px" }}
+            className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
+            style={{ width: "350px", height: "auto" }}
           />
         </div>
 
@@ -75,13 +80,9 @@ export const Route = createFileRoute("/sasehacks")({
         <div className="relative my-8 flex max-w-7xl flex-col items-center justify-center">
           <div className="ombre-background rounded-2xl p-2">
             <div className="grid w-full max-w-96 grid-cols-1 items-stretch gap-12 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:max-w-full lg:grid-cols-3 lg:p-24 xl:grid-cols-4">
-              {/* {HackathonSponsors.map((sponsor) => (
-                <PartnerCard
-                  companyName={sponsor.company}
-                  image={sponsor.image}
-                  link={sponsor.link}
-                />
-              ))} */}
+              {HackathonSponsors.map((sponsor) => (
+                <HackathonCard companyName={sponsor.company} image={sponsor.image} link={sponsor.link} />
+              ))}
             </div>
           </div>
         </div>

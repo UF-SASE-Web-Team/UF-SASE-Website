@@ -1,5 +1,6 @@
 import * as z from "zod";
 
+
 export const alumniBankSchema = z.object({
   name: z.string(),
   graduationYear: z.string(),

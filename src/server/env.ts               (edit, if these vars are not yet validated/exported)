@@ -1,0 +1,19 @@
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+const RATE_LIMIT_ENABLED = process.env.RATE_LIMIT_ENABLED === 'true';
+const RATE_LIMIT_MAX_TOKENS = parseInt(process.env.RATE_LIMIT_MAX_TOKENS, 10);
+const RATE_LIMIT_REFILL_RATE = parseInt(process.env.RATE_LIMIT_REFILL_RATE, 10);
+const RATE_LIMIT_REFILL_WINDOW_MS = parseInt(process.env.RATE_LIMIT_REFILL_WINDOW_MS, 10);
+
+if (isNaN(RATE_LIMIT_MAX_TOKENS) || isNaN(RATE_LIMIT_REFILL_RATE) || isNaN(RATE_LIMIT_REFILL_WINDOW_MS)) {
+    throw new Error('Invalid rate limiting environment variables');
+}
+
+module.exports = {
+    RATE_LIMIT_ENABLED,
+    RATE_LIMIT_MAX_TOKENS,
+    RATE_LIMIT_REFILL_RATE,
+    RATE_LIMIT_REFILL_WINDOW_MS
+};

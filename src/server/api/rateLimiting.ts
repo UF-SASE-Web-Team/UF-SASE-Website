@@ -37,6 +37,15 @@ function calculateCurrentTokens(storedTokens: number, lastUpdated: number): numb
   return Math.min(MAX_TOKENS, storedTokens + tokensToAdd);
 }
 
+/**
+ * Calculate how many milliseconds until the next token refill.
+ */
+function msUntilNextRefill(lastUpdated: number): number {
+  const elapsed = Date.now() - lastUpdated;
+  const remainder = elapsed % SERVER_ENV.RATE_LIMIT_REFILL_WINDOW_MS;
+  return SERVER_ENV.RATE_LIMIT_REFILL_WINDOW_MS - remainder;
+}
+
 export const rateLimiter: MiddlewareHandler = async (c, next) => {
   const ip = getClientIp(c);
 
@@ -44,29 +53,47 @@ export const rateLimiter: MiddlewareHandler = async (c, next) => {
     const record = await db.select().from(rateLimit).where(eq(rateLimit.ip, ip)).get();
     const now = Date.now();
     if (!record) {
+      const remaining = MAX_TOKENS - 1;
       await db.insert(rateLimit).values({
         ip,
-        tokenCount: MAX_TOKENS - 1,
+        tokenCount: remaining,
         lastUpdated: now,
       });
+
+      c.header("X-RateLimit-Limit", String(MAX_TOKENS));
+      c.header("X-RateLimit-Remaining", String(remaining));
+      c.header("X-RateLimit-Reset", String(Math.ceil((now + SERVER_ENV.RATE_LIMIT_REFILL_WINDOW_MS) / 1000)));
 
       await next();
       return;
     }
 
     const currentTokens = calculateCurrentTokens(record.tokenCount, record.lastUpdated);
+    const retryAfterMs = msUntilNextRefill(record.lastUpdated);
+    const resetEpochSecs = Math.ceil((Date.now() + retryAfterMs) / 1000);
 
     if (currentTokens <= 0) {
-      return createErrorResponse(c, "RATE_LIMIT_EXCEEDED", `Rate limit exceeded. Please try again later`, 429);
+      const retryAfterSecs = Math.ceil(retryAfterMs / 1000);
+      c.header("X-RateLimit-Limit", String(MAX_TOKENS));
+      c.header("X-RateLimit-Remaining", "0");
+      c.header("X-RateLimit-Reset", String(resetEpochSecs));
+      c.header("Retry-After", String(retryAfterSecs));
+      return createErrorResponse(c, "RATE_LIMIT_EXCEEDED", `Rate limit exceeded. Please try again in ${retryAfterSecs} seconds`, 429);
     }
+
+    const remaining = currentTokens - 1;
 
     await db
       .update(rateLimit)
       .set({
-        tokenCount: currentTokens - 1,
+        tokenCount: remaining,
         lastUpdated: now,
       })
       .where(eq(rateLimit.id, record.id));
+
+    c.header("X-RateLimit-Limit", String(MAX_TOKENS));
+    c.header("X-RateLimit-Remaining", String(remaining));
+    c.header("X-RateLimit-Reset", String(resetEpochSecs));
 
     await next();
   } catch (error) {

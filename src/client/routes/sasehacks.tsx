@@ -1,9 +1,9 @@
+import HackathonSponsors from "@/client/information/HackathonSponsors";
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
 import { EventPageHeader } from "@components/custom_ui/EventPageHeader";
 import EventSponsorCard from "@components/custom_ui/EventSponsorCard";
 import { useIsMobile } from "@hooks/useIsMobile";
-import HackathonSponsors from "@information/HackathonSponsors";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
 

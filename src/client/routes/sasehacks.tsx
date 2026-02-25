@@ -1,3 +1,4 @@
+import { DarkModeContext } from "@/client/components/custom_ui/DarkModeProvider";
 import { cn } from "@/shared/utils";
 import Calendar from "@assets/Calendar.png";
 import { imageUrls } from "@assets/imageUrls";
@@ -8,6 +9,7 @@ import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { useIsMobile } from "@hooks/useIsMobile";
 import HackathonSponsors from "@information/HackathonSponsors";
 import { createFileRoute } from "@tanstack/react-router";
+import { useContext } from "react";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/sasehacks")({
@@ -20,6 +22,7 @@ export const Route = createFileRoute("/sasehacks")({
   ],
   component: () => {
     const isMobile = useIsMobile();
+    const { darkMode } = useContext(DarkModeContext);
 
     return (
       <div className="flex flex-col items-center py-10 font-redhat">
@@ -37,11 +40,11 @@ export const Route = createFileRoute("/sasehacks")({
 
         <div className="relative my-6 flex flex-row justify-center text-xl font-thin sm:gap-2 md:gap-32 2xl:text-2xl">
           <div className={cn("flex items-center gap-6 text-center", isMobile ? "flex-[40%] flex-col" : "flex-row")}>
-            <img src={Calendar} alt="Calendar" style={{ width: isMobile ? "40px" : "50px" }} />
+            <img src={Calendar} alt="Calendar" style={{ width: isMobile ? "40px" : "50px" }} className={cn({ invert: darkMode })} />
             March 7-8, 2026
           </div>
           <div className={cn("flex items-center gap-6 text-center", isMobile ? "flex-[60%] flex-col" : "flex-row")}>
-            <img src={Pinpoint} alt="Pinpoint" style={{ width: isMobile ? "30px" : "35px" }} />
+            <img src={Pinpoint} alt="Pinpoint" style={{ width: isMobile ? "30px" : "35px" }} className={cn({ invert: darkMode })} />
             Newell Hall - 1700 Stadium Rd, Gainesville, FL 32611
           </div>
         </div>

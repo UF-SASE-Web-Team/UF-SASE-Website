@@ -13,7 +13,7 @@ const HackathonCard = ({ companyName, image, indexSizing = false, link, mobileVa
   const compact = mobileVariant === "compact";
 
   return (
-    <div className="align-items flex h-full w-full flex-col justify-center" style={{ zIndex: 10 }}>
+    <div className="align-items flex h-full w-full flex-col justify-center rounded-2xl bg-white" style={{ zIndex: 10 }}>
       <div>
         <Link to={link} className="absolute inset-0 z-10" />
 

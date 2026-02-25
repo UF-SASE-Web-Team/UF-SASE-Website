@@ -95,6 +95,25 @@ export const saseInfo = sqliteTable("sase_info", {
   groups: text("groups"),
 });
 
+// Events table
+export const events = sqliteTable("event", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  name: text("name").notNull().unique(),
+  description: text("description"),
+  timeAdded: integer("time_added")
+    .notNull()
+    .$defaultFn(() => Date.now()),
+  timeUpdated: integer("time_updated")
+    .notNull()
+    .$onUpdateFn(() => Date.now()),
+  location: text("location").notNull(),
+  startTime: integer("start_time", { mode: "timestamp" }).notNull(),
+  endTime: integer("end_time", { mode: "timestamp" }).notNull(),
+  involvedGroups: text("involved_groups"),
+  slidesUrl: text("slides_url"),
+});
 
 // Blogs table
 export const blogs = sqliteTable("blog", {
@@ -216,7 +235,7 @@ export const company = sqliteTable("company", {
   isCurrent: integer("is_current").default(0).notNull(),
 });
 
-export const event = sqliteTable("event", {
+export const saseEvents = sqliteTable("sase_event", {
   id: text("id")
     .primaryKey()
     .$defaultFn(() => generateIdFromEntropySize(10)),
@@ -233,4 +252,3 @@ export const event = sqliteTable("event", {
     .notNull()
     .$defaultFn(() => Date.now()),
 });
-

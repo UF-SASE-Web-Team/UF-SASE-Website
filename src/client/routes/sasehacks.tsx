@@ -1,4 +1,3 @@
-import { DarkModeContext } from "@/client/components/custom_ui/DarkModeProvider";
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
 import { EventPageHeader } from "@components/custom_ui/EventPageHeader";
@@ -6,7 +5,6 @@ import EventSponsorCard from "@components/custom_ui/EventSponsorCard";
 import { useIsMobile } from "@hooks/useIsMobile";
 import HackathonSponsors from "@information/HackathonSponsors";
 import { createFileRoute } from "@tanstack/react-router";
-import { useContext } from "react";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/sasehacks")({
@@ -19,7 +17,6 @@ export const Route = createFileRoute("/sasehacks")({
   ],
   component: () => {
     const isMobile = useIsMobile();
-    const { darkMode } = useContext(DarkModeContext);
 
     return (
       <div className="flex flex-col items-center py-10 font-redhat">

@@ -59,11 +59,13 @@ export const Route = createFileRoute("/sasehacks")({
 
         <p className="header-text">SPONSORS</p>
 
-        <div className="relative my-8 flex max-w-7xl flex-col items-center justify-center">
+        <div className="relative my-8 flex max-w-7xl flex-col items-center justify-center px-4 sm:px-6">
           <div className="ombre-background rounded-2xl p-2">
-            <div className="grid w-full max-w-96 grid-cols-1 items-stretch gap-12 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:max-w-full lg:grid-cols-3 lg:p-24 xl:grid-cols-4">
+            <div className="flex flex-wrap justify-center gap-12 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:p-24">
               {HackathonSponsors.map((sponsor) => (
-                <HackathonCard companyName={sponsor.company} image={sponsor.image} link={sponsor.link} />
+                <div key={sponsor.company} className="w-full max-w-[280px] sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)]">
+                  <HackathonCard companyName={sponsor.company} image={sponsor.image} link={sponsor.link} />
+                </div>
               ))}
             </div>
           </div>

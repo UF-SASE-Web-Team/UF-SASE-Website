@@ -1,6 +1,5 @@
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
-import SASEHacksPoster from "@assets/SASEHacksPoster.png";
 import { EventPageHeader } from "@components/custom_ui/EventPageHeader";
 import HackathonCard from "@components/custom_ui/HackathonCard";
 import { useIsMobile } from "@hooks/useIsMobile";
@@ -50,7 +49,7 @@ export const Route = createFileRoute("/sasehacks")({
           </p>
 
           <img
-            src={SASEHacksPoster}
+            src={imageUrls["SaseHacksPoster.png"]}
             alt="SASEHacks promotional poster"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "350px", height: "auto" }}

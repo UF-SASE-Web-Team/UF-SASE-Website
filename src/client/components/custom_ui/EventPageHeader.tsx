@@ -1,7 +1,6 @@
 import { DarkModeContext } from "@/client/components/custom_ui/DarkModeProvider";
 import { cn } from "@/shared/utils";
-import Calendar from "@assets/Calendar.png";
-import Pinpoint from "@assets/Pinpoint.png";
+import { imageUrls } from "@assets/imageUrls";
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { useContext } from "react";
@@ -38,13 +37,23 @@ export const EventPageHeader = ({ buttonHref, buttonText, date, location, subtit
           <div className="relative my-6 flex flex-row justify-center text-xl font-thin sm:gap-2 md:gap-32 2xl:text-2xl">
             {date && (
               <div className={cn("flex items-center gap-6 text-center", isMobile ? "flex-[40%] flex-col" : "flex-row")}>
-                <img src={Calendar} alt="Calendar" style={{ width: isMobile ? "40px" : "50px" }} className={cn({ invert: darkMode })} />
+                <img
+                  src={imageUrls["Calendar.png"]}
+                  alt="Calendar"
+                  style={{ width: isMobile ? "40px" : "50px" }}
+                  className={cn({ invert: darkMode })}
+                />
                 {date}
               </div>
             )}
             {location && (
               <div className={cn("flex items-center gap-6 text-center", isMobile ? "flex-[60%] flex-col" : "flex-row")}>
-                <img src={Pinpoint} alt="Pinpoint" style={{ width: isMobile ? "30px" : "35px" }} className={cn({ invert: darkMode })} />
+                <img
+                  src={imageUrls["Pinpoint.png"]}
+                  alt="Pinpoint"
+                  style={{ width: isMobile ? "30px" : "35px" }}
+                  className={cn({ invert: darkMode })}
+                />
                 {location}
               </div>
             )}

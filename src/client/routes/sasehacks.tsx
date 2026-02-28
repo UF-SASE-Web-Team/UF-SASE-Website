@@ -1,7 +1,7 @@
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
 import { EventPageHeader } from "@components/custom_ui/EventPageHeader";
-import HackathonCard from "@components/custom_ui/HackathonCard";
+import EventSponsorCard from "@components/custom_ui/EventSponsorCard";
 import { useIsMobile } from "@hooks/useIsMobile";
 import HackathonSponsors from "@information/HackathonSponsors";
 import { createFileRoute } from "@tanstack/react-router";
@@ -63,7 +63,7 @@ export const Route = createFileRoute("/sasehacks")({
             <div className="flex flex-wrap justify-center gap-12 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:p-24">
               {HackathonSponsors.map((sponsor) => (
                 <div key={sponsor.company} className="w-full max-w-[280px] sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)]">
-                  <HackathonCard companyName={sponsor.company} image={sponsor.image} link={sponsor.link} />
+                  <EventSponsorCard companyName={sponsor.company} image={sponsor.image} link={sponsor.link} />
                 </div>
               ))}
             </div>

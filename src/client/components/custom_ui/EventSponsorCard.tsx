@@ -1,7 +1,7 @@
 import { cn } from "@/shared/utils";
 import { Link } from "@tanstack/react-router";
 
-interface HackathonCardProps {
+interface EventSponsorCardProps {
   companyName: string;
   image: string;
   link: string;
@@ -9,7 +9,7 @@ interface HackathonCardProps {
   indexSizing?: boolean;
 }
 
-const HackathonCard = ({ companyName, image, indexSizing = false, link, mobileVariant = "default" }: HackathonCardProps) => {
+const EventSponsorCard = ({ companyName, image, indexSizing = false, link, mobileVariant = "default" }: EventSponsorCardProps) => {
   const compact = mobileVariant === "compact";
 
   return (
@@ -26,4 +26,4 @@ const HackathonCard = ({ companyName, image, indexSizing = false, link, mobileVa
   );
 };
 
-export default HackathonCard;
+export default EventSponsorCard;

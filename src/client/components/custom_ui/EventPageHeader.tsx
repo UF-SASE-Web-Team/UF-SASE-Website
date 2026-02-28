@@ -51,7 +51,7 @@ export const EventPageHeader = ({ buttonHref, buttonText, date, location, subtit
                 <img
                   src={imageUrls["Pinpoint.png"]}
                   alt="Pinpoint"
-                  style={{ width: isMobile ? "30px" : "35px" }}
+                  style={{ width: isMobile ? "28px" : "35px" }}
                   className={cn({ invert: darkMode })}
                 />
                 {location}

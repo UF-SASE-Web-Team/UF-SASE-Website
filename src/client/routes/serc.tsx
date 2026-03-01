@@ -1,5 +1,5 @@
 import { cn } from "@/shared/utils";
-// import { imageUrls } from "@assets/imageUrls";
+import { imageUrls } from "@assets/imageUrls";
 import { EventPageHeader } from "@components/custom_ui/EventPageHeader";
 import EventSponsorCard from "@components/custom_ui/EventSponsorCard";
 import { useIsMobile } from "@hooks/useIsMobile";
@@ -43,37 +43,35 @@ export const Route = createFileRoute("/serc")({
               </ul>
             </div>
           </p>
-          {/* waiting on uploadthing for serc poster */}
-          {/* <img
+          <img
             src={imageUrls["SERCPoster.png"]}
             alt="SERC promotional poster"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "350px", height: "auto" }}
-          /> */}
+          />
         </div>
         <p className="header-text text-center">SERC 2026 SPONSORS</p>
-        {/* waiting on uploadthing for other sponsors */}
         <div className="relative my-8 flex max-w-7xl flex-col items-center justify-center px-4 sm:px-6">
           <div className="ombre-background rounded-2xl p-2">
             <div className="flex flex-wrap justify-center gap-12 rounded-2xl bg-gradient-to-b from-gray-100 to-white p-10 dark:from-gray-900 dark:to-black lg:p-24">
               {SercSponsors.map((sponsor) => (
                 <div key={sponsor.company} className="w-full max-w-[280px] sm:w-[calc(50%-1.5rem)] lg:w-[calc(33.333%-2rem)]">
-                  <EventSponsorCard companyName={sponsor.company} image={sponsor.image} link={sponsor.link} />
+                  <EventSponsorCard companyName={sponsor.company} image={sponsor.image} link={sponsor.link} indexSizing={true} />
                 </div>
               ))}
             </div>
           </div>
         </div>
         <p className="subheader-text">EVENT GALLERY</p>
-        {/* <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
+        <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
           <img
-            src={imageUrls["SercPhoto1.jpg"]}
+            src={imageUrls["SercPhoto2.jpg"]}
             alt="SERC promotional poster"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "350px", height: "auto" }}
           />
           <img
-            src={imageUrls["SercPhoto2.jpg"]}
+            src={imageUrls["SercPhoto1.jpg"]}
             alt="SERC promotional poster"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "350px", height: "auto" }}
@@ -82,9 +80,9 @@ export const Route = createFileRoute("/serc")({
             src={imageUrls["SercPhoto3.jpg"]}
             alt="SERC promotional poster"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
-            style={{ width: "350px", height: "auto" }}
+            style={{ width: "350px", height: "auto", objectFit: "cover", objectPosition: "center" }}
           />
-        </div> */}
+        </div>
       </div>
     );
   },

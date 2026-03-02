@@ -235,6 +235,24 @@ export const company = sqliteTable("company", {
   isCurrent: integer("is_current").default(0).notNull(),
 });
 
+export const saseEvents = sqliteTable("sase_event", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  name: text("name").notNull(),
+  description: text("description"),
+  location: text("location").notNull(),
+  code: text("code")
+    .notNull()
+    .unique()
+    .$defaultFn(() => generateIdFromEntropySize(6)),
+  startDatetime: integer("start_datetime", { mode: "timestamp" }).notNull(),
+  endDatetime: integer("end_datetime", { mode: "timestamp" }),
+  timeAdded: integer("time_added")
+    .notNull()
+    .$defaultFn(() => Date.now()),
+});
+
 // Alumni Bank table
 export const alumniBank = sqliteTable("alumni_bank", {
   id: text("id")

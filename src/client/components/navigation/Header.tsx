@@ -45,6 +45,7 @@ const navItems = [
       { name: "Web Dev", path: "/webdev" },
       { name: "Sports", path: "/sports" },
       { name: "Mentor Mentee", path: "/mentor-mentee" },
+      { name: "Projects", path: "/projects" },
     ],
   },
   {

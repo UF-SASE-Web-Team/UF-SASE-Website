@@ -1,3 +1,4 @@
+// src/routes/profile/route.tsx
 import { imageUrls } from "@assets/imageUrls";
 import { seo } from "@client/utils/seo";
 import ProfileNav from "@components/profile/ProfileNav";

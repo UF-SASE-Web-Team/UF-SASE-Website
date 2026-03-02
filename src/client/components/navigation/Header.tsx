@@ -29,6 +29,7 @@ const navItems = [
     name: "Events",
     path: "/events",
     children: [
+      { name: "SASEHacks", path: "/sasehacks" },
       { name: "Gallery", path: "/gallery" },
       { name: "Blogs", path: "/blogs" },
     ],

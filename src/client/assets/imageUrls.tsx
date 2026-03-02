@@ -283,7 +283,6 @@ export const imageUrls = {
   "Jiexi.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIwHUteroTmGXoVhHAS79wOnW10lbk6aYEFd4D",
   "JonathanTang.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI1gG1v6Bt1GIKa0NBDlAXZoMOpV4eTgW3UQCL",
   "GraceZhao.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIfUMutvyixepMOaG7mPgcvnKLTX9UZBtlzSbd",
-  "CindyZhou.jpeg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIrj1x3vGwXWRIyQumk08BVNpGZU4SPv3EMFei",
   "ERAU.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIgzhcu7jNf7EIjRmO19PWBAeSakyzhnML0Kq3",
   "SERCPoster.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI2TIDT3diuk23wDEdSnxzOpMosLJj9hgUv1FX",
   "MitsubishiPower.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI1FoQ9WBt1GIKa0NBDlAXZoMOpV4eTgW3UQCL",

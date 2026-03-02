@@ -24,7 +24,7 @@ export const EventPageHeader = ({ buttonHref, buttonText, date, location, subtit
       <p className="header-text ombre-text text-center">{title}</p>
       <div className="text-center text-xl font-bold text-saseBlue">{subtitle}</div>
       <a
-        className={cn("mb-12 mt-8 rounded-2xl bg-saseBlue py-5 text-2xl font-semibold text-white shadow-xl", isMobile ? "px-16" : "px-28")}
+        className={cn("mx-2 mb-12 mt-8 rounded-2xl bg-saseBlue py-5 text-2xl font-semibold text-white shadow-xl", isMobile ? "px-12" : "px-20")}
         href={buttonHref}
         target="_blank"
         rel="noopener noreferrer"
@@ -34,7 +34,7 @@ export const EventPageHeader = ({ buttonHref, buttonText, date, location, subtit
       <OmbreDivider />
       {showDateLocation && (
         <>
-          <div className="relative my-6 flex flex-row justify-center text-xl font-thin sm:gap-2 md:gap-32 2xl:text-2xl">
+          <div className="relative my-6 flex flex-row justify-center text-lg font-thin sm:gap-2 md:gap-32 2xl:text-2xl">
             {date && (
               <div className={cn("flex items-center gap-6 text-center", isMobile ? "flex-[40%] flex-col" : "flex-row")}>
                 <img

@@ -128,6 +128,7 @@ export const imageUrls = {
   "MatthewTang.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI1dzAm1NBt1GIKa0NBDlAXZoMOpV4eTgW3UQC",
   "ManavSanghvi.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIri09nOGwXWRIyQumk08BVNpGZU4SPv3EMFei",
   "BryantCao.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIIvb6vtunHMY9SyZtrdWa62JTQsO3LcgNbe5B",
+  "CindyZhou.jpeg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIrj1x3vGwXWRIyQumk08BVNpGZU4SPv3EMFei",
   "SaseInterns3.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIWYzpnU4Mz9eV6NXlaokt0cQYmD7qRKGJp3E5",
   "ConnieHuangTestimonial.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI2UiRO2diuk23wDEdSnxzOpMosLJj9hgUv1FX",
   "SaseInterns2.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIBDmTyx12kDm2rxftGpUEesqCMHIJ7RnXNYh3",

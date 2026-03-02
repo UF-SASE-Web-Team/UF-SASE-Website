@@ -18,6 +18,7 @@ import { Route as SportsImport } from './routes/sports'
 import { Route as SponsorsImport } from './routes/sponsors'
 import { Route as SignupImport } from './routes/signup'
 import { Route as SetImport } from './routes/set'
+import { Route as SercImport } from './routes/serc'
 import { Route as SearchImport } from './routes/search'
 import { Route as SasehacksImport } from './routes/sasehacks'
 import { Route as ResourcesImport } from './routes/resources'
@@ -84,6 +85,12 @@ const SignupRoute = SignupImport.update({
 const SetRoute = SetImport.update({
   id: '/set',
   path: '/set',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const SercRoute = SercImport.update({
+  id: '/serc',
+  path: '/serc',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -368,6 +375,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SearchImport
       parentRoute: typeof rootRoute
     }
+    '/serc': {
+      id: '/serc'
+      path: '/serc'
+      fullPath: '/serc'
+      preLoaderRoute: typeof SercImport
+      parentRoute: typeof rootRoute
+    }
     '/set': {
       id: '/set'
       path: '/set'
@@ -495,6 +509,7 @@ export interface FileRoutesByFullPath {
   '/resources': typeof ResourcesRoute
   '/sasehacks': typeof SasehacksRoute
   '/search': typeof SearchRoute
+  '/serc': typeof SercRoute
   '/set': typeof SetRoute
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
@@ -528,6 +543,7 @@ export interface FileRoutesByTo {
   '/resources': typeof ResourcesRoute
   '/sasehacks': typeof SasehacksRoute
   '/search': typeof SearchRoute
+  '/serc': typeof SercRoute
   '/set': typeof SetRoute
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
@@ -563,6 +579,7 @@ export interface FileRoutesById {
   '/resources': typeof ResourcesRoute
   '/sasehacks': typeof SasehacksRoute
   '/search': typeof SearchRoute
+  '/serc': typeof SercRoute
   '/set': typeof SetRoute
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
@@ -599,6 +616,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/sasehacks'
     | '/search'
+    | '/serc'
     | '/set'
     | '/signup'
     | '/sponsors'
@@ -631,6 +649,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/sasehacks'
     | '/search'
+    | '/serc'
     | '/set'
     | '/signup'
     | '/sponsors'
@@ -664,6 +683,7 @@ export interface FileRouteTypes {
     | '/resources'
     | '/sasehacks'
     | '/search'
+    | '/serc'
     | '/set'
     | '/signup'
     | '/sponsors'
@@ -699,6 +719,7 @@ export interface RootRouteChildren {
   ResourcesRoute: typeof ResourcesRoute
   SasehacksRoute: typeof SasehacksRoute
   SearchRoute: typeof SearchRoute
+  SercRoute: typeof SercRoute
   SetRoute: typeof SetRoute
   SignupRoute: typeof SignupRoute
   SponsorsRoute: typeof SponsorsRoute
@@ -729,6 +750,7 @@ const rootRouteChildren: RootRouteChildren = {
   ResourcesRoute: ResourcesRoute,
   SasehacksRoute: SasehacksRoute,
   SearchRoute: SearchRoute,
+  SercRoute: SercRoute,
   SetRoute: SetRoute,
   SignupRoute: SignupRoute,
   SponsorsRoute: SponsorsRoute,
@@ -768,6 +790,7 @@ export const routeTree = rootRoute
         "/resources",
         "/sasehacks",
         "/search",
+        "/serc",
         "/set",
         "/signup",
         "/sponsors",
@@ -840,6 +863,9 @@ export const routeTree = rootRoute
     },
     "/search": {
       "filePath": "search.tsx"
+    },
+    "/serc": {
+      "filePath": "serc.tsx"
     },
     "/set": {
       "filePath": "set.tsx"

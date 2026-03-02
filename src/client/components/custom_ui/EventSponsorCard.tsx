@@ -1,5 +1,4 @@
 import { cn } from "@/shared/utils";
-import { Link } from "@tanstack/react-router";
 
 interface EventSponsorCardProps {
   companyName: string;
@@ -9,17 +8,17 @@ interface EventSponsorCardProps {
   indexSizing?: boolean;
 }
 
-const EventSponsorCard = ({ companyName, image, indexSizing = false, link, mobileVariant = "default" }: EventSponsorCardProps) => {
+const EventSponsorCard = ({ companyName, image, indexSizing: _indexSizing = false, link, mobileVariant = "default" }: EventSponsorCardProps) => {
   const compact = mobileVariant === "compact";
 
   return (
     <div className="align-items flex h-full w-full flex-col justify-center rounded-2xl bg-white" style={{ zIndex: 10 }}>
-      <div>
-        <Link to={link} className="absolute inset-0 z-10" />
+      <div className="relative aspect-square w-full">
+        <a href={link} target="_blank" rel="noopener noreferrer" className="absolute inset-0 z-10" />
 
         {/* Logo area */}
-        <div className="w-full overflow-hidden">
-          <img src={image} alt={companyName + " Logo"} className={cn("h-full w-full", (compact || indexSizing) && "object-contain")} />
+        <div className="flex h-full w-full items-center justify-center overflow-hidden p-4">
+          <img src={image} alt={companyName + " Logo"} className={cn("max-h-full max-w-full object-contain", compact && "object-contain")} />
         </div>
       </div>
     </div>

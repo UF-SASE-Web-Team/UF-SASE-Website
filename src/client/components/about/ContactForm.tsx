@@ -38,7 +38,7 @@ const notify = () =>
   });
 
 export const ContactForm = () => {
-  const { handleSubmit, register, reset } = useForm<FormData>();
+  const { handleSubmit, register, reset, watch } = useForm<FormData>();
   const [contact, setContact] = useState("none");
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -87,30 +87,75 @@ export const ContactForm = () => {
             size={1}
             onFocus={(e) => (e.target.size = 5)}
             onBlur={(e) => (e.target.size = 1)}
-            className="mt-1 w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
+            onChange={(e) => {
+              setContact(e.target.value);
+            }}
+            className={`mt-1 w-full rounded-md border border-gray-300 bg-white p-2 transition-colors focus:border-blue-500 focus:ring-blue-500 ${
+              contact === "none" ? "text-gray-400" : "text-black"
+            }`}
           >
             // executive board options
-            <option value="none">Select Contact</option>
-            <option value="president">President</option>
-            <option value="externalvp">External Vice President</option>
-            <option value="internalvp">Internal Vice President</option>
-            <option value="secretary">Secretary</option>
-            <option value="treasurer">Treasurer</option>
-            <option value="profficer">Public Relations Officer</option>
+            <option value="none" className="text-gray-400">
+              Select Contact
+            </option>
+            <option value="president" className="text-black">
+              President
+            </option>
+            <option value="externalvp" className="text-black">
+              External Vice President
+            </option>
+            <option value="internalvp" className="text-black">
+              Internal Vice President
+            </option>
+            <option value="secretary" className="text-black">
+              Secretary
+            </option>
+            <option value="treasurer" className="text-black">
+              Treasurer
+            </option>
+            <option value="profficer" className="text-black">
+              Public Relations Officer
+            </option>
             // chair board options
-            <option value="advancement">Advancement</option>
-            <option value="fundraising">Fundraising</option>
-            <option value="historian">Historian</option>
-            <option value="meminvolvment">Member Involvement</option>
-            <option value="multimedia">Multimedia</option>
-            <option value="networking">Networking</option>
-            <option value="precollegiate">Pre-Collegiate</option>
-            <option value="science">Science</option>
-            <option value="service">Service</option>
-            <option value="social">Social</option>
-            <option value="sportcord">Sports Coordinator</option>
-            <option value="tech">Technical</option>
-            <option value="web">Webmaster</option>
+            <option value="advancement" className="text-black">
+              Advancement
+            </option>
+            <option value="fundraising" className="text-black">
+              Fundraising
+            </option>
+            <option value="historian" className="text-black">
+              Historian
+            </option>
+            <option value="meminvolvment" className="text-black">
+              Member Involvement
+            </option>
+            <option value="multimedia" className="text-black">
+              Multimedia
+            </option>
+            <option value="networking" className="text-black">
+              Networking
+            </option>
+            <option value="precollegiate" className="text-black">
+              Pre-Collegiate
+            </option>
+            <option value="science" className="text-black">
+              Science
+            </option>
+            <option value="service" className="text-black">
+              Service
+            </option>
+            <option value="social" className="text-black">
+              Social
+            </option>
+            <option value="sportcord" className="text-black">
+              Sports Coordinator
+            </option>
+            <option value="tech" className="text-black">
+              Technical
+            </option>
+            <option value="web" className="text-black">
+              Webmaster
+            </option>
           </select>
         </div>
 
@@ -123,7 +168,9 @@ export const ContactForm = () => {
               type="text"
               id="firstName"
               placeholder="First"
-              className="mt-1 w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
+              className={`mt-1 w-full rounded-md border border-gray-300 bg-white p-2 focus:border-blue-500 focus:ring-blue-500 ${
+                !watch("firstName") ? "text-gray-400" : "text-slate-900"
+              }`}
               {...register("firstName", { required: "This is required.", maxLength: 256 })}
             />
           </div>
@@ -135,7 +182,9 @@ export const ContactForm = () => {
               type="text"
               id="lastName"
               placeholder="Last"
-              className="mt-1 w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
+              className={`mt-1 w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500 ${
+                !watch("lastName") ? "text-gray-400" : "text-slate-900"
+              }`}
               {...register("lastName", { required: "This is required.", maxLength: 256 })}
             />
           </div>
@@ -149,7 +198,9 @@ export const ContactForm = () => {
             type="email"
             id="email"
             placeholder="Email"
-            className="mt-1 w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
+            className={`mt-1 w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500 ${
+              !watch("email") ? "text-gray-400" : "text-slate-900"
+            }`}
             {...register("email", { required: "Email is required.", minLength: 4, maxLength: 256 })}
           />
         </div>
@@ -162,7 +213,9 @@ export const ContactForm = () => {
             id="message"
             rows={4}
             placeholder="Your message"
-            className="mt-1 w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500"
+            className={`mt-1 w-full rounded-md border border-gray-300 p-2 focus:border-blue-500 focus:ring-blue-500 ${
+              !watch("message") ? "text-gray-400" : "text-slate-900"
+            }`}
             {...register("message", { required: "Message cannot be empty", maxLength: { value: 3000, message: "Message is too long." } })}
           ></textarea>
         </div>

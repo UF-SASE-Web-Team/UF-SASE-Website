@@ -22,8 +22,8 @@ export const Route = createFileRoute("/serc")({
         />
         <div
           className={cn(
-            "max-w-8xl my-16 flex gap-16 text-2xl font-thin",
-            isMobile ? "mx-6 flex-col items-center gap-16 text-center sm:px-12 md:px-40" : "flex-row sm:px-12 md:px-40",
+            "max-w-8xl my-16 flex gap-16 font-thin",
+            isMobile ? "mx-6 flex-col items-center gap-16 text-center text-sm sm:px-12 md:px-40" : "flex-row text-lg sm:px-12 md:px-40",
           )}
         >
           <p>

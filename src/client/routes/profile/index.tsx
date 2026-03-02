@@ -65,66 +65,64 @@ export const Route = createFileRoute("/profile/")({
     if (!user) return <div>User data unavailable</div>;
 
     return (
-      <div className="flex min-h-screen justify-center bg-gray-50 py-8">
+      <div className="group mx-auto w-full max-w-5xl rounded-2xl bg-background px-4 py-6 shadow-xl md:px-10">
         {/* Centered card just like AccountBox */}
-        <div className="w-full max-w-4xl space-y-10 rounded-2xl bg-white px-10 py-8 shadow-xl">
-          <h1 className="text-2xl font-bold">Dashboard</h1>
+        <h1 className="pb-6 text-xl font-bold">Dashboard</h1>
 
-          {/* Pending Invites */}
-          <section className="space-y-4">
-            <h2 className="text-xl font-semibold">Pending Invites</h2>
-            {invites.length === 0 ? (
-              <div className="rounded-lg border border-dashed border-gray-300 p-6 text-center text-gray-500">No pending invites.</div>
+        {/* Pending Invites */}
+        <section className="space-y-4 pb-10">
+          <h2 className="text-xl font-semibold">Pending Invites</h2>
+          {invites.length === 0 ? (
+            <div className="rounded-lg border border-dashed border-gray-300 p-6 text-center text-gray-500">No pending invites.</div>
+          ) : (
+            <ul className="space-y-3">
+              {invites.map((invite) => (
+                <li key={invite.id} className="flex items-center justify-between rounded-lg border px-4 py-3">
+                  <span>
+                    Invite from <strong>{invite.mentorId}</strong>
+                  </span>
+                  <div className="space-x-2">
+                    <button onClick={() => handleAccept(invite.id)} className="rounded bg-green-500 px-3 py-1 text-white hover:bg-green-600">
+                      Accept
+                    </button>
+                    <button onClick={() => handleDecline(invite.id)} className="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600">
+                      Decline
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </section>
+
+        {/* Roles (placeholder) */}
+        {isAdmin && (
+          <section className="flex w-full flex-col space-y-4">
+            <h1 className="text-3xl font-bold text-saseBlue">Admin Dashboard</h1>
+            <h2 className="text-xl font-semibold">Users</h2>
+            {loading ? (
+              <p>Loading users...</p>
             ) : (
-              <ul className="space-y-3">
-                {invites.map((invite) => (
-                  <li key={invite.id} className="flex items-center justify-between rounded-lg border px-4 py-3">
-                    <span>
-                      Invite from <strong>{invite.mentorId}</strong>
-                    </span>
-                    <div className="space-x-2">
-                      <button onClick={() => handleAccept(invite.id)} className="rounded bg-green-500 px-3 py-1 text-white hover:bg-green-600">
-                        Accept
-                      </button>
-                      <button onClick={() => handleDecline(invite.id)} className="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600">
-                        Decline
-                      </button>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <div className="flex w-full flex-col gap-6">
+                {users != undefined ? (
+                  users.length > 0 ? (
+                    users.map((user) => <AccountBox key={user.id} {...user} adminView={true} />)
+                  ) : (
+                    <p>No Users found</p>
+                  )
+                ) : (
+                  <div>Users could not be loaded</div>
+                )}
+              </div>
             )}
           </section>
+        )}
 
-          {/* Roles (placeholder) */}
-          {isAdmin && (
-            <section className="flex w-full flex-col space-y-4">
-              <h1 className="text-3xl font-bold text-saseBlue">Admin Dashboard</h1>
-              <h2 className="text-xl font-semibold">Users</h2>
-              {loading ? (
-                <p>Loading users...</p>
-              ) : (
-                <div className="flex w-full flex-col gap-6">
-                  {users != undefined ? (
-                    users.length > 0 ? (
-                      users.map((user) => <AccountBox key={user.id} {...user} adminView={true} />)
-                    ) : (
-                      <p>No Users found</p>
-                    )
-                  ) : (
-                    <div>Users could not be loaded</div>
-                  )}
-                </div>
-              )}
-            </section>
-          )}
-
-          {/* Customization (placeholder) */}
-          <section className="space-y-4">
-            <h2 className="text-xl font-semibold">Customization</h2>
-            <div className="rounded-lg border border-dashed border-gray-300 p-6 text-center text-gray-500">Nothing to configure yet.</div>
-          </section>
-        </div>
+        {/* Customization (placeholder) */}
+        <section className="space-y-4">
+          <h2 className="text-xl font-semibold">Customization</h2>
+          <div className="rounded-lg border border-dashed border-gray-300 p-6 text-center text-gray-500">Nothing to configure yet.</div>
+        </section>
       </div>
     );
   },

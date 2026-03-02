@@ -26,7 +26,7 @@ const BlogTags: React.FC<BlogTagsProps> = ({ activeTag, onSearch, onTagClick, ta
 
   const tagButtonClasses = (isActive: boolean) =>
     cn(
-      "flex items-center px-2 py-1 text-sm italic",
+      "flex items-center px-2 py-1 text-sm",
       "sm:px-5 sm:py-2 sm:text-base",
       "font-serif -mb-px transition-colors hover:border-b-2 hover:border-black text-foreground",
       isActive && "border-b-2 border-black font-bold",

@@ -36,7 +36,7 @@ roleRoutes.post("/roles/assign", async (c) => {
     }
     const sessionID = sessionIDMatch[1];
     if (!(await isAdmin(sessionID))) {
-      createErrorResponse(c, "ASSIGN_ACTION_UNAUTHORIZED", "Assigning unauthorized: Admin role required", 403);
+      return createErrorResponse(c, "ASSIGN_ACTION_UNAUTHORIZED", "Assigning unauthorized: Admin role required", 403);
     }
 
     const roleExist = await db.select().from(Schema.roles).where(eq(Schema.roles.name, role)).get();
@@ -75,7 +75,7 @@ roleRoutes.post("/roles/delete", async (c) => {
     }
     const sessionID = sessionIDMatch[1];
     if (!(await isAdmin(sessionID))) {
-      createErrorResponse(c, "USER_NOT_ADMIN", "Deleting unauthorized: Admin role required", 403);
+      return createErrorResponse(c, "USER_NOT_ADMIN", "Deleting unauthorized: Admin role required", 403);
     }
 
     const roleExist = await db.select().from(Schema.roles).where(eq(Schema.roles.name, role)).get();

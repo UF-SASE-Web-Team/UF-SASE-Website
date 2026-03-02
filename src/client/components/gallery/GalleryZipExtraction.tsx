@@ -8,6 +8,49 @@ interface ZipProps {
 const MAX_MOBILE_ITEMS = 4;
 
 const GalleryZipExtraction: React.FC<ZipProps> = ({ slideshow }) => {
+  const spring2026_images = [
+    imageUrls["spring2026_1.JPG"],
+    imageUrls["spring2026_2.JPG"],
+    imageUrls["spring2026_3.JPG"],
+    imageUrls["spring2026_4.JPG"],
+    imageUrls["spring2026_5.JPG"],
+    imageUrls["spring2026_6.JPG"],
+    imageUrls["spring2026_7.JPG"],
+    imageUrls["spring2026_8.JPG"],
+    imageUrls["spring2026_9.JPG"],
+    imageUrls["spring2026_10.JPG"],
+    imageUrls["spring2026_11.JPG"],
+  ];
+
+  const fall2025_images = [
+    imageUrls["fall2025_1.JPG"],
+    imageUrls["fall2025_2.JPG"],
+    imageUrls["fall2025_3.JPG"],
+    imageUrls["fall2025_4.JPG"],
+    imageUrls["fall2025_5.jpg"],
+    imageUrls["fall2025_6.JPG"],
+    imageUrls["fall2025_7.jpg"],
+    imageUrls["fall2025_8.JPG"],
+    imageUrls["fall2025_9.JPG"],
+    imageUrls["fall2025_10.JPG"],
+    imageUrls["fall2025_11.jpeg"],
+    imageUrls["fall2025_12.JPG"],
+  ];
+
+  const spring2025_images = [
+    imageUrls["spring2025_1.JPG"],
+    imageUrls["spring2025_2.JPG"],
+    imageUrls["spring2025_3.JPG"],
+    imageUrls["spring2025_4.JPG"],
+    imageUrls["spring2025_5.JPG"],
+    imageUrls["spring2025_6.JPG"],
+    imageUrls["spring2025_7.JPG"],
+    imageUrls["spring2025_8.JPG"],
+    imageUrls["spring2025_9.JPG"],
+    imageUrls["spring2025_10.JPG"],
+    imageUrls["spring2025_11.JPG"],
+  ];
+
   const fall2024_images = [
     imageUrls["fall2024_1.JPG"],
     imageUrls["fall2024_4.JPG"],
@@ -16,6 +59,9 @@ const GalleryZipExtraction: React.FC<ZipProps> = ({ slideshow }) => {
     imageUrls["fall2024_7.JPG"],
     imageUrls["fall2024_9.JPG"],
     imageUrls["fall2024_10.JPG"],
+    imageUrls["fall2024_11.JPG"],
+    imageUrls["fall2024_12.JPG"],
+    imageUrls["fall2024_13.jpg"],
   ];
 
   const spring2024_images = [
@@ -23,23 +69,38 @@ const GalleryZipExtraction: React.FC<ZipProps> = ({ slideshow }) => {
     imageUrls["spring2024_2.JPG"],
     imageUrls["spring2024_3.JPG"],
     imageUrls["spring2024_4.JPG"],
-    imageUrls["spring2024_5.jpg"],
-    imageUrls["spring2024_6.JPG"],
+    imageUrls["spring2024_5.JPG"],
+    imageUrls["spring2024_6.jpg"],
+    imageUrls["spring2024_7.JPG"],
+    imageUrls["spring2024_8.JPG"],
+    imageUrls["spring2024_9.JPG"],
+    imageUrls["spring2024_10.JPG"],
+    imageUrls["spring2024_11.JPG"],
+    imageUrls["spring2024_12.JPG"],
+    imageUrls["spring2024_13.JPG"],
   ];
 
   const fall2023_images = [
     imageUrls["fall2023_4.JPG"],
-    imageUrls["fall2023_5.jpg"],
-    imageUrls["fall2023_6.JPG"],
-    imageUrls["fall2023_7.JPG"],
-    imageUrls["fall2023_8.JPG"],
+    imageUrls["fall2023_5.JPG"],
+    imageUrls["fall2023_6.jpg"],
+    imageUrls["fall2023_7.jpg"],
+    imageUrls["fall2023_8.HEIC"],
     imageUrls["fall2023_9.JPG"],
+    imageUrls["fall2023_10.jpg"],
+    imageUrls["fall2023_11.JPG"],
+    imageUrls["fall2023_12.JPG"],
+    imageUrls["fall2023_13.JPG"],
   ];
 
   let images: Array<string> = [];
-  if (slideshow === "Fall 2024") images = fall2024_images;
+  if (slideshow === "Spring 2026") images = spring2026_images;
+  else if (slideshow === "Fall 2025") images = fall2025_images;
+  else if (slideshow === "Spring 2025") images = spring2025_images;
+  else if (slideshow === "Fall 2024") images = fall2024_images;
   else if (slideshow === "Spring 2024") images = spring2024_images;
-  else images = fall2023_images;
+  else if (slideshow === "Fall 2023") images = fall2023_images;
+  else images = spring2026_images; // default to most recent
 
   const [isExpanded, setIsExpanded] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);

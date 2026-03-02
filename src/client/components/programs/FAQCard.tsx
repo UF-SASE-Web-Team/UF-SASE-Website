@@ -42,7 +42,8 @@ const FAQItem: React.FC<FAQItemProps> = ({ answer, question }) => {
 
 const FAQ: React.FC<FAQProps> = ({ faqData }) => {
   return (
-    <div className="w-full font-redhat">
+    // <div className="w-full font-redhat px-6 md:px-0">
+    <div className="mx-auto w-full max-w-7xl px-6 font-redhat md:px-12 lg:px-24">
       {faqData.map((item, index) => (
         <FAQItem key={index} question={item.question} answer={item.answer} />
       ))}

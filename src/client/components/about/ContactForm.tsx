@@ -48,6 +48,7 @@ export const ContactForm = () => {
     }
 
     const email = emails[contact];
+    console.log(email);
     const url = "/api/contact/submit";
 
     try {
@@ -90,7 +91,7 @@ export const ContactForm = () => {
           >
             // executive board options
             <option value="none">Select Contact</option>
-            <option value="president">President - Justin Doan</option>
+            <option value="president">President</option>
             <option value="externalvp">External Vice President</option>
             <option value="internalvp">Internal Vice President</option>
             <option value="secretary">Secretary</option>

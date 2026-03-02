@@ -16,4 +16,9 @@ export const pages = [
     aliases: ["Web Development", "Website Team", "Website", "Reactjs", "Computer Science", "Software Engineering"],
   },
   { name: "Sports", path: "/sports", aliases: ["SASE Sports", "Athletics", "Recreational", "Volleyball", "Badminton", "Soccer", "Flag Football"] },
+  {
+    name: "Projects",
+    path: "/projects",
+    aliases: ["SASE Projects", "Technical Projects", "Research", "Discord Bot", "NAS", "Automation"],
+  },
 ];

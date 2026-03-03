@@ -191,13 +191,13 @@ const boardInfo = [
           "I have the fantastic role of being in charge of SASE Sports! I work with my co-chair Kayla and we work to set up and create all of the intramural teams, host casual sports, and eSports events! My goal is to provide SASE with a welcoming and energetic sports group to help everyone relax and destress from school! As Sports Coordinator, I hope to continue to give back and grow to the SASE Sports community that welcomed me my freshman year!",
       },
       {
-        name: "Matthew Tang",
+        name: "Cindy Zhou",
         role: "Technical",
-        image: imageUrls["MatthewTang.jpg"],
+        image: imageUrls["CindyZhou.jpeg"],
         major: "2nd Year Mechanical Engineering",
         contact: "ufsase.tech@gmail.com",
         description:
-          "My role as technical chair is to lead and run the engineering team for SASE, also known as SET. I also have the role of running different technical workshops throughout the year. I hope to help others grow their problem-solving abilities and their professional development, whether it be working in a team environment or with communication. I hope that those I will work with will feel like they belong in the SASE community!",
+          "My main responsibilities as technical chair are to lead the SASE Engineering Team (SET) in accomplishing a year-long project and host semesterly technical workshops. I hope to encourage others to learn by building and foster a collaborative community of engineers. My goal is to give SET members a fulfilling learning experience!",
       },
       {
         name: "Vishal Vittal",

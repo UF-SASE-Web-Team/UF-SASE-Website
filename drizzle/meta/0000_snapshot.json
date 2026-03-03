@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "5e49e9fa-a95d-4588-8952-694e3ec08229",
+  "id": "b7efb05b-3a18-42a0-8727-3b40aa855fc6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "blog_tag_relationship": {
@@ -35,18 +35,26 @@
           "name": "blog_tag_relationship_blog_id_blog_id_fk",
           "tableFrom": "blog_tag_relationship",
           "tableTo": "blog",
-          "columnsFrom": ["blog_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "blog_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "blog_tag_relationship_tag_id_blog_tag_id_fk": {
           "name": "blog_tag_relationship_tag_id_blog_tag_id_fk",
           "tableFrom": "blog_tag_relationship",
           "tableTo": "blog_tag",
-          "columnsFrom": ["tag_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "tag_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -75,7 +83,9 @@
       "indexes": {
         "blog_tag_name_unique": {
           "name": "blog_tag_name_unique",
-          "columns": ["name"],
+          "columns": [
+            "name"
+          ],
           "isUnique": true
         }
       },
@@ -115,6 +125,14 @@
           "notNull": false,
           "autoincrement": false
         },
+        "images": {
+          "name": "images",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'[]'"
+        },
         "published_date": {
           "name": "published_date",
           "type": "integer",
@@ -128,26 +146,14 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
-        },
-        "last_update_date": {
-          "name": "last_update_date",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "tags": {
-          "name": "tags",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
         }
       },
       "indexes": {
         "blog_title_unique": {
           "name": "blog_title_unique",
-          "columns": ["title"],
+          "columns": [
+            "title"
+          ],
           "isUnique": true
         }
       },
@@ -156,12 +162,216 @@
           "name": "blog_author_id_user_id_fk",
           "tableFrom": "blog",
           "tableTo": "user",
-          "columnsFrom": ["author_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "author_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "board_member_history": {
+      "name": "board_member_history",
+      "columns": {
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "fileName": {
+          "name": "fileName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "bio": {
+          "name": "bio",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "key": {
+          "name": "key",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "url": {
+          "name": "url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "size": {
+          "name": "size",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "uploaded_at": {
+          "name": "uploaded_at",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "company": {
+      "name": "company",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "start_date": {
+          "name": "start_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "end_date": {
+          "name": "end_date",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "is_current": {
+          "name": "is_current",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "company_user_id_user_id_fk": {
+          "name": "company_user_id_user_id_fk",
+          "tableFrom": "company",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "email_subscriber": {
+      "name": "email_subscriber",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "subscribed_at": {
+          "name": "subscribed_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "email_subscriber_email_unique": {
+          "name": "email_subscriber_email_unique",
+          "columns": [
+            "email"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
@@ -231,16 +441,223 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "slides_url": {
+          "name": "slides_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
       "indexes": {
         "event_name_unique": {
           "name": "event_name_unique",
-          "columns": ["name"],
+          "columns": [
+            "name"
+          ],
           "isUnique": true
         }
       },
       "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "linkedin_profile": {
+      "name": "linkedin_profile",
+      "columns": {
+        "user": {
+          "name": "user",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "major": {
+          "name": "major",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "graduation_year": {
+          "name": "graduation_year",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "linkedin": {
+          "name": "linkedin",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "linkedin_profile_user_user_id_fk": {
+          "name": "linkedin_profile_user_user_id_fk",
+          "tableFrom": "linkedin_profile",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "meeting_slides": {
+      "name": "meeting_slides",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "category": {
+          "name": "category",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "date": {
+          "name": "date",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "semester": {
+          "name": "semester",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "thumbnail_url": {
+          "name": "thumbnail_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "embed_url": {
+          "name": "embed_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "meeting_slides_thumbnail_url_unique": {
+          "name": "meeting_slides_thumbnail_url_unique",
+          "columns": [
+            "thumbnail_url"
+          ],
+          "isUnique": true
+        },
+        "meeting_slides_embed_url_unique": {
+          "name": "meeting_slides_embed_url_unique",
+          "columns": [
+            "embed_url"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "mentor_mentee_invites": {
+      "name": "mentor_mentee_invites",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "mentor_id": {
+          "name": "mentor_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "mentee_id": {
+          "name": "mentee_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "mentor_mentee_invites_mentor_id_user_id_fk": {
+          "name": "mentor_mentee_invites_mentor_id_user_id_fk",
+          "tableFrom": "mentor_mentee_invites",
+          "tableTo": "user",
+          "columnsFrom": [
+            "mentor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "mentor_mentee_invites_mentee_id_user_id_fk": {
+          "name": "mentor_mentee_invites_mentee_id_user_id_fk",
+          "tableFrom": "mentor_mentee_invites",
+          "tableTo": "user",
+          "columnsFrom": [
+            "mentee_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
@@ -276,18 +693,26 @@
           "name": "mentor_mentee_relationship_mentor_id_user_id_fk",
           "tableFrom": "mentor_mentee_relationship",
           "tableTo": "user",
-          "columnsFrom": ["mentor_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "mentor_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         },
         "mentor_mentee_relationship_mentee_id_user_id_fk": {
           "name": "mentor_mentee_relationship_mentee_id_user_id_fk",
           "tableFrom": "mentor_mentee_relationship",
           "tableTo": "user",
-          "columnsFrom": ["mentee_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "mentee_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -295,25 +720,32 @@
       "uniqueConstraints": {},
       "checkConstraints": {}
     },
-    "personal_info": {
-      "name": "personal_info",
+    "oauth_account": {
+      "name": "oauth_account",
       "columns": {
-        "user_id": {
-          "name": "user_id",
+        "id": {
+          "name": "id",
           "type": "text",
           "primaryKey": true,
           "notNull": true,
           "autoincrement": false
         },
-        "first_name": {
-          "name": "first_name",
+        "user_id": {
+          "name": "user_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "last_name": {
-          "name": "last_name",
+        "provider": {
+          "name": "provider",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "provider_user_id": {
+          "name": "provider_user_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -323,47 +755,79 @@
           "name": "email",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "phone": {
-          "name": "phone",
-          "type": "blob",
-          "primaryKey": false,
           "notNull": false,
           "autoincrement": false
         },
-        "area_code": {
-          "name": "area_code",
+        "time_added": {
+          "name": "time_added",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         }
       },
-      "indexes": {
-        "personal_info_email_unique": {
-          "name": "personal_info_email_unique",
-          "columns": ["email"],
-          "isUnique": true
-        },
-        "personal_info_phone_unique": {
-          "name": "personal_info_phone_unique",
-          "columns": ["phone"],
-          "isUnique": true
-        }
-      },
+      "indexes": {},
       "foreignKeys": {
-        "personal_info_user_id_user_id_fk": {
-          "name": "personal_info_user_id_user_id_fk",
-          "tableFrom": "personal_info",
+        "oauth_account_user_id_user_id_fk": {
+          "name": "oauth_account_user_id_user_id_fk",
+          "tableFrom": "oauth_account",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "pending_verifications": {
+      "name": "pending_verifications",
+      "columns": {
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "code": {
+          "name": "code",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_data": {
+          "name": "user_data",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "attempts": {
+          "name": "attempts",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
@@ -378,47 +842,77 @@
           "notNull": true,
           "autoincrement": false
         },
+        "bio": {
+          "name": "bio",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
+        },
+        "phone": {
+          "name": "phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
+        },
+        "discord": {
+          "name": "discord",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
+        },
         "resume_path": {
           "name": "resume_path",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
         },
         "linkedin": {
           "name": "linkedin",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
         },
         "portfolio": {
           "name": "portfolio",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
         },
         "majors": {
           "name": "majors",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
         },
         "minors": {
           "name": "minors",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
         },
         "graduation_semester": {
           "name": "graduation_semester",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
         }
       },
       "indexes": {},
@@ -427,12 +921,48 @@
           "name": "professional_info_user_id_user_id_fk",
           "tableFrom": "professional_info",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "roles": {
+      "name": "roles",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "roles_name_unique": {
+          "name": "roles_name_unique",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}
@@ -454,20 +984,6 @@
           "notNull": false,
           "autoincrement": false
         },
-        "mentors": {
-          "name": "mentors",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "mentees": {
-          "name": "mentees",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
         "groups": {
           "name": "groups",
           "type": "text",
@@ -482,9 +998,13 @@
           "name": "sase_info_user_id_user_id_fk",
           "tableFrom": "sase_info",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
-          "onDelete": "no action",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
@@ -523,8 +1043,71 @@
           "name": "session_user_id_user_id_fk",
           "tableFrom": "session",
           "tableTo": "user",
-          "columnsFrom": ["user_id"],
-          "columnsTo": ["id"],
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "user_roles_relationship": {
+      "name": "user_roles_relationship",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "user_id": {
+          "name": "user_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "'user'"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "user_roles_relationship_user_id_user_id_fk": {
+          "name": "user_roles_relationship_user_id_user_id_fk",
+          "tableFrom": "user_roles_relationship",
+          "tableTo": "user",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "user_roles_relationship_role_roles_name_fk": {
+          "name": "user_roles_relationship_role_roles_name_fk",
+          "tableFrom": "user_roles_relationship",
+          "tableTo": "roles",
+          "columnsFrom": [
+            "role"
+          ],
+          "columnsTo": [
+            "name"
+          ],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -550,12 +1133,35 @@
           "notNull": true,
           "autoincrement": false
         },
-        "password_hash": {
-          "name": "password_hash",
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        },
+        "first_name": {
+          "name": "first_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
+        },
+        "last_name": {
+          "name": "last_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "''"
         },
         "time_added": {
           "name": "time_added",
@@ -575,21 +1181,24 @@
           "name": "points",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "roles": {
-          "name": "roles",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
+          "notNull": true,
+          "autoincrement": false,
+          "default": 0
         }
       },
       "indexes": {
         "user_username_unique": {
           "name": "user_username_unique",
-          "columns": ["username"],
+          "columns": [
+            "username"
+          ],
+          "isUnique": true
+        },
+        "user_email_unique": {
+          "name": "user_email_unique",
+          "columns": [
+            "email"
+          ],
           "isUnique": true
         }
       },

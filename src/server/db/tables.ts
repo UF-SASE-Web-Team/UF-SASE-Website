@@ -234,3 +234,33 @@ export const company = sqliteTable("company", {
   role: text("role"),
   isCurrent: integer("is_current").default(0).notNull(),
 });
+
+export const saseEvents = sqliteTable("sase_event", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  name: text("name").notNull(),
+  description: text("description"),
+  location: text("location").notNull(),
+  code: text("code")
+    .notNull()
+    .unique()
+    .$defaultFn(() => generateIdFromEntropySize(6)),
+  startDatetime: integer("start_datetime", { mode: "timestamp" }).notNull(),
+  endDatetime: integer("end_datetime", { mode: "timestamp" }),
+  timeAdded: integer("time_added")
+    .notNull()
+    .$defaultFn(() => Date.now()),
+});
+
+// Alumni Bank table
+export const alumniBank = sqliteTable("alumni_bank", {
+  id: text("id")
+    .primaryKey()
+    .references(() => users.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  major: text("major").notNull(),
+  graduationYear: text("graduation_year").notNull(),
+  currentCompany: text("current_company").notNull(),
+  pastCompanies: text("past_companies", { mode: "json" }).$type<Array<string>>().notNull().default([]),
+});

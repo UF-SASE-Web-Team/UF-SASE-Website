@@ -125,7 +125,7 @@ export const SwtFAQ: Array<{ question: string; answer: string | React.ReactNode 
     question: "How do I sign up?",
     answer: (
       <>
-        Keep an eye out for <strong>Spring 2026</strong> applications on UF SASE’s{" "}
+        Keep an eye out for <strong>Fall 2026</strong> applications on UF SASE’s{" "}
         <a href="https://www.instagram.com/ufsase/" target="_blank" rel="noopener noreferrer" className="text-saseGreen underline">
           Instagram
         </a>{" "}

@@ -7,5 +7,6 @@
   },
   "files.associations": {
     "*.css": "tailwindcss"
-  }
+  },
+  "cSpell.words": ["hgetall", "hset"]
 }

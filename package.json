@@ -59,6 +59,7 @@
     "hono": "^4.6.1",
     "html-react-parser": "^5.1.18",
     "install": "^0.13.0",
+    "ioredis": "^5.10.0",
     "isomorphic-dompurify": "^2.16.0",
     "jsdom": "^25.0.1",
     "jszip": "^3.10.1",

@@ -1,15 +1,18 @@
-import { db } from "@/server/db/db";
 import { createErrorResponse } from "@/shared/utils";
-import { rateLimit } from "@db/tables";
-import { eq } from "drizzle-orm";
 import type { MiddlewareHandler } from "hono";
+import redis from "../db/redis";
 import { SERVER_ENV } from "../env";
 
 // Token bucket configuration, controlled by environment variables
 const MAX_TOKENS = SERVER_ENV.RATE_LIMIT_MAX_TOKENS;
-const REFILL_RATE = SERVER_ENV.RATE_LIMIT_REFILL_RATE; // tokens per minute
+const REFILL_RATE = SERVER_ENV.RATE_LIMIT_REFILL_RATE; // tokens per window
+const REFILL_WINDOW_MS = SERVER_ENV.RATE_LIMIT_REFILL_WINDOW_MS;
+const RATE_LIMIT_TTL_SECONDS = 12 * 60 * 60; // 43200
+// Redis key prefix for rate limit hashes
+const RATE_LIMIT_PREFIX = "ratelimit:";
 
-// Ratelimiter works by first getting the client IP address from the request, look that up on the database to see how many tokens they have left, and when the last time they made a request was. Then we calculate how many tokens to refill based on the time elapsed since the last request, and if they have enough tokens to make the current request. If they do, we consume a token and allow the request to proceed. If not, we return a 429 Too Many Requests response.
+// Each key is a hash with fields: tokenCount, lastUpdated
+// TTL is set so stale entries are automatically cleaned up.
 
 function getClientIp(c: Parameters<MiddlewareHandler>[0]): string {
   const xForwardedFor = c.req.header("x-forwarded-for");
@@ -30,46 +33,44 @@ function getClientIp(c: Parameters<MiddlewareHandler>[0]): string {
 function calculateCurrentTokens(storedTokens: number, lastUpdated: number): number {
   const now = Date.now();
   const elapsedMs = now - lastUpdated;
-  const elapsedWindow = Math.floor(elapsedMs / SERVER_ENV.RATE_LIMIT_REFILL_WINDOW_MS);
+  const elapsedWindow = Math.floor(elapsedMs / REFILL_WINDOW_MS);
 
   const tokensToAdd = elapsedWindow * REFILL_RATE;
 
   return Math.min(MAX_TOKENS, storedTokens + tokensToAdd);
 }
-
-/**
- * Calculate how many milliseconds until the next token refill.
- */
 function msUntilNextRefill(lastUpdated: number): number {
   const elapsed = Date.now() - lastUpdated;
-  const remainder = elapsed % SERVER_ENV.RATE_LIMIT_REFILL_WINDOW_MS;
-  return SERVER_ENV.RATE_LIMIT_REFILL_WINDOW_MS - remainder;
+  const remainder = elapsed % REFILL_WINDOW_MS;
+  return REFILL_WINDOW_MS - remainder;
 }
 
 export const rateLimiter: MiddlewareHandler = async (c, next) => {
   const ip = getClientIp(c);
+  const key = `${RATE_LIMIT_PREFIX}${ip}`;
 
   try {
-    const record = await db.select().from(rateLimit).where(eq(rateLimit.ip, ip)).get();
+    const record = await redis.hgetall(key);
     const now = Date.now();
-    if (!record) {
+
+    if (!record || Object.keys(record).length === 0) {
+      // First request from this IP — initialise the hash
       const remaining = MAX_TOKENS - 1;
-      await db.insert(rateLimit).values({
-        ip,
-        tokenCount: remaining,
-        lastUpdated: now,
-      });
+      await redis.multi().hset(key, "tokenCount", String(remaining), "lastUpdated", String(now)).expire(key, RATE_LIMIT_TTL_SECONDS).exec();
 
       c.header("X-RateLimit-Limit", String(MAX_TOKENS));
       c.header("X-RateLimit-Remaining", String(remaining));
-      c.header("X-RateLimit-Reset", String(Math.ceil((now + SERVER_ENV.RATE_LIMIT_REFILL_WINDOW_MS) / 1000)));
+      c.header("X-RateLimit-Reset", String(Math.ceil((now + REFILL_WINDOW_MS) / 1000)));
 
       await next();
       return;
     }
 
-    const currentTokens = calculateCurrentTokens(record.tokenCount, record.lastUpdated);
-    const retryAfterMs = msUntilNextRefill(record.lastUpdated);
+    const storedTokens = parseInt(record.tokenCount, 10);
+    const lastUpdated = parseInt(record.lastUpdated, 10);
+
+    const currentTokens = calculateCurrentTokens(storedTokens, lastUpdated);
+    const retryAfterMs = msUntilNextRefill(lastUpdated);
     const resetEpochSecs = Math.ceil((Date.now() + retryAfterMs) / 1000);
 
     if (currentTokens <= 0) {
@@ -83,13 +84,7 @@ export const rateLimiter: MiddlewareHandler = async (c, next) => {
 
     const remaining = currentTokens - 1;
 
-    await db
-      .update(rateLimit)
-      .set({
-        tokenCount: remaining,
-        lastUpdated: now,
-      })
-      .where(eq(rateLimit.id, record.id));
+    await redis.multi().hset(key, "tokenCount", String(remaining), "lastUpdated", String(now)).expire(key, RATE_LIMIT_TTL_SECONDS).exec();
 
     c.header("X-RateLimit-Limit", String(MAX_TOKENS));
     c.header("X-RateLimit-Remaining", String(remaining));
@@ -98,7 +93,7 @@ export const rateLimiter: MiddlewareHandler = async (c, next) => {
     await next();
   } catch (error) {
     console.error("Rate limiter error:", error);
-
+    // Fail open — allow the request through if Redis is unavailable
     await next();
   }
 };

@@ -50,6 +50,11 @@ export const SERVER_ENV = createEnv({
       .string()
       .default("60000")
       .transform((val) => parseInt(val)),
+
+    REDIS_USERNAME: z.string(),
+    REDIS_PASSWORD: z.string(),
+    REDIS_HOST: z.string(),
+    REDIS_PORT: z.string().transform((val) => parseInt(val)),
   },
   runtimeEnv: process.env,
 });

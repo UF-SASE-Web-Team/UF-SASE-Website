@@ -29,7 +29,7 @@ export const Route = createFileRoute("/stemconnect")({
         >
           <div className="flex flex-col gap-3 self-start text-left">
             <p>
-              The <span className="font-semibold text-saseBlue">STEM Connect</span> is SASE’s premier professional and leadership development
+              <span className="font-semibold text-saseBlue">STEM Connect</span> is SASE’s premier professional and leadership development
               conference, designed to equip STEM students, professionals, and employers with the skills, networks, and insights needed to succeed in
               today’s workforce. It brings together collegiate and professional attendees through workshops, networking opportunities, and
               career-focused experiences.
@@ -48,7 +48,7 @@ export const Route = createFileRoute("/stemconnect")({
           </div>
           <img
             src={imageUrls["StemConnectBanner.png"]}
-            alt="STEM Connect promotional poster"
+            alt="STEM Connect 2026 event banner"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "1000px", height: "auto" }}
           />
@@ -87,19 +87,19 @@ export const Route = createFileRoute("/stemconnect")({
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
           <img
             src={imageUrls["StemConnectPhoto1.jpg"]}
-            alt="SERC promotional poster"
+            alt="2025-26 executive board at STEM Connect"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "350px", height: "auto" }}
           />
           <img
             src={imageUrls["StemConnectPhoto3.jpeg"]}
-            alt="SERC promotional poster"
+            alt="STEM Connect leadership award"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "350px", height: "260px", objectFit: "cover", objectPosition: "center" }}
           />
           <img
             src={imageUrls["StemConnectPhoto2.jpeg"]}
-            alt="SERC promotional poster"
+            alt="STEM Connect 2026 group photo with participants"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "350px", height: "auto" }}
           />

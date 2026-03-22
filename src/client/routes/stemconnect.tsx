@@ -29,10 +29,10 @@ export const Route = createFileRoute("/stemconnect")({
         >
           <div className="flex flex-col gap-3 self-start text-left">
             <p>
-              <span className="font-semibold text-saseBlue">STEM Connect</span> is SASE’s premier professional and leadership development
-              conference, designed to equip STEM students, professionals, and employers with the skills, networks, and insights needed to succeed in
-              today’s workforce. It brings together collegiate and professional attendees through workshops, networking opportunities, and
-              career-focused experiences.
+              <span className="font-semibold text-saseBlue">STEM Connect</span> is SASE’s premier professional and leadership development conference,
+              designed to equip STEM students, professionals, and employers with the skills, networks, and insights needed to succeed in today’s
+              workforce. It brings together collegiate and professional attendees through workshops, networking opportunities, and career-focused
+              experiences.
             </p>
             <div className="items-start text-left">
               <p className="text-saseBlue">Conference Highlights</p>

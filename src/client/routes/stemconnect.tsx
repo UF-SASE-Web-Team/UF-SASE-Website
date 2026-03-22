@@ -1,6 +1,7 @@
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
 import { EventPageHeader } from "@components/custom_ui/EventPageHeader";
+import { VerticalOmbreDivider } from "@components/custom_ui/VerticalOmbreDivider";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
 
@@ -15,8 +16,8 @@ export const Route = createFileRoute("/stemconnect")({
           subtitle="For more information, please visit the STEM Connect website!"
           buttonText="STEM Connect WEBSITE"
           buttonHref="https://stemconnect.events/"
-          date="TBA"
-          location="TBA"
+          date="Oct 1-3, 2026"
+          location="Seattle Convention Center"
           buttonClassName="text-lg sm:text-2xl"
         />
         <div
@@ -25,29 +26,59 @@ export const Route = createFileRoute("/stemconnect")({
             isMobile ? "mx-6 flex-col items-center gap-16 text-center text-sm sm:px-12 md:px-40" : "flex-col items-center text-lg sm:px-12 md:px-40",
           )}
         >
-          <p>
-            The <span className="font-semibold text-saseBlue">STEM Connect</span> is is SASE’s premier professional and leadership development
-            conference, designed to equip STEM students, professionals, and employers with the skills, networks, and insights needed to succeed in
-            today’s workforce. It brings together collegiate and professional attendees through workshops, networking opportunities, and
-            career-focused experiences.
+          <div className="flex flex-col gap-3 self-start text-left">
+            <p>
+              The <span className="font-semibold text-saseBlue">STEM Connect</span> is is SASE’s premier professional and leadership development
+              conference, designed to equip STEM students, professionals, and employers with the skills, networks, and insights needed to succeed in
+              today’s workforce. It brings together collegiate and professional attendees through workshops, networking opportunities, and
+              career-focused experiences.
+            </p>
             <div className="items-start text-left">
-              <p className="mt-6 text-saseBlue sm:mt-2">Conference Highlights</p>
+              <p className="text-saseBlue">Conference Highlights</p>
               <ul className="ml-6 list-disc">
                 <li>Collegiate workshops, panels, and networking events</li>
                 <li>Resume reviews and career fair with leading employers</li>
                 <li>Hospitality suites for casual connections</li>
                 <li>Science symposium featuring student research</li>
                 <li>Professional leadership sessions and executive panels</li>
-                <li>Professional leadership sessions and executive panels</li>
+                <li>Opportunities to connect with STEM talent nationwide</li>
               </ul>
             </div>
-          </p>
+          </div>
           <img
             src={imageUrls["StemConnectBanner.png"]}
             alt="STEM Connect promotional poster"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
-            style={{ width: "auto", height: "auto" }}
+            style={{ width: "1000px", height: "auto" }}
           />
+          <div className="max-w-8xl flex h-52 justify-items-end">
+            <div className="items-start px-2 text-left">
+              <p className="mt-6 text-saseBlue sm:mt-2">Collegiate</p>
+              <ul className="ml-6 list-disc">
+                <li>Student-focused workshops and panel discussions</li>
+                <li>Networking with peers and industry representatives</li>
+                <li>Resume reviews and research presentation opportunities</li>
+              </ul>
+            </div>
+            <VerticalOmbreDivider />
+            <div className="items-start px-2 text-left">
+              <p className="mt-6 text-saseBlue sm:mt-2">Professional</p>
+              <ul className="ml-6 list-disc">
+                <li>Leadership development workshops and executive panels</li>
+                <li>Industry-focused sessions across multiple development tracks</li>
+                <li>Networking with professionals and senior leaders</li>
+              </ul>
+            </div>
+            <VerticalOmbreDivider />
+            <div className="items-start px-2 text-left">
+              <p className="mt-6 text-saseBlue sm:mt-2">Career Fair</p>
+              <ul className="ml-6 list-disc">
+                <li>Connect with top STEM employers nationwide</li>
+                <li>Explore internships, full-time roles, and career pathways</li>
+                <li>Access recruiting opportunities with leading companies</li>
+              </ul>
+            </div>
+          </div>
         </div>
         <p className="subheader-text">EVENT GALLERY</p>
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">

@@ -31,7 +31,7 @@ const navItems = [
     children: [
       { name: "SASEHacks", path: "/sasehacks" },
       { name: "SERC", path: "/serc" },
-      { name: "STEMConnect", path: "/stemconnect" },
+      { name: "STEM Connect", path: "/stemconnect" },
       { name: "Gallery", path: "/gallery" },
       { name: "Blogs", path: "/blogs" },
     ],

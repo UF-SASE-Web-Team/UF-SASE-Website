@@ -304,6 +304,10 @@ export const imageUrls = {
   "FCI.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIVY2SEt8MSe4B8WlQFwX5z9an7tuiVIrgq063",
   "FirstFlorida.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIulNZwfntlYGv7p06JzneEfyBiHVKWROgUFZr",
   "dsiLogo.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIrxyzPaGwXWRIyQumk08BVNpGZU4SPv3EMFei",
+  "StemConnectPhoto2.jpeg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIytVBgwNUEnCaI2VbxyoQ14FtjJwY06h9Glqg",
+  "StemConnectPhoto1.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIIgYHM9unHMY9SyZtrdWa62JTQsO3LcgNbe5B",
+  "StemConnectBanner.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sId8lPrWD8AHikJfDB6Fzx0Mjm5yPSUbtEncCp",
+  "StemConnectPhoto3.jpeg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI6VJpPqClv5Bikxp1HPjRbswKfVuXmYoLD2z0",
 } as const;
 
 export type imageName = keyof typeof imageUrls;

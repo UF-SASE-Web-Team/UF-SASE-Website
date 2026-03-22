@@ -12,9 +12,10 @@ interface EventPageHeaderProps {
   buttonHref: string;
   date?: string;
   location?: string;
+  buttonClassName?: string;
 }
 
-export const EventPageHeader = ({ buttonHref, buttonText, date, location, subtitle, title }: EventPageHeaderProps) => {
+export const EventPageHeader = ({ buttonClassName, buttonHref, buttonText, date, location, subtitle, title }: EventPageHeaderProps) => {
   const isMobile = useIsMobile();
   const { darkMode } = useContext(DarkModeContext);
   const showDateLocation = date || location;
@@ -24,7 +25,11 @@ export const EventPageHeader = ({ buttonHref, buttonText, date, location, subtit
       <p className="header-text ombre-text text-center">{title}</p>
       <div className="text-center text-xl font-bold text-saseBlue">{subtitle}</div>
       <a
-        className={cn("mx-2 mb-12 mt-8 rounded-2xl bg-saseBlue py-5 text-2xl font-semibold text-white shadow-xl", isMobile ? "px-12" : "px-20")}
+        className={cn(
+          "mx-2 mb-12 mt-8 rounded-2xl bg-saseBlue py-5 text-2xl font-semibold text-white shadow-xl",
+          isMobile ? "px-12" : "px-20",
+          buttonClassName,
+        )}
         href={buttonHref}
         target="_blank"
         rel="noopener noreferrer"

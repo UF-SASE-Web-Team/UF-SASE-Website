@@ -2440,27 +2440,35 @@
     "uploadedAt": "2026-02-27T20:33:44.000Z"
   },
   {
-    "name": "Jiexi.jpg",
-    "key": "ehMyJVEoR9sIwHUteroTmGXoVhHAS79wOnW10lbk6aYEFd4D",
+    "name": "StemConnectPhoto2.jpeg",
+    "key": "ehMyJVEoR9sIytVBgwNUEnCaI2VbxyoQ14FtjJwY06h9Glqg",
     "customId": null,
-    "url": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIwHUteroTmGXoVhHAS79wOnW10lbk6aYEFd4D",
-    "size": 487838,
-    "uploadedAt": "2026-02-11T01:50:59.000Z"
+    "url": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIytVBgwNUEnCaI2VbxyoQ14FtjJwY06h9Glqg",
+    "size": 522891,
+    "uploadedAt": "2026-03-21T18:45:19.000Z"
   },
   {
-    "name": "JonathanTang.png",
-    "key": "ehMyJVEoR9sI1gG1v6Bt1GIKa0NBDlAXZoMOpV4eTgW3UQCL",
+    "name": "StemConnectPhoto1.jpg",
+    "key": "ehMyJVEoR9sIIgYHM9unHMY9SyZtrdWa62JTQsO3LcgNbe5B",
     "customId": null,
-    "url": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI1gG1v6Bt1GIKa0NBDlAXZoMOpV4eTgW3UQCL",
-    "size": 2425201,
-    "uploadedAt": "2026-02-11T01:50:59.000Z"
+    "url": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIIgYHM9unHMY9SyZtrdWa62JTQsO3LcgNbe5B",
+    "size": 353507,
+    "uploadedAt": "2026-03-21T18:45:19.000Z"
   },
   {
-    "name": "GraceZhao.jpg",
-    "key": "ehMyJVEoR9sIfUMutvyixepMOaG7mPgcvnKLTX9UZBtlzSbd",
+    "name": "StemConnectBanner.png",
+    "key": "ehMyJVEoR9sId8lPrWD8AHikJfDB6Fzx0Mjm5yPSUbtEncCp",
     "customId": null,
-    "url": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIfUMutvyixepMOaG7mPgcvnKLTX9UZBtlzSbd",
-    "size": 817415,
-    "uploadedAt": "2026-02-11T01:50:59.000Z"
+    "url": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sId8lPrWD8AHikJfDB6Fzx0Mjm5yPSUbtEncCp",
+    "size": 1730524,
+    "uploadedAt": "2026-03-21T18:45:19.000Z"
+  },
+  {
+    "name": "StemConnectPhoto3.jpeg",
+    "key": "ehMyJVEoR9sI6VJpPqClv5Bikxp1HPjRbswKfVuXmYoLD2z0",
+    "customId": null,
+    "url": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI6VJpPqClv5Bikxp1HPjRbswKfVuXmYoLD2z0",
+    "size": 180140,
+    "uploadedAt": "2026-03-21T18:45:19.000Z"
   }
 ]

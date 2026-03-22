@@ -3,6 +3,7 @@ import { imageUrls } from "@assets/imageUrls";
 import { EventPageHeader } from "@components/custom_ui/EventPageHeader";
 import { VerticalOmbreDivider } from "@components/custom_ui/VerticalOmbreDivider";
 import { useIsMobile } from "@hooks/useIsMobile";
+import stemConnectPillars from "@information/StemConnectPillars";
 import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/stemconnect")({
@@ -28,7 +29,7 @@ export const Route = createFileRoute("/stemconnect")({
         >
           <div className="flex flex-col gap-3 self-start text-left">
             <p>
-              The <span className="font-semibold text-saseBlue">STEM Connect</span> is is SASE’s premier professional and leadership development
+              The <span className="font-semibold text-saseBlue">STEM Connect</span> is SASE’s premier professional and leadership development
               conference, designed to equip STEM students, professionals, and employers with the skills, networks, and insights needed to succeed in
               today’s workforce. It brings together collegiate and professional attendees through workshops, networking opportunities, and
               career-focused experiences.
@@ -52,65 +53,34 @@ export const Route = createFileRoute("/stemconnect")({
             style={{ width: "1000px", height: "auto" }}
           />
           {isMobile ? (
-            <>
-              <div className="flex w-full flex-col gap-3">
-                <div className="items-start px-2 text-left">
-                  <p className="text-saseBlue sm:mt-2">Professional</p>
+            <div className="flex w-full flex-col gap-3">
+              {stemConnectPillars.map((pillar) => (
+                <div key={pillar.title} className="items-start px-2 text-left">
+                  <p className="text-saseBlue sm:mt-2">{pillar.title}</p>
                   <ul className="ml-6 list-disc">
-                    <li>Leadership development workshops and executive panels</li>
-                    <li>Industry-focused sessions across multiple development tracks</li>
-                    <li>Networking with professionals and senior leaders</li>
+                    {pillar.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
                   </ul>
                 </div>
-                <div className="items-start px-2 text-left">
-                  <p className="text-saseBlue sm:mt-2">Collegiate</p>
-                  <ul className="ml-6 list-disc">
-                    <li>Student-focused workshops and panel discussions</li>
-                    <li>Networking with peers and industry representatives</li>
-                    <li>Resume reviews and research presentation opportunities</li>
-                  </ul>
-                </div>
-                <div className="items-start px-2 text-left">
-                  <p className="text-saseBlue sm:mt-2">Career Fair</p>
-                  <ul className="ml-6 list-disc">
-                    <li>Connect with top STEM employers nationwide</li>
-                    <li>Explore internships, full-time roles, and career pathways</li>
-                    <li>Access recruiting opportunities with leading companies</li>
-                  </ul>
-                </div>
-              </div>
-            </>
+              ))}
+            </div>
           ) : (
-            <>
-              <div className="max-w-8xl flex w-full items-stretch gap-4">
-                <div className="items-start px-2 text-left">
-                  <p className="mt-6 text-saseBlue sm:mt-2">Professional</p>
-                  <ul className="ml-6 list-disc">
-                    <li>Leadership development workshops and executive panels</li>
-                    <li>Industry-focused sessions across multiple development tracks</li>
-                    <li>Networking with professionals and senior leaders</li>
-                  </ul>
+            <div className="max-w-8xl flex w-full items-stretch gap-4">
+              {stemConnectPillars.map((pillar, index) => (
+                <div key={pillar.title} className="flex items-stretch gap-4">
+                  <div className="items-start px-2 text-left">
+                    <p className="mt-6 text-saseBlue sm:mt-2">{pillar.title}</p>
+                    <ul className="ml-6 list-disc">
+                      {pillar.bullets.map((bullet) => (
+                        <li key={bullet}>{bullet}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  {index < stemConnectPillars.length - 1 && <VerticalOmbreDivider />}
                 </div>
-                <VerticalOmbreDivider />
-                <div className="items-start px-2 text-left">
-                  <p className="mt-6 text-saseBlue sm:mt-2">Collegiate</p>
-                  <ul className="ml-6 list-disc">
-                    <li>Student-focused workshops and panel discussions</li>
-                    <li>Networking with peers and industry representatives</li>
-                    <li>Resume reviews and research presentation opportunities</li>
-                  </ul>
-                </div>
-                <VerticalOmbreDivider />
-                <div className="items-start px-2 text-left">
-                  <p className="mt-6 text-saseBlue sm:mt-2">Career Fair</p>
-                  <ul className="ml-6 list-disc">
-                    <li>Connect with top STEM employers nationwide</li>
-                    <li>Explore internships, full-time roles, and career pathways</li>
-                    <li>Access recruiting opportunities with leading companies</li>
-                  </ul>
-                </div>
-              </div>
-            </>
+              ))}
+            </div>
           )}
         </div>
         <p className="subheader-text">EVENT GALLERY</p>

@@ -267,15 +267,23 @@ export const alumniBank = sqliteTable("alumni_bank", {
 
 // Semester/Year table
 export const semesterYears = sqliteTable("semester_year", {
-  id: text("id").primaryKey().$defaultFn(() => generateIdFromEntropySize(10)),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
   semester: text("semester").notNull(),
   year: integer("year").notNull(),
 });
 
 // User Semester Points relation table
 export const userSemesterPoints = sqliteTable("user_semester_points", {
-  id: text("id").primaryKey().$defaultFn(() => generateIdFromEntropySize(10)),
-  userId: text("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
-  semesterYearId: text("semester_year_id").notNull().references(() => semesterYears.id, { onDelete: "cascade" }),
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => generateIdFromEntropySize(10)),
+  userId: text("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  semesterYearId: text("semester_year_id")
+    .notNull()
+    .references(() => semesterYears.id, { onDelete: "cascade" }),
   points: integer("points").notNull().default(0),
 });

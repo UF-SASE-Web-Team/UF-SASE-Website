@@ -119,7 +119,7 @@ profileRoutes.patch("/profile", async (c) => {
           Object.assign(finalUpdate, validatedFields);
         } catch (error) {
           if (error instanceof ZodError) {
-            const errorMessages = error.errors.map((e) => `${e.path.join(".")}: ${e.message}`).join("; ");
+            const errorMessages = error.issues.map((e) => `${e.path.join(".")}: ${e.message}`).join("; ");
             return createErrorResponse(c, "VALIDATION_ERROR", `Validation failed: ${errorMessages}`, 400);
           }
           throw error;

@@ -23,9 +23,7 @@ export function extractCompanies(experiences: Array<WorkExperience>): CompanyInf
     return { currentCompany: null, pastCompanies: [] };
   }
 
-  const currentRole = experiences.find(
-    (exp) => exp.isCurrent === true || exp.endDate == null
-  );
+  const currentRole = experiences.find((exp) => exp.isCurrent === true || exp.endDate == null);
 
   const currentCompany = currentRole?.company?.trim() || null;
 

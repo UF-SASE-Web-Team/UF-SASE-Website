@@ -92,10 +92,7 @@ describe("extractCompanies", () => {
     });
 
     it("identifies current company via undefined endDate", () => {
-      const result = extractCompanies([
-        { company: "Apple" },
-        { company: "Microsoft", endDate: "2020-03" },
-      ]);
+      const result = extractCompanies([{ company: "Apple" }, { company: "Microsoft", endDate: "2020-03" }]);
       expect(result.currentCompany).toBe("Apple");
     });
 

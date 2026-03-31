@@ -141,7 +141,6 @@ export const imageUrls = {
   "MatthewTang.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI1dzAm1NBt1GIKa0NBDlAXZoMOpV4eTgW3UQC",
   "ManavSanghvi.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIri09nOGwXWRIyQumk08BVNpGZU4SPv3EMFei",
   "BryantCao.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIIvb6vtunHMY9SyZtrdWa62JTQsO3LcgNbe5B",
-  "CindyZhou.jpeg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIrj1x3vGwXWRIyQumk08BVNpGZU4SPv3EMFei",
   "SaseInterns3.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIWYzpnU4Mz9eV6NXlaokt0cQYmD7qRKGJp3E5",
   "ConnieHuangTestimonial.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI2UiRO2diuk23wDEdSnxzOpMosLJj9hgUv1FX",
   "SaseInterns2.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIBDmTyx12kDm2rxftGpUEesqCMHIJ7RnXNYh3",
@@ -283,6 +282,7 @@ export const imageUrls = {
   "Jiexi.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIwHUteroTmGXoVhHAS79wOnW10lbk6aYEFd4D",
   "JonathanTang.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI1gG1v6Bt1GIKa0NBDlAXZoMOpV4eTgW3UQCL",
   "GraceZhao.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIfUMutvyixepMOaG7mPgcvnKLTX9UZBtlzSbd",
+  "CindyZhou.jpeg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIrj1x3vGwXWRIyQumk08BVNpGZU4SPv3EMFei",
   "ERAU.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIgzhcu7jNf7EIjRmO19PWBAeSakyzhnML0Kq3",
   "SERCPoster.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI2TIDT3diuk23wDEdSnxzOpMosLJj9hgUv1FX",
   "MitsubishiPower.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI1FoQ9WBt1GIKa0NBDlAXZoMOpV4eTgW3UQCL",
@@ -304,6 +304,10 @@ export const imageUrls = {
   "FCI.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIVY2SEt8MSe4B8WlQFwX5z9an7tuiVIrgq063",
   "FirstFlorida.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIulNZwfntlYGv7p06JzneEfyBiHVKWROgUFZr",
   "dsiLogo.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIrxyzPaGwXWRIyQumk08BVNpGZU4SPv3EMFei",
+  "StemConnectPhoto2.jpeg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIytVBgwNUEnCaI2VbxyoQ14FtjJwY06h9Glqg",
+  "StemConnectPhoto1.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIIgYHM9unHMY9SyZtrdWa62JTQsO3LcgNbe5B",
+  "StemConnectBanner.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sId8lPrWD8AHikJfDB6Fzx0Mjm5yPSUbtEncCp",
+  "StemConnectPhoto3.jpeg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI6VJpPqClv5Bikxp1HPjRbswKfVuXmYoLD2z0",
 } as const;
 
 export type imageName = keyof typeof imageUrls;

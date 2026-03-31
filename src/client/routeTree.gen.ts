@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as WebdevImport } from './routes/webdev'
 import { Route as VerifyEmailImport } from './routes/verify-email'
 import { Route as UserpageImport } from './routes/userpage'
+import { Route as StemconnectImport } from './routes/stemconnect'
 import { Route as SportsImport } from './routes/sports'
 import { Route as SponsorsImport } from './routes/sponsors'
 import { Route as SignupImport } from './routes/signup'
@@ -61,6 +62,12 @@ const VerifyEmailRoute = VerifyEmailImport.update({
 const UserpageRoute = UserpageImport.update({
   id: '/userpage',
   path: '/userpage',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const StemconnectRoute = StemconnectImport.update({
+  id: '/stemconnect',
+  path: '/stemconnect',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -410,6 +417,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SportsImport
       parentRoute: typeof rootRoute
     }
+    '/stemconnect': {
+      id: '/stemconnect'
+      path: '/stemconnect'
+      fullPath: '/stemconnect'
+      preLoaderRoute: typeof StemconnectImport
+      parentRoute: typeof rootRoute
+    }
     '/userpage': {
       id: '/userpage'
       path: '/userpage'
@@ -514,6 +528,7 @@ export interface FileRoutesByFullPath {
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
   '/sports': typeof SportsRoute
+  '/stemconnect': typeof StemconnectRoute
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
@@ -548,6 +563,7 @@ export interface FileRoutesByTo {
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
   '/sports': typeof SportsRoute
+  '/stemconnect': typeof StemconnectRoute
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
@@ -584,6 +600,7 @@ export interface FileRoutesById {
   '/signup': typeof SignupRoute
   '/sponsors': typeof SponsorsRoute
   '/sports': typeof SportsRoute
+  '/stemconnect': typeof StemconnectRoute
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
@@ -621,6 +638,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sponsors'
     | '/sports'
+    | '/stemconnect'
     | '/userpage'
     | '/verify-email'
     | '/webdev'
@@ -654,6 +672,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sponsors'
     | '/sports'
+    | '/stemconnect'
     | '/userpage'
     | '/verify-email'
     | '/webdev'
@@ -688,6 +707,7 @@ export interface FileRouteTypes {
     | '/signup'
     | '/sponsors'
     | '/sports'
+    | '/stemconnect'
     | '/userpage'
     | '/verify-email'
     | '/webdev'
@@ -724,6 +744,7 @@ export interface RootRouteChildren {
   SignupRoute: typeof SignupRoute
   SponsorsRoute: typeof SponsorsRoute
   SportsRoute: typeof SportsRoute
+  StemconnectRoute: typeof StemconnectRoute
   UserpageRoute: typeof UserpageRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
   WebdevRoute: typeof WebdevRoute
@@ -755,6 +776,7 @@ const rootRouteChildren: RootRouteChildren = {
   SignupRoute: SignupRoute,
   SponsorsRoute: SponsorsRoute,
   SportsRoute: SportsRoute,
+  StemconnectRoute: StemconnectRoute,
   UserpageRoute: UserpageRoute,
   VerifyEmailRoute: VerifyEmailRoute,
   WebdevRoute: WebdevRoute,
@@ -795,6 +817,7 @@ export const routeTree = rootRoute
         "/signup",
         "/sponsors",
         "/sports",
+        "/stemconnect",
         "/userpage",
         "/verify-email",
         "/webdev",
@@ -878,6 +901,9 @@ export const routeTree = rootRoute
     },
     "/sports": {
       "filePath": "sports.tsx"
+    },
+    "/stemconnect": {
+      "filePath": "stemconnect.tsx"
     },
     "/userpage": {
       "filePath": "userpage.tsx"

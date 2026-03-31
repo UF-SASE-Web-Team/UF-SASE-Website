@@ -4,7 +4,7 @@ import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import { userRoleRelationship, users } from "@db/tables";
 import type { User } from "@shared/schema/userSchema";
 import bcrypt from "bcryptjs";
-import { eq } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 import { Hono } from "hono";
 
 const userRoutes = new Hono();
@@ -46,23 +46,31 @@ export const arrayToString = (arr: Array<string>): string => {
 userRoutes.get("/users", async (c) => {
   try {
     const rows = await db.select().from(users);
+    const userIds = rows.map((user) => user.id);
+
+    const roleRows = userIds.length
+      ? await db
+          .select({ userId: userRoleRelationship.userId, role: userRoleRelationship.role })
+          .from(userRoleRelationship)
+          .where(inArray(userRoleRelationship.userId, userIds))
+      : [];
+
+    const rolesByUser = new Map<string, Array<string>>();
+    for (const roleRow of roleRows) {
+      const existingRoles = rolesByUser.get(roleRow.userId) ?? [];
+      existingRoles.push(roleRow.role);
+      rolesByUser.set(roleRow.userId, existingRoles);
+    }
 
     // Get roles for each user
-    const usersWithRoles = await Promise.all(
-      rows.map(async (user) => {
-        const userRoles = await db
-          .select({ role: userRoleRelationship.role })
-          .from(userRoleRelationship)
-          .where(eq(userRoleRelationship.userId, user.id));
+    const usersWithRoles = rows.map((user) => {
+      const roleArray = rolesByUser.get(user.id) ?? [];
+      const roleString = arrayToString(roleArray);
 
-        const roleArray: Array<string> = userRoles.map((r) => r.role);
-        const roleString = arrayToString(roleArray);
-
-        // Initialize full Zod schema verified object with roles
-        const schemaUser: User = { ...user, roles: roleString };
-        return schemaUser;
-      }),
-    );
+      // Initialize full Zod schema verified object with roles
+      const schemaUser: User = { ...user, roles: roleString };
+      return schemaUser;
+    });
 
     return createSuccessResponse(c, usersWithRoles, "Fetched all users");
   } catch (err) {

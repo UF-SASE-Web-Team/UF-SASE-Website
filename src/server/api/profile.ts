@@ -1,5 +1,5 @@
-import { isAdmin } from "@/server/api/roles";
 import { db } from "@/server/db/db";
+import { requireSession } from "@/server/middleware/auth";
 import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import * as Schema from "@db/tables";
 import { updateUserSchema } from "@schema/userSchema";
@@ -32,26 +32,19 @@ const profileSelection = {
   graduationSemester: Schema.professionalInfo.graduationSemester,
 };
 
-profileRoutes.get("/profile", async (c) => {
+profileRoutes.get("/profile", requireSession, async (c) => {
   try {
-    const cookie = c.req.header("Cookie") || "";
-    const sessionIDMatch = cookie.match(/sessionId=([^;]*)/);
-    if (!sessionIDMatch) {
-      return createErrorResponse(c, "INVALID_SESSION", "Missing or invalid session ID", 400);
-    }
-    const sessionID = sessionIDMatch[1];
+    const session = c.get("session");
 
     const result = await db
       .select(profileSelection)
       .from(Schema.users)
-      .innerJoin(Schema.sessions, eq(Schema.users.id, Schema.sessions.userId))
       .innerJoin(Schema.professionalInfo, eq(Schema.users.id, Schema.professionalInfo.userId))
-      .where(eq(Schema.sessions.id, sessionID));
+      .where(eq(Schema.users.id, session.userId));
 
     if (result.length === 1) {
       return createSuccessResponse(c, result[0], "Profile retrieved successfully");
     } else if (result.length === 0) {
-      console.log(sessionID);
       return createErrorResponse(c, "NO_USER_FOUND", "No user found", 404);
     } else {
       return createErrorResponse(c, "MULTIPLE_USERS", "Multiple users", 500);
@@ -63,22 +56,16 @@ profileRoutes.get("/profile", async (c) => {
 });
 
 // update user information only (professional info updates go through /api/users/professional/:id)
-profileRoutes.patch("/profile", async (c) => {
+profileRoutes.patch("/profile", requireSession, async (c) => {
   try {
-    const cookie = c.req.header("Cookie") || "";
-    const sessionIDMatch = cookie.match(/sessionId=([^;]*)/);
-    if (!sessionIDMatch) {
-      return createErrorResponse(c, "INVALID_SESSION", "Missing or invalid session ID", 400);
-    }
-    const sessionID = sessionIDMatch[1];
-    const adminPerms = await isAdmin(sessionID);
-    const result = await db.select().from(Schema.sessions).where(eq(Schema.sessions.id, sessionID));
-
-    if (result.length === 0) {
-      return createErrorResponse(c, "INVALID_SESSION", "Invalid session", 400);
-    }
-
-    const userID = result[0].userId;
+    const session = c.get("session");
+    const userID = session.userId;
+    const userRoles = await db
+      .select({ role: Schema.userRoleRelationship.role })
+      .from(Schema.userRoleRelationship)
+      .where(eq(Schema.userRoleRelationship.userId, userID))
+      .all();
+    const adminPerms = userRoles.some((r) => r.role === "admin" || r.role === "board");
     const body = await c.req.json();
 
     // separate user fields from roles fields

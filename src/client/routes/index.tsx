@@ -12,7 +12,7 @@ import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { PIEBoard } from "@information/People";
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { seo } from "../utils/seo";
 
 export const Route = createFileRoute("/")({
@@ -28,6 +28,20 @@ export const Route = createFileRoute("/")({
   component: () => {
     const isMobile = useIsMobile();
     const [expanded, setExpanded] = useState(false);
+
+    useEffect(() => {
+      const scriptId = "EmbedSocialHashtagScript";
+
+      if (document.getElementById(scriptId)) {
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = "https://embedsocial.com/cdn/ht.js";
+      script.defer = true;
+      document.head.appendChild(script);
+    }, []);
 
     return (
       <div className="flex flex-col items-center">
@@ -240,6 +254,12 @@ export const Route = createFileRoute("/")({
                 </div>
               </div>
             )}
+          </div>
+        </div>
+        {/* Instagram Section */}
+        <div className="flex w-full flex-col items-center bg-white px-1 py-10 dark:bg-black md:px-4">
+          <div className="w-full max-w-none">
+            <div className="embedsocial-hashtag min-h-[350px] w-full md:min-h-[640px]" data-ref="adf8a2d91dfce8da76c2225e0335b55d3ce7afa2" />
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { db } from "@/server/db/db";
+import { requireRoles, requireSession } from "@/server/middleware/auth";
 import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import * as Schema from "@db/tables";
 import { and, eq } from "drizzle-orm";
@@ -25,19 +26,9 @@ roleRoutes.get("/roles/:userID", async (c) => {
   }
 });
 
-roleRoutes.post("/roles/assign", async (c) => {
+roleRoutes.post("/roles/assign", requireSession, requireRoles(["admin", "board"]), async (c) => {
   try {
     const { role, userId } = await c.req.json();
-    const cookie = c.req.header("Cookie") || "";
-    console.log(cookie);
-    const sessionIDMatch = cookie.match(/sessionId=([^;]*)/);
-    if (!sessionIDMatch) {
-      return createErrorResponse(c, "INVALID_SESSION", "Missing or invalid session ID", 400);
-    }
-    const sessionID = sessionIDMatch[1];
-    if (!(await isAdmin(sessionID))) {
-      return createErrorResponse(c, "ASSIGN_ACTION_UNAUTHORIZED", "Assigning unauthorized: Admin role required", 403);
-    }
 
     const roleExist = await db.select().from(Schema.roles).where(eq(Schema.roles.name, role)).get();
     if (!roleExist) {
@@ -65,18 +56,9 @@ roleRoutes.post("/roles/assign", async (c) => {
   }
 });
 
-roleRoutes.post("/roles/delete", async (c) => {
+roleRoutes.post("/roles/delete", requireSession, requireRoles(["admin", "board"]), async (c) => {
   try {
     const { role, userId } = await c.req.json();
-    const cookie = c.req.header("Cookie") || "";
-    const sessionIDMatch = cookie.match(/sessionId=([^;]*)/);
-    if (!sessionIDMatch) {
-      return createErrorResponse(c, "INVALID_SESSION", "Missing or invalid session ID", 400);
-    }
-    const sessionID = sessionIDMatch[1];
-    if (!(await isAdmin(sessionID))) {
-      return createErrorResponse(c, "USER_NOT_ADMIN", "Deleting unauthorized: Admin role required", 403);
-    }
 
     const roleExist = await db.select().from(Schema.roles).where(eq(Schema.roles.name, role)).get();
     if (!roleExist) {
@@ -102,18 +84,5 @@ roleRoutes.post("/roles/delete", async (c) => {
     return createErrorResponse(c, "DELETE_ROLE_ERROR", "Failed to delete role", 500);
   }
 });
-
-export async function isAdmin(sessionId: string) {
-  const session = await db.select().from(Schema.sessions).where(eq(Schema.sessions.id, sessionId)).get();
-  if (!session) return false;
-
-  const userRoles = await db
-    .select({ role: Schema.userRoleRelationship.role })
-    .from(Schema.userRoleRelationship)
-    .where(eq(Schema.userRoleRelationship.userId, session.userId))
-    .all();
-
-  if (userRoles.some((r) => r.role === "admin" || r.role === "board")) return true;
-}
 
 export default roleRoutes;

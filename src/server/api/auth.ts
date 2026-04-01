@@ -1,5 +1,6 @@
 import { db } from "@/server/db/db";
 import { VerificationTemplate } from "@/server/email/verification-template";
+import { requireSession } from "@/server/middleware/auth";
 import { createErrorResponse, createSuccessResponse, emailRegex, passwordRegex } from "@/shared/utils";
 import { oauthAccounts, pendingVerifications, professionalInfo, sessions, userRoleRelationship, users } from "@db/tables";
 import { SERVER_ENV } from "@server/env";
@@ -7,6 +8,7 @@ import { generateCodeVerifier, generateState, Google } from "arctic";
 import bcrypt from "bcryptjs";
 import { and, eq } from "drizzle-orm";
 import { Hono } from "hono";
+import { getCookie } from "hono/cookie";
 import { generateIdFromEntropySize } from "lucia";
 import { Resend } from "resend";
 
@@ -245,14 +247,13 @@ authRoutes.post("/auth/login", async (c) => {
 
 // Logout route
 authRoutes.post("/auth/logout", async (c) => {
-  const sessionId = c.req.header("Cookie")?.match(/sessionId=([^;]*)/)?.[1];
+  const sessionId = getCookie(c, "sessionId");
 
   if (!sessionId) {
     return createErrorResponse(c, "NO_SESSION", "No active session found", 401);
   }
 
   try {
-    // delete the session id row from the table
     await db.delete(sessions).where(eq(sessions.id, sessionId));
 
     return createSuccessResponse(c, null, "Successfully logged out");
@@ -263,26 +264,9 @@ authRoutes.post("/auth/logout", async (c) => {
 });
 
 // used for validating sessions
-authRoutes.get("/auth/session", async (c) => {
-  const sessionId = c.req.header("Cookie")?.match(/sessionId=([^;]*)/)?.[1];
-
-  if (!sessionId) {
-    return createErrorResponse(c, "NO_SESSION", "No active session", 401);
-  }
-
+authRoutes.get("/auth/session", requireSession, async (c) => {
   try {
-    const session = await db.select().from(sessions).where(eq(sessions.id, sessionId)).get();
-
-    if (!session) {
-      return createErrorResponse(c, "SESSION_NOT_FOUND", "Session not found", 401);
-    }
-
-    if (session.expiresAt < Date.now()) {
-      await db.delete(sessions).where(eq(sessions.id, sessionId));
-      // maybe renew session?
-      return createErrorResponse(c, "SESSION_EXPIRED", "Session expired", 401);
-    }
-
+    const session = c.get("session");
     const user = await db.select({ id: users.id, username: users.username }).from(users).where(eq(users.id, session.userId)).get();
 
     if (!user) {

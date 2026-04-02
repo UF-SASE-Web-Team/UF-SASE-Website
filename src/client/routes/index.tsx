@@ -257,9 +257,9 @@ export const Route = createFileRoute("/")({
           </div>
         </div>
         {/* Instagram Section */}
-        <div className="flex w-full flex-col items-center bg-white px-1 py-10 dark:bg-black md:px-4">
+        <div className="flex w-full flex-col items-center bg-white px-1 py-10 dark:bg-gray-700 md:px-4">
           <div className="w-full max-w-none">
-            <div className="embedsocial-hashtag min-h-[350px] w-full md:min-h-[640px]" data-ref="adf8a2d91dfce8da76c2225e0335b55d3ce7afa2" />
+            <div className="embedsocial-hashtag w-full" data-ref="adf8a2d91dfce8da76c2225e0335b55d3ce7afa2" />
           </div>
         </div>
       </div>

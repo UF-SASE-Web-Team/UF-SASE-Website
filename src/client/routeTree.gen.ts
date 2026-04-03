@@ -24,6 +24,7 @@ import { Route as SearchImport } from './routes/search'
 import { Route as SasehacksImport } from './routes/sasehacks'
 import { Route as ResourcesImport } from './routes/resources'
 import { Route as ResetPasswordImport } from './routes/reset-password'
+import { Route as ProjectsImport } from './routes/projects'
 import { Route as ProgramsImport } from './routes/programs'
 import { Route as PastBoardImport } from './routes/past-board'
 import { Route as MentorMenteeImport } from './routes/mentor-mentee'
@@ -122,6 +123,12 @@ const ResourcesRoute = ResourcesImport.update({
 const ResetPasswordRoute = ResetPasswordImport.update({
   id: '/reset-password',
   path: '/reset-password',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ProjectsRoute = ProjectsImport.update({
+  id: '/projects',
+  path: '/projects',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -354,6 +361,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProgramsImport
       parentRoute: typeof rootRoute
     }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsImport
+      parentRoute: typeof rootRoute
+    }
     '/reset-password': {
       id: '/reset-password'
       path: '/reset-password'
@@ -519,6 +533,7 @@ export interface FileRoutesByFullPath {
   '/mentor-mentee': typeof MentorMenteeRoute
   '/past-board': typeof PastBoardRoute
   '/programs': typeof ProgramsRoute
+  '/projects': typeof ProjectsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
   '/sasehacks': typeof SasehacksRoute
@@ -554,6 +569,7 @@ export interface FileRoutesByTo {
   '/mentor-mentee': typeof MentorMenteeRoute
   '/past-board': typeof PastBoardRoute
   '/programs': typeof ProgramsRoute
+  '/projects': typeof ProjectsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
   '/sasehacks': typeof SasehacksRoute
@@ -591,6 +607,7 @@ export interface FileRoutesById {
   '/mentor-mentee': typeof MentorMenteeRoute
   '/past-board': typeof PastBoardRoute
   '/programs': typeof ProgramsRoute
+  '/projects': typeof ProjectsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
   '/sasehacks': typeof SasehacksRoute
@@ -629,6 +646,7 @@ export interface FileRouteTypes {
     | '/mentor-mentee'
     | '/past-board'
     | '/programs'
+    | '/projects'
     | '/reset-password'
     | '/resources'
     | '/sasehacks'
@@ -663,6 +681,7 @@ export interface FileRouteTypes {
     | '/mentor-mentee'
     | '/past-board'
     | '/programs'
+    | '/projects'
     | '/reset-password'
     | '/resources'
     | '/sasehacks'
@@ -698,6 +717,7 @@ export interface FileRouteTypes {
     | '/mentor-mentee'
     | '/past-board'
     | '/programs'
+    | '/projects'
     | '/reset-password'
     | '/resources'
     | '/sasehacks'
@@ -735,6 +755,7 @@ export interface RootRouteChildren {
   MentorMenteeRoute: typeof MentorMenteeRoute
   PastBoardRoute: typeof PastBoardRoute
   ProgramsRoute: typeof ProgramsRoute
+  ProjectsRoute: typeof ProjectsRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ResourcesRoute: typeof ResourcesRoute
   SasehacksRoute: typeof SasehacksRoute
@@ -767,6 +788,7 @@ const rootRouteChildren: RootRouteChildren = {
   MentorMenteeRoute: MentorMenteeRoute,
   PastBoardRoute: PastBoardRoute,
   ProgramsRoute: ProgramsRoute,
+  ProjectsRoute: ProjectsRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ResourcesRoute: ResourcesRoute,
   SasehacksRoute: SasehacksRoute,
@@ -808,6 +830,7 @@ export const routeTree = rootRoute
         "/mentor-mentee",
         "/past-board",
         "/programs",
+        "/projects",
         "/reset-password",
         "/resources",
         "/sasehacks",
@@ -874,6 +897,9 @@ export const routeTree = rootRoute
     },
     "/programs": {
       "filePath": "programs.tsx"
+    },
+    "/projects": {
+      "filePath": "projects.tsx"
     },
     "/reset-password": {
       "filePath": "reset-password.tsx"

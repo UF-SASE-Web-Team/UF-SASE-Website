@@ -15,7 +15,7 @@ export const Route = createFileRoute("/gulfgames")({
           subtitle="For more information, please visit our Gulf Games promotional post on Instagram!"
           buttonText="Learn More on Instagram"
           buttonHref="https://www.instagram.com/usfsase/p/DU9LgtsjyqT/"
-          date="April 11, 2026"
+          date="April 23, 2026"
           location="USF Recreation"
         />
         <div
@@ -32,7 +32,7 @@ export const Route = createFileRoute("/gulfgames")({
             <div className="items-start text-left">
               <p className="mt-6 text-saseBlue sm:mt-2">Why You Should Attend</p>
               <ul className="ml-6 list-disc">
-                <li>Only $6 to participate</li>
+                <li>Free to participate</li>
                 <li>Friendly field day-style games and competition</li>
                 <li>Meet members from SASE chapters across the Southeast</li>
                 <li>Free lunch included</li>

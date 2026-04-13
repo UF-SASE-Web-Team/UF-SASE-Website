@@ -1,5 +1,6 @@
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
+import Carousel from "@components/carousel/Carousel";
 import { EventPageHeader } from "@components/custom_ui/EventPageHeader";
 import EventSponsorCard from "@components/custom_ui/EventSponsorCard";
 import { useIsMobile } from "@hooks/useIsMobile";
@@ -68,6 +69,13 @@ export const Route = createFileRoute("/sasehacks")({
               ))}
             </div>
           </div>
+        </div>
+
+        <p className="header-text">RECAP</p>
+
+        <div className="max-w-7xl">
+          <Carousel purpose="Images" prog="SASEHacks" />
+          <div className="mb-10" />
         </div>
       </div>
     );

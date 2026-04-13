@@ -10,6 +10,7 @@ export const blogSchema = z.object({
   timeUpdated: z.string().min(0, "Update time must be a valid timestamp."),
   images: z.array(z.string().url()).optional(),
   tags: z.array(z.string()).optional(),
+  username: z.string().optional(),
 });
 
 export const blogTitleSchema = z.object({

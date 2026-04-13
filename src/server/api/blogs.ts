@@ -3,6 +3,7 @@ import * as Schema from "@db/tables";
 import { createErrorResponse, createSuccessResponse } from "@shared/utils";
 import { eq, like } from "drizzle-orm";
 import { Hono } from "hono";
+import { users } from "@db/tables";
 
 const blogRoutes = new Hono();
 
@@ -50,7 +51,19 @@ const updateBlogTags = async (blogId: string, tags: Array<string> = []) => {
 // fetch all blogs with tags
 blogRoutes.get("/blogs/all", async (c) => {
   try {
-    const blogs = await db.select().from(Schema.blogs);
+    const blogs = await db
+  .select({
+    id: Schema.blogs.id,
+    title: Schema.blogs.title,
+    content: Schema.blogs.content,
+    authorId: Schema.blogs.authorId,
+    images: Schema.blogs.images,
+    publishedDate: Schema.blogs.publishedDate,
+    timeUpdated: Schema.blogs.timeUpdated,
+    username: users.username,
+  })
+  .from(Schema.blogs)
+  .leftJoin(users, eq(Schema.blogs.authorId, users.id));
 
     // get tags for each blog
     const blogsWithTags = await Promise.all(
@@ -96,9 +109,18 @@ blogRoutes.get("/blogs/search/:title", async (c) => {
     const searchTitle = c.req.param("title");
 
     const blogs = await db
-      .select()
-      .from(Schema.blogs)
-      .where(like(Schema.blogs.title, `%${searchTitle}%`));
+  .select({
+    id: Schema.blogs.id,
+    title: Schema.blogs.title,
+    content: Schema.blogs.content,
+    authorId: Schema.blogs.authorId,
+    images: Schema.blogs.images,
+    publishedDate: Schema.blogs.publishedDate,
+    timeUpdated: Schema.blogs.timeUpdated,
+    username: users.username, 
+  })
+  .from(Schema.blogs)
+  .leftJoin(users, eq(Schema.blogs.authorId, users.id));
 
     // get tags for each blog
     const blogsWithTags = await Promise.all(

@@ -9,9 +9,9 @@ export type BlogTag = SchemaTag;
 // Enhanced display type that components use
 export interface BlogDisplay extends Omit<BlogBase, "images" | "tags" | "authorId"> {
   images: Array<string>;
+  tags: Array<string>;
   author: string;
   read_time?: string;
-  tags: Array<string>;
   displayEditButton?: boolean;
 }
 
@@ -80,3 +80,8 @@ export interface BlogTagsProps {
 export interface BlogCarouselProps {
   images: Array<string>;
 }
+
+export type BlogAPI = BlogBase & {
+  username: string;
+  tags?: string[];
+};

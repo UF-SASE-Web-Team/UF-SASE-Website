@@ -12,6 +12,7 @@ import BlogExpanded from "../components/blogs/BlogExpanded";
 import BlogForm from "../components/blogs/BlogForm";
 import BlogHeader from "../components/blogs/BlogHeader";
 import BlogTags from "../components/blogs/BlogTags";
+import type { BlogAPI } from "@shared/types/blogTypes";
 import { useBlogFunctions } from "../hooks/useBlogsFunctions";
 import { useIsMobile } from "../hooks/useIsMobile";
 import { seo } from "../utils/seo";
@@ -63,14 +64,18 @@ function BlogsPage() {
 
   // process blogs
   const availableTags = tags.data?.map((tag) => tag.name) || ["Winter Banquet", "Collaborations", "GBMs"];
-  const processedBlogs = (blogs.data || []).map((blog) => ({
+  const processedBlogs = ((blogs.data as BlogAPI[]) || []).map((blog) => {
+  console.log("BLOG OBJECT:", blog); 
+
+  return {
     ...blog,
-    author: blog.authorId || "SASE at UF",
+    author: blog.username || "SASE at UF",
     images: blog.images || [],
     read_time: `${Math.ceil((blog.content?.split(/\s+/).length || 0) / 200)} min`,
     tags: blog.tags || [],
     displayEditButton: isAuthenticated,
-  }));
+  };
+});
 
   // filter blogs
   const filteredBlogs = activeTag ? processedBlogs.filter((blog) => blog.tags.some((tag) => tag.toLowerCase() === activeTag)) : processedBlogs;

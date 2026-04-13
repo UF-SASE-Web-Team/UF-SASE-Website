@@ -113,10 +113,7 @@ export const useBlogFunctions = () => {
   };
 
   const getBlogDisplayData = (): Array<BlogDisplay> => {
-    const blogsToUse =
-      activeTag && filteredBlogsQuery.data
-      ? (filteredBlogsQuery.data as BlogAPI[])
-      : (blogs.data as BlogAPI[]) || [];
+    const blogsToUse = activeTag && filteredBlogsQuery.data ? (filteredBlogsQuery.data as Array<BlogAPI>) : (blogs.data as Array<BlogAPI>) || [];
 
     return blogsToUse.map((blog) => ({
       ...blog,

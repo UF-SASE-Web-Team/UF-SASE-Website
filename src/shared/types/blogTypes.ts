@@ -83,5 +83,5 @@ export interface BlogCarouselProps {
 
 export type BlogAPI = BlogBase & {
   username: string;
-  tags?: string[];
+  tags?: Array<string>;
 };

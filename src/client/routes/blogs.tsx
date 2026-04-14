@@ -65,11 +65,9 @@ function BlogsPage() {
   // process blogs
   const availableTags = tags.data?.map((tag) => tag.name) || ["Winter Banquet", "Collaborations", "GBMs"];
   const processedBlogs = ((blogs.data as Array<BlogAPI>) || []).map((blog) => {
-    console.log("BLOG OBJECT:", blog);
-
     return {
       ...blog,
-      author: blog.username || "SASE at UF",
+      author: `${blog.firstName || ""} ${blog.lastName || ""}`.trim() || "SASE at UF",
       images: blog.images || [],
       read_time: `${Math.ceil((blog.content?.split(/\s+/).length || 0) / 200)} min`,
       tags: blog.tags || [],

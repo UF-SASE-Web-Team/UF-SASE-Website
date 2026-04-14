@@ -118,7 +118,7 @@ export const useBlogFunctions = () => {
     return blogsToUse.map((blog) => ({
       ...blog,
       images: blog.images || [],
-      author: blog.username || "UF SASE",
+      author: `${blog.firstName || ""} ${blog.lastName || ""}`.trim() || "UF SASE",
       read_time: `${Math.ceil((blog.content?.split(/\s+/).length || 0) / 200)} min`,
       tags: blog.tags || [],
       displayEditButton: isAuthenticated,

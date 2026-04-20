@@ -80,3 +80,9 @@ export interface BlogTagsProps {
 export interface BlogCarouselProps {
   images: Array<string>;
 }
+
+export type BlogAPI = BlogBase & {
+  firstName?: string;
+  lastName?: string;
+  tags?: Array<string>;
+};

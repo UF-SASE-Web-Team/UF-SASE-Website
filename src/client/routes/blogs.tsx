@@ -2,6 +2,7 @@
 
 import { cn } from "@/shared/utils";
 import { Button } from "@components/ui/button";
+import type { BlogAPI } from "@shared/types/blogTypes";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { imageUrls } from "../assets/imageUrls";
@@ -63,14 +64,16 @@ function BlogsPage() {
 
   // process blogs
   const availableTags = tags.data?.map((tag) => tag.name) || ["Winter Banquet", "Collaborations", "GBMs"];
-  const processedBlogs = (blogs.data || []).map((blog) => ({
-    ...blog,
-    author: blog.authorId || "SASE at UF",
-    images: blog.images || [],
-    read_time: `${Math.ceil((blog.content?.split(/\s+/).length || 0) / 200)} min`,
-    tags: blog.tags || [],
-    displayEditButton: isAuthenticated,
-  }));
+  const processedBlogs = ((blogs.data as Array<BlogAPI>) || []).map((blog) => {
+    return {
+      ...blog,
+      author: `${blog.firstName || ""} ${blog.lastName || ""}`.trim() || "SASE at UF",
+      images: blog.images || [],
+      read_time: `${Math.ceil((blog.content?.split(/\s+/).length || 0) / 200)} min`,
+      tags: blog.tags || [],
+      displayEditButton: isAuthenticated,
+    };
+  });
 
   // filter blogs
   const filteredBlogs = activeTag ? processedBlogs.filter((blog) => blog.tags.some((tag) => tag.toLowerCase() === activeTag)) : processedBlogs;

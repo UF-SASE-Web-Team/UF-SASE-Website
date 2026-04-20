@@ -5,7 +5,6 @@ import { FlatCompat } from "@eslint/eslintrc";
 import js from "@eslint/js";
 import tsParser from "@typescript-eslint/parser";
 import codegen from "eslint-plugin-codegen";
-import deprecation from "eslint-plugin-deprecation";
 import drizzle from "eslint-plugin-drizzle";
 import _import from "eslint-plugin-import";
 import react from "eslint-plugin-react";
@@ -28,7 +27,6 @@ export default [
   {
     plugins: {
       react,
-      deprecation,
       import: fixupPluginRules(_import),
       "sort-destructure-keys": sortDestructureKeys,
       "simple-import-sort": simpleImportSort,
@@ -81,7 +79,6 @@ export default [
       "import/order": "off",
       "simple-import-sort/imports": "off",
       "sort-destructure-keys/sort-destructure-keys": "error",
-      "deprecation/deprecation": "off",
 
       "@typescript-eslint/array-type": [
         "warn",

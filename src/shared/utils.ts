@@ -27,8 +27,10 @@ export const createSuccessResponse = <T>(c: Context, result: T, message: string 
   return c.json({ data: result, message, meta });
 };
 
-export const createErrorResponse = (c: Context, errCode: string, errMsg: string, statusCode: StatusCode = 500) =>
-  c.json({ error: { errCode, errMsg } }, statusCode);
+export const createErrorResponse = (c: Context, errCode: string, errMsg: string, statusCode: StatusCode = 500) => {
+  c.status(statusCode);
+  return c.json({ error: { errCode, errMsg } });
+};
 
 export const apiFetch = async (url: string, options: RequestInit = {}, dataSuccessSchema: ZodTypeAny): Promise<SuccessResponse> => {
   const response = await fetch(url, options);

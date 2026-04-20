@@ -6,6 +6,7 @@ import { MobileMissionCarousel } from "@/client/components/home/MobileMissionCar
 import { Missions } from "@/client/information/Missions";
 import SponsorInfo from "@/client/information/Sponsors";
 import { cn } from "@/shared/utils";
+import SASEBoard from "@assets/24-25_SASEBoard.png";
 import { imageUrls } from "@assets/imageUrls";
 import Carousel from "@components/carousel/Carousel";
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
@@ -33,8 +34,8 @@ export const Route = createFileRoute("/")({
       <div className="flex flex-col items-center">
         {/* Title & Image Section */}
         <div className="flex w-full flex-col items-center">
-          <img src={imageUrls["Board.png"]} alt="2023-2024 SASE Board" className="relative h-auto w-full" />
-          <div className="absolute w-full items-center px-[10%] pt-[30%] font-oswald text-3xl font-bold italic text-white sm:text-5xl lg:text-7xl xl:pt-[35%]">
+          <img src={SASEBoard} alt="2025-2026 SASE Board" className="relative h-auto w-full" />
+          <div className="absolute h-full w-full items-center bg-gradient-to-b from-transparent to-black px-[10%] pt-[25%] font-oswald text-3xl font-bold italic text-white sm:text-5xl lg:text-7xl xl:pt-[30%]">
             <h1 className="flex w-full items-center">
               <span>S </span>
               <img src={imageUrls["WhiteLogo.png"]} alt="SASE Logo" className="inline-block h-[1.5em] align-middle" />

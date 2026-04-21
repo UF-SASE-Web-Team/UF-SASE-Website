@@ -1,5 +1,5 @@
 import { db } from "@/server/db/db";
-import { requireSession } from "@/server/middleware/auth";
+import { requireRoles, requireSession } from "@/server/middleware/auth";
 import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import * as Schema from "@db/tables";
 import { asc } from "drizzle-orm";
@@ -121,6 +121,32 @@ alumniRoutes.get("/alumni-bank", requireSession, async (c) => {
     console.error("Error fetching alumni bank:", error);
     return createErrorResponse(c, "FETCH_ALUMNI_BANK_ERROR", "Failed to fetch alumni bank", 500);
   }
+});
+
+alumniRoutes.get("/alumni-bank/refresh/status", requireSession, requireRoles(["admin"]), async (c) => {
+  const { getAlumniRefreshStatus, validateAlumniRefreshConfig } = await import("@/server/services/alumniBankRefresh");
+  const configCheck = validateAlumniRefreshConfig();
+  return createSuccessResponse(
+    c,
+    {
+      ...getAlumniRefreshStatus(),
+      pipelineReady: configCheck.ok,
+      pipelineReason: configCheck.reason ?? null,
+      mcpUrl: configCheck.mcpUrl,
+    },
+    "Alumni refresh status retrieved",
+  );
+});
+
+alumniRoutes.post("/alumni-bank/refresh", requireSession, requireRoles(["admin"]), async (c) => {
+  const { startAlumniRefresh, validateAlumniRefreshConfig } = await import("@/server/services/alumniBankRefresh");
+  const configCheck = validateAlumniRefreshConfig();
+  if (!configCheck.ok) {
+    return createErrorResponse(c, "ALUMNI_REFRESH_CONFIG_INVALID", configCheck.reason ?? "Alumni refresh configuration is invalid.", 400);
+  }
+
+  const result = startAlumniRefresh();
+  return createSuccessResponse(c, result.status, result.started ? "Alumni refresh started." : "Alumni refresh is already running.");
 });
 
 export default alumniRoutes;

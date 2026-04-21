@@ -1,17 +1,48 @@
-import { fetchAlumniBank } from "@client/api/alumniBank";
+import { fetchAlumniBank, fetchAlumniRefreshStatus, triggerAlumniRefresh } from "@client/api/alumniBank";
+import { useAuth } from "@hooks/AuthContext";
 import { Icon } from "@iconify/react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useRef } from "react";
 
 export const Route = createFileRoute("/profile/alumni-bank")({
   component: AlumniBankPage,
 });
 
 function AlumniBankPage() {
+  const { isAdmin } = useAuth();
+  const queryClient = useQueryClient();
+  const previousRefreshState = useRef<string | null>(null);
+
   const { data, error, isLoading } = useQuery({
     queryKey: ["alumni-bank"],
     queryFn: fetchAlumniBank,
   });
+
+  const refreshStatusQuery = useQuery({
+    queryKey: ["alumni-bank-refresh-status"],
+    queryFn: fetchAlumniRefreshStatus,
+    enabled: isAdmin,
+    refetchInterval: (query) => {
+      return query.state.data?.state === "running" ? 2_000 : false;
+    },
+  });
+
+  const triggerRefresh = useMutation({
+    mutationFn: triggerAlumniRefresh,
+    onSuccess: async () => {
+      await refreshStatusQuery.refetch();
+    },
+  });
+
+  useEffect(() => {
+    if (!isAdmin) return;
+    const state = refreshStatusQuery.data?.state ?? null;
+    if (previousRefreshState.current === "running" && state === "completed") {
+      void queryClient.invalidateQueries({ queryKey: ["alumni-bank"] });
+    }
+    previousRefreshState.current = state;
+  }, [isAdmin, queryClient, refreshStatusQuery.data?.state]);
 
   if (isLoading) return <div className="p-10 text-center">Loading alumni bank...</div>;
   if (error) return <div className="p-10 text-center text-red-600">Error: {(error as Error).message}</div>;
@@ -19,6 +50,70 @@ function AlumniBankPage() {
   return (
     <div className="group mx-auto w-full max-w-7xl rounded-2xl bg-background px-4 py-6 shadow-xl md:px-10">
       <h1 className="pb-6 text-xl font-bold">Alumni Bank</h1>
+
+      {isAdmin && (
+        <section className="mb-6 rounded-xl border p-4">
+          <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h2 className="text-lg font-semibold">Alumni Bank Update</h2>
+              <p className="text-sm text-gray-500">Manual refresh from configured LinkedIn MCP.</p>
+            </div>
+            <button
+              onClick={() => triggerRefresh.mutate()}
+              disabled={
+                triggerRefresh.isPending ||
+                refreshStatusQuery.isFetching ||
+                refreshStatusQuery.data?.state === "running" ||
+                refreshStatusQuery.data?.pipelineReady === false
+              }
+              className="rounded-md bg-saseBlue px-4 py-2 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50"
+            >
+              {refreshStatusQuery.data?.state === "running" ? "Refreshing..." : "Run Alumni Bank Update"}
+            </button>
+          </div>
+
+          <div className="mt-4 space-y-2 text-sm">
+            {refreshStatusQuery.error && <p className="text-red-600">Status error: {(refreshStatusQuery.error as Error).message}</p>}
+
+            {refreshStatusQuery.data && (
+              <>
+                <p>
+                  State: <span className="font-semibold">{refreshStatusQuery.data.state}</span>
+                </p>
+                <p>
+                  Progress:{" "}
+                  <span className="font-semibold">
+                    {refreshStatusQuery.data.processed}/{refreshStatusQuery.data.total}
+                  </span>{" "}
+                  | Success: {refreshStatusQuery.data.succeeded} | Failed: {refreshStatusQuery.data.failed} | Skipped:{" "}
+                  {refreshStatusQuery.data.skipped}
+                </p>
+                <p>
+                  Newly Added Graduates This Run: <span className="font-semibold">{refreshStatusQuery.data.added}</span>
+                </p>
+                {refreshStatusQuery.data.currentName && (
+                  <p>
+                    Current: {refreshStatusQuery.data.currentName} ({refreshStatusQuery.data.currentLinkedin})
+                  </p>
+                )}
+                {refreshStatusQuery.data.lastError && <p className="text-red-600">Last error: {refreshStatusQuery.data.lastError}</p>}
+                {refreshStatusQuery.data.pipelineReady === false && refreshStatusQuery.data.pipelineReason && (
+                  <p className="text-red-600">Pipeline config issue: {refreshStatusQuery.data.pipelineReason}</p>
+                )}
+                {refreshStatusQuery.data.logs.length > 0 && (
+                  <div className="max-h-48 overflow-y-auto rounded-md border bg-muted p-3 font-mono text-xs">
+                    {refreshStatusQuery.data.logs.slice(0, 12).map((log, index) => (
+                      <div key={`${log.timestamp}-${index}`} className={log.level === "error" ? "text-red-600" : "text-gray-700"}>
+                        [{new Date(log.timestamp).toLocaleTimeString()}] {log.level.toUpperCase()}: {log.message}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        </section>
+      )}
 
       {data && data.length > 0 ? (
         <div className="overflow-x-auto rounded-xl border">

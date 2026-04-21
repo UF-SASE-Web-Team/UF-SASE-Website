@@ -1,3 +1,8 @@
+import { db } from "@/server/db/db";
+import { requireSession } from "@/server/middleware/auth";
+import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
+import * as Schema from "@db/tables";
+import { asc } from "drizzle-orm";
 import { Hono } from "hono";
 
 const alumniRoutes = new Hono();
@@ -14,6 +19,35 @@ export interface CompanyInfo {
   currentCompany: string | null;
   pastCompanies: Array<string>;
 }
+
+export interface AlumniBankRow {
+  id: string;
+  name: string;
+  major: string;
+  minor: string;
+  graduationMonth: string;
+  graduationYear: number;
+  currentRole: string;
+  currentCompany: string;
+  pastCompanies: Array<string>;
+  email: string;
+  linkedin: string;
+}
+
+const monthToIndex = new Map<string, number>([
+  ["january", 1],
+  ["february", 2],
+  ["march", 3],
+  ["april", 4],
+  ["may", 5],
+  ["june", 6],
+  ["july", 7],
+  ["august", 8],
+  ["september", 9],
+  ["october", 10],
+  ["november", 11],
+  ["december", 12],
+]);
 
 // Identifies the current company and a deduplicated list of past companies
 // from a list of work experiences. A role is considered current if isCurrent
@@ -65,5 +99,28 @@ export function extractLinkedInUsername(input: string): string | null {
 
   return null;
 }
+
+alumniRoutes.get("/alumni-bank", requireSession, async (c) => {
+  try {
+    const rows = await db.select().from(Schema.alumniBank).orderBy(asc(Schema.alumniBank.name));
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
+
+    const filteredRows: Array<AlumniBankRow> = rows.filter((row) => {
+      if (!row.linkedin.trim()) return false;
+
+      const graduationMonth = monthToIndex.get(row.graduationMonth.trim().toLowerCase());
+      if (!graduationMonth) return false;
+
+      return row.graduationYear < currentYear || (row.graduationYear === currentYear && graduationMonth < currentMonth);
+    });
+
+    return createSuccessResponse(c, filteredRows, "Alumni bank retrieved successfully");
+  } catch (error) {
+    console.error("Error fetching alumni bank:", error);
+    return createErrorResponse(c, "FETCH_ALUMNI_BANK_ERROR", "Failed to fetch alumni bank", 500);
+  }
+});
 
 export default alumniRoutes;

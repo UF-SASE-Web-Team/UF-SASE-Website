@@ -2,6 +2,7 @@
 // import { eq } from "drizzle-orm";
 import infoRoutes from "@/server/api/professionalInfo";
 import { uploadRouter } from "@/server/api/uploadthing";
+import alumniRoutes from "@api/alumniBank";
 import authRoutes from "@api/auth";
 import blogRoutes from "@api/blogs";
 import contactRoutes from "@api/contact";
@@ -85,6 +86,7 @@ app
   .route("/api", profileRoutes)
   .route("/api", contactRoutes)
   .route("/api", eventRoutes)
+  .route("/api", alumniRoutes)
   .route("/api", sheetsRoutes)
   .route("/api", roleRoutes)
   .route("/api", mentorMenteeRoutes)

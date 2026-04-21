@@ -31,35 +31,9 @@ const client = createClient({
 
 const db = drizzle(client);
 
-const firstNames = [
-  "Avery",
-  "Jordan",
-  "Taylor",
-  "Casey",
-  "Riley",
-  "Morgan",
-  "Jamie",
-  "Alex",
-  "Drew",
-  "Emerson",
-  "Quinn",
-  "Skyler",
-];
+const firstNames = ["Avery", "Jordan", "Taylor", "Casey", "Riley", "Morgan", "Jamie", "Alex", "Drew", "Emerson", "Quinn", "Skyler"];
 
-const lastNames = [
-  "Nguyen",
-  "Patel",
-  "Kim",
-  "Tran",
-  "Choi",
-  "Liu",
-  "Shah",
-  "Wong",
-  "Reddy",
-  "Chen",
-  "Kaur",
-  "Singh",
-];
+const lastNames = ["Nguyen", "Patel", "Kim", "Tran", "Choi", "Liu", "Shah", "Wong", "Reddy", "Chen", "Kaur", "Singh"];
 
 const majors = [
   "Computer Science",
@@ -71,6 +45,7 @@ const majors = [
 ];
 
 const minors = ["Mathematics", "Business Administration", "Statistics", "Economics", "Digital Arts", "None"];
+const graduationMonths = ["January", "May", "August", "December"];
 
 const graduationTerms = ["Spring 2026", "Fall 2026", "Spring 2027", "Fall 2027", "Spring 2028"];
 const groups = ["Web Dev", "Mentorship", "Events", "Outreach", "Marketing", "Projects"];
@@ -110,20 +85,31 @@ const linkedInByUserId = new Map<
   {
     url: string;
     graduationYear: number;
+    graduationMonth?: string;
   }
 >([
   ["stephanie-fong-id", { url: "https://www.linkedin.com/in/stephanietfong/", graduationYear: 2024 }],
   ["nivedhaa-sankaran-id", { url: "https://www.linkedin.com/in/nivedhaa-sankaran/", graduationYear: 2027 }],
   ["lynette-hemingway-id", { url: "https://www.linkedin.com/in/lynette-hemingway/", graduationYear: 2027 }],
+  ["tai-tran-id", { url: "https://www.linkedin.com/in/ti-tai-tran/", graduationYear: 2025, graduationMonth: "May" }],
 ]);
 
-const pick = <T>(values: Array<T>, index: number): T => values[index % values.length]!;
+const pick = <T>(values: Array<T>, index: number): T => {
+  if (values.length === 0) {
+    throw new Error("Cannot pick from an empty array");
+  }
+  const value = values[index % values.length];
+  if (value === undefined) {
+    throw new Error(`Failed to pick value at index ${index}`);
+  }
+  return value;
+};
 
-const insertInChunks = async (table: Parameters<typeof db.insert>[0], rows: Array<Record<string, unknown>>) => {
+const insertInChunks = async <T>(table: Parameters<typeof db.insert>[0], rows: Array<T>) => {
   for (let index = 0; index < rows.length; index += INSERT_CHUNK_SIZE) {
     const chunk = rows.slice(index, index + INSERT_CHUNK_SIZE);
     if (chunk.length > 0) {
-      await db.insert(table).values(chunk);
+      await db.insert(table).values(chunk as Array<Record<string, unknown>>);
     }
   }
 };
@@ -229,6 +215,17 @@ const main = async () => {
       timeAdded: now - 10_000_000,
       timeUpdated: now - 10_000_000,
       points: 210,
+    },
+    {
+      id: "tai-tran-id",
+      username: "taitran",
+      password: defaultHash,
+      email: "tai.tran@ufsase.dev",
+      firstName: "Tai",
+      lastName: "Tran",
+      timeAdded: now - 8_000_000,
+      timeUpdated: now - 8_000_000,
+      points: 200,
     },
   ];
 
@@ -345,10 +342,7 @@ const main = async () => {
       "- Upcoming opportunities",
     ].join("\n"),
     authorId: allUsers[idx % allUsers.length]?.id,
-    images: [
-      `https://picsum.photos/seed/blog-${idx + 1}/1200/630`,
-      `https://picsum.photos/seed/blog-alt-${idx + 1}/1200/630`,
-    ],
+    images: [`https://picsum.photos/seed/blog-${idx + 1}/1200/630`, `https://picsum.photos/seed/blog-alt-${idx + 1}/1200/630`],
     publishedDate: new Date(now - idx * 7 * 86_400_000),
     timeUpdated: new Date(now - idx * 2 * 86_400_000),
   }));
@@ -414,21 +408,18 @@ const main = async () => {
     uploadedAt: new Date(now - idx * 10 * 86_400_000).toISOString(),
   }));
 
-  const pendingVerificationRows: Array<Record<string, unknown>> = Array.from(
-    { length: PENDING_VERIFICATIONS_COUNT },
-    (_, idx) => ({
+  const pendingVerificationRows: Array<Record<string, unknown>> = Array.from({ length: PENDING_VERIFICATIONS_COUNT }, (_, idx) => ({
+    email: `pending${idx + 1}@ufsase.dev`,
+    code: (100_000 + idx).toString(),
+    userData: JSON.stringify({
+      username: `pendinguser${idx + 1}`,
       email: `pending${idx + 1}@ufsase.dev`,
-      code: (100_000 + idx).toString(),
-      userData: JSON.stringify({
-        username: `pendinguser${idx + 1}`,
-        email: `pending${idx + 1}@ufsase.dev`,
-        firstName: pick(firstNames, idx),
-        lastName: pick(lastNames, idx),
-      }),
-      expiresAt: now + (idx + 1) * 30 * 60 * 1000,
-      attempts: idx % 3,
+      firstName: pick(firstNames, idx),
+      lastName: pick(lastNames, idx),
     }),
-  );
+    expiresAt: now + (idx + 1) * 30 * 60 * 1000,
+    attempts: idx % 3,
+  }));
 
   const linkedinRows: Array<Record<string, unknown>> = allUsers.slice(0, 50).map((user, idx) => {
     const linkedIn = linkedInByUserId.get(user.id);
@@ -472,14 +463,31 @@ const main = async () => {
     },
   ]);
 
-  const alumniBankRows: Array<Record<string, unknown>> = allUsers.slice(15, 55).map((user, idx) => ({
-    id: user.id,
-    name: `${user.firstName} ${user.lastName}`,
-    major: pick(majors, idx),
-    graduationYear: `${2024 + (idx % 5)}`,
-    currentCompany: pick(companyNames, idx),
-    pastCompanies: [pick(companyNames, idx + 2), pick(companyNames, idx + 5), pick(companyNames, idx + 8)],
-  }));
+  const alumniSeedUsers = [
+    allUsers.find((user) => user.id === "stephanie-fong-id"),
+    allUsers.find((user) => user.id === "nivedhaa-sankaran-id"),
+    allUsers.find((user) => user.id === "lynette-hemingway-id"),
+    allUsers.find((user) => user.id === "tai-tran-id"),
+    ...allUsers.slice(15, 52),
+  ].filter((user): user is SeedUser => Boolean(user));
+
+  const alumniBankRows: Array<Record<string, unknown>> = alumniSeedUsers.map((user, idx) => {
+    const linkedIn = linkedInByUserId.get(user.id);
+    const graduationYear = linkedIn?.graduationYear ?? 2022 + (idx % 4);
+    return {
+      id: user.id,
+      name: `${user.firstName} ${user.lastName}`,
+      major: pick(majors, idx),
+      minor: pick(minors, idx + 1),
+      graduationMonth: linkedIn?.graduationMonth ?? pick(graduationMonths, idx),
+      graduationYear,
+      currentRole: pick(roleTitles, idx),
+      currentCompany: pick(companyNames, idx),
+      pastCompanies: [pick(companyNames, idx + 2), pick(companyNames, idx + 5), pick(companyNames, idx + 8)],
+      email: user.email,
+      linkedin: linkedIn?.url ?? "",
+    };
+  });
 
   const semesterRows: Array<Record<string, unknown>> = [
     { id: "semester-fall-2022", semester: "Fall", year: 2022 },

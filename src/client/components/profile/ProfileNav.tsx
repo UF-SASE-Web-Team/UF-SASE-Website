@@ -7,6 +7,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 const NAV_ITEMS = [
   { to: "/profile", text: "Dashboard", icon: "mdi:view-dashboard-outline", color: "text-saseBlue", border: "bg-saseBlue" },
   { to: "/profile/info", text: "Profile", icon: "mdi:account-outline", color: "text-saseGreen", border: "bg-saseGreen" },
+  { to: "/profile/alumni-bank", text: "Alumni Bank", icon: "mdi:school-outline", color: "text-saseBlue", border: "bg-saseBlue" },
   { to: "/profile/security", text: "Security", icon: "mdi:lock-outline", color: "text-saseBlue", border: "bg-saseBlue" },
   { to: "/profile/settings", text: "Settings", icon: "mdi:cog-outline", color: "text-saseGreen", border: "bg-saseGreen" },
 ];

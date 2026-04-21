@@ -1,6 +1,7 @@
 export * from "./blogSchema";
 export * from "./blogTagRelationshipSchema";
 export * from "./blogTagSchema";
+export * from "./alumniBankSchema";
 export * from "./eventSchema";
 export * from "./MMRelationshipSchema";
 export * from "./professionalInfoSchema";

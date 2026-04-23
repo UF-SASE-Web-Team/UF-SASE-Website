@@ -1,6 +1,13 @@
 import { alumniBankRowSchema, alumniRefreshStatusSchema } from "@shared/schema";
 import { apiFetch } from "@shared/utils";
 
+export interface AlumniBankSearchParams {
+  search?: string;
+  major?: string;
+  company?: string;
+  graduationYear?: number;
+}
+
 export type AlumniBankEntry = {
   id: string;
   name: string;
@@ -39,9 +46,16 @@ export type AlumniRefreshStatus = {
   mcpUrl?: string;
 };
 
-export const fetchAlumniBank = async (): Promise<Array<AlumniBankEntry>> => {
+export const fetchAlumniBank = async (params?: AlumniBankSearchParams): Promise<Array<AlumniBankEntry>> => {
+  const qs = new URLSearchParams();
+  if (params?.search) qs.set("search", params.search);
+  if (params?.major) qs.set("major", params.major);
+  if (params?.company) qs.set("company", params.company);
+  if (params?.graduationYear !== undefined) qs.set("graduationYear", String(params.graduationYear));
+  const query = qs.toString();
+
   const response = await apiFetch(
-    "/api/alumni-bank",
+    query ? `/api/alumni-bank?${query}` : "/api/alumni-bank",
     {
       method: "GET",
       credentials: "include",

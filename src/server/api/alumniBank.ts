@@ -34,6 +34,47 @@ export interface AlumniBankRow {
   linkedin: string;
 }
 
+export interface AlumniBankSearchParams {
+  search?: string;
+  major?: string;
+  company?: string;
+  graduationYear?: number;
+}
+
+// Filters a list of alumni rows by optional search params. All params are AND'd.
+// search: case-insensitive substring match against name, currentRole, currentCompany, or any pastCompanies element
+// major: case-insensitive substring match against major
+// company: case-insensitive substring match against currentCompany or any pastCompanies element
+// graduationYear: exact match
+export function filterAlumni(rows: Array<AlumniBankRow>, params: AlumniBankSearchParams): Array<AlumniBankRow> {
+  const search = params.search?.trim().toLowerCase();
+  const major = params.major?.trim().toLowerCase();
+  const company = params.company?.trim().toLowerCase();
+  const { graduationYear } = params;
+
+  return rows.filter((row) => {
+    if (search) {
+      const inName = row.name.toLowerCase().includes(search);
+      const inRole = row.currentRole.toLowerCase().includes(search);
+      const inCompany = row.currentCompany.toLowerCase().includes(search);
+      const inPast = row.pastCompanies.some((c) => c.toLowerCase().includes(search));
+      if (!inName && !inRole && !inCompany && !inPast) return false;
+    }
+
+    if (major && !row.major.toLowerCase().includes(major)) return false;
+
+    if (company) {
+      const inCurrent = row.currentCompany.toLowerCase().includes(company);
+      const inPast = row.pastCompanies.some((c) => c.toLowerCase().includes(company));
+      if (!inCurrent && !inPast) return false;
+    }
+
+    if (graduationYear !== undefined && row.graduationYear !== graduationYear) return false;
+
+    return true;
+  });
+}
+
 const monthToIndex = new Map<string, number>([
   ["january", 1],
   ["february", 2],
@@ -116,7 +157,16 @@ alumniRoutes.get("/alumni-bank", requireSession, async (c) => {
       return row.graduationYear < currentYear || (row.graduationYear === currentYear && graduationMonth < currentMonth);
     });
 
-    return createSuccessResponse(c, filteredRows, "Alumni bank retrieved successfully");
+    const query = c.req.query();
+    const searchParams: AlumniBankSearchParams = {
+      search: query.search || undefined,
+      major: query.major || undefined,
+      company: query.company || undefined,
+      graduationYear: query.graduationYear ? parseInt(query.graduationYear, 10) : undefined,
+    };
+
+    const results = filterAlumni(filteredRows, searchParams);
+    return createSuccessResponse(c, results, "Alumni bank retrieved successfully");
   } catch (error) {
     console.error("Error fetching alumni bank:", error);
     return createErrorResponse(c, "FETCH_ALUMNI_BANK_ERROR", "Failed to fetch alumni bank", 500);

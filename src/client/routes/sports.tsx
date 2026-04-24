@@ -48,13 +48,13 @@ export const Route = createFileRoute("/sports")({
         </div>
 
         <div className="flex w-full flex-col items-center pb-10">
-          <div className="max-w-7xl">
+          <div className="mx-8 max-w-7xl py-10">
             <Carousel purpose="Images" prog="Sports" />
             <div className="mb-10" />
           </div>
 
           {/* Testimonials */}
-          <div className="max-w-7xl py-10">
+          <div className="mx-8 max-w-7xl py-10">
             <HeaderWithGreenBorder text="Testimonials" type="Subheader" />
             <Carousel purpose="Testimonials" prog="Sports" />
           </div>
@@ -63,7 +63,7 @@ export const Route = createFileRoute("/sports")({
           <GoalsSection goals={SportGoals} />
 
           {/* FAQs */}
-          <div className="max-w-7xl pt-10">
+          <div className="mx-8 max-w-7xl pt-10">
             <HeaderWithGreenBorder text="FAQs" type="Subheader" />
             <FAQ faqData={SportsFAQ} />
           </div>

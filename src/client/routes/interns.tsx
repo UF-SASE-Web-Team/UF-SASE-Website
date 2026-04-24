@@ -57,7 +57,7 @@ export const Route = createFileRoute("/interns")({
           </div>
 
           {/* Testimonials */}
-          <div className="max-w-7xl py-10">
+          <div className="mx-8 max-w-7xl py-10">
             <HeaderWithGreenBorder text="Testimonials" type="Subheader" />
             <Carousel purpose="Testimonials" prog="Interns" />
           </div>

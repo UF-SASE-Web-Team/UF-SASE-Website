@@ -183,7 +183,7 @@ export const SWTTeamLeads: Array<{
       {
         name: "Nathan Kim",
         image: imageUrls["NathanKim.jpg"],
-        quote: "나는 SWT 사랑해!",
+        quote: "SWT 최고야!",
         role: "Backend",
         mobileAlign: "left",
         mobileColor: "green",

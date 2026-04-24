@@ -1,12 +1,23 @@
+import { db } from "@/server/db/db";
+import { sessions } from "@db/tables";
+import { eq } from "drizzle-orm";
 import { createUploadthing, UploadThingError } from "uploadthing/server";
 import type { FileRouter } from "uploadthing/server";
 
 const f = createUploadthing();
 
 async function auth(req: Request) {
-  const key = req.headers.get("x-uploadthing-key");
-  if (key === process.env.UPLOADTHING_KEY) {
-    return { id: "Admin" };
+  const cookieHeader = req.headers.get("cookie");
+  if (!cookieHeader) return null;
+
+  const match = cookieHeader.match(/sessionId=([^;]+)/);
+  if (!match) return null;
+  
+  const sessionId = match[1];
+  const session = await db.select().from(sessions).where(eq(sessions.id, sessionId)).get();
+  
+  if (session && session.expiresAt > Date.now()) {
+    return { id: session.userId };
   }
   return null;
 }

@@ -9,9 +9,6 @@ interface BlogImageUploaderProps {
 
 export default function BlogImageUploader({ images, setImages }: BlogImageUploaderProps) {
   const { isUploading, startUpload } = useUploadThing("imageUploader", {
-    headers: {
-      "x-uploadthing-key": import.meta.env.VITE_UPLOADTHING_PUBLIC_KEY,
-    },
     onClientUploadComplete: (res) => {
       const newUrls = res.map((file) => file.ufsUrl);
       setImages([...images, ...newUrls]);

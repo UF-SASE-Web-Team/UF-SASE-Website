@@ -12,10 +12,10 @@ async function auth(req: Request) {
 
   const match = cookieHeader.match(/sessionId=([^;]+)/);
   if (!match) return null;
-  
+
   const sessionId = match[1];
   const session = await db.select().from(sessions).where(eq(sessions.id, sessionId)).get();
-  
+
   if (session && session.expiresAt > Date.now()) {
     return { id: session.userId };
   }

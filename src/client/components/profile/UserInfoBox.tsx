@@ -150,7 +150,7 @@ export default function UserInfoBox(props: UserInfoBoxProps) {
   };
 
   return (
-    <div className="group mx-auto w-full max-w-5xl rounded-2xl bg-background px-4 py-6 shadow-xl md:px-10">
+    <div className="group mx-auto w-full max-w-5xl rounded-2xl border border-white bg-transparent px-4 py-6 shadow-xl md:px-10">
       <ConfigurableAccountBox title="Profile Information" initialData={initialData} fieldConfigs={fieldConfigs} onSave={handleSave} />
     </div>
   );

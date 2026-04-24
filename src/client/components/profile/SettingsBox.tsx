@@ -71,7 +71,7 @@ const SettingsBox: React.FC<SettingsBoxProps> = ({ darkMode, email, firstName, l
   };
 
   return (
-    <div className="group w-full rounded-2xl bg-background shadow-xl">
+    <div className="group w-full rounded-2xl bg-transparent">
       {/* Main Header */}
       <h1 className="mb-6 text-xl font-bold">Settings</h1>
 

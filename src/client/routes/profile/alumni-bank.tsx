@@ -27,6 +27,12 @@ function AlumniBankPage() {
   const { data, error, isLoading } = useQuery({
     queryKey: ["alumni-bank", filters],
     queryFn: () => fetchAlumniBank(filters),
+    retry: (failureCount, error) => {
+      if (error instanceof Error && error.message.includes("[DATA_REQUIRED]")) {
+        return false;
+      }
+      return failureCount < 3;
+    },
   });
 
   const refreshStatusQuery = useQuery({

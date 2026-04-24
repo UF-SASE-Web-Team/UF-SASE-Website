@@ -155,11 +155,7 @@ alumniRoutes.get("/alumni-bank", requireSession, async (c) => {
       linkedinRegex.test(profInfo.linkedin.trim()) &&
       profInfo.majors?.trim() &&
       profInfo.graduationSemester?.trim() &&
-      profInfo.phone?.trim() &&
-      profInfo.bio?.trim() &&
-      profInfo.discord?.trim() &&
-      profInfo.portfolio?.trim() &&
-      profInfo.minors?.trim();
+      profInfo.discord?.trim();
 
     if (!isEligible) {
       return createErrorResponse(c, "DATA_REQUIRED", "Please provide all your professional information to unlock the network.", 403);

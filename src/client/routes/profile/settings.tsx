@@ -19,18 +19,16 @@ export const Route = createFileRoute("/profile/settings")({
     if (!user) return <div className="p-10 text-center">User data unavailable</div>;
 
     return (
-      <div className="group mx-auto w-full max-w-5xl rounded-2xl border border-white bg-transparent px-4 py-6 shadow-xl md:px-10">
-        <SettingsBox
-          darkMode={darkMode}
-          toggleDarkMode={toggleDarkMode}
-          username={user.username}
-          email={user.email}
-          firstName={user.firstName}
-          lastName={user.lastName}
-          points={user.points}
-          roles={user.roles}
-        />
-      </div>
+      <SettingsBox
+        darkMode={darkMode}
+        toggleDarkMode={toggleDarkMode}
+        username={user.username}
+        email={user.email}
+        firstName={user.firstName}
+        lastName={user.lastName}
+        points={user.points}
+        roles={user.roles}
+      />
     );
   },
 });

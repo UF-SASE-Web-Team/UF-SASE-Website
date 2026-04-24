@@ -96,7 +96,7 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave, show
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {fieldConfigs.map((cfg) => {
           const hasError = validationErrors[cfg.name];
-          const errorClass = hasError ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-gray-300";
+          const errorClass = hasError ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "border-border";
 
           return (
             <div key={cfg.name} className="flex flex-col gap-2">
@@ -105,7 +105,7 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave, show
               {isEditing && cfg.editable ? (
                 <>
                   {cfg.type === "select" ? (
-                    <select {...register(cfg.name)} className={`rounded-lg border px-4 py-2 ${errorClass}`}>
+                    <select {...register(cfg.name)} className={`rounded-lg border bg-card px-4 py-2 text-foreground ${errorClass}`}>
                       <option value="">{cfg.placeholder || "Select an option"}</option>
                       {cfg.options?.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -118,21 +118,21 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave, show
                       rows={3}
                       {...register(cfg.name)}
                       placeholder={cfg.placeholder}
-                      className={`rounded-lg border px-4 py-2 ${errorClass}`}
+                      className={`rounded-lg border bg-card px-4 py-2 text-foreground ${errorClass}`}
                     />
                   ) : (
                     <input
                       type={cfg.type}
                       {...register(cfg.name)}
                       placeholder={cfg.placeholder}
-                      className={`rounded-lg border px-4 py-2 ${errorClass}`}
+                      className={`rounded-lg border bg-card px-4 py-2 text-foreground ${errorClass}`}
                     />
                   )}
                   {hasError && <span className="text-sm text-red-500">{hasError}</span>}
                 </>
               ) : cfg.name === "password" ? (
                 <div className="flex flex-col gap-1">
-                  <div className="rounded-lg bg-gray-50 px-4 py-2">••••••••</div>
+                  <div className="rounded-lg bg-muted px-4 py-2 text-foreground">••••••••</div>
                   {cfg.showResetLink && cfg.resetLinkUrl && isEditing && (
                     <a
                       href={cfg.resetLinkUrl}
@@ -144,7 +144,7 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave, show
                   )}
                 </div>
               ) : (
-                <div className="rounded-lg bg-gray-50 px-4 py-2 text-black">{initialData[cfg.name] || "-"}</div>
+                <div className="rounded-lg bg-muted px-4 py-2 text-foreground">{initialData[cfg.name] || "-"}</div>
               )}
             </div>
           );

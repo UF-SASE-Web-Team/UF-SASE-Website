@@ -252,21 +252,20 @@ export const Route = createFileRoute("/webdev")({
                 {/* Semester Project Team Leads */}
                 {buttonIndex === 2 && (
                   <>
-                    {projectLeads
-                      ?.slice(0, 3)
-                      .map((lead: { image: string; name: string; role: string; quote: string | undefined }, index) => (
-                        <MemberCard key={index} image={lead.image} name={lead.name} role={lead.role} textColor="green" quote={lead.quote} />
-                      ))}
+                    {projectLeads?.map((lead: { image: string; name: string; role: string; quote: string | undefined }, index) => (
+                      <MemberCard
+                        key={index}
+                        image={lead.image}
+                        name={lead.name}
+                        role={lead.role}
+                        textColor="green"
+                        quote={lead.quote}
+                        size="small"
+                      />
+                    ))}
                   </>
                 )}
               </div>
-              {buttonIndex === 2 && projectLeads && projectLeads.length > 3 && (
-                <div className="flex flex-row gap-8">
-                  {projectLeads.slice(3).map((lead: { image: string; name: string; role: string; quote: string | undefined }, index) => (
-                    <MemberCard key={index} image={lead.image} name={lead.name} role={lead.role} textColor="green" quote={lead.quote} />
-                  ))}
-                </div>
-              )}
             </div>
           )}
 

@@ -149,6 +149,14 @@ export const SWTTeamLeads: Array<{
     team: "Semester Project",
     information: [
       {
+        name: "Kenzo Fukuda",
+        image: imageUrls["KenzoFukuda.jpeg"],
+        quote: "skating into the codebase",
+        role: "Frontend",
+        mobileAlign: "left",
+        mobileColor: "green",
+      },
+      {
         name: "Helen Zou",
         image: imageUrls["HelenZou.png"],
         quote: "herm",
@@ -163,14 +171,6 @@ export const SWTTeamLeads: Array<{
         role: "UI/UX",
         mobileAlign: "right",
         mobileColor: "blue",
-      },
-      {
-        name: "Kenzo Fukuda",
-        image: imageUrls["KenzoFukuda.jpeg"],
-        quote: "skating into the codebase",
-        role: "Frontend",
-        mobileAlign: "left",
-        mobileColor: "green",
       },
       {
         name: "Jonathan Tang",

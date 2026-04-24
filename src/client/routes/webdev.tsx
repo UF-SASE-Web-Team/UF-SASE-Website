@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { DarkModeContext } from "@/client/components/custom_ui/DarkModeProvider";
 import MemberCard from "@/client/components/custom_ui/MemberCard";
 import MobileMemberCard from "@/client/components/custom_ui/MobileMemberCard";

@@ -1,5 +1,6 @@
 import { fetchAlumniBank, fetchAlumniRefreshStatus, triggerAlumniRefresh } from "@client/api/alumniBank";
 import type { AlumniBankSearchParams } from "@client/api/alumniBank";
+import { AlumniBankLockedState } from "@components/profile/AlumniBankLockedState";
 import { useAuth } from "@hooks/AuthContext";
 import { Icon } from "@iconify/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -53,7 +54,13 @@ function AlumniBankPage() {
     previousRefreshState.current = state;
   }, [isAdmin, queryClient, refreshStatusQuery.data?.state]);
 
-  if (error) return <div className="p-10 text-center text-red-600">Error: {(error as Error).message}</div>;
+  if (isLoading) return <div className="p-10 text-center">Loading alumni bank...</div>;
+  if (error) {
+    if ((error as Error).message.includes("[DATA_REQUIRED]")) {
+      return <AlumniBankLockedState />;
+    }
+    return <div className="p-10 text-center text-red-600">Error: {(error as Error).message}</div>;
+  }
 
   return (
     <div className="group mx-auto w-full max-w-7xl rounded-2xl bg-background px-4 py-6 shadow-xl md:px-10">

@@ -2,7 +2,7 @@ import { db } from "@/server/db/db";
 import { requireRoles, requireSession } from "@/server/middleware/auth";
 import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
 import * as Schema from "@db/tables";
-import { asc } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 import { Hono } from "hono";
 
 const alumniRoutes = new Hono();
@@ -143,6 +143,28 @@ export function extractLinkedInUsername(input: string): string | null {
 
 alumniRoutes.get("/alumni-bank", requireSession, async (c) => {
   try {
+    const session = c.get("session");
+    if (!session) return createErrorResponse(c, "UNAUTHORIZED", "No active session", 401);
+
+    const profInfo = await db.select().from(Schema.professionalInfo).where(eq(Schema.professionalInfo.userId, session.userId)).get();
+
+    const linkedinRegex = /^https:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9_-]+\/?$/;
+    const isEligible =
+      profInfo &&
+      profInfo.linkedin?.trim() &&
+      linkedinRegex.test(profInfo.linkedin.trim()) &&
+      profInfo.majors?.trim() &&
+      profInfo.graduationSemester?.trim() &&
+      profInfo.phone?.trim() &&
+      profInfo.bio?.trim() &&
+      profInfo.discord?.trim() &&
+      profInfo.portfolio?.trim() &&
+      profInfo.minors?.trim();
+
+    if (!isEligible) {
+      return createErrorResponse(c, "DATA_REQUIRED", "Please provide all your professional information to unlock the network.", 403);
+    }
+
     const rows = await db.select().from(Schema.alumniBank).orderBy(asc(Schema.alumniBank.name));
     const now = new Date();
     const currentYear = now.getFullYear();

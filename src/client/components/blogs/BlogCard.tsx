@@ -41,7 +41,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
         {/* main card */}
         <section
           className={cn(
-            "relative z-10 flex flex-col items-start rounded-[50px] border-2 border-border bg-white p-12",
+            "relative z-10 flex flex-col items-start rounded-[50px] border-2 border-border bg-muted p-12",
             "h-[450px] w-full shadow-lg transition sm:h-[600px] sm:flex-col",
           )}
         >
@@ -63,24 +63,24 @@ const BlogCard: React.FC<BlogCardProps> = ({ blog, expandedBlogId, isEditing, se
             <div className="relative flex items-center justify-center">
               {/* title */}
               <div className="relative mb-2 flex w-full items-start justify-start">
-                <h2 className={cn("font-oswald text-2xl font-bold text-gray-800 sm:text-4xl")}>{blog.title}</h2>
+                <h2 className={cn("font-oswald text-2xl font-bold sm:text-4xl")}>{blog.title}</h2>
               </div>
             </div>
             {/* author, date */}
-            <p className="mt-2 font-serif text-sm italic text-gray-600 sm:text-lg">{formattedDate}</p>
+            <p className="mt-2 font-serif text-sm italic sm:text-lg">{formattedDate}</p>
 
             {/* read time */}
-            {blog.read_time && <span className="mt-2 rounded-full bg-gray-100 px-4 py-1 text-sm text-gray-600">{blog.read_time} read</span>}
+            {blog.read_time && <span className="mt-2 rounded-full bg-muted px-4 py-1 text-sm">{blog.read_time} read</span>}
 
             {/* content */}
-            <p className={cn("mt-4 line-clamp-4 font-redhat text-gray-700", "text-sm sm:text-lg")}>
+            <p className={cn("mt-4 line-clamp-4 font-redhat", "text-sm sm:text-lg")}>
               {blog.content ? blog.content.substring(0, 80) + "..." : "No content available"}
             </p>
 
             {/* read more button*/}
             <div className="mt-6 flex w-full justify-center">
               <div className="relative">
-                <div className="absolute -inset-0.5 rounded-full bg-white shadow-md" />
+                <div className="absolute -inset-0.5 rounded-full bg-muted shadow-md" />
                 <Button
                   className={cn(
                     "relative rounded-full bg-saseBlue font-serif",

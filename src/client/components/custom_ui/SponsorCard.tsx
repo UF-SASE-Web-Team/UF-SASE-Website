@@ -64,7 +64,7 @@ const SponsorCard = ({
       {/* Main Card with solid opaque shadow */}
       <div
         className={cn(
-          "relative isolate flex h-full flex-col items-center rounded-2xl border-foreground bg-muted duration-300 hover:scale-105",
+          "relative isolate flex h-full flex-col items-center rounded-3xl border-foreground bg-muted duration-300 hover:scale-105",
           // solid green shadow
           "shadow-[4px_4px_0_#7DC242]",
           "sm:shadow-[5px_5px_0_#7DC242] md:shadow-[6px_6px_0_#7DC242]",

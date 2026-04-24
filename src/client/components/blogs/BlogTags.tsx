@@ -21,14 +21,14 @@ const BlogTags: React.FC<BlogTagsProps> = ({ activeTag, onSearch, onTagClick, ta
   const navButtonClasses = cn(
     "flex items-center px-2 py-1 text-sm",
     "sm:px-3 sm:py-2 sm:text-base",
-    "font-serif -mb-px transition-colors hover:border-b-2 hover:border-black text-foreground",
+    "font-redhat -mb-px transition-colors hover:border-b-2 hover:border-black text-foreground",
   );
 
   const tagButtonClasses = (isActive: boolean) =>
     cn(
       "flex items-center px-2 py-1 text-sm",
       "sm:px-5 sm:py-2 sm:text-base",
-      "font-serif -mb-px transition-colors hover:border-b-2 hover:border-black text-foreground",
+      "font-redhat -mb-px transition-colors hover:border-b-2 hover:border-black text-foreground",
       isActive && "border-b-2 border-black font-bold",
     );
 
@@ -96,7 +96,7 @@ const BlogTags: React.FC<BlogTagsProps> = ({ activeTag, onSearch, onTagClick, ta
             placeholder="Search..."
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
-            className="dark: w-full rounded-full bg-gray-200 px-4 py-2 text-sm text-black sm:w-64 sm:px-6 sm:py-3 sm:text-base"
+            className="dark: w-full rounded-full bg-muted px-4 py-2 text-sm text-black sm:w-64 sm:px-6 sm:py-3 sm:text-base"
           />
           <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2 transform cursor-pointer">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -25,10 +25,10 @@ const BlogCarousel: React.FC<BlogCarouselProps> = ({ images }) => {
       {/* buttons */}
       {images.length > 1 && (
         <>
-          <button onClick={scrollPrev} className="absolute left-2 top-1/2 -translate-y-1/2 transform rounded-full bg-white p-2 shadow-md">
+          <button onClick={scrollPrev} className="absolute left-2 top-1/2 -translate-y-1/2 transform rounded-full bg-muted p-2 shadow-md">
             <ChevronLeft size={24} />
           </button>
-          <button onClick={scrollNext} className="absolute right-2 top-1/2 -translate-y-1/2 transform rounded-full bg-white p-2 shadow-md">
+          <button onClick={scrollNext} className="absolute right-2 top-1/2 -translate-y-1/2 transform rounded-full bg-muted p-2 shadow-md">
             <ChevronRight size={24} />
           </button>
         </>

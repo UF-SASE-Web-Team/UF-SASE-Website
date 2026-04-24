@@ -258,6 +258,9 @@ const ProfileInfoRoute = ProfileInfoImport.update({
 const ProfileAlumniBankRoute = ProfileAlumniBankImport.update({
   id: '/alumni-bank',
   path: '/alumni-bank',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+
 const ProfileAdminRoute = ProfileAdminImport.update({
   id: '/admin',
   path: '/admin',
@@ -489,6 +492,8 @@ declare module '@tanstack/react-router' {
       path: '/alumni-bank'
       fullPath: '/profile/alumni-bank'
       preLoaderRoute: typeof ProfileAlumniBankImport
+      parentRoute: typeof ProfileRouteImport
+    }
     '/profile/admin': {
       id: '/profile/admin'
       path: '/admin'

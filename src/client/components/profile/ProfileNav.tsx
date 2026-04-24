@@ -58,7 +58,7 @@ const ProfileNav: React.FC<{ profileName?: string }> = ({ profileName = "User" }
   );
 };
 
-const NavItem: React.FC<{ to: string; icon: string; text: string; color: string; border: string }> = ({ border, color, icon, text, to }) => {
+const NavItem: React.FC<{ to: string; icon: string; text: string; color: string; border: string }> = ({ color, icon, text, to }) => {
   return (
     <Link
       to={to}

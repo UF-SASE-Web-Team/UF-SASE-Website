@@ -49,29 +49,6 @@ export const Route = createFileRoute("/profile/")({
     if (!user) return <div className="p-10 text-center text-gray-500">User data unavailable</div>;
 
     return (
-      <div className="group mx-auto w-full max-w-5xl rounded-2xl border border-white bg-transparent px-4 py-6 shadow-xl md:px-10">
-        {/* Centered card just like AccountBox */}
-        <h1 className="pb-6 text-xl font-bold">Dashboard</h1>
-
-        {/* Pending Invites */}
-        <section className="space-y-4 pb-10">
-          <h2 className="text-xl font-semibold">Pending Invites</h2>
-          {invites.length === 0 ? (
-            <div className="rounded-lg border border-dashed border-gray-300 p-6 text-center text-gray-500">No pending invites.</div>
-          ) : (
-            <ul className="space-y-3">
-              {invites.map((invite) => (
-                <li key={invite.id} className="flex items-center justify-between rounded-lg border px-4 py-3">
-                  <span>
-                    Invite from <strong>{invite.mentorId}</strong>
-                  </span>
-                  <div className="space-x-2">
-                    <button onClick={() => handleAccept(invite.id)} className="rounded bg-green-500 px-3 py-1 text-white hover:bg-green-600">
-                      Accept
-                    </button>
-                    <button onClick={() => handleDecline(invite.id)} className="rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600">
-                      Decline
-                    </button>
       <div className="mx-auto w-full max-w-6xl px-2 py-4 md:px-4 md:py-8">
         <div className="flex flex-col gap-6 md:flex-row md:gap-8">
           {/* Left Subbox - 1/3 width */}

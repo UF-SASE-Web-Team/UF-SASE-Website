@@ -20,7 +20,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({ blogs, expandedBlogId, setExpan
       </div>
       <div className="w-full">
         <OmbreDivider />
-        <div className="flex w-full flex-col items-center justify-center bg-black py-10 dark:bg-greenBackground">
+        <div className="flex w-full flex-col items-center justify-center bg-black px-48 py-10 dark:bg-greenBackground">
           <div className="grid grid-cols-1 place-items-center gap-4 md:grid-cols-2">
             {blogs.map((blog) => (
               <BlogCard

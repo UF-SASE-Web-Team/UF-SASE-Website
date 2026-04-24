@@ -44,26 +44,26 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
 
   const renderContent = () => {
     if (!blog.content.includes("##")) {
-      return <p className={cn("mb-6 font-redhat", "text-sm text-gray-800 sm:text-base")}>{blog.content}</p>;
+      return <p className={cn("mb-6 font-redhat", "text-sm sm:text-base")}>{blog.content}</p>;
     }
     const sections = blog.content.split(/##\s*([^\n]+)/);
     return sections.map((section, idx) => {
       if (idx === 0) {
         return (
-          <p key="intro" className={cn("mb-6 font-redhat", "text-sm text-gray-800 sm:text-base")}>
+          <p key="intro" className={cn("mb-6 font-redhat", "text-sm sm:text-base")}>
             {section}
           </p>
         );
       }
       if (idx % 2 === 1) {
         return (
-          <h2 key={`h-${idx}`} className={cn("mb-2 font-redhat font-bold", "text-lg text-gray-800 sm:text-xl")}>
+          <h2 key={`h-${idx}`} className={cn("mb-2 font-redhat font-bold", "text-lg sm:text-xl")}>
             {section}
           </h2>
         );
       } else {
         return (
-          <p key={`p-${idx}`} className={cn("mb-6 font-redhat", "text-sm text-gray-800 sm:text-base")}>
+          <p key={`p-${idx}`} className={cn("mb-6 font-redhat", "text-sm sm:text-base")}>
             {section}
           </p>
         );
@@ -72,7 +72,7 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden bg-white">
+    <div className="fixed inset-0 z-50 overflow-y-auto overflow-x-hidden bg-muted">
       <div className="mx-auto max-w-full px-4 py-8 sm:max-w-6xl">
         {/* header */}
         <div className="relative mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -100,10 +100,10 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
             {/* mobile layout */}
             {isMobile ? (
               <div className="flex flex-col items-center">
-                <h1 className={cn("font-oswald font-bold text-gray-800", "text-xl")}>{blog.title}</h1>
+                <h1 className={cn("font-oswald font-bold", "text-xl")}>{blog.title}</h1>
 
                 {/* author & date */}
-                <p className="mt-2 text-center font-serif text-sm text-gray-600">
+                <p className="mt-2 text-center font-serif text-sm">
                   by {blog.author},{" "}
                   {new Date(blog.publishedDate).toLocaleDateString("en-US", {
                     month: "long",
@@ -120,11 +120,11 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
                   {blog.images.length > 0 ? (
                     <BlogCarousel images={blog.images} />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center rounded-lg bg-gray-200 text-gray-500">No images available</div>
+                    <div className="flex h-full w-full items-center justify-center rounded-lg bg-muted">No images available</div>
                   )}
                 </figure>
 
-                <div className={cn("mx-4 mb-8 mt-4 w-full overflow-y-auto rounded-2xl border-4 border-dashed border-saseBlue bg-gray-100 px-8 py-6")}>
+                <div className={cn("mx-4 mb-8 mt-4 w-full overflow-y-auto rounded-2xl border-4 border-dashed border-saseBlue bg-muted px-8 py-6")}>
                   {renderContent()}
                 </div>
               </div>
@@ -133,9 +133,9 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
                 {/* header */}
                 <div className="px-4 py-2 text-center">
                   <div className="relative flex items-center justify-center">
-                    <h1 className={cn("font-oswald font-bold text-gray-800", "text-xl sm:text-4xl")}>{blog.title}</h1>
+                    <h1 className={cn("font-oswald font-bold", "text-xl sm:text-4xl")}>{blog.title}</h1>
                   </div>
-                  <div className={cn("mt-2 flex items-center justify-center font-redhat", "text-sm text-gray-600 sm:text-base")}>
+                  <div className={cn("mt-2 flex items-center justify-center font-redhat", "text-sm sm:text-base")}>
                     <span className="mr-2 font-bold text-[#0668B3]">{blog.read_time || "15 min"} read</span>
                     <span className="mx-2">by {blog.author}</span>
                     <span className="ml-2">
@@ -152,9 +152,9 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
                   {blog.images.length > 0 ? (
                     <BlogCarousel images={blog.images} />
                   ) : (
-                    <div className="flex h-64 w-full items-center justify-center rounded-lg bg-gray-200 text-gray-500">No images available</div>
+                    <div className="flex h-64 w-full items-center justify-center rounded-lg bg-muted">No images available</div>
                   )}
-                  <div className={cn("mt-2 font-redhat", "text-center text-sm text-gray-500 sm:text-base")}>
+                  <div className={cn("mt-2 font-redhat", "text-center text-sm sm:text-base")}>
                     {blog.images.length > 0 ? "caption lorem ipsum yuh lots of words to say about this photo" : ""}
                   </div>
                 </div>
@@ -168,12 +168,12 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
         <div className="mt-10 flex w-full justify-center gap-10">
           {onNavigatePrev && (
             <div className="relative">
-              <div className="absolute -inset-0.5 rounded-full bg-white shadow-md" />
+              <div className="absolute -inset-0.5 rounded-full bg-muted shadow-md" />
               <Button
                 onClick={onNavigatePrev}
                 className={cn(
                   "relative rounded-full bg-saseBlue font-serif text-lg",
-                  "text-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
+                  "shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
                   "underline decoration-1 underline-offset-4",
                   "z-10 px-6 py-2",
                 )}
@@ -184,12 +184,12 @@ const BlogExpanded: React.FC<BlogExpandedProps> = ({
           )}
           {onNavigateNext && (
             <div className="relative">
-              <div className="absolute -inset-0.5 rounded-full bg-white shadow-md" />
+              <div className="absolute -inset-0.5 rounded-full bg-muted shadow-md" />
               <Button
                 onClick={onNavigateNext}
                 className={cn(
                   "relative rounded-full bg-saseBlue font-serif text-lg",
-                  "text-white shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
+                  "shadow-[2px_4px_12px_rgba(0,0,0,0.2)]",
                   "underline decoration-1 underline-offset-4",
                   "z-10 px-6 py-2",
                 )}

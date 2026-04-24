@@ -14,9 +14,9 @@ const SlideshowIndicator = ({ label }: SlideshowIndicatorProps) => {
         const isYearChar = /\d/.test(c); // digits -> year
 
         const baseClasses =
-          "flex items-center justify-center rounded-full font-redhat font-semibold text-white shadow-[0_3px_0_rgba(0,0,0,0.25)] " +
+          "flex items-center justify-center rounded-full font-redhat font-semibold text-white font-muted" +
           "h-10 w-10 border-[2px] text-base " +
-          "sm:h-11 sm:w-11 sm:border-[3px] sm:text-lg " +
+          "sm:h-11 sm:w-11 sm:border-[3px] sm:text-lg" +
           "md:h-12 md:w-12 md:border-[4px] md:text-xl";
 
         const colorClasses = isYearChar ? "bg-saseGreen border-saseGreen" : "bg-saseBlue border-saseBlue";

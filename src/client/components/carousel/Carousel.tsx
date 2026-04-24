@@ -177,10 +177,12 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
         ) : null}
 
         {/* Gradient Shading on left side */}
-        {purpose === "Images" ? (
+        {purpose === "Images" && !isMobile ? (
           <div className="absolute left-0 top-0 z-10 h-full w-[25%] bg-gradient-to-r from-white to-transparent dark:from-background" />
         ) : null}
-        {purpose === "Values" ? <div className="absolute left-0 top-0 z-10 h-full w-[25%] bg-gradient-to-r from-black to-transparent" /> : null}
+        {purpose === "Values" && !isMobile ? (
+          <div className="absolute left-0 top-0 z-10 h-full w-[25%] bg-gradient-to-r from-black to-transparent" />
+        ) : null}
 
         {/* Carousel slides */}
         <div className="overflow-hidden" ref={emblaRef}>
@@ -277,10 +279,12 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
         </div>
 
         {/* Gradient Shading on right side */}
-        {purpose === "Images" ? (
+        {purpose === "Images" && !isMobile ? (
           <div className="absolute right-0 top-0 z-10 h-full w-[25%] bg-gradient-to-l from-white to-transparent dark:from-background" />
         ) : null}
-        {purpose === "Values" ? <div className="absolute right-0 top-0 z-10 h-full w-[25%] bg-gradient-to-l from-black to-transparent" /> : null}
+        {purpose === "Values" && !isMobile ? (
+          <div className="absolute right-0 top-0 z-10 h-full w-[25%] bg-gradient-to-l from-black to-transparent" />
+        ) : null}
 
         {/* Right arrow for desktop */}
         {!isMobile ? (

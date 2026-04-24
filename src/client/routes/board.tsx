@@ -36,7 +36,7 @@ export const Route = createFileRoute("/board")({
         </div>
 
         {/* group picture */}
-        <div className="mb-16 mt-10 flex justify-center">
+        <div className="mb-16 mt-10 mx-6 flex justify-center">
           {/*Gradient/shadow*/}
           <div className="relative w-full max-w-5xl">
             <div className="pointer-events-none absolute inset-0 translate-x-4 translate-y-4 rounded-2xl bg-gradient-to-tr from-[#7DC242] to-[#0668B3] opacity-75" />

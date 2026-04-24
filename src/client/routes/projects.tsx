@@ -107,7 +107,7 @@ export const Route = createFileRoute("/projects")({
           <GoalsSection goals={ProjectGoals} />
 
           {/* Coming Soon */}
-          <div className="w-full max-w-7xl py-10">
+          <div className="w-full max-w-7xl px-6 py-10">
             <HeaderWithGreenBorder text="Coming Soon" type="Subheader" />
 
             <div className="rounded-[1.5rem] bg-gradient-to-r from-saseBlue to-saseGreen p-[3px]">

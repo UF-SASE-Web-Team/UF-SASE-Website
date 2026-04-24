@@ -17,8 +17,8 @@ export const Route = createFileRoute("/serc")({
           subtitle="For more information, please visit the SERC website!"
           buttonText="SERC WEBSITE"
           buttonHref="https://serc.saseconnect.org/"
-          date="TBA"
-          location="TBA"
+          date="January 17, 2026"
+          location="UCF"
         />
         <div
           className={cn(

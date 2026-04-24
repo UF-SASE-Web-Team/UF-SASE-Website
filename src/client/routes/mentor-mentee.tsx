@@ -71,8 +71,10 @@ export const Route = createFileRoute("/mentor-mentee")({
         </div>
 
         {/* Image & Bullet Points on Ombre Background */}
-        <div className="ombre-background mb-10 w-full max-w-7xl rounded-2xl">
-          <div className={cn({ "flex flex-col": isMobile, "grid grid-cols-[1fr_2fr]": !isMobile }, `items-center justify-center gap-4 px-8 py-4`)}>
+        <div className={cn({ "mx-6 rounded-none": isMobile, "rounded-2xl": !isMobile }, "ombre-background mb-10 w-full max-w-7xl")}>
+          <div
+            className={cn({ "flex flex-col": isMobile, "mx-6 grid grid-cols-[1fr_2fr]": !isMobile }, `items-center justify-center gap-4 px-8 py-4`)}
+          >
             <img src={imageUrls["MMgraphic.png"]} alt="Mentor-Mentee Graphic" className="max-w-sm object-contain" />
 
             <ul className="flex h-full flex-col justify-between space-y-6 pb-10 pt-6">

@@ -59,7 +59,7 @@ export const Route = createFileRoute("/sasehacks")({
 
         <p className="header-text">RECAP</p>
 
-        <div className="max-w-7xl">
+        <div className="mx-8 max-w-7xl">
           <Carousel purpose="Images" prog="SASEHacks" />
           <div className="my-24" />
         </div>

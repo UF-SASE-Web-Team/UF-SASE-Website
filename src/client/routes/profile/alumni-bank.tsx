@@ -63,7 +63,7 @@ function AlumniBankPage() {
   }
 
   return (
-    <div className="group mx-auto w-full max-w-7xl rounded-2xl bg-background px-4 py-6 shadow-xl md:px-10">
+    <div className="group mx-auto w-full max-w-7xl rounded-2xl border border-white bg-transparent px-4 py-6 shadow-xl md:px-10">
       <h1 className="pb-6 text-xl font-bold">Alumni Bank</h1>
 
       {isAdmin && (
@@ -71,7 +71,7 @@ function AlumniBankPage() {
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="text-lg font-semibold">Alumni Bank Update</h2>
-              <p className="text-sm text-gray-500">Manual refresh from configured LinkedIn MCP.</p>
+              <p className="text-sm italic">Manual refresh from configured LinkedIn MCP.</p>
             </div>
             <button
               onClick={() => triggerRefresh.mutate()}
@@ -168,34 +168,32 @@ function AlumniBankPage() {
         <div className="p-10 text-center text-gray-500">Loading alumni bank...</div>
       ) : data && data.length > 0 ? (
         <div className="overflow-x-auto rounded-xl border">
-          <table className="min-w-[1200px] divide-y divide-gray-200 text-left text-sm">
-            <thead className="bg-muted">
+          <table className="w-full text-left text-sm">
+            <thead className="bg-gray-200 dark:text-black">
               <tr>
-                <th className="px-4 py-3 font-semibold">Name</th>
-                <th className="px-4 py-3 font-semibold">Major</th>
-                <th className="px-4 py-3 font-semibold">Minor</th>
-                <th className="px-4 py-3 font-semibold">Graduation Month</th>
-                <th className="px-4 py-3 font-semibold">Graduation Year</th>
-                <th className="px-4 py-3 font-semibold">Current Role</th>
-                <th className="px-4 py-3 font-semibold">Current Company</th>
-                <th className="px-4 py-3 font-semibold">Past Companies</th>
-                <th className="px-4 py-3 font-semibold">Email</th>
-                <th className="px-4 py-3 font-semibold">LinkedIn</th>
+                <th className="px-4 py-2 font-semibold">Name</th>
+                <th className="px-4 py-2 font-semibold">Major</th>
+                <th className="px-4 py-2 font-semibold">Graduation</th>
+                <th className="px-4 py-2 font-semibold">Current Role</th>
+                <th className="px-4 py-2 font-semibold">Past Companies</th>
+                <th className="px-4 py-2 font-semibold">Email</th>
+                <th className="px-4 py-2 font-semibold">LinkedIn</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
               {data.map((row) => (
                 <tr key={row.id}>
-                  <td className="px-4 py-3">{row.name}</td>
-                  <td className="px-4 py-3">{row.major}</td>
-                  <td className="px-4 py-3">{row.minor}</td>
-                  <td className="px-4 py-3">{row.graduationMonth}</td>
-                  <td className="px-4 py-3">{row.graduationYear}</td>
-                  <td className="px-4 py-3">{row.currentRole}</td>
-                  <td className="px-4 py-3">{row.currentCompany}</td>
-                  <td className="px-4 py-3">{row.pastCompanies.join(", ") || "—"}</td>
-                  <td className="px-4 py-3">{row.email}</td>
-                  <td className="px-4 py-3">
+                  <td className="px-4 py-2">{row.name}</td>
+                  <td className="px-4 py-2">{row.major}</td>
+                  <td className="px-4 py-2">
+                    {row.graduationMonth} {row.graduationYear}
+                  </td>
+                  <td className="px-4 py-2">
+                    {row.currentRole} @ {row.currentCompany}
+                  </td>
+                  <td className="px-4 py-2">{row.pastCompanies.join(", ") || "—"}</td>
+                  <td className="px-4 py-2">{row.email}</td>
+                  <td className="px-4 py-2">
                     {row.linkedin.trim() ? (
                       <a href={row.linkedin} target="_blank" rel="noreferrer" className="inline-flex items-center text-[#0A66C2] hover:opacity-80">
                         <Icon icon="mdi:linkedin" className="text-xl" />

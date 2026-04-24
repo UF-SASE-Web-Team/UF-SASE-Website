@@ -65,7 +65,7 @@ export const Route = createFileRoute("/profile/")({
     if (!user) return <div>User data unavailable</div>;
 
     return (
-      <div className="group mx-auto w-full max-w-5xl rounded-2xl bg-background px-4 py-6 shadow-xl md:px-10">
+      <div className="group mx-auto w-full max-w-5xl rounded-2xl border border-white bg-transparent px-4 py-6 shadow-xl md:px-10">
         {/* Centered card just like AccountBox */}
         <h1 className="pb-6 text-xl font-bold">Dashboard</h1>
 

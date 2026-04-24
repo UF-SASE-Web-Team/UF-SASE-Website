@@ -149,14 +149,6 @@ export const SWTTeamLeads: Array<{
     team: "Semester Project",
     information: [
       {
-        name: "Kenzo Fukuda",
-        image: imageUrls["KenzoFukuda.jpeg"],
-        quote: "skating into the codebase",
-        role: "Frontend",
-        mobileAlign: "left",
-        mobileColor: "green",
-      },
-      {
         name: "Helen Zou",
         image: imageUrls["HelenZou.png"],
         quote: "herm",
@@ -173,6 +165,14 @@ export const SWTTeamLeads: Array<{
         mobileColor: "blue",
       },
       {
+        name: "Kenzo Fukuda",
+        image: imageUrls["KenzoFukuda.jpeg"],
+        quote: "skating into the codebase",
+        role: "Frontend",
+        mobileAlign: "left",
+        mobileColor: "green",
+      },
+      {
         name: "Jonathan Tang",
         image: imageUrls["JonathanTang.png"],
         quote: "SWT 是第一!",
@@ -183,7 +183,7 @@ export const SWTTeamLeads: Array<{
       {
         name: "Nathan Kim",
         image: imageUrls["NathanKim.jpg"],
-        quote: "tiffany was here",
+        quote: "나는 SWT 사랑해!",
         role: "Backend",
         mobileAlign: "left",
         mobileColor: "green",

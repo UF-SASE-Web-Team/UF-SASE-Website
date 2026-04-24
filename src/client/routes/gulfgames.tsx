@@ -1,5 +1,5 @@
 import { cn } from "@/shared/utils";
-// import { imageUrls } from "@assets/imageUrls";
+import { imageUrls } from "@assets/imageUrls";
 import { EventPageHeader } from "@components/custom_ui/EventPageHeader";
 import { useIsMobile } from "@hooks/useIsMobile";
 import { createFileRoute } from "@tanstack/react-router";
@@ -9,7 +9,7 @@ export const Route = createFileRoute("/gulfgames")({
     const isMobile = useIsMobile();
 
     return (
-      <div className="flex flex-col items-center py-10 font-redhat">
+      <div className="flex flex-col items-center py-10 text-center font-redhat">
         <EventPageHeader
           title="Gulf Games"
           subtitle="For more information, please visit our Gulf Games promotional post on Instagram!"
@@ -40,14 +40,34 @@ export const Route = createFileRoute("/gulfgames")({
               </ul>
             </div>
           </p>
-          {/* <img
+          <img
             src={imageUrls["GulfGamesPoster.png"]}
             alt="Gulf Games promotional poster"
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "350px", height: "auto" }}
-          /> */}
+          />
         </div>
-        {/* <p className="subheader-text">EVENT GALLERY</p> */}
+        <p className="subheader-text">EVENT GALLERY</p>
+        <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-center">
+          <img
+            src={imageUrls["GulfGamesPhoto1.jpg"]}
+            alt="SERC promotional poster"
+            className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
+            style={{ width: "350px", height: "auto" }}
+          />
+          <img
+            src={imageUrls["GulfGamesPhoto2.jpg"]}
+            alt="SERC promotional poster"
+            className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
+            style={{ width: "350px", height: "auto" }}
+          />
+          <img
+            src={imageUrls["GulfGamesPhoto3.jpg"]}
+            alt="SERC promotional poster"
+            className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
+            style={{ width: "350px", height: "auto", objectFit: "cover", objectPosition: "center" }}
+          />
+        </div>
       </div>
     );
   },

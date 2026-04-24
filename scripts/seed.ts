@@ -92,6 +92,7 @@ const linkedInByUserId = new Map<
   ["nivedhaa-sankaran-id", { url: "https://www.linkedin.com/in/nivedhaa-sankaran/", graduationYear: 2027 }],
   ["lynette-hemingway-id", { url: "https://www.linkedin.com/in/lynette-hemingway/", graduationYear: 2027 }],
   ["tai-tran-id", { url: "https://www.linkedin.com/in/ti-tai-tran/", graduationYear: 2025, graduationMonth: "May" }],
+  ["thuy-le-id", { url: "https://www.linkedin.com/in/thuy-n-le", graduationYear: 2027, graduationMonth: "May" }],
 ]);
 
 const pick = <T>(values: Array<T>, index: number): T => {
@@ -226,6 +227,17 @@ const main = async () => {
       timeAdded: now - 8_000_000,
       timeUpdated: now - 8_000_000,
       points: 200,
+    },
+    {
+      id: "thuy-le-id",
+      username: "thuyle",
+      password: defaultHash,
+      email: "thuy.le@ufsase.dev",
+      firstName: "Thuy",
+      lastName: "Le",
+      timeAdded: now - 5_000_000,
+      timeUpdated: now - 5_000_000,
+      points: 150,
     },
   ];
 
@@ -468,6 +480,7 @@ const main = async () => {
     allUsers.find((user) => user.id === "nivedhaa-sankaran-id"),
     allUsers.find((user) => user.id === "lynette-hemingway-id"),
     allUsers.find((user) => user.id === "tai-tran-id"),
+    allUsers.find((user) => user.id === "thuy-le-id"),
     ...allUsers.slice(15, 52),
   ].filter((user): user is SeedUser => Boolean(user));
 

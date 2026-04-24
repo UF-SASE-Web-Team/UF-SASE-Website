@@ -69,7 +69,7 @@ function AlumniBankPage() {
   }
 
   return (
-    <div className="group mx-auto mt-8 w-full max-w-7xl rounded-2xl bg-white px-4 pb-6 pt-8 shadow-xl md:px-10">
+    <div className="group mx-auto mt-8 w-full max-w-7xl rounded-2xl bg-card text-foreground px-4 pb-6 pt-8 shadow-xl md:px-10">
       <h1 className="pb-6 text-xl font-bold">Alumni Bank</h1>
 
       {isAdmin && (
@@ -124,7 +124,7 @@ function AlumniBankPage() {
                 {refreshStatusQuery.data.logs.length > 0 && (
                   <div className="max-h-48 overflow-y-auto rounded-md border bg-muted p-3 font-mono text-xs">
                     {refreshStatusQuery.data.logs.slice(0, 12).map((log, index) => (
-                      <div key={`${log.timestamp}-${index}`} className={log.level === "error" ? "text-red-600" : "text-gray-700"}>
+                      <div key={`${log.timestamp}-${index}`} className={log.level === "error" ? "text-red-600" : "text-muted-foreground"}>
                         [{new Date(log.timestamp).toLocaleTimeString()}] {log.level.toUpperCase()}: {log.message}
                       </div>
                     ))}
@@ -142,30 +142,30 @@ function AlumniBankPage() {
           placeholder="Search name, role, company..."
           value={inputValues.search ?? ""}
           onChange={(e) => setInputValues((f) => ({ ...f, search: e.target.value || undefined }))}
-          className="rounded border px-3 py-1.5 text-sm"
+          className="rounded border border-border bg-card px-3 py-1.5 text-sm text-foreground placeholder:text-muted-foreground"
         />
         <input
           type="text"
           placeholder="Major"
           value={inputValues.major ?? ""}
           onChange={(e) => setInputValues((f) => ({ ...f, major: e.target.value || undefined }))}
-          className="rounded border px-3 py-1.5 text-sm"
+          className="rounded border border-border bg-card px-3 py-1.5 text-sm text-foreground placeholder:text-muted-foreground"
         />
         <input
           type="text"
           placeholder="Company"
           value={inputValues.company ?? ""}
           onChange={(e) => setInputValues((f) => ({ ...f, company: e.target.value || undefined }))}
-          className="rounded border px-3 py-1.5 text-sm"
+          className="rounded border border-border bg-card px-3 py-1.5 text-sm text-foreground placeholder:text-muted-foreground"
         />
         <input
           type="number"
           placeholder="Grad Year"
           value={inputValues.graduationYear ?? ""}
           onChange={(e) => setInputValues((f) => ({ ...f, graduationYear: e.target.value ? parseInt(e.target.value, 10) : undefined }))}
-          className="w-28 rounded border px-3 py-1.5 text-sm"
+          className="w-28 rounded border border-border bg-card px-3 py-1.5 text-sm text-foreground placeholder:text-muted-foreground"
         />
-        <button onClick={() => setInputValues({})} className="rounded border px-3 py-1.5 text-sm text-gray-500 hover:bg-gray-100">
+        <button onClick={() => setInputValues({})} className="rounded border border-border px-3 py-1.5 text-sm text-muted-foreground hover:bg-muted">
           Clear
         </button>
       </div>
@@ -175,7 +175,7 @@ function AlumniBankPage() {
       ) : data && data.length > 0 ? (
         <div className="overflow-x-auto rounded-xl border">
           <table className="w-full text-left text-sm">
-            <thead className="bg-gray-200 dark:text-black">
+            <thead className="bg-muted">
               <tr>
                 <th className="px-4 py-2 font-semibold">Name</th>
                 <th className="px-4 py-2 font-semibold">Major</th>
@@ -186,7 +186,7 @@ function AlumniBankPage() {
                 <th className="px-4 py-2 font-semibold">LinkedIn</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100">
+            <tbody className="divide-y divide-border">
               {data.map((row) => (
                 <tr key={row.id}>
                   <td className="px-4 py-2">{row.name}</td>

@@ -24,7 +24,7 @@ const ProfileNav: React.FC<{ profileName?: string }> = ({ profileName = "User" }
   };
 
   return (
-    <div className="mt-8 flex w-full flex-col bg-white font-redhat md:w-60 md:rounded-3xl md:p-6 md:shadow-xl">
+    <div className="mt-8 flex w-full flex-col bg-card text-foreground font-redhat md:w-60 md:rounded-3xl md:p-6 md:shadow-xl">
       {/* Profile Info - Hidden on Mobile Top Nav to save space */}
       <div className="mb-6 hidden flex-col items-center text-center md:flex">
         <div className="flex h-32 w-32 items-center justify-center rounded-full bg-saseBlueLight text-white shadow-inner">
@@ -49,7 +49,7 @@ const ProfileNav: React.FC<{ profileName?: string }> = ({ profileName = "User" }
       </nav>
 
       {/* Desktop Logout Button */}
-      <div className="hidden bg-white md:mt-10 md:flex md:justify-center">
+      <div className="hidden bg-card md:mt-10 md:flex md:justify-center">
         <Button variant="destructive" size="sm" onClick={handleLogout} className="w-full">
           Log Out
         </Button>
@@ -65,16 +65,16 @@ const NavItem: React.FC<{ to: string; icon: string; text: string; color: string;
       activeOptions={{ exact: to === "/profile" }} // Ensures Dashboard isn't always active
       className="group relative flex items-center space-x-2 px-6 py-4 transition-all md:rounded-xl md:px-4 md:py-3"
       activeProps={{
-        className: cn("border", "border-white", color, "font-bold"),
+        className: cn("border", "border-transparent", color, "font-bold"),
       }}
     >
       {({ isActive }) => (
         <>
-          <Icon icon={icon} className={cn("text-2xl transition-colors", isActive ? "text-black" : "group-hover: text-gray-400")} />
+          <Icon icon={icon} className={cn("text-2xl transition-colors", isActive ? "text-foreground" : "text-muted-foreground group-hover:text-foreground")} />
           <span
             className={cn(
               "whitespace-nowrap text-sm font-medium transition-colors",
-              isActive ? `font-bold text-black` : "text-black group-hover:text-gray-900 dark:group-hover:text-white",
+              isActive ? "font-bold text-foreground" : "text-foreground group-hover:text-foreground",
             )}
           >
             {text}

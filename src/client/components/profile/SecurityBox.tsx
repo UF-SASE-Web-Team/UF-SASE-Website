@@ -9,7 +9,7 @@ const SecurityBox: React.FC = () => {
   };
 
   return (
-    <div className="group mx-auto mt-8 w-full max-w-5xl rounded-2xl bg-white px-4 pb-6 pt-8 shadow-xl md:px-10">
+    <div className="group mx-auto mt-8 w-full max-w-5xl rounded-2xl bg-card text-foreground px-4 pb-6 pt-8 shadow-xl md:px-10">
       <h2 className="mb-6 text-xl font-bold">Security</h2>
 
       <div className="flex justify-between">
@@ -30,7 +30,7 @@ const SecurityBox: React.FC = () => {
               Privacy Policy
             </summary>
             {activeDropdown === "privacy" && (
-              <div className="mt-2 max-h-40 overflow-y-auto rounded-lg bg-gray-100 p-4 font-redhat text-sm text-gray-700">
+              <div className="mt-2 max-h-40 overflow-y-auto rounded-lg bg-muted p-4 font-redhat text-sm text-muted-foreground">
                 <p>
                   This privacy policy ("policy") will help you understand how UF SASE ("us", "we", "our") uses and protects the data you provide to us
                   when you visit and use ufsase.com ("blog", "service").
@@ -78,7 +78,7 @@ const SecurityBox: React.FC = () => {
               User Agreement
             </summary>
             {activeDropdown === "user-agreement" && (
-              <div className="mt-2 max-h-40 overflow-y-auto rounded-lg bg-gray-100 p-4 font-redhat text-sm text-gray-700">
+              <div className="mt-2 max-h-40 overflow-y-auto rounded-lg bg-muted p-4 font-redhat text-sm text-muted-foreground">
                 <p>User agreement terms and conditions will go here.</p>
               </div>
             )}
@@ -99,7 +99,7 @@ const SecurityBox: React.FC = () => {
               Cookie Policy
             </summary>
             {activeDropdown === "cookie" && (
-              <div className="mt-2 max-h-40 overflow-y-auto rounded-lg bg-gray-100 p-4 font-redhat text-sm text-gray-700">
+              <div className="mt-2 max-h-40 overflow-y-auto rounded-lg bg-muted p-4 font-redhat text-sm text-muted-foreground">
                 <p>We use cookies to improve user experience and collect analytics.</p>
               </div>
             )}
@@ -120,7 +120,7 @@ const SecurityBox: React.FC = () => {
               Copyright Policy
             </summary>
             {activeDropdown === "copyright" && (
-              <div className="mt-2 max-h-40 overflow-y-auto rounded-lg bg-gray-100 p-4 font-redhat text-sm text-gray-700">
+              <div className="mt-2 max-h-40 overflow-y-auto rounded-lg bg-muted p-4 font-redhat text-sm text-muted-foreground">
                 <p>All content is copyrighted and should not be redistributed without permission.</p>
               </div>
             )}

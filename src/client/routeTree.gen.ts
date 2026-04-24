@@ -30,6 +30,7 @@ import { Route as PastBoardImport } from './routes/past-board'
 import { Route as MentorMenteeImport } from './routes/mentor-mentee'
 import { Route as LoginImport } from './routes/login'
 import { Route as InternsImport } from './routes/interns'
+import { Route as GulfgamesImport } from './routes/gulfgames'
 import { Route as GalleryImport } from './routes/gallery'
 import { Route as FreshmanFaqImport } from './routes/freshman-faq'
 import { Route as ForgotPasswordImport } from './routes/forgot-password'
@@ -45,6 +46,7 @@ import { Route as ProfileSettingsImport } from './routes/profile/settings'
 import { Route as ProfileSecurityImport } from './routes/profile/security'
 import { Route as ProfileInfoImport } from './routes/profile/info'
 import { Route as ProfileAlumniBankImport } from './routes/profile/alumni-bank'
+import { Route as ProfileAdminImport } from './routes/profile/admin'
 import { Route as UsersUsernameIdImport } from './routes/users/$username/$id'
 
 // Create/Update Routes
@@ -163,6 +165,12 @@ const InternsRoute = InternsImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const GulfgamesRoute = GulfgamesImport.update({
+  id: '/gulfgames',
+  path: '/gulfgames',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const GalleryRoute = GalleryImport.update({
   id: '/gallery',
   path: '/gallery',
@@ -250,6 +258,9 @@ const ProfileInfoRoute = ProfileInfoImport.update({
 const ProfileAlumniBankRoute = ProfileAlumniBankImport.update({
   id: '/alumni-bank',
   path: '/alumni-bank',
+const ProfileAdminRoute = ProfileAdminImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => ProfileRouteRoute,
 } as any)
 
@@ -331,6 +342,13 @@ declare module '@tanstack/react-router' {
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryImport
+      parentRoute: typeof rootRoute
+    }
+    '/gulfgames': {
+      id: '/gulfgames'
+      path: '/gulfgames'
+      fullPath: '/gulfgames'
+      preLoaderRoute: typeof GulfgamesImport
       parentRoute: typeof rootRoute
     }
     '/interns': {
@@ -471,6 +489,11 @@ declare module '@tanstack/react-router' {
       path: '/alumni-bank'
       fullPath: '/profile/alumni-bank'
       preLoaderRoute: typeof ProfileAlumniBankImport
+    '/profile/admin': {
+      id: '/profile/admin'
+      path: '/admin'
+      fullPath: '/profile/admin'
+      preLoaderRoute: typeof ProfileAdminImport
       parentRoute: typeof ProfileRouteImport
     }
     '/profile/info': {
@@ -515,6 +538,7 @@ declare module '@tanstack/react-router' {
 
 interface ProfileRouteRouteChildren {
   ProfileAlumniBankRoute: typeof ProfileAlumniBankRoute
+  ProfileAdminRoute: typeof ProfileAdminRoute
   ProfileInfoRoute: typeof ProfileInfoRoute
   ProfileSecurityRoute: typeof ProfileSecurityRoute
   ProfileSettingsRoute: typeof ProfileSettingsRoute
@@ -523,6 +547,7 @@ interface ProfileRouteRouteChildren {
 
 const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
   ProfileAlumniBankRoute: ProfileAlumniBankRoute,
+  ProfileAdminRoute: ProfileAdminRoute,
   ProfileInfoRoute: ProfileInfoRoute,
   ProfileSecurityRoute: ProfileSecurityRoute,
   ProfileSettingsRoute: ProfileSettingsRoute,
@@ -544,6 +569,7 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof ForgotPasswordRoute
   '/freshman-faq': typeof FreshmanFaqRoute
   '/gallery': typeof GalleryRoute
+  '/gulfgames': typeof GulfgamesRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
@@ -564,6 +590,7 @@ export interface FileRoutesByFullPath {
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
   '/profile/alumni-bank': typeof ProfileAlumniBankRoute
+  '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -581,6 +608,7 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof ForgotPasswordRoute
   '/freshman-faq': typeof FreshmanFaqRoute
   '/gallery': typeof GalleryRoute
+  '/gulfgames': typeof GulfgamesRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
@@ -601,6 +629,7 @@ export interface FileRoutesByTo {
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
   '/profile/alumni-bank': typeof ProfileAlumniBankRoute
+  '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -620,6 +649,7 @@ export interface FileRoutesById {
   '/forgot-password': typeof ForgotPasswordRoute
   '/freshman-faq': typeof FreshmanFaqRoute
   '/gallery': typeof GalleryRoute
+  '/gulfgames': typeof GulfgamesRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
@@ -640,6 +670,7 @@ export interface FileRoutesById {
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
   '/profile/alumni-bank': typeof ProfileAlumniBankRoute
+  '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -660,6 +691,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/freshman-faq'
     | '/gallery'
+    | '/gulfgames'
     | '/interns'
     | '/login'
     | '/mentor-mentee'
@@ -680,6 +712,7 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/webdev'
     | '/profile/alumni-bank'
+    | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -696,6 +729,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/freshman-faq'
     | '/gallery'
+    | '/gulfgames'
     | '/interns'
     | '/login'
     | '/mentor-mentee'
@@ -716,6 +750,7 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/webdev'
     | '/profile/alumni-bank'
+    | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -733,6 +768,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/freshman-faq'
     | '/gallery'
+    | '/gulfgames'
     | '/interns'
     | '/login'
     | '/mentor-mentee'
@@ -753,6 +789,7 @@ export interface FileRouteTypes {
     | '/verify-email'
     | '/webdev'
     | '/profile/alumni-bank'
+    | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -772,6 +809,7 @@ export interface RootRouteChildren {
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   FreshmanFaqRoute: typeof FreshmanFaqRoute
   GalleryRoute: typeof GalleryRoute
+  GulfgamesRoute: typeof GulfgamesRoute
   InternsRoute: typeof InternsRoute
   LoginRoute: typeof LoginRoute
   MentorMenteeRoute: typeof MentorMenteeRoute
@@ -805,6 +843,7 @@ const rootRouteChildren: RootRouteChildren = {
   ForgotPasswordRoute: ForgotPasswordRoute,
   FreshmanFaqRoute: FreshmanFaqRoute,
   GalleryRoute: GalleryRoute,
+  GulfgamesRoute: GulfgamesRoute,
   InternsRoute: InternsRoute,
   LoginRoute: LoginRoute,
   MentorMenteeRoute: MentorMenteeRoute,
@@ -847,6 +886,7 @@ export const routeTree = rootRoute
         "/forgot-password",
         "/freshman-faq",
         "/gallery",
+        "/gulfgames",
         "/interns",
         "/login",
         "/mentor-mentee",
@@ -876,6 +916,7 @@ export const routeTree = rootRoute
       "filePath": "profile/route.tsx",
       "children": [
         "/profile/alumni-bank",
+        "/profile/admin",
         "/profile/info",
         "/profile/security",
         "/profile/settings",
@@ -905,6 +946,9 @@ export const routeTree = rootRoute
     },
     "/gallery": {
       "filePath": "gallery.tsx"
+    },
+    "/gulfgames": {
+      "filePath": "gulfgames.tsx"
     },
     "/interns": {
       "filePath": "interns.tsx"
@@ -965,6 +1009,8 @@ export const routeTree = rootRoute
     },
     "/profile/alumni-bank": {
       "filePath": "profile/alumni-bank.tsx",
+    "/profile/admin": {
+      "filePath": "profile/admin.tsx",
       "parent": "/profile"
     },
     "/profile/info": {

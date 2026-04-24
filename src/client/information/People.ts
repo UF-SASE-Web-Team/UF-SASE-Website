@@ -180,6 +180,14 @@ export const SWTTeamLeads: Array<{
         mobileAlign: "right",
         mobileColor: "blue",
       },
+      // {
+      //   name: "Nathan Kim",
+      //   image: imageUrls["NathanKim.jpg"],
+      //   quote: "cooler quote coming soon",
+      //   role: "Backend",
+      //   mobileAlign: "left",
+      //   mobileColor: "green",
+      // },
     ],
   },
 ];

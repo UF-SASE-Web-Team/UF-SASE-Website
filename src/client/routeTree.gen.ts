@@ -487,18 +487,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WebdevImport
       parentRoute: typeof rootRoute
     }
-    '/profile/alumni-bank': {
-      id: '/profile/alumni-bank'
-      path: '/alumni-bank'
-      fullPath: '/profile/alumni-bank'
-      preLoaderRoute: typeof ProfileAlumniBankImport
-      parentRoute: typeof ProfileRouteImport
-    }
     '/profile/admin': {
       id: '/profile/admin'
       path: '/admin'
       fullPath: '/profile/admin'
       preLoaderRoute: typeof ProfileAdminImport
+      parentRoute: typeof ProfileRouteImport
+    }
+    '/profile/alumni-bank': {
+      id: '/profile/alumni-bank'
+      path: '/alumni-bank'
+      fullPath: '/profile/alumni-bank'
+      preLoaderRoute: typeof ProfileAlumniBankImport
       parentRoute: typeof ProfileRouteImport
     }
     '/profile/info': {
@@ -542,8 +542,8 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface ProfileRouteRouteChildren {
-  ProfileAlumniBankRoute: typeof ProfileAlumniBankRoute
   ProfileAdminRoute: typeof ProfileAdminRoute
+  ProfileAlumniBankRoute: typeof ProfileAlumniBankRoute
   ProfileInfoRoute: typeof ProfileInfoRoute
   ProfileSecurityRoute: typeof ProfileSecurityRoute
   ProfileSettingsRoute: typeof ProfileSettingsRoute
@@ -551,8 +551,8 @@ interface ProfileRouteRouteChildren {
 }
 
 const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
-  ProfileAlumniBankRoute: ProfileAlumniBankRoute,
   ProfileAdminRoute: ProfileAdminRoute,
+  ProfileAlumniBankRoute: ProfileAlumniBankRoute,
   ProfileInfoRoute: ProfileInfoRoute,
   ProfileSecurityRoute: ProfileSecurityRoute,
   ProfileSettingsRoute: ProfileSettingsRoute,
@@ -594,8 +594,8 @@ export interface FileRoutesByFullPath {
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
-  '/profile/alumni-bank': typeof ProfileAlumniBankRoute
   '/profile/admin': typeof ProfileAdminRoute
+  '/profile/alumni-bank': typeof ProfileAlumniBankRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -633,8 +633,8 @@ export interface FileRoutesByTo {
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
-  '/profile/alumni-bank': typeof ProfileAlumniBankRoute
   '/profile/admin': typeof ProfileAdminRoute
+  '/profile/alumni-bank': typeof ProfileAlumniBankRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -674,8 +674,8 @@ export interface FileRoutesById {
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
-  '/profile/alumni-bank': typeof ProfileAlumniBankRoute
   '/profile/admin': typeof ProfileAdminRoute
+  '/profile/alumni-bank': typeof ProfileAlumniBankRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -716,8 +716,8 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/verify-email'
     | '/webdev'
-    | '/profile/alumni-bank'
     | '/profile/admin'
+    | '/profile/alumni-bank'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -754,8 +754,8 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/verify-email'
     | '/webdev'
-    | '/profile/alumni-bank'
     | '/profile/admin'
+    | '/profile/alumni-bank'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -793,8 +793,8 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/verify-email'
     | '/webdev'
-    | '/profile/alumni-bank'
     | '/profile/admin'
+    | '/profile/alumni-bank'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -920,8 +920,8 @@ export const routeTree = rootRoute
     "/profile": {
       "filePath": "profile/route.tsx",
       "children": [
-        "/profile/alumni-bank",
         "/profile/admin",
+        "/profile/alumni-bank",
         "/profile/info",
         "/profile/security",
         "/profile/settings",
@@ -1012,10 +1012,12 @@ export const routeTree = rootRoute
     "/webdev": {
       "filePath": "webdev.tsx"
     },
-    "/profile/alumni-bank": {
-      "filePath": "profile/alumni-bank.tsx",
     "/profile/admin": {
       "filePath": "profile/admin.tsx",
+      "parent": "/profile"
+    },
+    "/profile/alumni-bank": {
+      "filePath": "profile/alumni-bank.tsx",
       "parent": "/profile"
     },
     "/profile/info": {

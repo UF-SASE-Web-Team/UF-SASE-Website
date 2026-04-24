@@ -1,9 +1,10 @@
 import { fetchAlumniBank, fetchAlumniRefreshStatus, triggerAlumniRefresh } from "@client/api/alumniBank";
+import type { AlumniBankSearchParams } from "@client/api/alumniBank";
 import { useAuth } from "@hooks/AuthContext";
 import { Icon } from "@iconify/react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const Route = createFileRoute("/profile/alumni-bank")({
   component: AlumniBankPage,
@@ -14,9 +15,17 @@ function AlumniBankPage() {
   const queryClient = useQueryClient();
   const previousRefreshState = useRef<string | null>(null);
 
+  const [inputValues, setInputValues] = useState<AlumniBankSearchParams>({});
+  const [filters, setFilters] = useState<AlumniBankSearchParams>({});
+
+  useEffect(() => {
+    const timer = setTimeout(() => setFilters(inputValues), 300);
+    return () => clearTimeout(timer);
+  }, [inputValues]);
+
   const { data, error, isLoading } = useQuery({
-    queryKey: ["alumni-bank"],
-    queryFn: fetchAlumniBank,
+    queryKey: ["alumni-bank", filters],
+    queryFn: () => fetchAlumniBank(filters),
   });
 
   const refreshStatusQuery = useQuery({
@@ -39,12 +48,11 @@ function AlumniBankPage() {
     if (!isAdmin) return;
     const state = refreshStatusQuery.data?.state ?? null;
     if (previousRefreshState.current === "running" && state === "completed") {
-      void queryClient.invalidateQueries({ queryKey: ["alumni-bank"] });
+      void queryClient.invalidateQueries({ queryKey: ["alumni-bank"], exact: false });
     }
     previousRefreshState.current = state;
   }, [isAdmin, queryClient, refreshStatusQuery.data?.state]);
 
-  if (isLoading) return <div className="p-10 text-center">Loading alumni bank...</div>;
   if (error) return <div className="p-10 text-center text-red-600">Error: {(error as Error).message}</div>;
 
   return (
@@ -115,7 +123,46 @@ function AlumniBankPage() {
         </section>
       )}
 
-      {data && data.length > 0 ? (
+      <div className="mb-4 flex flex-wrap gap-2">
+        <input
+          type="text"
+          placeholder="Search name, role, company..."
+          value={inputValues.search ?? ""}
+          onChange={(e) => setInputValues((f) => ({ ...f, search: e.target.value || undefined }))}
+          className="rounded border px-3 py-1.5 text-sm"
+        />
+        <input
+          type="text"
+          placeholder="Major"
+          value={inputValues.major ?? ""}
+          onChange={(e) => setInputValues((f) => ({ ...f, major: e.target.value || undefined }))}
+          className="rounded border px-3 py-1.5 text-sm"
+        />
+        <input
+          type="text"
+          placeholder="Company"
+          value={inputValues.company ?? ""}
+          onChange={(e) => setInputValues((f) => ({ ...f, company: e.target.value || undefined }))}
+          className="rounded border px-3 py-1.5 text-sm"
+        />
+        <input
+          type="number"
+          placeholder="Grad Year"
+          value={inputValues.graduationYear ?? ""}
+          onChange={(e) => setInputValues((f) => ({ ...f, graduationYear: e.target.value ? parseInt(e.target.value, 10) : undefined }))}
+          className="w-28 rounded border px-3 py-1.5 text-sm"
+        />
+        <button
+          onClick={() => setInputValues({})}
+          className="rounded border px-3 py-1.5 text-sm text-gray-500 hover:bg-gray-100"
+        >
+          Clear
+        </button>
+      </div>
+
+      {isLoading ? (
+        <div className="p-10 text-center text-gray-500">Loading alumni bank...</div>
+      ) : data && data.length > 0 ? (
         <div className="overflow-x-auto rounded-xl border">
           <table className="min-w-[1200px] divide-y divide-gray-200 text-left text-sm">
             <thead className="bg-muted">

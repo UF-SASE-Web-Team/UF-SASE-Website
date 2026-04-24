@@ -23,6 +23,7 @@ const main = async () => {
 
   const seenLogs = new Set<string>();
 
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     const status = getAlumniRefreshStatus();
 

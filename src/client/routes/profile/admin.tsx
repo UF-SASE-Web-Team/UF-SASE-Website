@@ -19,7 +19,7 @@ export const Route = createFileRoute("/profile/admin")({
 
     if (!isAdmin) return null;
     if (isLoading) return <div className="p-10 text-center">Loading users…</div>;
-    if (error) return <div className="p-10 text-red-600 font-bold">Error: {error.message}</div>;
+    if (error) return <div className="p-10 font-bold text-red-600">Error: {error.message}</div>;
 
     return (
       <div className="group mx-auto w-full max-w-5xl rounded-2xl bg-background px-4 py-6 shadow-xl md:px-10">
@@ -28,13 +28,9 @@ export const Route = createFileRoute("/profile/admin")({
           <h2 className="text-xl font-semibold">User Management</h2>
           <div className="flex w-full flex-col gap-6">
             {users && users.length > 0 ? (
-              users.map((user) => (
-                <AccountBox key={user.id} {...user} adminView={true} />
-              ))
+              users.map((user) => <AccountBox key={user.id} {...user} adminView={true} />)
             ) : (
-              <div className="rounded-lg border border-dashed border-gray-300 p-6 text-center text-gray-500">
-                No users found in the system.
-              </div>
+              <div className="rounded-lg border border-dashed border-gray-300 p-6 text-center text-gray-500">No users found in the system.</div>
             )}
           </div>
         </section>

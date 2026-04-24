@@ -44,8 +44,8 @@ export const Route = createFileRoute("/profile/")({
     };
 
     if (userLoading || loading) return <div className="p-10 text-center">Loading dashboard…</div>;
-    if (userError) return <div className="p-10 text-red-600 font-bold text-center">Error: {userError.message}</div>;
-    if (error) return <div className="p-10 text-red-600 font-bold text-center">Error: {error}</div>;
+    if (userError) return <div className="p-10 text-center font-bold text-red-600">Error: {userError.message}</div>;
+    if (error) return <div className="p-10 text-center font-bold text-red-600">Error: {error}</div>;
     if (!user) return <div className="p-10 text-center text-gray-500">User data unavailable</div>;
 
     return (
@@ -71,9 +71,19 @@ export const Route = createFileRoute("/profile/")({
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-bold text-gray-900">Get more!</h3>
                   </div>
-                  
+
                   <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-saseBlue py-3 font-bold text-white shadow-lg shadow-saseBlue/20 transition-all hover:scale-[1.02] hover:bg-blue-700 active:scale-95">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
                       <line x1="12" y1="5" x2="12" y2="19" />
                       <line x1="5" y1="12" x2="19" y2="12" />
                     </svg>
@@ -81,7 +91,8 @@ export const Route = createFileRoute("/profile/")({
                   </button>
 
                   <p className="text-xs leading-relaxed text-gray-400">
-                    Get point codes by attending <span className="font-semibold text-gray-600">SASE events</span> like GBMs, Workshops, and <span className="italic text-saseGreen">MORE!</span>
+                    Get point codes by attending <span className="font-semibold text-gray-600">SASE events</span> like GBMs, Workshops, and{" "}
+                    <span className="italic text-saseGreen">MORE!</span>
                   </p>
                 </div>
               </div>
@@ -101,7 +112,7 @@ export const Route = createFileRoute("/profile/")({
                   <div className="flex items-end justify-center gap-2 pt-10 md:gap-4">
                     {/* 2nd Place */}
                     <div className="flex flex-col items-center">
-                      <div className="flex h-24 w-20 flex-col items-center justify-start rounded-t-2xl bg-gray-100 shadow-inner md:w-28 md:h-32">
+                      <div className="flex h-24 w-20 flex-col items-center justify-start rounded-t-2xl bg-gray-100 shadow-inner md:h-32 md:w-28">
                         <span className="mt-4 text-3xl font-black text-gray-300">2</span>
                       </div>
                       <div className="mt-3 text-center">
@@ -112,7 +123,7 @@ export const Route = createFileRoute("/profile/")({
 
                     {/* 1st Place */}
                     <div className="flex flex-col items-center">
-                      <div className="relative flex h-36 w-24 flex-col items-center justify-start rounded-t-2xl bg-saseBlue shadow-xl md:w-32 md:h-44">
+                      <div className="relative flex h-36 w-24 flex-col items-center justify-start rounded-t-2xl bg-saseBlue shadow-xl md:h-44 md:w-32">
                         <span className="mt-8 text-4xl font-black text-white/20">1</span>
                       </div>
                       <div className="mt-3 text-center">
@@ -123,7 +134,7 @@ export const Route = createFileRoute("/profile/")({
 
                     {/* 3rd Place */}
                     <div className="flex flex-col items-center">
-                      <div className="flex h-16 w-20 flex-col items-center justify-start rounded-t-2xl bg-orange-50 shadow-inner md:w-28 md:h-24">
+                      <div className="flex h-16 w-20 flex-col items-center justify-start rounded-t-2xl bg-orange-50 shadow-inner md:h-24 md:w-28">
                         <span className="mt-4 text-3xl font-black text-orange-200">3</span>
                       </div>
                       <div className="mt-3 text-center">
@@ -146,9 +157,14 @@ export const Route = createFileRoute("/profile/")({
                       { rank: 9, name: "Kayla C.", points: "12" },
                       { rank: 10, name: "Pryanna P.", points: "10" },
                     ].map((entry) => (
-                      <div key={entry.rank} className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-all hover:scale-[1.01] hover:shadow-md">
+                      <div
+                        key={entry.rank}
+                        className="flex items-center justify-between rounded-xl bg-white p-4 shadow-sm transition-all hover:scale-[1.01] hover:shadow-md"
+                      >
                         <div className="flex items-center gap-4">
-                          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-100 text-sm font-bold text-gray-500">{entry.rank}</span>
+                          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gray-100 text-sm font-bold text-gray-500">
+                            {entry.rank}
+                          </span>
                           <p className="font-semibold text-gray-900">{entry.name}</p>
                         </div>
                         <p className="font-bold text-saseBlue">{entry.points} pts</p>
@@ -195,7 +211,7 @@ export const Route = createFileRoute("/profile/")({
                               </button>
                               <button
                                 onClick={() => handleDecline(invite.id)}
-                                className="flex-1 rounded-lg bg-gray-100 px-4 py-2 text-xs font-bold text-gray-600 transition-all hover:bg-red-50 hover:text-red-600 active:scale-95 sm:shrink-0 sm:flex-none md:rounded-xl md:px-5 md:py-2 md:text-sm"
+                                className="flex-1 rounded-lg bg-gray-100 px-4 py-2 text-xs font-bold text-gray-600 transition-all hover:bg-red-50 hover:text-red-600 active:scale-95 sm:flex-none sm:shrink-0 md:rounded-xl md:px-5 md:py-2 md:text-sm"
                               >
                                 Decline
                               </button>

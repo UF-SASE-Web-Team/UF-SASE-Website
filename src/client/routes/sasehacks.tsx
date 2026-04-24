@@ -57,6 +57,13 @@ export const Route = createFileRoute("/sasehacks")({
           />
         </div>
 
+        <p className="header-text">RECAP</p>
+
+        <div className="max-w-7xl">
+          <Carousel purpose="Images" prog="SASEHacks" />
+          <div className="my-24" />
+        </div>
+
         <p className="header-text">SPONSORS</p>
 
         <div className="relative my-8 flex max-w-7xl flex-col items-center justify-center px-4 sm:px-6">
@@ -69,13 +76,6 @@ export const Route = createFileRoute("/sasehacks")({
               ))}
             </div>
           </div>
-        </div>
-
-        <p className="header-text">RECAP</p>
-
-        <div className="max-w-7xl">
-          <Carousel purpose="Images" prog="SASEHacks" />
-          <div className="mb-10" />
         </div>
       </div>
     );

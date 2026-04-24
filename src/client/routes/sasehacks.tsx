@@ -1,5 +1,6 @@
 import { cn } from "@/shared/utils";
 import { imageUrls } from "@assets/imageUrls";
+import Carousel from "@components/carousel/Carousel";
 import { EventPageHeader } from "@components/custom_ui/EventPageHeader";
 import EventSponsorCard from "@components/custom_ui/EventSponsorCard";
 import { useIsMobile } from "@hooks/useIsMobile";
@@ -54,6 +55,13 @@ export const Route = createFileRoute("/sasehacks")({
             className="flex-shrink-0 rounded-2xl shadow-xl sm:w-[350px] md:w-[150px]"
             style={{ width: "350px", height: "auto" }}
           />
+        </div>
+
+        <p className="header-text">RECAP</p>
+
+        <div className="max-w-7xl">
+          <Carousel purpose="Images" prog="SASEHacks" />
+          <div className="my-24" />
         </div>
 
         <p className="header-text">SPONSORS</p>

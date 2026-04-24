@@ -1,45 +1,39 @@
-import Citi from "@assets/Citi.jpg";
-import DraftKings from "@assets/DraftKings.png";
-import GEVernova from "@assets/GEVernova.png";
 import { imageUrls } from "@assets/imageUrls";
-import Micron from "@assets/Micron.png";
-import Solidigm from "@assets/Solidigm.png";
-import UKG from "@assets/UKG.png";
 
 const SponsorInfo = [
   {
     company: "Micron",
-    image: Micron,
+    image: imageUrls["Micron.png"],
     shadow_color: "shadow-blue-500",
     link: "https://www.micron.com/",
   },
   {
     company: "Citi",
-    image: Citi,
+    image: imageUrls["Citi.jpg"],
     shadow_color: "shadow-[#FFD700]",
     link: "https://www.citi.com/",
   },
   {
     company: "UKG",
-    image: UKG,
+    image: imageUrls["UKG.png"],
     shadow_color: "shadow-[#CD7F32]",
     link: "https://www.ukg.com/",
   },
   {
     company: "Draft Kings",
-    image: DraftKings,
+    image: imageUrls["DraftKings.png"],
     shadow_color: "shadow-[#CD7F32]",
     link: "https://www.draftkings.com/",
   },
   {
     company: "GE Vernova",
-    image: GEVernova,
+    image: imageUrls["GEVernova.png"],
     shadow_color: "shadow-[#CD7F32]",
     link: "https://www.gevernova.com/",
   },
   {
     company: "Solidigm",
-    image: Solidigm,
+    image: imageUrls["Solidigm.png"],
     shadow_color: "shadow-[#CD7F32]",
     link: "https://www.solidigm.com/",
   },

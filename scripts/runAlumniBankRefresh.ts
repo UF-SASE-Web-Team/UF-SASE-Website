@@ -23,7 +23,7 @@ const main = async () => {
 
   const seenLogs = new Set<string>();
 
-  while (true) {
+  for (;;) {
     const status = getAlumniRefreshStatus();
 
     for (const log of [...status.logs].reverse()) {

@@ -24,7 +24,7 @@ export const Route = createFileRoute("/gulfgames")({
             isMobile ? "mx-6 flex-col items-center gap-16 text-center text-sm sm:px-12 md:px-40" : "flex-row text-lg sm:px-12 md:px-40",
           )}
         >
-          <p>
+          <p className="text-center md:text-left">
             The <span className="font-semibold text-saseBlue">Gulf Games</span>, formerly known as SASElympics, is a fun and competitive sports event
             where southeast collegiate SASE chapters come together for team-based games and athletic challenges. This year, the event will be hosted
             by the University of South Florida (USF) SASE Chapter. Compete against other teams in challenges for a chance to win a prize! Sports and

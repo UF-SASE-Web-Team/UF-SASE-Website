@@ -69,7 +69,7 @@ function AlumniBankPage() {
   }
 
   return (
-    <div className="group mx-auto mt-8 w-full max-w-7xl rounded-2xl bg-card text-foreground px-4 pb-6 pt-8 shadow-xl md:px-10">
+    <div className="group mx-auto mt-8 w-full max-w-7xl rounded-2xl bg-card px-4 pb-6 pt-8 text-foreground shadow-xl md:px-10">
       <h1 className="pb-6 text-xl font-bold">Alumni Bank</h1>
 
       {isAdmin && (

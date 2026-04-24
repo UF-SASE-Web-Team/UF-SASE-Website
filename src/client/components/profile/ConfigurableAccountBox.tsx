@@ -105,7 +105,7 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave, show
               {isEditing && cfg.editable ? (
                 <>
                   {cfg.type === "select" ? (
-                    <select {...register(cfg.name)} className={`rounded-lg border bg-card text-foreground px-4 py-2 ${errorClass}`}>
+                    <select {...register(cfg.name)} className={`rounded-lg border bg-card px-4 py-2 text-foreground ${errorClass}`}>
                       <option value="">{cfg.placeholder || "Select an option"}</option>
                       {cfg.options?.map((option) => (
                         <option key={option.value} value={option.value}>
@@ -118,14 +118,14 @@ export function ConfigurableAccountBox({ fieldConfigs, initialData, onSave, show
                       rows={3}
                       {...register(cfg.name)}
                       placeholder={cfg.placeholder}
-                      className={`rounded-lg border bg-card text-foreground px-4 py-2 ${errorClass}`}
+                      className={`rounded-lg border bg-card px-4 py-2 text-foreground ${errorClass}`}
                     />
                   ) : (
                     <input
                       type={cfg.type}
                       {...register(cfg.name)}
                       placeholder={cfg.placeholder}
-                      className={`rounded-lg border bg-card text-foreground px-4 py-2 ${errorClass}`}
+                      className={`rounded-lg border bg-card px-4 py-2 text-foreground ${errorClass}`}
                     />
                   )}
                   {hasError && <span className="text-sm text-red-500">{hasError}</span>}

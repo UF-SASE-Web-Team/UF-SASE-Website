@@ -24,7 +24,7 @@ const ProfileNav: React.FC<{ profileName?: string }> = ({ profileName = "User" }
   };
 
   return (
-    <div className="mt-8 flex w-full flex-col bg-card text-foreground font-redhat md:w-60 md:rounded-3xl md:p-6 md:shadow-xl">
+    <div className="mt-8 flex w-full flex-col bg-card font-redhat text-foreground md:w-60 md:rounded-3xl md:p-6 md:shadow-xl">
       {/* Profile Info - Hidden on Mobile Top Nav to save space */}
       <div className="mb-6 hidden flex-col items-center text-center md:flex">
         <div className="flex h-32 w-32 items-center justify-center rounded-full bg-saseBlueLight text-white shadow-inner">
@@ -70,7 +70,10 @@ const NavItem: React.FC<{ to: string; icon: string; text: string; color: string;
     >
       {({ isActive }) => (
         <>
-          <Icon icon={icon} className={cn("text-2xl transition-colors", isActive ? "text-foreground" : "text-muted-foreground group-hover:text-foreground")} />
+          <Icon
+            icon={icon}
+            className={cn("text-2xl transition-colors", isActive ? "text-foreground" : "text-muted-foreground group-hover:text-foreground")}
+          />
           <span
             className={cn(
               "whitespace-nowrap text-sm font-medium transition-colors",

@@ -328,6 +328,9 @@ export const imageUrls = {
   "SASEHacks1.JPG": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI137ZzCBt1GIKa0NBDlAXZoMOpV4eTgW3UQCL",
   "SASEHacks9.JPG": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIBDuF8y12kDm2rxftGpUEesqCMHIJ7RnXNYh3",
   "SASEHacks6.JPG": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI188QNMBt1GIKa0NBDlAXZoMOpV4eTgW3UQCL",
+  "WebTeamWinterBanquet2025_.JPG": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIBD3gl9v2kDm2rxftGpUEesqCMHIJ7RnXNYh3",
+  "springWebDev2026.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIo0PagDhDJighcSZmqsKCAzTIOvLHd7u1nV2b",
+  "NathanKim.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIBQubCQ2kDm2rxftGpUEesqCMHIJ7RnXNYh34",
 } as const;
 
 export type imageName = keyof typeof imageUrls;

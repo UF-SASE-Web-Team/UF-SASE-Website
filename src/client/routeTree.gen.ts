@@ -30,6 +30,7 @@ import { Route as PastBoardImport } from './routes/past-board'
 import { Route as MentorMenteeImport } from './routes/mentor-mentee'
 import { Route as LoginImport } from './routes/login'
 import { Route as InternsImport } from './routes/interns'
+import { Route as GulfgamesImport } from './routes/gulfgames'
 import { Route as GalleryImport } from './routes/gallery'
 import { Route as FreshmanFaqImport } from './routes/freshman-faq'
 import { Route as ForgotPasswordImport } from './routes/forgot-password'
@@ -160,6 +161,12 @@ const LoginRoute = LoginImport.update({
 const InternsRoute = InternsImport.update({
   id: '/interns',
   path: '/interns',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const GulfgamesRoute = GulfgamesImport.update({
+  id: '/gulfgames',
+  path: '/gulfgames',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -331,6 +338,13 @@ declare module '@tanstack/react-router' {
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryImport
+      parentRoute: typeof rootRoute
+    }
+    '/gulfgames': {
+      id: '/gulfgames'
+      path: '/gulfgames'
+      fullPath: '/gulfgames'
+      preLoaderRoute: typeof GulfgamesImport
       parentRoute: typeof rootRoute
     }
     '/interns': {
@@ -544,6 +558,7 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof ForgotPasswordRoute
   '/freshman-faq': typeof FreshmanFaqRoute
   '/gallery': typeof GalleryRoute
+  '/gulfgames': typeof GulfgamesRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
@@ -581,6 +596,7 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof ForgotPasswordRoute
   '/freshman-faq': typeof FreshmanFaqRoute
   '/gallery': typeof GalleryRoute
+  '/gulfgames': typeof GulfgamesRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
@@ -620,6 +636,7 @@ export interface FileRoutesById {
   '/forgot-password': typeof ForgotPasswordRoute
   '/freshman-faq': typeof FreshmanFaqRoute
   '/gallery': typeof GalleryRoute
+  '/gulfgames': typeof GulfgamesRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
@@ -660,6 +677,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/freshman-faq'
     | '/gallery'
+    | '/gulfgames'
     | '/interns'
     | '/login'
     | '/mentor-mentee'
@@ -696,6 +714,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/freshman-faq'
     | '/gallery'
+    | '/gulfgames'
     | '/interns'
     | '/login'
     | '/mentor-mentee'
@@ -733,6 +752,7 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/freshman-faq'
     | '/gallery'
+    | '/gulfgames'
     | '/interns'
     | '/login'
     | '/mentor-mentee'
@@ -772,6 +792,7 @@ export interface RootRouteChildren {
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   FreshmanFaqRoute: typeof FreshmanFaqRoute
   GalleryRoute: typeof GalleryRoute
+  GulfgamesRoute: typeof GulfgamesRoute
   InternsRoute: typeof InternsRoute
   LoginRoute: typeof LoginRoute
   MentorMenteeRoute: typeof MentorMenteeRoute
@@ -805,6 +826,7 @@ const rootRouteChildren: RootRouteChildren = {
   ForgotPasswordRoute: ForgotPasswordRoute,
   FreshmanFaqRoute: FreshmanFaqRoute,
   GalleryRoute: GalleryRoute,
+  GulfgamesRoute: GulfgamesRoute,
   InternsRoute: InternsRoute,
   LoginRoute: LoginRoute,
   MentorMenteeRoute: MentorMenteeRoute,
@@ -847,6 +869,7 @@ export const routeTree = rootRoute
         "/forgot-password",
         "/freshman-faq",
         "/gallery",
+        "/gulfgames",
         "/interns",
         "/login",
         "/mentor-mentee",
@@ -905,6 +928,9 @@ export const routeTree = rootRoute
     },
     "/gallery": {
       "filePath": "gallery.tsx"
+    },
+    "/gulfgames": {
+      "filePath": "gulfgames.tsx"
     },
     "/interns": {
       "filePath": "interns.tsx"

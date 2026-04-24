@@ -31,6 +31,7 @@ const navItems = [
     children: [
       { name: "SASEHacks", path: "/sasehacks" },
       { name: "SERC", path: "/serc" },
+      { name: "Gulf Games", path: "/gulfgames" },
       { name: "STEM Connect", path: "/stemconnect" },
       { name: "Gallery", path: "/gallery" },
       { name: "Blogs", path: "/blogs" },
@@ -45,6 +46,7 @@ const navItems = [
       { name: "Web Dev", path: "/webdev" },
       { name: "Sports", path: "/sports" },
       { name: "Mentor Mentee", path: "/mentor-mentee" },
+      { name: "Projects", path: "/projects" },
     ],
   },
   {

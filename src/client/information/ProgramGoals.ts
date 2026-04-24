@@ -107,3 +107,25 @@ export const MMGoals: Array<{
     mobileAlign: "left",
   },
 ];
+
+export const ProjectGoals: Array<{
+  text: string;
+  color: "blue" | "green";
+  mobileAlign: "left" | "right";
+}> = [
+  {
+    text: "Develop targeted technical skills like coding, CAD, or material analysis through hands-on projects.",
+    color: "blue",
+    mobileAlign: "left",
+  },
+  {
+    text: "Collaborate with diverse, multidisciplinary teams of students from various STEM and non-STEM backgrounds.",
+    color: "green",
+    mobileAlign: "right",
+  },
+  {
+    text: "Build tangible, real-world experience to highlight on your resume and discuss in interviews.",
+    color: "blue",
+    mobileAlign: "left",
+  },
+];

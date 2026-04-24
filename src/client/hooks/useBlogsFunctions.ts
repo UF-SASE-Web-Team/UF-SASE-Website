@@ -1,6 +1,6 @@
 import { useAuth } from "@/client/hooks/AuthContext";
 import { useBlogs } from "@hooks/useBlogs";
-import type { BlogBase, BlogDisplay } from "@shared/types/blogTypes";
+import type { BlogAPI, BlogBase, BlogDisplay } from "@shared/types/blogTypes";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { fetchBlogsByTag } from "../api/blogs";
@@ -113,12 +113,12 @@ export const useBlogFunctions = () => {
   };
 
   const getBlogDisplayData = (): Array<BlogDisplay> => {
-    const blogsToUse = activeTag && filteredBlogsQuery.data ? filteredBlogsQuery.data : blogs.data || [];
+    const blogsToUse = activeTag && filteredBlogsQuery.data ? (filteredBlogsQuery.data as Array<BlogAPI>) : (blogs.data as Array<BlogAPI>) || [];
 
     return blogsToUse.map((blog) => ({
       ...blog,
       images: blog.images || [],
-      author: blog.authorId || "UF SASE",
+      author: `${blog.firstName || ""} ${blog.lastName || ""}`.trim() || "UF SASE",
       read_time: `${Math.ceil((blog.content?.split(/\s+/).length || 0) / 200)} min`,
       tags: blog.tags || [],
       displayEditButton: isAuthenticated,

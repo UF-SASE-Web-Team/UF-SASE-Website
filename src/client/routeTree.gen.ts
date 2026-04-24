@@ -24,11 +24,13 @@ import { Route as SearchImport } from './routes/search'
 import { Route as SasehacksImport } from './routes/sasehacks'
 import { Route as ResourcesImport } from './routes/resources'
 import { Route as ResetPasswordImport } from './routes/reset-password'
+import { Route as ProjectsImport } from './routes/projects'
 import { Route as ProgramsImport } from './routes/programs'
 import { Route as PastBoardImport } from './routes/past-board'
 import { Route as MentorMenteeImport } from './routes/mentor-mentee'
 import { Route as LoginImport } from './routes/login'
 import { Route as InternsImport } from './routes/interns'
+import { Route as GulfgamesImport } from './routes/gulfgames'
 import { Route as GalleryImport } from './routes/gallery'
 import { Route as FreshmanFaqImport } from './routes/freshman-faq'
 import { Route as ForgotPasswordImport } from './routes/forgot-password'
@@ -43,6 +45,8 @@ import { Route as ProfileIndexImport } from './routes/profile/index'
 import { Route as ProfileSettingsImport } from './routes/profile/settings'
 import { Route as ProfileSecurityImport } from './routes/profile/security'
 import { Route as ProfileInfoImport } from './routes/profile/info'
+import { Route as ProfileAlumniBankImport } from './routes/profile/alumni-bank'
+import { Route as ProfileAdminImport } from './routes/profile/admin'
 import { Route as UsersUsernameIdImport } from './routes/users/$username/$id'
 
 // Create/Update Routes
@@ -125,6 +129,12 @@ const ResetPasswordRoute = ResetPasswordImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const ProjectsRoute = ProjectsImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const ProgramsRoute = ProgramsImport.update({
   id: '/programs',
   path: '/programs',
@@ -152,6 +162,12 @@ const LoginRoute = LoginImport.update({
 const InternsRoute = InternsImport.update({
   id: '/interns',
   path: '/interns',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const GulfgamesRoute = GulfgamesImport.update({
+  id: '/gulfgames',
+  path: '/gulfgames',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -239,6 +255,18 @@ const ProfileInfoRoute = ProfileInfoImport.update({
   getParentRoute: () => ProfileRouteRoute,
 } as any)
 
+const ProfileAlumniBankRoute = ProfileAlumniBankImport.update({
+  id: '/alumni-bank',
+  path: '/alumni-bank',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+
+const ProfileAdminRoute = ProfileAdminImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+
 const UsersUsernameIdRoute = UsersUsernameIdImport.update({
   id: '/users/$username/$id',
   path: '/users/$username/$id',
@@ -319,6 +347,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GalleryImport
       parentRoute: typeof rootRoute
     }
+    '/gulfgames': {
+      id: '/gulfgames'
+      path: '/gulfgames'
+      fullPath: '/gulfgames'
+      preLoaderRoute: typeof GulfgamesImport
+      parentRoute: typeof rootRoute
+    }
     '/interns': {
       id: '/interns'
       path: '/interns'
@@ -352,6 +387,13 @@ declare module '@tanstack/react-router' {
       path: '/programs'
       fullPath: '/programs'
       preLoaderRoute: typeof ProgramsImport
+      parentRoute: typeof rootRoute
+    }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsImport
       parentRoute: typeof rootRoute
     }
     '/reset-password': {
@@ -445,6 +487,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WebdevImport
       parentRoute: typeof rootRoute
     }
+    '/profile/alumni-bank': {
+      id: '/profile/alumni-bank'
+      path: '/alumni-bank'
+      fullPath: '/profile/alumni-bank'
+      preLoaderRoute: typeof ProfileAlumniBankImport
+      parentRoute: typeof ProfileRouteImport
+    }
+    '/profile/admin': {
+      id: '/profile/admin'
+      path: '/admin'
+      fullPath: '/profile/admin'
+      preLoaderRoute: typeof ProfileAdminImport
+      parentRoute: typeof ProfileRouteImport
+    }
     '/profile/info': {
       id: '/profile/info'
       path: '/info'
@@ -486,6 +542,8 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface ProfileRouteRouteChildren {
+  ProfileAlumniBankRoute: typeof ProfileAlumniBankRoute
+  ProfileAdminRoute: typeof ProfileAdminRoute
   ProfileInfoRoute: typeof ProfileInfoRoute
   ProfileSecurityRoute: typeof ProfileSecurityRoute
   ProfileSettingsRoute: typeof ProfileSettingsRoute
@@ -493,6 +551,8 @@ interface ProfileRouteRouteChildren {
 }
 
 const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
+  ProfileAlumniBankRoute: ProfileAlumniBankRoute,
+  ProfileAdminRoute: ProfileAdminRoute,
   ProfileInfoRoute: ProfileInfoRoute,
   ProfileSecurityRoute: ProfileSecurityRoute,
   ProfileSettingsRoute: ProfileSettingsRoute,
@@ -514,11 +574,13 @@ export interface FileRoutesByFullPath {
   '/forgot-password': typeof ForgotPasswordRoute
   '/freshman-faq': typeof FreshmanFaqRoute
   '/gallery': typeof GalleryRoute
+  '/gulfgames': typeof GulfgamesRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
   '/past-board': typeof PastBoardRoute
   '/programs': typeof ProgramsRoute
+  '/projects': typeof ProjectsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
   '/sasehacks': typeof SasehacksRoute
@@ -532,6 +594,8 @@ export interface FileRoutesByFullPath {
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
+  '/profile/alumni-bank': typeof ProfileAlumniBankRoute
+  '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -549,11 +613,13 @@ export interface FileRoutesByTo {
   '/forgot-password': typeof ForgotPasswordRoute
   '/freshman-faq': typeof FreshmanFaqRoute
   '/gallery': typeof GalleryRoute
+  '/gulfgames': typeof GulfgamesRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
   '/past-board': typeof PastBoardRoute
   '/programs': typeof ProgramsRoute
+  '/projects': typeof ProjectsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
   '/sasehacks': typeof SasehacksRoute
@@ -567,6 +633,8 @@ export interface FileRoutesByTo {
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
+  '/profile/alumni-bank': typeof ProfileAlumniBankRoute
+  '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -586,11 +654,13 @@ export interface FileRoutesById {
   '/forgot-password': typeof ForgotPasswordRoute
   '/freshman-faq': typeof FreshmanFaqRoute
   '/gallery': typeof GalleryRoute
+  '/gulfgames': typeof GulfgamesRoute
   '/interns': typeof InternsRoute
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
   '/past-board': typeof PastBoardRoute
   '/programs': typeof ProgramsRoute
+  '/projects': typeof ProjectsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
   '/sasehacks': typeof SasehacksRoute
@@ -604,6 +674,8 @@ export interface FileRoutesById {
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
+  '/profile/alumni-bank': typeof ProfileAlumniBankRoute
+  '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
   '/profile/settings': typeof ProfileSettingsRoute
@@ -624,11 +696,13 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/freshman-faq'
     | '/gallery'
+    | '/gulfgames'
     | '/interns'
     | '/login'
     | '/mentor-mentee'
     | '/past-board'
     | '/programs'
+    | '/projects'
     | '/reset-password'
     | '/resources'
     | '/sasehacks'
@@ -642,6 +716,8 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/verify-email'
     | '/webdev'
+    | '/profile/alumni-bank'
+    | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -658,11 +734,13 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/freshman-faq'
     | '/gallery'
+    | '/gulfgames'
     | '/interns'
     | '/login'
     | '/mentor-mentee'
     | '/past-board'
     | '/programs'
+    | '/projects'
     | '/reset-password'
     | '/resources'
     | '/sasehacks'
@@ -676,6 +754,8 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/verify-email'
     | '/webdev'
+    | '/profile/alumni-bank'
+    | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -693,11 +773,13 @@ export interface FileRouteTypes {
     | '/forgot-password'
     | '/freshman-faq'
     | '/gallery'
+    | '/gulfgames'
     | '/interns'
     | '/login'
     | '/mentor-mentee'
     | '/past-board'
     | '/programs'
+    | '/projects'
     | '/reset-password'
     | '/resources'
     | '/sasehacks'
@@ -711,6 +793,8 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/verify-email'
     | '/webdev'
+    | '/profile/alumni-bank'
+    | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
     | '/profile/settings'
@@ -730,11 +814,13 @@ export interface RootRouteChildren {
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   FreshmanFaqRoute: typeof FreshmanFaqRoute
   GalleryRoute: typeof GalleryRoute
+  GulfgamesRoute: typeof GulfgamesRoute
   InternsRoute: typeof InternsRoute
   LoginRoute: typeof LoginRoute
   MentorMenteeRoute: typeof MentorMenteeRoute
   PastBoardRoute: typeof PastBoardRoute
   ProgramsRoute: typeof ProgramsRoute
+  ProjectsRoute: typeof ProjectsRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ResourcesRoute: typeof ResourcesRoute
   SasehacksRoute: typeof SasehacksRoute
@@ -762,11 +848,13 @@ const rootRouteChildren: RootRouteChildren = {
   ForgotPasswordRoute: ForgotPasswordRoute,
   FreshmanFaqRoute: FreshmanFaqRoute,
   GalleryRoute: GalleryRoute,
+  GulfgamesRoute: GulfgamesRoute,
   InternsRoute: InternsRoute,
   LoginRoute: LoginRoute,
   MentorMenteeRoute: MentorMenteeRoute,
   PastBoardRoute: PastBoardRoute,
   ProgramsRoute: ProgramsRoute,
+  ProjectsRoute: ProjectsRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ResourcesRoute: ResourcesRoute,
   SasehacksRoute: SasehacksRoute,
@@ -803,11 +891,13 @@ export const routeTree = rootRoute
         "/forgot-password",
         "/freshman-faq",
         "/gallery",
+        "/gulfgames",
         "/interns",
         "/login",
         "/mentor-mentee",
         "/past-board",
         "/programs",
+        "/projects",
         "/reset-password",
         "/resources",
         "/sasehacks",
@@ -830,6 +920,8 @@ export const routeTree = rootRoute
     "/profile": {
       "filePath": "profile/route.tsx",
       "children": [
+        "/profile/alumni-bank",
+        "/profile/admin",
         "/profile/info",
         "/profile/security",
         "/profile/settings",
@@ -860,6 +952,9 @@ export const routeTree = rootRoute
     "/gallery": {
       "filePath": "gallery.tsx"
     },
+    "/gulfgames": {
+      "filePath": "gulfgames.tsx"
+    },
     "/interns": {
       "filePath": "interns.tsx"
     },
@@ -874,6 +969,9 @@ export const routeTree = rootRoute
     },
     "/programs": {
       "filePath": "programs.tsx"
+    },
+    "/projects": {
+      "filePath": "projects.tsx"
     },
     "/reset-password": {
       "filePath": "reset-password.tsx"
@@ -913,6 +1011,12 @@ export const routeTree = rootRoute
     },
     "/webdev": {
       "filePath": "webdev.tsx"
+    },
+    "/profile/alumni-bank": {
+      "filePath": "profile/alumni-bank.tsx",
+    "/profile/admin": {
+      "filePath": "profile/admin.tsx",
+      "parent": "/profile"
     },
     "/profile/info": {
       "filePath": "profile/info.tsx",

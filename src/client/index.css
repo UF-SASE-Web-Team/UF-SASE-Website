@@ -210,3 +210,10 @@
 .ombre-text {
   @apply inline-block bg-gradient-to-r from-saseBlue to-saseGreen bg-clip-text text-transparent;
 }
+
+/* Hide EmbedSocial branding in the Instagram embed container. */
+.embedsocial-hashtag .feed-powered-by-es,
+.embedsocial-hashtag .es-widget-branding,
+.embedsocial-hashtag a[href*="embedsocial.com/instagram-widget"] {
+  display: none !important;
+}

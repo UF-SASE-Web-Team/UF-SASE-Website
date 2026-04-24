@@ -2,6 +2,7 @@
 // import { eq } from "drizzle-orm";
 import infoRoutes from "@/server/api/professionalInfo";
 import { uploadRouter } from "@/server/api/uploadthing";
+import alumniRoutes from "@api/alumniBank";
 import authRoutes from "@api/auth";
 import blogRoutes from "@api/blogs";
 import contactRoutes from "@api/contact";
@@ -46,14 +47,14 @@ const uploadthingHandler = createRouteHandler({
 app.all("/api/uploadthing/*", (c) => uploadthingHandler(c.req.raw));
 app.all("/api/uploadthing", (c) => uploadthingHandler(c.req.raw));
 
-app.get("/api/calendar/ics", async (c) => {
+app.get("/api/calendar/ics", async (_c) => {
   try {
     const r = await fetch(ICS_URL, {
       headers: { "User-Agent": "UF-SASE-Website/1.0 (+https://uf-sase.com)" },
       cache: "no-store",
     });
 
-    if (!r.ok) return c.text("Upstream error", { status: r.status });
+    if (!r.ok) return new Response("Upstream error", { status: r.status });
 
     const text = await r.text();
 
@@ -65,7 +66,7 @@ app.get("/api/calendar/ics", async (c) => {
       },
     });
   } catch {
-    return c.text("Proxy failed", { status: 500 });
+    return new Response("Proxy failed", { status: 500 });
   }
 });
 
@@ -85,6 +86,7 @@ app
   .route("/api", profileRoutes)
   .route("/api", contactRoutes)
   .route("/api", eventRoutes)
+  .route("/api", alumniRoutes)
   .route("/api", sheetsRoutes)
   .route("/api", roleRoutes)
   .route("/api", mentorMenteeRoutes)

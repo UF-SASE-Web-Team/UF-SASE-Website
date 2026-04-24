@@ -260,9 +260,14 @@ export const alumniBank = sqliteTable("alumni_bank", {
     .references(() => users.id, { onDelete: "cascade" }),
   name: text("name").notNull(),
   major: text("major").notNull(),
-  graduationYear: text("graduation_year").notNull(),
+  minor: text("minor").notNull(),
+  graduationMonth: text("graduation_month").notNull(),
+  graduationYear: integer("graduation_year").notNull(),
+  currentRole: text("current_role").notNull(),
   currentCompany: text("current_company").notNull(),
   pastCompanies: text("past_companies", { mode: "json" }).$type<Array<string>>().notNull().default([]),
+  email: text("email").notNull(),
+  linkedin: text("linkedin").notNull().default(""),
 });
 
 // Semester/Year table

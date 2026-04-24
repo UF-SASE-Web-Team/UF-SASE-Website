@@ -221,7 +221,7 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
                     <div
                       className={cn({ "hover:cursor-pointer": prog != "M&M" }, `embla__slide__image group relative flex items-center justify-center`)}
                     >
-                      {/* Carousel for Interns/SASE Sports Testimonials, SET Projects, or M&M Groups */}
+                      {/* Carousel for Interns/SASE Sports Testimonials, SET Projects, SASEHacks Recap, or M&M Groups */}
                       {checkisTestimonial(slide) || checkIsMMGroup(slide) ? (
                         <>
                           <img src={slide.image} alt={`Image`} className="aspect-auto rounded-xl" />

@@ -1,3 +1,8 @@
+import { db } from "@/server/db/db";
+import { requireRoles, requireSession } from "@/server/middleware/auth";
+import { createErrorResponse, createSuccessResponse } from "@/shared/utils";
+import * as Schema from "@db/tables";
+import { asc, eq } from "drizzle-orm";
 import { Hono } from "hono";
 
 const alumniRoutes = new Hono();
@@ -14,6 +19,76 @@ export interface CompanyInfo {
   currentCompany: string | null;
   pastCompanies: Array<string>;
 }
+
+export interface AlumniBankRow {
+  id: string;
+  name: string;
+  major: string;
+  minor: string;
+  graduationMonth: string;
+  graduationYear: number;
+  currentRole: string;
+  currentCompany: string;
+  pastCompanies: Array<string>;
+  email: string;
+  linkedin: string;
+}
+
+export interface AlumniBankSearchParams {
+  search?: string;
+  major?: string;
+  company?: string;
+  graduationYear?: number;
+}
+
+// Filters a list of alumni rows by optional search params. All params are AND'd.
+// search: case-insensitive substring match against name, currentRole, currentCompany, or any pastCompanies element
+// major: case-insensitive substring match against major
+// company: case-insensitive substring match against currentCompany or any pastCompanies element
+// graduationYear: exact match
+export function filterAlumni(rows: Array<AlumniBankRow>, params: AlumniBankSearchParams): Array<AlumniBankRow> {
+  const search = params.search?.trim().toLowerCase();
+  const major = params.major?.trim().toLowerCase();
+  const company = params.company?.trim().toLowerCase();
+  const { graduationYear } = params;
+
+  return rows.filter((row) => {
+    if (search) {
+      const inName = row.name.toLowerCase().includes(search);
+      const inRole = row.currentRole.toLowerCase().includes(search);
+      const inCompany = row.currentCompany.toLowerCase().includes(search);
+      const inPast = row.pastCompanies.some((c) => c.toLowerCase().includes(search));
+      if (!inName && !inRole && !inCompany && !inPast) return false;
+    }
+
+    if (major && !row.major.toLowerCase().includes(major)) return false;
+
+    if (company) {
+      const inCurrent = row.currentCompany.toLowerCase().includes(company);
+      const inPast = row.pastCompanies.some((c) => c.toLowerCase().includes(company));
+      if (!inCurrent && !inPast) return false;
+    }
+
+    if (graduationYear !== undefined && row.graduationYear !== graduationYear) return false;
+
+    return true;
+  });
+}
+
+const monthToIndex = new Map<string, number>([
+  ["january", 1],
+  ["february", 2],
+  ["march", 3],
+  ["april", 4],
+  ["may", 5],
+  ["june", 6],
+  ["july", 7],
+  ["august", 8],
+  ["september", 9],
+  ["october", 10],
+  ["november", 11],
+  ["december", 12],
+]);
 
 // Identifies the current company and a deduplicated list of past companies
 // from a list of work experiences. A role is considered current if isCurrent
@@ -65,5 +140,81 @@ export function extractLinkedInUsername(input: string): string | null {
 
   return null;
 }
+
+alumniRoutes.get("/alumni-bank", requireSession, async (c) => {
+  try {
+    const session = c.get("session");
+    if (!session) return createErrorResponse(c, "UNAUTHORIZED", "No active session", 401);
+
+    const profInfo = await db.select().from(Schema.professionalInfo).where(eq(Schema.professionalInfo.userId, session.userId)).get();
+
+    const linkedinRegex = /^https:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9_-]+\/?$/;
+    const isEligible =
+      profInfo &&
+      profInfo.linkedin?.trim() &&
+      linkedinRegex.test(profInfo.linkedin.trim()) &&
+      profInfo.majors?.trim() &&
+      profInfo.graduationSemester?.trim() &&
+      profInfo.discord?.trim();
+
+    if (!isEligible) {
+      return createErrorResponse(c, "DATA_REQUIRED", "Please provide all your professional information to unlock the network.", 403);
+    }
+
+    const rows = await db.select().from(Schema.alumniBank).orderBy(asc(Schema.alumniBank.name));
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const currentMonth = now.getMonth() + 1;
+
+    const filteredRows: Array<AlumniBankRow> = rows.filter((row) => {
+      if (!row.linkedin.trim()) return false;
+
+      const graduationMonth = monthToIndex.get(row.graduationMonth.trim().toLowerCase());
+      if (!graduationMonth) return false;
+
+      return row.graduationYear < currentYear || (row.graduationYear === currentYear && graduationMonth < currentMonth);
+    });
+
+    const query = c.req.query();
+    const searchParams: AlumniBankSearchParams = {
+      search: query.search || undefined,
+      major: query.major || undefined,
+      company: query.company || undefined,
+      graduationYear: query.graduationYear ? parseInt(query.graduationYear, 10) : undefined,
+    };
+
+    const results = filterAlumni(filteredRows, searchParams);
+    return createSuccessResponse(c, results, "Alumni bank retrieved successfully");
+  } catch (error) {
+    console.error("Error fetching alumni bank:", error);
+    return createErrorResponse(c, "FETCH_ALUMNI_BANK_ERROR", "Failed to fetch alumni bank", 500);
+  }
+});
+
+alumniRoutes.get("/alumni-bank/refresh/status", requireSession, requireRoles(["admin"]), async (c) => {
+  const { getAlumniRefreshStatus, validateAlumniRefreshConfig } = await import("@/server/services/alumniBankRefresh");
+  const configCheck = validateAlumniRefreshConfig();
+  return createSuccessResponse(
+    c,
+    {
+      ...getAlumniRefreshStatus(),
+      pipelineReady: configCheck.ok,
+      pipelineReason: configCheck.reason ?? null,
+      mcpUrl: configCheck.mcpUrl,
+    },
+    "Alumni refresh status retrieved",
+  );
+});
+
+alumniRoutes.post("/alumni-bank/refresh", requireSession, requireRoles(["admin"]), async (c) => {
+  const { startAlumniRefresh, validateAlumniRefreshConfig } = await import("@/server/services/alumniBankRefresh");
+  const configCheck = validateAlumniRefreshConfig();
+  if (!configCheck.ok) {
+    return createErrorResponse(c, "ALUMNI_REFRESH_CONFIG_INVALID", configCheck.reason ?? "Alumni refresh configuration is invalid.", 400);
+  }
+
+  const result = startAlumniRefresh();
+  return createSuccessResponse(c, result.status, result.started ? "Alumni refresh started." : "Alumni refresh is already running.");
+});
 
 export default alumniRoutes;

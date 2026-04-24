@@ -24,7 +24,7 @@ const ProfileNav: React.FC<{ profileName?: string }> = ({ profileName = "User" }
   };
 
   return (
-    <div className="mt-8 flex w-full flex-col border border-white bg-white font-redhat md:w-60 md:rounded-3xl md:p-6 md:shadow-xl">
+    <div className="mt-8 flex w-full flex-col bg-white font-redhat md:w-60 md:rounded-3xl md:p-6 md:shadow-xl">
       {/* Profile Info - Hidden on Mobile Top Nav to save space */}
       <div className="mb-6 hidden flex-col items-center text-center md:flex">
         <div className="flex h-32 w-32 items-center justify-center rounded-full bg-saseBlueLight text-white shadow-inner">

@@ -59,7 +59,7 @@ export function AlumniBankLockedState() {
   };
 
   return (
-    <div className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-2xl bg-background shadow-xl">
+    <div className="relative mx-auto mt-8 w-full max-w-7xl overflow-hidden rounded-2xl bg-background pt-8 shadow-xl">
       <div className="relative z-10 flex min-h-[500px] flex-col items-center justify-center p-6 text-center backdrop-blur-sm">
         <div className="w-full max-w-lg rounded-2xl border-muted bg-muted p-8">
           <h2 className="mb-3 text-center font-oswald text-4xl font-semibold">Unlock the Alumni Bank</h2>

@@ -61,7 +61,7 @@ export const Route = createFileRoute("/profile/")({
 
               <div className="space-y-8">
                 <div className="text-center">
-                  <p className="text-6xl font-black text-saseBlue md:text-8xl">4</p>
+                  <p className="text-6xl font-black text-saseBlue md:text-8xl">3</p>
                   <p className="mt-2 font-bold uppercase tracking-widest text-saseBlue/40">Total Points</p>
                 </div>
 
@@ -116,7 +116,7 @@ export const Route = createFileRoute("/profile/")({
                         <span className="mt-4 text-3xl font-black text-gray-300">2</span>
                       </div>
                       <div className="mt-3 text-center">
-                        <p className="text-sm font-bold text-gray-700">Leann T.</p>
+                        <p className="text-sm font-bold text-gray-700">Justin D.</p>
                         <p className="text-xs font-medium text-saseBlue">24 pts</p>
                       </div>
                     </div>
@@ -127,8 +127,8 @@ export const Route = createFileRoute("/profile/")({
                         <span className="mt-8 text-4xl font-black text-white/20">1</span>
                       </div>
                       <div className="mt-3 text-center">
-                        <p className="text-base font-black text-gray-900">Justin D.</p>
-                        <p className="text-sm font-bold text-saseBlue">29 pts</p>
+                        <p className="text-base font-black text-gray-900">Thuy L.</p>
+                        <p className="text-sm font-bold text-saseBlue">67 pts</p>
                       </div>
                     </div>
 
@@ -138,7 +138,7 @@ export const Route = createFileRoute("/profile/")({
                         <span className="mt-4 text-3xl font-black text-orange-200">3</span>
                       </div>
                       <div className="mt-3 text-center">
-                        <p className="text-sm font-bold text-gray-700">Manav S.</p>
+                        <p className="text-sm font-bold text-gray-700">Lynette H.</p>
                         <p className="text-xs font-medium text-saseBlue">21 pts</p>
                       </div>
                     </div>
@@ -149,13 +149,15 @@ export const Route = createFileRoute("/profile/")({
                 <section className="rounded-3xl bg-gray-50/50 p-3 md:p-6">
                   <div className="space-y-2">
                     {[
-                      { rank: 4, name: "Kevin T.", points: "20" },
-                      { rank: 5, name: "Helen Z.", points: "18" },
-                      { rank: 6, name: "Adriel P.", points: "17" },
-                      { rank: 7, name: "Michael H.", points: "15" },
-                      { rank: 8, name: "Logan T.", points: "14" },
-                      { rank: 9, name: "Kayla C.", points: "12" },
-                      { rank: 10, name: "Pryanna P.", points: "10" },
+                      { rank: 4, name: "Manav S.", points: "20" },
+                      { rank: 5, name: "Leann T.", points: "20" },
+                      { rank: 6, name: "Kevin T.", points: "20" },
+                      { rank: 7, name: "Helen Z.", points: "18" },
+                      { rank: 8, name: "Adriel P.", points: "17" },
+                      { rank: 9, name: "Michael H.", points: "15" },
+                      { rank: 10, name: "Logan T.", points: "14" },
+                      { rank: 11, name: "Kayla C.", points: "12" },
+                      { rank: 12, name: "Pryanna P.", points: "10" },
                     ].map((entry) => (
                       <div
                         key={entry.rank}

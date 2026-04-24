@@ -24,7 +24,7 @@ const ProfileNav: React.FC<{ profileName?: string }> = ({ profileName = "User" }
   };
 
   return (
-    <div className="flex w-full flex-col border border-white bg-transparent font-redhat md:w-60 md:rounded-3xl md:p-6 md:shadow-xl">
+    <div className="mt-8 flex w-full flex-col border border-white bg-white font-redhat md:w-60 md:rounded-3xl md:p-6 md:shadow-xl">
       {/* Profile Info - Hidden on Mobile Top Nav to save space */}
       <div className="mb-6 hidden flex-col items-center text-center md:flex">
         <div className="flex h-32 w-32 items-center justify-center rounded-full bg-saseBlueLight text-white shadow-inner">
@@ -49,7 +49,7 @@ const ProfileNav: React.FC<{ profileName?: string }> = ({ profileName = "User" }
       </nav>
 
       {/* Desktop Logout Button */}
-      <div className="hidden bg-transparent md:mt-10 md:flex md:justify-center">
+      <div className="hidden bg-white md:mt-10 md:flex md:justify-center">
         <Button variant="destructive" size="sm" onClick={handleLogout} className="w-full">
           Log Out
         </Button>

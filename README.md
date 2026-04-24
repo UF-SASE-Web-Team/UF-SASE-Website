@@ -4,6 +4,10 @@ This repository hosts the official website for the UF chapter of the Society of 
 [Staging](https://uf-sase-website.vercel.app)
 [Production](https://ufsase.com)
 
+## Additional Docs
+
+- [Alumni Bank Update Pipeline (Local Development)](./README.alumni-bank-update.md)
+
 ## Getting Started
 
 ### Prerequisites

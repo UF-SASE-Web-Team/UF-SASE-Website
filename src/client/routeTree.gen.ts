@@ -45,6 +45,7 @@ import { Route as ProfileIndexImport } from './routes/profile/index'
 import { Route as ProfileSettingsImport } from './routes/profile/settings'
 import { Route as ProfileSecurityImport } from './routes/profile/security'
 import { Route as ProfileInfoImport } from './routes/profile/info'
+import { Route as ProfileAlumniBankImport } from './routes/profile/alumni-bank'
 import { Route as ProfileAdminImport } from './routes/profile/admin'
 import { Route as UsersUsernameIdImport } from './routes/users/$username/$id'
 
@@ -251,6 +252,12 @@ const ProfileSecurityRoute = ProfileSecurityImport.update({
 const ProfileInfoRoute = ProfileInfoImport.update({
   id: '/info',
   path: '/info',
+  getParentRoute: () => ProfileRouteRoute,
+} as any)
+
+const ProfileAlumniBankRoute = ProfileAlumniBankImport.update({
+  id: '/alumni-bank',
+  path: '/alumni-bank',
   getParentRoute: () => ProfileRouteRoute,
 } as any)
 
@@ -480,6 +487,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WebdevImport
       parentRoute: typeof rootRoute
     }
+    '/profile/alumni-bank': {
+      id: '/profile/alumni-bank'
+      path: '/alumni-bank'
+      fullPath: '/profile/alumni-bank'
+      preLoaderRoute: typeof ProfileAlumniBankImport
+      parentRoute: typeof ProfileRouteImport
+    }
     '/profile/admin': {
       id: '/profile/admin'
       path: '/admin'
@@ -528,6 +542,7 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface ProfileRouteRouteChildren {
+  ProfileAlumniBankRoute: typeof ProfileAlumniBankRoute
   ProfileAdminRoute: typeof ProfileAdminRoute
   ProfileInfoRoute: typeof ProfileInfoRoute
   ProfileSecurityRoute: typeof ProfileSecurityRoute
@@ -536,6 +551,7 @@ interface ProfileRouteRouteChildren {
 }
 
 const ProfileRouteRouteChildren: ProfileRouteRouteChildren = {
+  ProfileAlumniBankRoute: ProfileAlumniBankRoute,
   ProfileAdminRoute: ProfileAdminRoute,
   ProfileInfoRoute: ProfileInfoRoute,
   ProfileSecurityRoute: ProfileSecurityRoute,
@@ -578,6 +594,7 @@ export interface FileRoutesByFullPath {
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
+  '/profile/alumni-bank': typeof ProfileAlumniBankRoute
   '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
@@ -616,6 +633,7 @@ export interface FileRoutesByTo {
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
+  '/profile/alumni-bank': typeof ProfileAlumniBankRoute
   '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
@@ -656,6 +674,7 @@ export interface FileRoutesById {
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
+  '/profile/alumni-bank': typeof ProfileAlumniBankRoute
   '/profile/admin': typeof ProfileAdminRoute
   '/profile/info': typeof ProfileInfoRoute
   '/profile/security': typeof ProfileSecurityRoute
@@ -697,6 +716,7 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/verify-email'
     | '/webdev'
+    | '/profile/alumni-bank'
     | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
@@ -734,6 +754,7 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/verify-email'
     | '/webdev'
+    | '/profile/alumni-bank'
     | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
@@ -772,6 +793,7 @@ export interface FileRouteTypes {
     | '/userpage'
     | '/verify-email'
     | '/webdev'
+    | '/profile/alumni-bank'
     | '/profile/admin'
     | '/profile/info'
     | '/profile/security'
@@ -898,6 +920,7 @@ export const routeTree = rootRoute
     "/profile": {
       "filePath": "profile/route.tsx",
       "children": [
+        "/profile/alumni-bank",
         "/profile/admin",
         "/profile/info",
         "/profile/security",
@@ -989,6 +1012,8 @@ export const routeTree = rootRoute
     "/webdev": {
       "filePath": "webdev.tsx"
     },
+    "/profile/alumni-bank": {
+      "filePath": "profile/alumni-bank.tsx",
     "/profile/admin": {
       "filePath": "profile/admin.tsx",
       "parent": "/profile"

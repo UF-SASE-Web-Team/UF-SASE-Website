@@ -7,6 +7,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 const NAV_ITEMS = [
   { to: "/profile", text: "Dashboard", icon: "mdi:view-dashboard-outline", color: "text-saseBlue", border: "bg-saseBlue" },
   { to: "/profile/info", text: "Profile", icon: "mdi:account-outline", color: "text-saseGreen", border: "bg-saseGreen" },
+  { to: "/profile/alumni-bank", text: "Alumni Bank", icon: "mdi:school-outline", color: "text-saseBlue", border: "bg-saseBlue" },
   { to: "/profile/security", text: "Security", icon: "mdi:lock-outline", color: "text-saseBlue", border: "bg-saseBlue" },
   { to: "/profile/settings", text: "Settings", icon: "mdi:cog-outline", color: "text-saseGreen", border: "bg-saseGreen" },
 ];
@@ -23,7 +24,7 @@ const ProfileNav: React.FC<{ profileName?: string }> = ({ profileName = "User" }
   };
 
   return (
-    <div className="flex w-full flex-col bg-background font-redhat md:w-60 md:rounded-3xl md:p-6 md:shadow-xl">
+    <div className="flex w-full flex-col border border-white bg-transparent font-redhat md:w-60 md:rounded-3xl md:p-6 md:shadow-xl">
       {/* Profile Info - Hidden on Mobile Top Nav to save space */}
       <div className="mb-6 hidden flex-col items-center text-center md:flex">
         <div className="flex h-32 w-32 items-center justify-center rounded-full bg-saseBlueLight text-white shadow-inner">
@@ -34,7 +35,7 @@ const ProfileNav: React.FC<{ profileName?: string }> = ({ profileName = "User" }
       </div>
 
       {/* Navigation Links: Horizontal scroll on mobile, Vertical list on desktop */}
-      <nav className="no-scrollbar flex flex-row overflow-x-auto border-b md:flex-col md:space-y-2 md:border-none">
+      <nav className="no-scrollbar flex flex-row overflow-x-auto border-b bg-transparent md:flex-col md:space-y-2 md:border-none">
         {NAV_ITEMS.map((item) => (
           <NavItem key={item.to} {...item} />
         ))}
@@ -48,7 +49,7 @@ const ProfileNav: React.FC<{ profileName?: string }> = ({ profileName = "User" }
       </nav>
 
       {/* Desktop Logout Button */}
-      <div className="hidden md:mt-10 md:flex md:justify-center">
+      <div className="hidden bg-transparent md:mt-10 md:flex md:justify-center">
         <Button variant="destructive" size="sm" onClick={handleLogout} className="w-full">
           Log Out
         </Button>
@@ -57,29 +58,27 @@ const ProfileNav: React.FC<{ profileName?: string }> = ({ profileName = "User" }
   );
 };
 
-const NavItem: React.FC<{ to: string; icon: string; text: string; color: string; border: string }> = ({ border, color, icon, text, to }) => {
+const NavItem: React.FC<{ to: string; icon: string; text: string; color: string; border: string }> = ({ color, icon, text, to }) => {
   return (
     <Link
       to={to}
       activeOptions={{ exact: to === "/profile" }} // Ensures Dashboard isn't always active
       className="group relative flex items-center space-x-2 px-6 py-4 transition-all md:rounded-xl md:px-4 md:py-3"
       activeProps={{
-        className: cn("bg-gray-50 md:bg-muted", color, "font-bold"),
+        className: cn("border", "border-white", color, "font-bold"),
       }}
     >
       {({ isActive }) => (
         <>
-          <Icon icon={icon} className={cn("text-2xl transition-colors", isActive ? color : "group-hover: text-gray-400" + color)} />
+          <Icon icon={icon} className={cn("text-2xl transition-colors", isActive ? "text-black" : "group-hover: text-gray-400")} />
           <span
             className={cn(
               "whitespace-nowrap text-sm font-medium transition-colors",
-              isActive ? `text-${color}` : "text-gray-500 group-hover:text-gray-900 dark:group-hover:text-white",
+              isActive ? `font-bold text-black` : "text-black group-hover:text-gray-900 dark:group-hover:text-white",
             )}
           >
             {text}
           </span>
-          {/* Active indicator line (Bottom for mobile, Left for desktop) */}
-          {isActive && <div className={cn("absolute bottom-0 left-0 h-1 w-full md:bottom-auto md:left-0 md:h-full md:w-1", border)} />}
         </>
       )}
     </Link>

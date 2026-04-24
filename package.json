@@ -18,7 +18,8 @@
     "db:studio": "drizzle-kit studio --port 3003 --verbose",
     "db:generate": "drizzle-kit generate && bun run generate",
     "db:push": "bun drizzle-kit push --force",
-    "db:seed": "bun run scripts/seed.ts"
+    "db:seed": "bun run scripts/seed.ts",
+    "alumni:update": "bun run scripts/runAlumniBankRefresh.ts"
   },
   "dependencies": {
     "@google-cloud/local-auth": "^3.0.1",

@@ -29,7 +29,7 @@ export const Route = createFileRoute("/profile")({
     if (!user) return <div className="p-10 text-center">User data unavailable</div>;
 
     return (
-      <div className="flex min-h-screen w-full flex-col bg-muted md:flex-row md:gap-6 md:p-10">
+      <div className="ombre-background flex min-h-screen w-full flex-col bg-muted md:flex-row md:gap-6 md:p-10">
         {errorMessage && (
           <div className="fixed right-4 top-4 z-50 rounded border border-red-200 bg-red-100 p-3 text-red-700 shadow-lg">{errorMessage}</div>
         )}
@@ -38,7 +38,7 @@ export const Route = createFileRoute("/profile")({
             - On mobile: Sticky at the top with a horizontal scroll if links overflow.
             - On desktop: Fixed width sidebar.
         */}
-        <aside className="sticky top-0 z-10 w-full border-b bg-background md:relative md:top-auto md:w-64 md:flex-shrink-0 md:rounded-xl md:border-none md:bg-transparent">
+        <aside className="sticky top-0 z-10 w-full border-b bg-transparent md:relative md:top-auto md:w-64 md:flex-shrink-0 md:rounded-xl md:border-none md:bg-transparent">
           <ProfileNav profileName={user.username} />
         </aside>
 

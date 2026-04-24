@@ -29,10 +29,10 @@ export const Route = createFileRoute("/webdev")({
     const isMobile = useIsMobile();
     const [buttonIndex, setIndex] = useState(1);
     const { darkMode } = useContext(DarkModeContext);
-    const currentWebmastersInfo = Webmasters.find((team: { team: string }) => team.team == "Current")?.information;
-    const pastWebmastersInfo = Webmasters.find((team: { team: string }) => team.team == "Past")?.information;
-    const websiteLeads = SWTTeamLeads.find((team: { team: string }) => team.team == "Website")?.information;
-    const projectLeads = SWTTeamLeads.find((team: { team: string }) => team.team == "Semester Project")?.information;
+    const currentWebmastersInfo = Webmasters.find((team: { team: string }) => team.team === "Current")?.information;
+    const pastWebmastersInfo = Webmasters.find((team: { team: string }) => team.team === "Past")?.information;
+    const websiteLeads = SWTTeamLeads.find((team: { team: string }) => team.team === "Website")?.information;
+    const projectLeads = SWTTeamLeads.find((team: { team: string }) => team.team === "Semester Project")?.information;
 
     const buttonState = (position: number) => {
       setIndex(position);
@@ -222,17 +222,19 @@ export const Route = createFileRoute("/webdev")({
                   <>
                     {/* Current Webmasters */}
                     {currentWebmastersInfo?.map(
-                      (lead: { image: string; name: string; year: string; textColor: string; quote: string | undefined }) => (
-                        <MemberCard image={lead.image} name={lead.name} role="Webmaster" textColor="blue" quote={lead.quote} />
+                      (lead: { image: string; name: string; year: string; textColor: string; quote: string | undefined }, index) => (
+                        <MemberCard key={index} image={lead.image} name={lead.name} role="Webmaster" textColor="blue" quote={lead.quote} />
                       ),
                     )}
                   </>
                 ) : (
                   <>
                     {/* Past Webmasters */}
-                    {pastWebmastersInfo?.map((lead: { image: string; name: string; year: string; textColor: string; quote: string | undefined }) => (
-                      <MemberCard image={lead.image} name={lead.name} role={lead.year} textColor={lead.textColor} />
-                    ))}
+                    {pastWebmastersInfo?.map(
+                      (lead: { image: string; name: string; year: string; textColor: string; quote: string | undefined }, index) => (
+                        <MemberCard key={index} image={lead.image} name={lead.name} role={lead.year} textColor={lead.textColor} />
+                      ),
+                    )}
                   </>
                 )}
               </div>
@@ -241,8 +243,8 @@ export const Route = createFileRoute("/webdev")({
                 {/* Web Maintenance Team Leads */}
                 {buttonIndex === 1 && (
                   <>
-                    {websiteLeads?.map((lead: { image: string; name: string; role: string; quote: string | undefined }) => (
-                      <MemberCard image={lead.image} name={lead.name} role={lead.role} textColor="green" quote={lead.quote} />
+                    {websiteLeads?.map((lead: { image: string; name: string; role: string; quote: string | undefined }, index) => (
+                      <MemberCard key={index} image={lead.image} name={lead.name} role={lead.role} textColor="green" quote={lead.quote} />
                     ))}
                   </>
                 )}
@@ -250,8 +252,16 @@ export const Route = createFileRoute("/webdev")({
                 {/* Semester Project Team Leads */}
                 {buttonIndex === 2 && (
                   <>
-                    {projectLeads?.map((lead: { image: string; name: string; role: string; quote: string | undefined }) => (
-                      <MemberCard image={lead.image} name={lead.name} role={lead.role} textColor="green" quote={lead.quote} />
+                    {projectLeads?.map((lead: { image: string; name: string; role: string; quote: string | undefined }, index) => (
+                      <MemberCard
+                        key={index}
+                        image={lead.image}
+                        name={lead.name}
+                        role={lead.role}
+                        textColor="green"
+                        quote={lead.quote}
+                        size="small"
+                      />
                     ))}
                   </>
                 )}

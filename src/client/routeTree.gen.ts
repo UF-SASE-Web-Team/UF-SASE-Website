@@ -22,6 +22,7 @@ import { Route as SetImport } from './routes/set'
 import { Route as SercImport } from './routes/serc'
 import { Route as SearchImport } from './routes/search'
 import { Route as SasehacksImport } from './routes/sasehacks'
+import { Route as SasePcrImport } from './routes/sase-pcr'
 import { Route as ResourcesImport } from './routes/resources'
 import { Route as ResetPasswordImport } from './routes/reset-password'
 import { Route as ProjectsImport } from './routes/projects'
@@ -35,6 +36,7 @@ import { Route as GalleryImport } from './routes/gallery'
 import { Route as FreshmanFaqImport } from './routes/freshman-faq'
 import { Route as ForgotPasswordImport } from './routes/forgot-password'
 import { Route as EventsImport } from './routes/events'
+import { Route as CommunityOutreachImport } from './routes/community-outreach'
 import { Route as BoardImport } from './routes/board'
 import { Route as BlogsImport } from './routes/blogs'
 import { Route as AuthedImport } from './routes/authed'
@@ -117,6 +119,12 @@ const SasehacksRoute = SasehacksImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const SasePcrRoute = SasePcrImport.update({
+  id: '/sase-pcr',
+  path: '/sase-pcr',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const ResourcesRoute = ResourcesImport.update({
   id: '/resources',
   path: '/resources',
@@ -192,6 +200,12 @@ const ForgotPasswordRoute = ForgotPasswordImport.update({
 const EventsRoute = EventsImport.update({
   id: '/events',
   path: '/events',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const CommunityOutreachRoute = CommunityOutreachImport.update({
+  id: '/community-outreach',
+  path: '/community-outreach',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -319,6 +333,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BoardImport
       parentRoute: typeof rootRoute
     }
+    '/community-outreach': {
+      id: '/community-outreach'
+      path: '/community-outreach'
+      fullPath: '/community-outreach'
+      preLoaderRoute: typeof CommunityOutreachImport
+      parentRoute: typeof rootRoute
+    }
     '/events': {
       id: '/events'
       path: '/events'
@@ -408,6 +429,13 @@ declare module '@tanstack/react-router' {
       path: '/resources'
       fullPath: '/resources'
       preLoaderRoute: typeof ResourcesImport
+      parentRoute: typeof rootRoute
+    }
+    '/sase-pcr': {
+      id: '/sase-pcr'
+      path: '/sase-pcr'
+      fullPath: '/sase-pcr'
+      preLoaderRoute: typeof SasePcrImport
       parentRoute: typeof rootRoute
     }
     '/sasehacks': {
@@ -570,6 +598,7 @@ export interface FileRoutesByFullPath {
   '/authed': typeof AuthedRoute
   '/blogs': typeof BlogsRoute
   '/board': typeof BoardRoute
+  '/community-outreach': typeof CommunityOutreachRoute
   '/events': typeof EventsRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/freshman-faq': typeof FreshmanFaqRoute
@@ -583,6 +612,7 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
+  '/sase-pcr': typeof SasePcrRoute
   '/sasehacks': typeof SasehacksRoute
   '/search': typeof SearchRoute
   '/serc': typeof SercRoute
@@ -609,6 +639,7 @@ export interface FileRoutesByTo {
   '/authed': typeof AuthedRoute
   '/blogs': typeof BlogsRoute
   '/board': typeof BoardRoute
+  '/community-outreach': typeof CommunityOutreachRoute
   '/events': typeof EventsRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/freshman-faq': typeof FreshmanFaqRoute
@@ -622,6 +653,7 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
+  '/sase-pcr': typeof SasePcrRoute
   '/sasehacks': typeof SasehacksRoute
   '/search': typeof SearchRoute
   '/serc': typeof SercRoute
@@ -650,6 +682,7 @@ export interface FileRoutesById {
   '/authed': typeof AuthedRoute
   '/blogs': typeof BlogsRoute
   '/board': typeof BoardRoute
+  '/community-outreach': typeof CommunityOutreachRoute
   '/events': typeof EventsRoute
   '/forgot-password': typeof ForgotPasswordRoute
   '/freshman-faq': typeof FreshmanFaqRoute
@@ -663,6 +696,7 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/reset-password': typeof ResetPasswordRoute
   '/resources': typeof ResourcesRoute
+  '/sase-pcr': typeof SasePcrRoute
   '/sasehacks': typeof SasehacksRoute
   '/search': typeof SearchRoute
   '/serc': typeof SercRoute
@@ -692,6 +726,7 @@ export interface FileRouteTypes {
     | '/authed'
     | '/blogs'
     | '/board'
+    | '/community-outreach'
     | '/events'
     | '/forgot-password'
     | '/freshman-faq'
@@ -705,6 +740,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/reset-password'
     | '/resources'
+    | '/sase-pcr'
     | '/sasehacks'
     | '/search'
     | '/serc'
@@ -730,6 +766,7 @@ export interface FileRouteTypes {
     | '/authed'
     | '/blogs'
     | '/board'
+    | '/community-outreach'
     | '/events'
     | '/forgot-password'
     | '/freshman-faq'
@@ -743,6 +780,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/reset-password'
     | '/resources'
+    | '/sase-pcr'
     | '/sasehacks'
     | '/search'
     | '/serc'
@@ -769,6 +807,7 @@ export interface FileRouteTypes {
     | '/authed'
     | '/blogs'
     | '/board'
+    | '/community-outreach'
     | '/events'
     | '/forgot-password'
     | '/freshman-faq'
@@ -782,6 +821,7 @@ export interface FileRouteTypes {
     | '/projects'
     | '/reset-password'
     | '/resources'
+    | '/sase-pcr'
     | '/sasehacks'
     | '/search'
     | '/serc'
@@ -810,6 +850,7 @@ export interface RootRouteChildren {
   AuthedRoute: typeof AuthedRoute
   BlogsRoute: typeof BlogsRoute
   BoardRoute: typeof BoardRoute
+  CommunityOutreachRoute: typeof CommunityOutreachRoute
   EventsRoute: typeof EventsRoute
   ForgotPasswordRoute: typeof ForgotPasswordRoute
   FreshmanFaqRoute: typeof FreshmanFaqRoute
@@ -823,6 +864,7 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   ResourcesRoute: typeof ResourcesRoute
+  SasePcrRoute: typeof SasePcrRoute
   SasehacksRoute: typeof SasehacksRoute
   SearchRoute: typeof SearchRoute
   SercRoute: typeof SercRoute
@@ -844,6 +886,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthedRoute: AuthedRoute,
   BlogsRoute: BlogsRoute,
   BoardRoute: BoardRoute,
+  CommunityOutreachRoute: CommunityOutreachRoute,
   EventsRoute: EventsRoute,
   ForgotPasswordRoute: ForgotPasswordRoute,
   FreshmanFaqRoute: FreshmanFaqRoute,
@@ -857,6 +900,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   ResourcesRoute: ResourcesRoute,
+  SasePcrRoute: SasePcrRoute,
   SasehacksRoute: SasehacksRoute,
   SearchRoute: SearchRoute,
   SercRoute: SercRoute,
@@ -887,6 +931,7 @@ export const routeTree = rootRoute
         "/authed",
         "/blogs",
         "/board",
+        "/community-outreach",
         "/events",
         "/forgot-password",
         "/freshman-faq",
@@ -900,6 +945,7 @@ export const routeTree = rootRoute
         "/projects",
         "/reset-password",
         "/resources",
+        "/sase-pcr",
         "/sasehacks",
         "/search",
         "/serc",
@@ -940,6 +986,9 @@ export const routeTree = rootRoute
     "/board": {
       "filePath": "board.tsx"
     },
+    "/community-outreach": {
+      "filePath": "community-outreach.tsx"
+    },
     "/events": {
       "filePath": "events.tsx"
     },
@@ -978,6 +1027,9 @@ export const routeTree = rootRoute
     },
     "/resources": {
       "filePath": "resources.tsx"
+    },
+    "/sase-pcr": {
+      "filePath": "sase-pcr.tsx"
     },
     "/sasehacks": {
       "filePath": "sasehacks.tsx"

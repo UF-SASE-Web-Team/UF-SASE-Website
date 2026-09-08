@@ -3,7 +3,9 @@ import { imageUrls } from "@assets/imageUrls";
 import Carousel from "@components/carousel/Carousel";
 import { EventPageHeader } from "@components/custom_ui/EventPageHeader";
 import EventSponsorCard from "@components/custom_ui/EventSponsorCard";
+import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { useIsMobile } from "@hooks/useIsMobile";
+import { Icon } from "@iconify/react";
 import HackathonSponsors from "@information/HackathonSponsors";
 import { createFileRoute } from "@tanstack/react-router";
 import { seo } from "../utils/seo";
@@ -26,9 +28,21 @@ export const Route = createFileRoute("/sasehacks")({
           subtitle="For more information, please visit the SASEHACKS website!"
           buttonText="SASEHACKS WEBSITE"
           buttonHref="https://www.sasehacks.com"
-          date="March 7-8, 2026"
-          location="Newell Hall - 1700 Stadium Rd, Gainesville, FL 32611"
         />
+
+        <div className="relative my-6 flex flex-col items-center justify-center gap-4 text-lg font-thin 2xl:text-2xl">
+          <p>SASEHacks Committee App is open! (deadline: 09/10)</p>
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSf8kFqNrrMn1zEPfiHgLJdZ-e6bJ6JZlo4cKlEMoRMb_x6lqQ/viewform?usp=header"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-2xl bg-saseGreen px-10 py-4 text-xl font-semibold text-white shadow-xl transition hover:brightness-90"
+          >
+            Apply Now
+            <Icon icon="mdi:open-in-new" className="text-lg" />
+          </a>
+        </div>
+        <OmbreDivider />
 
         <div
           className={cn(
@@ -42,8 +56,7 @@ export const Route = createFileRoute("/sasehacks")({
             <br></br>
             <br></br>
             Meals are provided, overnight hacking is encouraged, and all majors and skill levels are welcome. Teams can have between 2 and 4 hackers,
-            and we'll even have a team formation social before we kick off! <strong>Registration for SASEHacks has closed</strong>, but be on the
-            lookout for future hackathon updates!
+            and we'll even have a team formation social before we kick off!
             <br></br>
             <br></br>
             Whether you want to build alongside a team or share your knowledge with others, we have a spot for you!

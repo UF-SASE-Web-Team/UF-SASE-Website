@@ -47,6 +47,10 @@ export const Webmasters: Array<{
 }> = [
   {
     team: "Current",
+    information: [],
+  },
+  {
+    team: "Past",
     information: [
       {
         name: "Thuy Le",
@@ -64,11 +68,6 @@ export const Webmasters: Array<{
         textColor: "blue",
         mobileAlign: "right",
       },
-    ],
-  },
-  {
-    team: "Past",
-    information: [
       {
         name: "Ricky Zhang",
         image: imageUrls["RickyZhang.jpg"],

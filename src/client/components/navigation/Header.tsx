@@ -42,11 +42,14 @@ const navItems = [
     path: "/programs",
     children: [
       { name: "Interns", path: "/interns" },
-      { name: "SET", path: "/set" },
-      { name: "Web Dev", path: "/webdev" },
+      { name: "Gator Rover", path: "/set" },
+      { name: "SWEET", path: "/webdev" },
       { name: "Sports", path: "/sports" },
       { name: "Mentor Mentee", path: "/mentor-mentee" },
       { name: "Projects", path: "/projects" },
+      { name: "SASEHacks", path: "/sasehacks" },
+      { name: "Community Outreach", path: "/community-outreach" },
+      { name: "SASE PCR", path: "/sase-pcr" },
     ],
   },
   {

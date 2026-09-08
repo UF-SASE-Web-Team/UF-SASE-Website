@@ -53,7 +53,13 @@ export const Route = createFileRoute("/interns")({
         <div className="flex w-full flex-col items-center pb-10">
           {/* Group Picture & App Status */}
           <div className="flex w-full flex-col items-center justify-center bg-black py-10 dark:bg-greenBackground">
-            <ApplicationPhoto image={imageUrls["SaseInterns.png"]} applicationStatus="CLOSED" nextSemester="Spring 2026" />
+            <ApplicationPhoto
+              image={imageUrls["SaseInterns.png"]}
+              applicationStatus="OPEN"
+              nextSemester="Fall 2026"
+              applyLink="https://forms.gle/sCxz1YHAXUs8TPxV6"
+              deadline="9/11"
+            />
           </div>
 
           {/* Testimonials */}

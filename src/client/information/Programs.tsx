@@ -15,7 +15,7 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
     number: "1",
   },
   {
-    program: "SASE Engineering Team (SET)",
+    program: "Gator Rover",
     description: (
       <p>
         The <span className="font-semibold text-saseGreen">SASE Engineering Team</span> works together on a year-long project to explore technical
@@ -28,7 +28,7 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
     number: "2",
   },
   {
-    program: "SASE Web Team (SWT)",
+    program: "SWEET",
     description: (
       <p>
         The <span className="font-semibold text-saseBlue">SASE Web Development Team</span> brings together UI/UX, Frontend, and Backend members to
@@ -64,5 +64,41 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
     image: imageUrls["MentorshipValues.jpeg"],
     link: "/mentor-mentee",
     number: "5",
+  },
+  {
+    program: "SASEHacks",
+    description: (
+      <p>
+        <span className="font-semibold text-saseGreen">SASEHacks</span> is a 24-hour hackathon where students from any university can learn new
+        skills, network, attend workshops, build innovative projects, and compete for exciting category prizes.
+      </p>
+    ),
+    image: imageUrls["SaseHacksPoster.png"],
+    link: "/sasehacks",
+    number: "6",
+  },
+  {
+    program: "Community Outreach",
+    description: (
+      <p>
+        <span className="font-semibold text-saseBlue">SASE Community Outreach</span> connects members with the Gainesville community through service
+        and volunteering opportunities. More details coming soon!
+      </p>
+    ),
+    image: imageUrls["SASELogo.png"],
+    link: "/community-outreach",
+    number: "7",
+  },
+  {
+    program: "SASE PCR",
+    description: (
+      <p>
+        <span className="font-semibold text-saseGreen">SASE PCR (Program for Collaborative Research)</span> gives members the chance to get involved
+        in research.
+      </p>
+    ),
+    image: "/images/SasePcrGraphic.png",
+    link: "/sase-pcr",
+    number: "8",
   },
 ];

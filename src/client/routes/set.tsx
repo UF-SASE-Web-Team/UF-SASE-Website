@@ -15,7 +15,7 @@ import { seo } from "../utils/seo";
 export const Route = createFileRoute("/set")({
   meta: () => [
     ...seo({
-      title: "SET | UF SASE",
+      title: "Gator Rover | UF SASE",
       description:
         "SASE Engineering Team (SET) collaborates to design and execute a yearlong project that showcases technical creativity and problem-solving.",
       image: imageUrls["SASELogo.png"],
@@ -31,11 +31,9 @@ export const Route = createFileRoute("/set")({
             {/* Green Line and Text in Row */}
             <div className="mr-5 h-52 w-1.5 rounded-sm bg-saseGreen"></div>
             <h2 className="font-oswald text-6xl font-semibold leading-tight text-foreground sm:text-7xl">
-              SASE
+              GATOR
               <br />
-              ENGINEERING
-              <br />
-              TEAM
+              ROVER
             </h2>
           </header>
           <InfoCard
@@ -54,7 +52,12 @@ export const Route = createFileRoute("/set")({
         <div className="flex w-full flex-col items-center pb-10">
           {/* Group Picture & App Status */}
           <div className="flex w-full flex-col items-center justify-center bg-black py-10 dark:bg-greenBackground">
-            <ApplicationPhoto image={imageUrls["SETPHOTO3.jpg"]} applicationStatus="CLOSED" nextSemester="Fall 2026" />
+            <ApplicationPhoto
+              image={imageUrls["SETPHOTO3.jpg"]}
+              applicationStatus="OPEN"
+              nextSemester="Fall 2026"
+              applyLink="https://forms.gle/3S9innLfXJ2FEa229"
+            />
           </div>
 
           {/* Past Projects */}

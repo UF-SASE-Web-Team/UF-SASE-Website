@@ -4,6 +4,7 @@ import { HeaderWithGreenBorder } from "@components/custom_ui/HeaderWithGreenBord
 import { GoalsSection } from "@components/programs/GoalsSection";
 import InfoCard from "@components/programs/InfoCard";
 import { useIsMobile } from "@hooks/useIsMobile";
+import { Icon } from "@iconify/react";
 import { createFileRoute } from "@tanstack/react-router";
 import { imageUrls } from "../assets/imageUrls";
 import { seo } from "../utils/seo";
@@ -106,29 +107,25 @@ export const Route = createFileRoute("/projects")({
           {/* Goals & Outcomes */}
           <GoalsSection goals={ProjectGoals} />
 
-          {/* Coming Soon */}
+          {/* Applications Open */}
           <div className="w-full max-w-7xl px-6 py-10">
-            <HeaderWithGreenBorder text="Coming Soon" type="Subheader" />
+            <HeaderWithGreenBorder text="Applications" type="Subheader" />
 
             <div className="rounded-[1.5rem] bg-gradient-to-r from-saseBlue to-saseGreen p-[3px]">
               <div className="rounded-[calc(1.5rem-3px)] bg-muted px-10 py-12 text-center">
-                <p className="font-oswald text-3xl font-semibold text-foreground">Another round of SASE Projects applications is on the way!</p>
+                <p className="font-oswald text-3xl font-semibold text-foreground">Applications for SASE Projects are open!</p>
                 <p className="mt-4 font-redhat text-xl text-foreground">
-                  Stay tuned to our{" "}
-                  <a
-                    href="https://www.instagram.com/ufsase/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold text-saseBlue underline"
-                  >
-                    Instagram
-                  </a>{" "}
-                  and{" "}
-                  <a href="http://discord.gg/q3HBeC5" target="_blank" rel="noopener noreferrer" className="font-semibold text-saseGreen underline">
-                    Discord
-                  </a>{" "}
-                  for updates on the next application cycle!
+                  Deadline: <strong>9/11</strong>
                 </p>
+                <a
+                  href="https://forms.gle/G153C72hsPjkiuAMA"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6 inline-flex items-center gap-2 rounded-2xl bg-saseBlue px-10 py-4 text-xl font-semibold text-white shadow-xl transition hover:brightness-90"
+                >
+                  Apply Now
+                  <Icon icon="mdi:open-in-new" className="text-lg" />
+                </a>
               </div>
             </div>
           </div>

@@ -11,14 +11,14 @@ export const pages = [
   { name: "Events", path: "/events", aliases: ["Meetings", "Workshops", "Slides"] },
   { name: "Gallery", path: "/gallery", aliases: ["Photos", "Images", "Media"] },
   { name: "Blogs", path: "/blogs", aliases: ["Articles", "News", "Posts"] },
-  { name: "Programs", path: "/programs", aliases: ["Interns", "SET", "Web Dev", "Sports"] },
+  { name: "Programs", path: "/programs", aliases: ["Interns", "Gator Rover", "SWEET", "Sports"] },
   { name: "Interns", path: "/interns", aliases: ["SASE Interns", "Internships"] },
   { name: "Mentor Mentee", path: "/mentor-mentee", aliases: ["Mentor", "Mentee"] },
-  { name: "SET", path: "/set", aliases: ["SASE Engineering Team", "Engineering Team"] },
+  { name: "Gator Rover", path: "/set", aliases: ["SET", "SASE Engineering Team", "Engineering Team"] },
   {
-    name: "Web Dev",
+    name: "SWEET",
     path: "/webdev",
-    aliases: ["Web Development", "Website Team", "Website", "Reactjs", "Computer Science", "Software Engineering"],
+    aliases: ["Web Dev", "Web Development", "Website Team", "Website", "Reactjs", "Computer Science", "Software Engineering"],
   },
   { name: "Sports", path: "/sports", aliases: ["SASE Sports", "Athletics", "Recreational", "Volleyball", "Badminton", "Soccer", "Flag Football"] },
   {
@@ -26,4 +26,7 @@ export const pages = [
     path: "/projects",
     aliases: ["SASE Projects", "Technical Projects", "Research", "Discord Bot", "NAS", "Automation"],
   },
+  { name: "SASEHacks", path: "/sasehacks", aliases: ["Hackathon", "SASE Hacks"] },
+  { name: "Community Outreach", path: "/community-outreach", aliases: ["Outreach", "Volunteering", "Service"] },
+  { name: "SASE PCR", path: "/sase-pcr", aliases: ["PCR"] },
 ];

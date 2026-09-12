@@ -1,3 +1,5 @@
+import { optimizeImage } from "@/client/utils/optimizeImage";
+
 interface Member {
   role: string;
   image: string;
@@ -24,7 +26,13 @@ const BoardMemberCard = ({ member, pastMember = false }: { member: Member; pastM
       {/* image */}
       <div className={`group relative aspect-square w-full overflow-hidden transition-transform duration-500 ease-in-out`}>
         <div className="ombre-background h-full w-full rounded-2xl p-2">
-          <img src={member.image} alt={`${member.name}'s photo`} className="h-full w-full rounded-2xl object-cover" />
+          <img
+            src={optimizeImage(member.image, { width: 400 })}
+            alt={`${member.name}'s photo`}
+            className="h-full w-full rounded-2xl object-cover"
+            loading="lazy"
+            decoding="async"
+          />
         </div>
 
         {/*hover overlay*/}

@@ -66,6 +66,19 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
     number: "5",
   },
   {
+    program: "SASE Projects",
+    description: (
+      <p>
+        <span className="font-semibold text-saseGreen">SASE Projects</span> brings together small, multidisciplinary groups of 5–6 students to design
+        and execute approachable technical and research initiatives. Members of all majors and skill levels "learn by doing," building hands-on
+        technical and project management experience to highlight on their resumes.
+      </p>
+    ),
+    image: imageUrls["SASELogo.png"],
+    link: "/projects",
+    number: "6",
+  },
+  {
     program: "SASEHacks",
     description: (
       <p>
@@ -75,7 +88,7 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
     ),
     image: imageUrls["SaseHacksPoster.png"],
     link: "/sasehacks",
-    number: "6",
+    number: "7",
   },
   {
     program: "Community Outreach",
@@ -87,7 +100,7 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
     ),
     image: imageUrls["SASELogo.png"],
     link: "/community-outreach",
-    number: "7",
+    number: "8",
   },
   {
     program: "SASE PCR",
@@ -99,6 +112,6 @@ export const GeneralProgramsInfo: Array<{ program: string; description: string |
     ),
     image: "/images/SasePcrGraphic.png",
     link: "/sase-pcr",
-    number: "8",
+    number: "9",
   },
 ];

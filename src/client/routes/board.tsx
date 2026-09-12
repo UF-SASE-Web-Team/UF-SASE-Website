@@ -42,11 +42,7 @@ export const Route = createFileRoute("/board")({
           <div className="relative w-full max-w-5xl">
             <div className="pointer-events-none absolute inset-0 translate-x-4 translate-y-4 rounded-2xl bg-gradient-to-tr from-[#7DC242] to-[#0668B3] opacity-75" />
             <div className="relative overflow-hidden rounded-2xl border-[2px] border-border bg-black">
-              <img
-                src={optimizeImage(imageUrls["25-26Board.jpg"], { width: 1024 })}
-                className="block h-auto w-full"
-                decoding="async"
-              />
+              <img src={optimizeImage(imageUrls["25-26Board.jpg"], { width: 1024 })} className="block h-auto w-full" decoding="async" />
             </div>
             <img
               src="https://moqsegbvdj.ufs.sh/f/2ipokchyMOTKKkbiQJRau5S173OCZMnlcgUAzrajkIEisoLt"

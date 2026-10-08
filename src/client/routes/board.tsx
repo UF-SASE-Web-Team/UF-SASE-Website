@@ -4,7 +4,7 @@ import boardInfo from "@components/board/BoardInfo";
 import { OmbreDivider } from "@components/custom_ui/OmbreDivider";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { optimizeImage } from "../utils/optimizeImage";
+import { optimizeImage, optimizeImageSrcSet } from "../utils/optimizeImage";
 import { seo } from "../utils/seo";
 
 interface Member {
@@ -43,7 +43,12 @@ export const Route = createFileRoute("/board")({
           <div className="relative w-full max-w-5xl">
             <div className="pointer-events-none absolute inset-0 translate-x-4 translate-y-4 rounded-2xl bg-gradient-to-tr from-[#7DC242] to-[#0668B3] opacity-75" />
             <div className="relative overflow-hidden rounded-2xl border-[2px] border-border bg-black">
-              <img src={optimizeImage(imageUrls["26-27Board.jpg"], { width: 1024 })} className="block h-auto w-full" decoding="async" />
+              <img
+                src={optimizeImage(imageUrls["26-27Board.jpg"], { width: 1024, quality: 90 })}
+                srcSet={optimizeImageSrcSet(imageUrls["26-27Board.jpg"], { width: 1024, quality: 90 })}
+                className="block h-auto w-full"
+                decoding="async"
+              />
             </div>
             <img
               src="https://moqsegbvdj.ufs.sh/f/2ipokchyMOTKKkbiQJRau5S173OCZMnlcgUAzrajkIEisoLt"
@@ -151,7 +156,8 @@ export const Route = createFileRoute("/board")({
 
                 <div className="ombre-background aspect-square w-full max-w-[340px] justify-self-center overflow-hidden rounded-2xl p-2">
                   <img
-                    src={optimizeImage(openMember.image, { width: 680 })}
+                    src={optimizeImage(openMember.image, { width: 680, quality: 85 })}
+                    srcSet={optimizeImageSrcSet(openMember.image, { width: 680 })}
                     alt={`${openMember.name}'s photo`}
                     className="h-full w-full rounded-2xl object-cover"
                     decoding="async"

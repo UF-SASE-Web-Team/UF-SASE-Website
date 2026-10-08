@@ -9,6 +9,7 @@ const PastBoardImages = [
   {
     program: "Past Board",
     images: [
+      { src: imageUrls["25-26Board.jpg"], year: "2025–26" },
       { src: imageUrls["24-25Board.jpg"], year: "2024–25" },
       { src: imageUrls["23-24Board.jpg"], year: "2023–24" },
     ],

@@ -195,6 +195,7 @@ const boardInfo = [
         image: imageUrls["PhamMinh-26.jpg"],
         major: "2nd Year Biomedical Engineering",
         contact: "ufsase.science@gmail.com",
+        linkedin: "https://www.linkedin.com/in/ph%E1%BA%A1m-minh-443824361/",
         description: "",
       },
       {

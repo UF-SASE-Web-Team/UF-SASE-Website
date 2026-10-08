@@ -44,8 +44,8 @@ export const Route = createFileRoute("/board")({
             <div className="pointer-events-none absolute inset-0 translate-x-4 translate-y-4 rounded-2xl bg-gradient-to-tr from-[#7DC242] to-[#0668B3] opacity-75" />
             <div className="relative overflow-hidden rounded-2xl border-[2px] border-border bg-black">
               <img
-                src={optimizeImage(imageUrls["26-27Board.jpg"], { width: 1024, quality: 85 })}
-                srcSet={optimizeImageSrcSet(imageUrls["26-27Board.jpg"], { width: 1024 })}
+                src={optimizeImage(imageUrls["26-27Board.jpg"], { width: 1024, quality: 90 })}
+                srcSet={optimizeImageSrcSet(imageUrls["26-27Board.jpg"], { width: 1024, quality: 90 })}
                 className="block h-auto w-full"
                 decoding="async"
               />

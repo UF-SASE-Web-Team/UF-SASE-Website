@@ -331,7 +331,7 @@ export const imageUrls = {
   "WebTeamWinterBanquet2025_.JPG": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIBD3gl9v2kDm2rxftGpUEesqCMHIJ7RnXNYh3",
   "springWebDev2026.png": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIo0PagDhDJighcSZmqsKCAzTIOvLHd7u1nV2b",
   "NathanKim.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIBQubCQ2kDm2rxftGpUEesqCMHIJ7RnXNYh34",
-  "26-27Board.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sI7ihamybKABVHz30CFZ54lXbUoIMWGd6wOjin",
+  "26-27Board.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIiCulhOLzR4LG5Nvi7wqTelrZ8myCpV6XgD1x",
   "MichaelHemingway-26.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIFPiZ8wAU3c5JO1RsA0miEYz4B7LpDWSZVIbo",
   "LoganThompson-26.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIMUpwr2ilprYuJav8QOzy4wSd7WFmeTqGtbgh",
   "KaylaChen-26.jpg": "https://cl2r0r2asj.ufs.sh/f/ehMyJVEoR9sIBNqtBC2kDm2rxftGpUEesqCMHIJ7RnXNYh34",

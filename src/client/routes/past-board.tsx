@@ -29,22 +29,24 @@ export const Route = createFileRoute("/past-board")({
         </div>
         <OmbreDivider />
 
-        <PastBoardDropDown title="2024-25">
-          {pastBoardInfo.map((section, idx) => (
-            <div key={idx} className="mb-12">
-              <h2 className="text-center font-oswald text-3xl font-semibold">{section.section}</h2>
-              <div className="flex justify-center">
-                <div className="grid max-w-screen-lg grid-cols-1 justify-items-center gap-x-16 gap-y-5 md:grid-cols-3">
-                  {section.members.map((member, idx) => (
-                    <div key={idx} id={`member-${member.name}`} className="flex w-full max-w-[300px] items-center justify-center">
-                      <BoardMemberCard member={member} pastMember={true} />
-                    </div>
-                  ))}
+        {pastBoardInfo.map((board) => (
+          <PastBoardDropDown key={board.year} title={board.year}>
+            {board.sections.map((section, idx) => (
+              <div key={idx} className="mb-12">
+                <h2 className="text-center font-oswald text-3xl font-semibold">{section.section}</h2>
+                <div className="flex justify-center">
+                  <div className="grid max-w-screen-lg grid-cols-1 justify-items-center gap-x-16 gap-y-5 md:grid-cols-3">
+                    {section.members.map((member, idx) => (
+                      <div key={idx} id={`member-${member.name}`} className="flex w-full max-w-[300px] items-center justify-center">
+                        <BoardMemberCard member={member} pastMember={true} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </PastBoardDropDown>
+            ))}
+          </PastBoardDropDown>
+        ))}
 
         <div className="flex justify-center">
           <Link

@@ -80,7 +80,6 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
   const [snaps, setSnaps] = useState<Array<number>>([]);
   const tweenFactor = useRef(0);
   const tweenNodes = useRef<Array<HTMLElement>>([]);
-  const isShortCarousel = slides.length < 3;
 
   const { nextBtnDisabled, onNextButtonClick, onPrevButtonClick, prevBtnDisabled } = usePrevNextButtons(emblaApi);
 
@@ -191,8 +190,8 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
               <div
                 className={cn(
                   {
-                    "flex-[0_0_100%]": isMobile || (checkIsPastBoard(slide) && isShortCarousel),
-                    "flex-[0_0_40%]": !isMobile && !(checkIsPastBoard(slide) && isShortCarousel),
+                    "flex-[0_0_100%]": isMobile || checkIsPastBoard(slide),
+                    "flex-[0_0_40%]": !isMobile && !checkIsPastBoard(slide),
                   },
                   `flex min-w-0 items-center justify-center [transform:translate3d(0,0,0)]`,
                 )}
@@ -265,7 +264,11 @@ const TestimonialCarousel: React.FC<PropType> = ({ prog, purpose }) => {
                           </div>
                         </>
                       ) : typeof slide === "object" && "src" in slide ? (
-                        <img src={slide.src} alt={`Image`} className="aspect-auto rounded-xl" />
+                        <img
+                          src={slide.src}
+                          alt={`${slide.year} board`}
+                          className="h-[220px] w-auto max-w-full rounded-xl object-contain sm:h-[320px] md:h-[450px]"
+                        />
                       ) : (
                         // Carousel for Program Images
                         <img src={slide} alt={`Image`} className="aspect-auto rounded-xl" />

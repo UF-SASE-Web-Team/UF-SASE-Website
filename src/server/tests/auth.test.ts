@@ -76,17 +76,6 @@ mock.module("resend", () => ({
   },
 }));
 
-mock.module("@server/env", () => ({
-  SERVER_ENV: {
-    DATABASE_URL: ":memory:",
-    DATABASE_AUTH_TOKEN: "",
-    RESEND_API_KEY: "re_test_key",
-    GOOGLE_OAUTH_CLIENT_ID: "test-client-id",
-    GOOGLE_OAUTH_CLIENT_SECRET: "test-secret",
-    GOOGLE_OAUTH_REDIRECT_URI: "http://localhost/callback",
-  },
-}));
-
 mock.module("@/server/email/verification-template", () => ({
   VerificationTemplate: ({ code }: { code: string }) => `<div>Your code: ${code}</div>`,
 }));

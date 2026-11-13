@@ -49,6 +49,17 @@ const Footer: React.FC = () => {
               </Button>
             </div>
           </div>
+
+          {/* Legal Links */}
+          <div className="flex items-center gap-4 pt-4 font-redhat text-sm text-white/80">
+            <Link to="/privacy" className="transition-all hover:text-saseGreen hover:underline">
+              Privacy Policy
+            </Link>
+            <span aria-hidden="true">|</span>
+            <Link to="/terms" className="transition-all hover:text-saseGreen hover:underline">
+              Terms of Service
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

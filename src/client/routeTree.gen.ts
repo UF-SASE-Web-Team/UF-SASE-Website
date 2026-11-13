@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as WebdevImport } from './routes/webdev'
 import { Route as VerifyEmailImport } from './routes/verify-email'
 import { Route as UserpageImport } from './routes/userpage'
+import { Route as TermsImport } from './routes/terms'
 import { Route as StemconnectImport } from './routes/stemconnect'
 import { Route as SportsImport } from './routes/sports'
 import { Route as SponsorsImport } from './routes/sponsors'
@@ -27,6 +28,7 @@ import { Route as ResourcesImport } from './routes/resources'
 import { Route as ResetPasswordImport } from './routes/reset-password'
 import { Route as ProjectsImport } from './routes/projects'
 import { Route as ProgramsImport } from './routes/programs'
+import { Route as PrivacyImport } from './routes/privacy'
 import { Route as PastBoardImport } from './routes/past-board'
 import { Route as MentorMenteeImport } from './routes/mentor-mentee'
 import { Route as LoginImport } from './routes/login'
@@ -68,6 +70,12 @@ const VerifyEmailRoute = VerifyEmailImport.update({
 const UserpageRoute = UserpageImport.update({
   id: '/userpage',
   path: '/userpage',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const TermsRoute = TermsImport.update({
+  id: '/terms',
+  path: '/terms',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -146,6 +154,12 @@ const ProjectsRoute = ProjectsImport.update({
 const ProgramsRoute = ProgramsImport.update({
   id: '/programs',
   path: '/programs',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const PrivacyRoute = PrivacyImport.update({
+  id: '/privacy',
+  path: '/privacy',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -403,6 +417,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PastBoardImport
       parentRoute: typeof rootRoute
     }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyImport
+      parentRoute: typeof rootRoute
+    }
     '/programs': {
       id: '/programs'
       path: '/programs'
@@ -492,6 +513,13 @@ declare module '@tanstack/react-router' {
       path: '/stemconnect'
       fullPath: '/stemconnect'
       preLoaderRoute: typeof StemconnectImport
+      parentRoute: typeof rootRoute
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsImport
       parentRoute: typeof rootRoute
     }
     '/userpage': {
@@ -608,6 +636,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
   '/past-board': typeof PastBoardRoute
+  '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/projects': typeof ProjectsRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -621,6 +650,7 @@ export interface FileRoutesByFullPath {
   '/sponsors': typeof SponsorsRoute
   '/sports': typeof SportsRoute
   '/stemconnect': typeof StemconnectRoute
+  '/terms': typeof TermsRoute
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
@@ -649,6 +679,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
   '/past-board': typeof PastBoardRoute
+  '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/projects': typeof ProjectsRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -662,6 +693,7 @@ export interface FileRoutesByTo {
   '/sponsors': typeof SponsorsRoute
   '/sports': typeof SportsRoute
   '/stemconnect': typeof StemconnectRoute
+  '/terms': typeof TermsRoute
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
@@ -692,6 +724,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/mentor-mentee': typeof MentorMenteeRoute
   '/past-board': typeof PastBoardRoute
+  '/privacy': typeof PrivacyRoute
   '/programs': typeof ProgramsRoute
   '/projects': typeof ProjectsRoute
   '/reset-password': typeof ResetPasswordRoute
@@ -705,6 +738,7 @@ export interface FileRoutesById {
   '/sponsors': typeof SponsorsRoute
   '/sports': typeof SportsRoute
   '/stemconnect': typeof StemconnectRoute
+  '/terms': typeof TermsRoute
   '/userpage': typeof UserpageRoute
   '/verify-email': typeof VerifyEmailRoute
   '/webdev': typeof WebdevRoute
@@ -736,6 +770,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/mentor-mentee'
     | '/past-board'
+    | '/privacy'
     | '/programs'
     | '/projects'
     | '/reset-password'
@@ -749,6 +784,7 @@ export interface FileRouteTypes {
     | '/sponsors'
     | '/sports'
     | '/stemconnect'
+    | '/terms'
     | '/userpage'
     | '/verify-email'
     | '/webdev'
@@ -776,6 +812,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/mentor-mentee'
     | '/past-board'
+    | '/privacy'
     | '/programs'
     | '/projects'
     | '/reset-password'
@@ -789,6 +826,7 @@ export interface FileRouteTypes {
     | '/sponsors'
     | '/sports'
     | '/stemconnect'
+    | '/terms'
     | '/userpage'
     | '/verify-email'
     | '/webdev'
@@ -817,6 +855,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/mentor-mentee'
     | '/past-board'
+    | '/privacy'
     | '/programs'
     | '/projects'
     | '/reset-password'
@@ -830,6 +869,7 @@ export interface FileRouteTypes {
     | '/sponsors'
     | '/sports'
     | '/stemconnect'
+    | '/terms'
     | '/userpage'
     | '/verify-email'
     | '/webdev'
@@ -860,6 +900,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   MentorMenteeRoute: typeof MentorMenteeRoute
   PastBoardRoute: typeof PastBoardRoute
+  PrivacyRoute: typeof PrivacyRoute
   ProgramsRoute: typeof ProgramsRoute
   ProjectsRoute: typeof ProjectsRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
@@ -873,6 +914,7 @@ export interface RootRouteChildren {
   SponsorsRoute: typeof SponsorsRoute
   SportsRoute: typeof SportsRoute
   StemconnectRoute: typeof StemconnectRoute
+  TermsRoute: typeof TermsRoute
   UserpageRoute: typeof UserpageRoute
   VerifyEmailRoute: typeof VerifyEmailRoute
   WebdevRoute: typeof WebdevRoute
@@ -896,6 +938,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   MentorMenteeRoute: MentorMenteeRoute,
   PastBoardRoute: PastBoardRoute,
+  PrivacyRoute: PrivacyRoute,
   ProgramsRoute: ProgramsRoute,
   ProjectsRoute: ProjectsRoute,
   ResetPasswordRoute: ResetPasswordRoute,
@@ -909,6 +952,7 @@ const rootRouteChildren: RootRouteChildren = {
   SponsorsRoute: SponsorsRoute,
   SportsRoute: SportsRoute,
   StemconnectRoute: StemconnectRoute,
+  TermsRoute: TermsRoute,
   UserpageRoute: UserpageRoute,
   VerifyEmailRoute: VerifyEmailRoute,
   WebdevRoute: WebdevRoute,
@@ -941,6 +985,7 @@ export const routeTree = rootRoute
         "/login",
         "/mentor-mentee",
         "/past-board",
+        "/privacy",
         "/programs",
         "/projects",
         "/reset-password",
@@ -954,6 +999,7 @@ export const routeTree = rootRoute
         "/sponsors",
         "/sports",
         "/stemconnect",
+        "/terms",
         "/userpage",
         "/verify-email",
         "/webdev",
@@ -1016,6 +1062,9 @@ export const routeTree = rootRoute
     "/past-board": {
       "filePath": "past-board.tsx"
     },
+    "/privacy": {
+      "filePath": "privacy.tsx"
+    },
     "/programs": {
       "filePath": "programs.tsx"
     },
@@ -1054,6 +1103,9 @@ export const routeTree = rootRoute
     },
     "/stemconnect": {
       "filePath": "stemconnect.tsx"
+    },
+    "/terms": {
+      "filePath": "terms.tsx"
     },
     "/userpage": {
       "filePath": "userpage.tsx"

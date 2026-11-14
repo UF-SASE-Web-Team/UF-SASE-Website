@@ -17,7 +17,7 @@ const PrivacyPolicy = () => (
       </LegalText>
       <LegalList
         items={[
-          "Name, email address, and username",
+          "Name, email address, username, and UFID (your 8-digit University of Florida ID number)",
           "Major, minor, and graduation date",
           "Bio",
           "Discord handle, Instagram handle, and LinkedIn URL",
@@ -76,7 +76,7 @@ const PrivacyPolicy = () => (
           </>,
           <>
             <strong>Other members:</strong> any signed-in member can see your name, username, avatar, major, minor, graduation date, bio, and social
-            handles. Your email address is not shown to other members.
+            handles. Your email address and UFID are not shown to other members.
           </>,
           <>
             <strong>UF SASE officers and authorized app administrators,</strong> who can see member and attendance records, plus reports that members

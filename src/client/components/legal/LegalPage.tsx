@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-export const LEGAL_LAST_UPDATED = "November 12, 2026";
+export const LEGAL_LAST_UPDATED = "November 13, 2026";
 export const LEGAL_CONTACT_EMAIL = "ufsase.webmaster@gmail.com";
 
 const linkClass = "font-medium text-saseBlue underline underline-offset-2 hover:text-saseGreen";

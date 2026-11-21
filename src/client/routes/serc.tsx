@@ -16,7 +16,7 @@ export const Route = createFileRoute("/serc")({
           title="SOUTHEAST REGIONAL CONFERENCE (SERC)"
           subtitle="For more information, please visit the SERC website!"
           buttonText="SERC WEBSITE"
-          buttonHref="https://serc.saseconnect.org/"
+          buttonHref="https://serc.ufsase.com/"
           date="TBA"
           location="UF"
         />
@@ -30,7 +30,17 @@ export const Route = createFileRoute("/serc")({
             The <span className="font-semibold text-saseBlue">Southeast Regional Conference (SERC)</span> is an annual event hosted by the Society of
             Asian Scientists and Engineers (SASE). It brings together university chapters across the Southeast for a full day of professional
             development, leadership training, competitions, and community building. Students gain hands‑on experience, network with industry
-            professionals, and strengthen their chapter’s presence within the region.
+            professionals, and strengthen their chapter’s presence within the region. Full details on this year’s conference, including the schedule,
+            registration, and partners, are available at{" "}
+            <a
+              href="https://serc.ufsase.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-saseBlue underline underline-offset-2 hover:text-saseGreen"
+            >
+              serc.ufsase.com
+            </a>
+            .
             <div className="items-start text-left">
               <p className="mt-6 text-saseBlue sm:mt-2">Conference Highlights</p>
               <ul className="ml-6 list-disc">
